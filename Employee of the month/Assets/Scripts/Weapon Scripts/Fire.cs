@@ -18,11 +18,9 @@ public class Fire : MonoBehaviour
         if (controllerInput.HasFired && timer >= fireRate)
         {
             GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-            //TODO
-            //newBullet.GetComponent<Bullet>().UpdateBulletModifiers(GetComponent<WeaponController>().weapon);
+            newBullet.GetComponent<Bullet>().UpdateBulletModifyers(GetComponent<WeaponController>().weapon);
 
             timer = 0;
-            Debug.Log("Has Fired");
         }
     }
 

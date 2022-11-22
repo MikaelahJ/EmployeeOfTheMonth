@@ -20,11 +20,13 @@ public class ControllerInput : MonoBehaviour
     public Vector2 MousePosition { get { return mousePosition; } }
     public bool IsRunning { get { return isRunning; } }
     public bool HasFired { get { return hasFired; } set { hasFired = value; } }
-  
+
 
     public void GetLeftStick(InputAction.CallbackContext input)
     {
+        Debug.Log("l-stick");
         leftStick = input.ReadValue<Vector2>();
+        Debug.Log(leftStick);
     }
 
     public void GetRightStick(InputAction.CallbackContext input)
@@ -44,7 +46,7 @@ public class ControllerInput : MonoBehaviour
             isRunning = true;
         }
 
-        if(input.canceled)
+        if (input.canceled)
         {
             isRunning = false;
         }
@@ -52,12 +54,12 @@ public class ControllerInput : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext input)
     {
-        if(input.started)
+        if (input.started)
         {
             hasFired = true;
         }
 
-        if(input.canceled)
+        if (input.canceled)
         {
             hasFired = false;
         }
