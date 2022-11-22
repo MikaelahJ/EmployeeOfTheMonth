@@ -17,7 +17,6 @@ public class firetest : MonoBehaviour
         if (Input.GetMouseButton(0) && timer >= fireRate)
         {
             GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-            //TODO
             newBullet.GetComponent<Bullet>().UpdateBulletModifyers(GetComponent<WeaponController>().weapon);
 
             timer = 0;
