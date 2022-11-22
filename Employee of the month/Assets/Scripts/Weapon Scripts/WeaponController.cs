@@ -72,6 +72,7 @@ public class WeaponController : MonoBehaviour
             //Bullet Modifiers
             newWeapon.isBouncy = newWeapon.isBouncy || item.isBouncy;
             newWeapon.numOfBounces += item.numOfBounces;
+            newWeapon.numOfPenetrations += item.numOfPenetrations;
             newWeapon.isPenetrate = newWeapon.isPenetrate || item.isPenetrate;
             newWeapon.isExplosive = newWeapon.isExplosive || item.isExplosive;
             newWeapon.isKnockback = newWeapon.isKnockback || item.isKnockback;

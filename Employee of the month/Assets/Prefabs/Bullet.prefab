@@ -100,9 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBouncy: 0
-  maxBounce: 2
   isPenetrate: 0
-  maxObjectPass: 1
   isExplode: 0
 --- !u!50 &1624548292394652931
 Rigidbody2D:

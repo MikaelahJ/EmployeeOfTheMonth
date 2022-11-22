@@ -27,6 +27,7 @@ public class Bullet : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.velocity = direction * bulletSpeed;
     }
+
     public void UpdateBulletModifyers(NewItemScriptableObject weapon)
     {
         bulletSpeed = weapon.bulletVelocity;
@@ -121,5 +122,14 @@ public class Bullet : MonoBehaviour
 
         rb2d.velocity = direction * bulletSpeed;
 
+        if (objectsPassed == maxObjectPass)
+        {
+            Invoke(nameof(ChangeLayer), 0.5f);
+        }
+    }
+    private void ChangeLayer()
+    {
+        int defaultLayer = LayerMask.NameToLayer("Default");
+        gameObject.layer = defaultLayer;
     }
 }
