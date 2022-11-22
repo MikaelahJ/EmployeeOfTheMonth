@@ -1,22 +1,32 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewItem", menuName = "ScriptableObjects/NewItemScriptableObject", order = 1)]
+
+//Add variables in the list below, please set the value to 0 or equivalent
 public class NewItemScriptableObject : ScriptableObject
 {
     [Header("Item Icon")]
     public Sprite itemIcon;
 
     [Header("Weapon modifiers")]
-    public float fireRate = 0.5f;
+    public float weaponDamage = 0;
+    public float fireRate = 0;
     public float recoilModifier = 0;
     
-
     [Header("Bullet modifiers")]
+    [Header("Bouncy")]
     public bool isBouncy = false;
-    public int numOfBounces = 1;
+    public int numOfBounces = 0;
+    [Header("Penetration")]
     public bool isPenetrate = false;
+    public int numOfPenetrations = 0;
+    [Header("Explosive")]
     public bool isExplosive = false;
+    public float explosionRadius = 0f;
+    public float explosionDamage = 0f;
+    [Header("Knockback")]
     public bool isKnockback = false;
+    public float knockbackModifier = 0f;
 
     
 }
