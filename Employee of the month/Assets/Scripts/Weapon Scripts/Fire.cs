@@ -6,7 +6,7 @@ public class Fire : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private GetControllerInput controllerInput;
+    [SerializeField] private ControllerInput controllerInput;
 
     private float timer;
     private float fireRate = 0.2f;
@@ -22,6 +22,7 @@ public class Fire : MonoBehaviour
             //newBullet.GetComponent<Bullet>().UpdateBulletModifiers(GetComponent<WeaponController>().weapon);
 
             timer = 0;
+            Debug.Log("Has Fired");
         }
     }
 

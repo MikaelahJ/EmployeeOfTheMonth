@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
     int runSpeed;
 
     //Todo get Input script
-    private GetControllerInput controllerInput;
+    private ControllerInput controllerInput;
     private Rigidbody2D rb;
     private Vector2 movementVector;
     private Vector2 inputVector;
@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        controllerInput = GetComponent<GetControllerInput>();
+        controllerInput = GetComponent<ControllerInput>();
         previousDerection = Vector2.zero;
         maxSpeed = walkSpeed;
     }
@@ -67,9 +67,9 @@ public class Movement : MonoBehaviour
     private void UpdateMovement()
     {
         inputVector = controllerInput.Leftstick.normalized;
-
-        movementVector.x += inputVector.x * acceleration * Time.deltaTime;
-        movementVector.y += inputVector.y * acceleration * Time.deltaTime;
+        //Debug.Log(inputVector);
+        movementVector += inputVector * acceleration * Time.deltaTime;
+        //movementVector.y += inputVector.y * acceleration * Time.deltaTime;
 
         if (inputVector.x == 0)
         {
@@ -83,7 +83,6 @@ public class Movement : MonoBehaviour
 
         movementVector = Vector2.ClampMagnitude(movementVector, maxSpeed);
         rb.velocity = movementVector;
-        Debug.Log(transform.up.magnitude);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GetControllerInput : MonoBehaviour
+public class ControllerInput : MonoBehaviour
 {
     [SerializeField]
     private Vector2 leftStick;
@@ -20,17 +20,7 @@ public class GetControllerInput : MonoBehaviour
     public Vector2 MousePosition { get { return mousePosition; } }
     public bool IsRunning { get { return isRunning; } }
     public bool HasFired { get { return hasFired; } set { hasFired = value; } }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
 
     public void GetLeftStick(InputAction.CallbackContext input)
     {
@@ -47,7 +37,7 @@ public class GetControllerInput : MonoBehaviour
         mousePosition = input.ReadValue<Vector2>();
     }
 
-    public void RunAction(InputAction.CallbackContext input)
+    public void OnRun(InputAction.CallbackContext input)
     {
         if (input.started)
         {
@@ -60,7 +50,7 @@ public class GetControllerInput : MonoBehaviour
         }
     }
 
-    public void ShootAction(InputAction.CallbackContext input)
+    public void OnShoot(InputAction.CallbackContext input)
     {
         if(input.started)
         {
