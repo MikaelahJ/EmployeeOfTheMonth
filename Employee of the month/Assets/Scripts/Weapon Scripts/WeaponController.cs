@@ -5,6 +5,9 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     public int itemSlots = 3;
+    [Header("Equipped Weapon")]
+    public NewItemScriptableObject weapon;
+
     [Header("Base Weapon")]
     public NewItemScriptableObject baseWeapon;
 
@@ -16,7 +19,6 @@ public class WeaponController : MonoBehaviour
     [Header("Equipped Items")]
     public List <NewItemScriptableObject> items;
 
-    public NewItemScriptableObject weapon;
 
     // Start is called before the first frame update
     void Start()
