@@ -6,6 +6,7 @@ public class Fire : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private GetControllerInput controllerInput;
 
     private float timer;
     private float fireRate = 0.2f;
@@ -14,7 +15,7 @@ public class Fire : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (Input.GetMouseButton(0) && timer >= fireRate)
+        if (controllerInput.HasFired && timer >= fireRate)
         {
             Instantiate(bulletPrefab, firePoint.position, transform.rotation);
             timer = 0;
