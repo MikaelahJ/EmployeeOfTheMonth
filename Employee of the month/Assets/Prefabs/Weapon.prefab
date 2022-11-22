@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2297937692892492729, guid: 21869bbf1ccf89144ab556bd20aaa66d, type: 3}
   firePoint: {fileID: 3847611636834874352}
+  controllerInput: {fileID: 0}
 --- !u!114 &-6732671962525501779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,3 +145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50903cf966bbfe54fb72dc303b35a595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSlots: 3
+  weapon: {fileID: 0}
+  baseWeapon: {fileID: 11400000, guid: 3aa017dc77f19cf49bbac598b3fa39b8, type: 2}
+  item1: {fileID: 11400000, guid: 3d2c5761adb14064d88ece172b6825e6, type: 2}
+  item2: {fileID: 11400000, guid: 0231b47f1935dd249a95cc00ece896af, type: 2}
+  item3: {fileID: 11400000, guid: a6660cf1d76defa40b80a9ed9f08f1f2, type: 2}
+  items: []
