@@ -99,6 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7932bb6c36bc899499b1c5b49f923f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBouncy: 0
+  maxBounce: 2
+  isPenetrate: 1
+  maxObjectPass: 1
+  isExplode: 0
 --- !u!50 &1624548292394652931
 Rigidbody2D:
   serializedVersion: 4
@@ -119,7 +124,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &471386594015539393
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
