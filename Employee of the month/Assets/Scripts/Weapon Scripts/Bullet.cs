@@ -8,19 +8,18 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb2d;
     private float bulletSpeed = 5;
     private Vector3 direction;
-    private int damage;
+    private float damage = 5;
 
     public bool isBouncy = false;
-    public int maxBounce = 2;
+    private int maxBounce = 2;
     private int bounces = 0;
 
     public bool isPenetrate = false;
-    public int maxObjectPass = 1;
+    private int maxObjectPass = 1;
     private int objectsPassed = 0;
 
     public bool isExplode = true;
     private float explodeRadius = 1;
-
 
     void Start()
     {
@@ -28,16 +27,24 @@ public class Bullet : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.velocity = direction * bulletSpeed;
     }
-    private void UpdateBulletModifyers(NewItemScriptableObject weapon)
-    {
 
+    public void UpdateBulletModifyers(NewItemScriptableObject weapon)
+    {
+        bulletSpeed = weapon.bulletVelocity;
+        damage = weapon.weaponDamage;
+        isBouncy = weapon.isBouncy;
+        maxBounce = weapon.numOfBounces;
+        isPenetrate = weapon.isPenetrate;
+        maxObjectPass = weapon.numOfPenetrations;
+        isExplode = weapon.isExplosive;
+        explodeRadius = weapon.explosionRadius;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (isExplode)
         {
-            Explode();
+            Explode(transform.position);
             return;
         }
 
@@ -46,11 +53,19 @@ public class Bullet : MonoBehaviour
             if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
             {
                 Penetrate();
+                SendDamage(collision.collider);
+
                 return;
             }
             else
             {
                 Bounce(collision.GetContact(0));
+
+                if (collision.gameObject.CompareTag("Player"))
+                {
+                    //send knockback
+                }
+
                 return;
             }
         }
@@ -58,8 +73,9 @@ public class Bullet : MonoBehaviour
         if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
         {
             Penetrate();
-            return;
+            SendDamage(collision.collider);
 
+            return;
         }
 
         else
@@ -68,9 +84,21 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void Explode()
+    private void SendDamage(Collider2D collider)
     {
-        throw new NotImplementedException();
+        if (collider.transform.GetComponent<HasHealth>() != null)
+        {
+            collider.transform.GetComponent<HasHealth>().LoseHealth(damage);
+        }
+    }
+
+    private void Explode(Vector2 collisionPoint)
+    {
+        Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll(collisionPoint, explodeRadius);
+        foreach (var target in targetsInRadius)
+        {
+            SendDamage(target);
+        }
     }
 
     private void Bounce(ContactPoint2D collisionPoint)
@@ -94,5 +122,14 @@ public class Bullet : MonoBehaviour
 
         rb2d.velocity = direction * bulletSpeed;
 
+        if (objectsPassed == maxObjectPass)
+        {
+            Invoke(nameof(ChangeLayer), 0.5f);
+        }
+    }
+    private void ChangeLayer()
+    {
+        int defaultLayer = LayerMask.NameToLayer("Default");
+        gameObject.layer = defaultLayer;
     }
 }

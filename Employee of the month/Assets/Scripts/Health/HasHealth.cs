@@ -5,7 +5,7 @@ using UnityEngine;
 public class HasHealth : MonoBehaviour
 {
     public int maxHealth = 100;
-    public int healthbar;
+    public float healthbar;
 
     private bool isDead = false;
 
@@ -26,7 +26,7 @@ public class HasHealth : MonoBehaviour
         Debug.Log(gameObject.name + " healed " + heal + "HP.");
     }
 
-    public void LoseHealth(int damage)
+    public void LoseHealth(float damage)
     {
         if (damage < 0)
         {
@@ -36,7 +36,7 @@ public class HasHealth : MonoBehaviour
         Debug.Log(gameObject.name + " lost " + damage + "HP.");
     }
 
-    private void ChangeHealth(int healthChange)
+    private void ChangeHealth(float healthChange)
     {
         healthbar += healthChange;
         
