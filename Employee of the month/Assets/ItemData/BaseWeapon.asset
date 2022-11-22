@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BaseWeapon
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
-  weaponDamage: 0
+  weaponDamage: 5
   fireRate: 1
   recoilModifier: 0
   bulletVelocity: 5

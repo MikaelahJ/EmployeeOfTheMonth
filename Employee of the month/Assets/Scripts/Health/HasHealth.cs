@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class HasHealth : MonoBehaviour
 {
+    public GameObject healthbar;
+
     public int maxHealth = 100;
-    public float healthbar;
+    public float health;
 
     private bool isDead = false;
 
     void Start()
     {
-        healthbar = maxHealth;
+        health = maxHealth;
 
-        HealthRegen(-10, 1, 7);
+        //HealthRegen(1, 0.2f, 50);
     }
 
     public void GainHealth(int heal)
@@ -38,19 +40,21 @@ public class HasHealth : MonoBehaviour
 
     private void ChangeHealth(float healthChange)
     {
-        healthbar += healthChange;
+        health += healthChange;
         
-        if (healthbar > maxHealth)
+        if (health > maxHealth)
         {
-            healthbar = maxHealth;
+            health = maxHealth;
             Debug.Log(gameObject.name + " has full health!");
         }
 
-        if (healthbar <= 0)
+        if (health <= 0)
         {
             OnDeath();
             Debug.Log(gameObject.name + " reached 0 health!");
         }
+
+        UpdateHealthbar();
     }
 
     private void OnDeath()
@@ -81,5 +85,11 @@ public class HasHealth : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenRegen);
         }
         Debug.Log(gameObject.name + "'s " + health + " hp per " + timeBetweenRegen + " seconds wore off!");
+    }
+
+    private void UpdateHealthbar()
+    {
+        if (healthbar == null) { return; }
+        healthbar.GetComponent<Healthbar>().SetHealthBar(health);
     }
 }

@@ -12,10 +12,10 @@ public class Healthbar : MonoBehaviour
     {
         startPosition = transform.GetChild(0).GetChild(0).GetComponent<RectTransform>().position;
 
-        SetHealthBar(10);
+        
     }
 
-    void SetHealthBar(float health)
+    public void SetHealthBar(float health)
     {
         float lostHealth = 100 - health;
         transform.GetChild(0).GetChild(0).GetComponent<RectTransform>().position = new Vector3(startPosition.x - lostHealth, startPosition.y, startPosition.z);
