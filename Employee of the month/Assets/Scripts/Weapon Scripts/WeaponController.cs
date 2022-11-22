@@ -16,7 +16,7 @@ public class WeaponController : MonoBehaviour
     [Header("Equipped Items")]
     public List <NewItemScriptableObject> items;
 
-    public NewItemScriptableObject Weapon;
+    public NewItemScriptableObject weapon;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +27,8 @@ public class WeaponController : MonoBehaviour
         AddItem(item2);
         AddItem(item3);
         AddItem(item1);
+        UpdateWeaponStats();
+        RemoveItem(item1);
         UpdateWeaponStats();
     }
     
@@ -72,7 +74,7 @@ public class WeaponController : MonoBehaviour
             newWeapon.isExplosive = newWeapon.isExplosive || item.isExplosive;
             newWeapon.isKnockback = newWeapon.isKnockback || item.isKnockback;
         }
-        Weapon = newWeapon;
+        weapon = newWeapon;
     }
     
 }
