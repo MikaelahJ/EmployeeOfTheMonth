@@ -16,7 +16,7 @@ public class HasHealth : MonoBehaviour
         HealthRegen(-10, 1, 7);
     }
 
-    void GainHealth(int heal)
+    public void GainHealth(int heal)
     {
         if(heal < 0)
         {
@@ -26,7 +26,7 @@ public class HasHealth : MonoBehaviour
         Debug.Log(gameObject.name + " healed " + heal + "HP.");
     }
 
-    void LoseHealth(int damage)
+    public void LoseHealth(int damage)
     {
         if (damage < 0)
         {
@@ -58,7 +58,7 @@ public class HasHealth : MonoBehaviour
         isDead = true;
     }
 
-    void HealthRegen(int health, float timeBetweenRegen, float duration)
+    public void HealthRegen(int health, float timeBetweenRegen, float duration)
     {
         StartCoroutine(HealthRegenCouroutine(health, timeBetweenRegen, duration));
     }

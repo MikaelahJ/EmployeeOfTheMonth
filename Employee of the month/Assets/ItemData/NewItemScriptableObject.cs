@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewItem", menuName = "ScriptableObjects/NewItemScriptableObject", order = 1)]
 
 //Add variables in the list below, please set the value to 0 or equivalent
+//After you added a variable, update the UpdateWeaponStats Function in WeaponController
 public class NewItemScriptableObject : ScriptableObject
 {
     [Header("Item Icon")]
