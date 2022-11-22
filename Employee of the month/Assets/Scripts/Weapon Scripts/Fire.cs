@@ -19,7 +19,7 @@ public class Fire : MonoBehaviour
         {
             GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
             //TODO
-            //newBullet.GetComponent<Bullet>().UpdateBulletModifiers(NewItemScriptableObject weapon);
+            //newBullet.GetComponent<Bullet>().UpdateBulletModifiers(GetComponent<WeaponController>().weapon);
 
             timer = 0;
         }

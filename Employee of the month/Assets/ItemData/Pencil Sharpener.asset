@@ -13,10 +13,16 @@ MonoBehaviour:
   m_Name: Pencil Sharpener
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
+  weaponDamage: 0
   fireRate: 0
   recoilModifier: 0
+  bulletVelocity: 0
   isBouncy: 0
   numOfBounces: 0
   isPenetrate: 1
+  numOfPenetrations: 1
   isExplosive: 0
+  explosionRadius: 0
+  explosionDamage: 0
   isKnockback: 1
+  knockbackModifier: 0

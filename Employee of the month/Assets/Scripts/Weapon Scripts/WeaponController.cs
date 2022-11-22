@@ -27,9 +27,7 @@ public class WeaponController : MonoBehaviour
         AddItem(item2);
         AddItem(item3);
         AddItem(item1);
-        UpdateWeaponStats();
         RemoveItem(item1);
-        UpdateWeaponStats();
     }
     
     void AddItem(NewItemScriptableObject item)
@@ -43,6 +41,7 @@ public class WeaponController : MonoBehaviour
         {
             Debug.Log("Inventory full, can't add item: " + item.name);
         }
+        UpdateWeaponStats();
     }
 
     void RemoveItem(NewItemScriptableObject item)
@@ -55,6 +54,7 @@ public class WeaponController : MonoBehaviour
         {
             Debug.Log("Did not find item: " + item.name + " in inventory");
         }
+        UpdateWeaponStats();
     }
 
     void UpdateWeaponStats()
