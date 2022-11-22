@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40bb7cf003a8d7242881e46c28417936, type: 3}
-  m_Name: NewItem
+  m_Name: Rubber
   m_EditorClassIdentifier: 
-  prefabName: 
-  fireRate: 0.5
+  itemIcon: {fileID: 0}
+  fireRate: 0
   recoilModifier: 0
-  isBouncy: 0
+  isBouncy: 1
+  numOfBounces: 4
   isPenetrate: 0
   isExplosive: 0
   isKnockback: 0
