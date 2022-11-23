@@ -188,7 +188,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6921790797268207042}
-        m_TargetAssemblyTypeName: GetControllerInput, Assembly-CSharp
+        m_TargetAssemblyTypeName: ControllerInput, Assembly-CSharp
         m_MethodName: GetLeftStick
         m_Mode: 0
         m_Arguments:
@@ -204,7 +204,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6921790797268207042}
-        m_TargetAssemblyTypeName: GetControllerInput, Assembly-CSharp
+        m_TargetAssemblyTypeName: ControllerInput, Assembly-CSharp
         m_MethodName: GetMousePosition
         m_Mode: 0
         m_Arguments:
