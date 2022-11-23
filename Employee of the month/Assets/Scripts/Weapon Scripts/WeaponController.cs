@@ -19,6 +19,7 @@ public class WeaponController : MonoBehaviour
     [Header("Equipped Items")]
     public List<NewItemScriptableObject> items;
 
+    [SerializeField] private GameObject itemHolder;
 
     void Start()
     {
@@ -37,6 +38,13 @@ public class WeaponController : MonoBehaviour
         if (items.Count < itemSlots)
         {
             items.Add(item);
+
+            if(itemHolder != null)
+            {
+                int index = items.IndexOf(item);
+                itemHolder.GetComponent<ItemHolder>().AddItem(item.itemIcon, index);
+            }
+
             Debug.Log("Added item: " + item.name);
         }
         else
@@ -48,8 +56,14 @@ public class WeaponController : MonoBehaviour
 
     void RemoveItem(NewItemScriptableObject item)
     {
+        int index = items.IndexOf(item);
         if (items.Remove(item))
         {
+            if (itemHolder != null)
+            {
+                itemHolder.GetComponent<ItemHolder>().RemoveItem(index);
+            }
+
             Debug.Log("Removed item: " + item.name);
         }
         else
