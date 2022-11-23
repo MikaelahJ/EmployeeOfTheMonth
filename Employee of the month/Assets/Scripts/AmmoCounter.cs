@@ -7,11 +7,13 @@ public class AmmoCounter : MonoBehaviour
 {
     public int currentAmmo = 0;
     string textAmmo = "000";
-    TextMeshProUGUI ammoCounter;
+
+    [SerializeField] private GameObject ammoCounter;
+    TextMeshProUGUI ammoCount;
 
     private void Start()
     {
-        ammoCounter = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        ammoCount = ammoCounter.GetComponent<TextMeshProUGUI>();
 
         SetAmmo(999);
     }
@@ -23,7 +25,7 @@ public class AmmoCounter : MonoBehaviour
 
         string temp = "000" + ammo;
         textAmmo = temp.Substring(temp.Length - 3);
-        ammoCounter.text = textAmmo;
+        ammoCount.text = textAmmo;
         currentAmmo = ammo;
     }
 

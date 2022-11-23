@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1399804188795825117}
   - component: {fileID: 9019639404975870166}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: GreyNumbers (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -312,6 +312,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e90f1f9c7f0e9e84da588950e7d1aceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item1: {fileID: 4128787643825133195}
+  item2: {fileID: 4128787644724971413}
+  item3: {fileID: 4128787644972458734}
 --- !u!1 &4128787644576547958
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +327,7 @@ GameObject:
   - component: {fileID: 4128787644576547963}
   - component: {fileID: 4128787644576547960}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: AmmoCount (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -844,6 +847,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be4f8abb0e089a4bbb2ebe7d9dc5652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentAmmo: 0
+  ammoCounter: {fileID: 4128787644576547958}
 --- !u!1 &4128787645126756896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,3 +1037,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  mask: {fileID: 4128787645126756896}
+  UIhealth: {fileID: 4128787644884531949}

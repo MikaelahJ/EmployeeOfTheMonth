@@ -7,14 +7,18 @@ public class ItemHolder : MonoBehaviour
 {
     GameObject[] items;
 
+    [SerializeField] private GameObject item1;
+    [SerializeField] private GameObject item2;
+    [SerializeField] private GameObject item3;
+
+
     void Start()
     {
-        items = new GameObject[transform.childCount];
+        items = new GameObject[3];
 
-        for (int i = 0; i < items.Length; i++)
-        {
-            items[i] = transform.GetChild(i).gameObject;
-        }
+        items[0] = item1;
+        items[1] = item2;
+        items[2] = item3;
 
         items[1].GetComponent<Image>().sprite = items[0].GetComponent<Image>().sprite;
         RemoveItem(0);

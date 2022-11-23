@@ -7,17 +7,13 @@ public class Healthbar : MonoBehaviour
 {
     public AnimationCurve healthCurve;
 
-    private Vector3 startPosition;
-    private GameObject mask;
-    GameObject UIhealth;
+    [SerializeField] private GameObject mask;
+    [SerializeField] private GameObject UIhealth;
 
     void Start()
     {
-        mask = transform.GetChild(0).GetComponent<RectTransform>().gameObject;
-        UIhealth = mask.transform.GetChild(0).GetComponent<RectTransform>().gameObject;
-        startPosition = mask.transform.position;
-
-        
+        //mask = transform.GetChild(0).GetComponent<RectTransform>().gameObject;
+        //UIhealth = mask.transform.GetChild(0).GetComponent<RectTransform>().gameObject;
     }
 
     public void SetHealthBar(float health)
