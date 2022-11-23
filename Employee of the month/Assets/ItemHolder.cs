@@ -15,10 +15,27 @@ public class ItemHolder : MonoBehaviour
         {
             items[i] = transform.GetChild(i).gameObject;
         }
+
+        items[1].GetComponent<Image>().sprite = items[0].GetComponent<Image>().sprite;
+        RemoveItem(0);
     }
 
-    void AddItem(Sprite item, int index)
+
+
+    public void AddItem(Sprite item, int index)
     {
+        Image itemImage = items[index].GetComponent<Image>();
+        var tempColor = itemImage.color;
+        tempColor.a = 1f;
+        itemImage.color = tempColor;  
         items[index].GetComponent<Image>().sprite = item;
+    }
+
+    public void RemoveItem(int index)
+    {
+        Image itemImage = items[index].GetComponent<Image>();
+        var tempColor = itemImage.color;
+        tempColor.a = 0f;
+        itemImage.color = tempColor;
     }
 }
