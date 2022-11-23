@@ -5,13 +5,13 @@ using TMPro;
 
 public class AmmoCounter : MonoBehaviour
 {
-    int currentAmmo = 0;
+    public int currentAmmo = 0;
     string textAmmo = "000";
     TextMeshProUGUI ammoCounter;
 
     private void Start()
     {
-        ammoCounter = GetComponentInChildren<TextMeshProUGUI>();
+        ammoCounter = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
 
         SetAmmo(30);
     }

@@ -7,6 +7,7 @@ public class Fire : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private ControllerInput controllerInput;
+    [SerializeField] private GameObject ammoCounter;
 
     private float timer;
     private float fireRate = 0.2f;
@@ -15,12 +16,25 @@ public class Fire : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (controllerInput.HasFired && timer >= fireRate)
-        {
-            GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-            newBullet.GetComponent<Bullet>().UpdateBulletModifyers(GetComponent<WeaponController>().weapon);
+        if (!controllerInput.HasFired) { return; }
 
-            timer = 0;
+        if(timer < fireRate) { return; }
+
+        if(ammoCounter != null)
+            if(ammoCounter.GetComponent<AmmoCounter>().currentAmmo == 0) { return; }
+
+        FireBullet();
+        timer = 0;
+    }
+
+    void FireBullet()
+    {
+        GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
+        newBullet.GetComponent<Bullet>().UpdateBulletModifyers(GetComponent<WeaponController>().weapon);
+
+        if (ammoCounter != null)
+        {
+            ammoCounter.GetComponent<AmmoCounter>().LoseAmmo();
         }
     }
 
