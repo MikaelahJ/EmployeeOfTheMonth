@@ -18,6 +18,9 @@ public class AmmoCounter : MonoBehaviour
 
     public void SetAmmo(int ammo)
     {
+        if (ammo < 0)
+            ammo = 0;
+
         string temp = "000" + ammo;
         textAmmo = temp.Substring(temp.Length - 3);
         ammoCounter.text = textAmmo;
