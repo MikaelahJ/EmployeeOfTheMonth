@@ -2,19 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAim : MonoBehaviour
+public class StickAim : MonoBehaviour
 {
     [Range(0, 20)]
     public int rotationSpeed;
 
-    private ControllerInput input;
-    private Vector2 inputVector;
+    private Vector2 rightStickVector;
     private Vector2 previousRotation;
 
 
     void Start()
     {
-        input = GetComponent<ControllerInput>();
         previousRotation = Vector2.zero;
     }
 
@@ -26,9 +24,13 @@ public class PlayerAim : MonoBehaviour
 
     public void AimDirection()
     {
-        inputVector = input.RighStick;
-
-        transform.up = Vector2.Lerp(previousRotation, inputVector, rotationSpeed * Time.deltaTime);
+        transform.up = Vector2.Lerp(previousRotation, rightStickVector, rotationSpeed * Time.deltaTime);
         previousRotation = transform.up;
+    }
+
+    //Used in controllerinput script
+    public void GetRightStick(Vector2 input)
+    {
+        rightStickVector = input;
     }
 }

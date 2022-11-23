@@ -10,28 +10,30 @@ public class MouseAim : MonoBehaviour
 
     private Vector3 mousePosition;
     private Vector3 previousMousePosition;
-    private ControllerInput input;
+    private Vector2 mouseInput;
 
-
-
-    private void Start()
-    {
-        input = GetComponent<ControllerInput>();
-    }
 
     private void Update()
     {
         MouseAimDirection();
     }
 
+
     public void MouseAimDirection()
     {
-        mousePosition = input.MousePosition;
+        mousePosition = mouseInput;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         mousePosition.z = 0;
         mousePosition = mousePosition - transform.position;
         transform.up = Vector3.Lerp(previousMousePosition, mousePosition, rotationSpeed);
 
+        transform.up = mousePosition;
         previousMousePosition = mousePosition;
+    }
+
+    //Used in the controllerinput script
+    public void GetMouseInput(Vector3 input)
+    {
+        mouseInput = input;
     }
 }

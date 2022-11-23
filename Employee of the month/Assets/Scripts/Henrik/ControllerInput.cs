@@ -12,43 +12,47 @@ public class ControllerInput : MonoBehaviour
     [SerializeField]
     private Vector2 mousePosition;
 
-    private bool isRunning;
-    private bool hasFired;
+    private Movement playerMovement;
+    private MouseAim mouseAim;
+    private StickAim stickAim;
+    private Fire fire;
 
-    public Vector2 Leftstick { get { return leftStick; } }
-    public Vector2 RighStick { get { return rightStick; } }
-    public Vector2 MousePosition { get { return mousePosition; } }
-    public bool IsRunning { get { return isRunning; } }
-    public bool HasFired { get { return hasFired; } set { hasFired = value; } }
+
+
+    private void Start()
+    {
+        playerMovement = GetComponent<Movement>();
+        mouseAim = GetComponent<MouseAim>();
+        stickAim = GetComponent<StickAim>();
+        fire = GetComponentInChildren<Fire>();
+    }
 
 
     public void GetLeftStick(InputAction.CallbackContext input)
     {
-        Debug.Log("l-stick");
-        leftStick = input.ReadValue<Vector2>();
-        Debug.Log(leftStick);
+        playerMovement.GetRightStickInput(input.ReadValue<Vector2>());
     }
 
     public void GetRightStick(InputAction.CallbackContext input)
     {
-        rightStick = input.ReadValue<Vector2>();
+        stickAim.GetRightStick(input.ReadValue<Vector2>());
     }
 
     public void GetMousePosition(InputAction.CallbackContext input)
     {
-        mousePosition = input.ReadValue<Vector2>();
+        mouseAim.GetMouseInput(input.ReadValue<Vector2>());
     }
 
     public void OnRun(InputAction.CallbackContext input)
     {
         if (input.started)
         {
-            isRunning = true;
+            playerMovement.GetRunButtonInput(true);
         }
 
         if (input.canceled)
         {
-            isRunning = false;
+            playerMovement.GetRunButtonInput(false);
         }
     }
 
@@ -56,12 +60,11 @@ public class ControllerInput : MonoBehaviour
     {
         if (input.started)
         {
-            hasFired = true;
+           fire.GetFireButtonInput(true);
         }
-
-        if (input.canceled)
+        if(input.canceled)
         {
-            hasFired = false;
+            fire.GetFireButtonInput(false);
         }
     }
 }

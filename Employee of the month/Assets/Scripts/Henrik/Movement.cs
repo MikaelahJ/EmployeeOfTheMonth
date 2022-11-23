@@ -5,7 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField]
-    [Range(5, 50)]
+    [Range(5, 500)]
     int acceleration;
     [SerializeField]
     [Range(0, 10)]
@@ -21,22 +21,21 @@ public class Movement : MonoBehaviour
     private ControllerInput controllerInput;
     private Rigidbody2D rb;
     private Vector2 movementVector;
-    private Vector2 inputVector;
+    public Vector2 leftstickInput;
     private int maxSpeed;
-    private Vector2 previousDerection;
     private bool isRunning;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         controllerInput = GetComponent<ControllerInput>();
-        previousDerection = Vector2.zero;
         maxSpeed = walkSpeed;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         UpdateSpeed();
         UpdateMovement();
@@ -44,21 +43,12 @@ public class Movement : MonoBehaviour
 
     private void UpdateSpeed()
     {
-        //TODO works but is instant
-        //Check if walking backwards
-        //Vector2 deltaMovement = (Vector2)transform.position - previousDerection;
-        //if(Vector2.Dot(transform.up, deltaMovement) < 0)
-        //{
-        //    maxSpeed = Mathf.Lerp(maxSpeed, walkSpeed / 2, decelaration);
-        //}
-        //previousDerection = transform.position;
-
-        if (controllerInput.IsRunning && maxSpeed != runSpeed)
+        if (isRunning)
         {
             maxSpeed = runSpeed;
         }
 
-        if(!controllerInput.IsRunning && maxSpeed != walkSpeed)
+        if (!isRunning)
         {
             maxSpeed = walkSpeed;
         }
@@ -66,25 +56,40 @@ public class Movement : MonoBehaviour
 
     private void UpdateMovement()
     {
-        inputVector = controllerInput.Leftstick.normalized;
-        movementVector += inputVector * acceleration * Time.deltaTime;
+        movementVector += leftstickInput * acceleration * Time.fixedDeltaTime;
 
-        if (inputVector.x == 0)
+        if (leftstickInput.magnitude < 0.2f)  // slow down rapidly if we dont give a movement input (12 is an arbitrary large number) 0.2 is the deadzone
         {
-            movementVector.x -= movementVector.x * decelaration * Time.deltaTime;
+         
+            movementVector = Vector3.Lerp(movementVector, Vector3.zero, Time.fixedDeltaTime * 12);
         }
 
-        if(inputVector.y == 0)
+        if (movementVector.magnitude > maxSpeed) // limit movement speed to the maximum speed set from UpdateSpeed();
         {
-            movementVector.y -= movementVector.y * decelaration * Time.deltaTime;
+            movementVector = movementVector.normalized * maxSpeed;
         }
 
-        movementVector = Vector2.ClampMagnitude(movementVector, maxSpeed);
         rb.velocity = movementVector;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         movementVector = Vector2.zero;
+        Debug.Log(rb.velocity);
     }
+
+
+    //Used in the controllerinput script
+    public void GetRightStickInput(Vector2 input)
+    {
+        leftstickInput = input;
+    }
+
+    //Used in the controllerinput script
+    public void GetRunButtonInput(bool input)
+    {
+        isRunning = input;
+    }
+
+
 }
