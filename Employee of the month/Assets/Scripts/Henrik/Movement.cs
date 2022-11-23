@@ -67,9 +67,7 @@ public class Movement : MonoBehaviour
     private void UpdateMovement()
     {
         inputVector = controllerInput.Leftstick.normalized;
-        //Debug.Log(inputVector);
         movementVector += inputVector * acceleration * Time.deltaTime;
-        //movementVector.y += inputVector.y * acceleration * Time.deltaTime;
 
         if (inputVector.x == 0)
         {
