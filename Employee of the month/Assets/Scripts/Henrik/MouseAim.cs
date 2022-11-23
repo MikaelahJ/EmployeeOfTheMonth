@@ -29,8 +29,9 @@ public class MouseAim : MonoBehaviour
         mousePosition = input.MousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         mousePosition.z = 0;
+        mousePosition = mousePosition - transform.position;
         transform.up = Vector3.Lerp(previousMousePosition, mousePosition, rotationSpeed);
 
-        previousMousePosition = transform.up;
+        previousMousePosition = mousePosition;
     }
 }
