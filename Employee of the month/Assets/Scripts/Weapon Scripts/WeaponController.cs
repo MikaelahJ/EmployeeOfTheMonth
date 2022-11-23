@@ -17,24 +17,24 @@ public class WeaponController : MonoBehaviour
     public NewItemScriptableObject item3;
 
     [Header("Equipped Items")]
-    public List <NewItemScriptableObject> items;
+    public List<NewItemScriptableObject> items;
 
 
-    // Start is called before the first frame update
     void Start()
     {
+        UpdateWeaponStats();
         //Test to add
-        Debug.Log(items.Count);
-        AddItem(item1);
-        AddItem(item2);
-        AddItem(item3);
-        AddItem(item1);
-        RemoveItem(item1);
+        //Debug.Log(items.Count);
+        //AddItem(item1);
+        //AddItem(item2);
+        //AddItem(item3);
+        //AddItem(item1);
+        //RemoveItem(item1);
     }
-    
-    void AddItem(NewItemScriptableObject item)
+
+    public void AddItem(NewItemScriptableObject item)
     {
-        if(items.Count < itemSlots)
+        if (items.Count < itemSlots)
         {
             items.Add(item);
             Debug.Log("Added item: " + item.name);
@@ -79,5 +79,5 @@ public class WeaponController : MonoBehaviour
         }
         weapon = newWeapon;
     }
-    
+
 }
