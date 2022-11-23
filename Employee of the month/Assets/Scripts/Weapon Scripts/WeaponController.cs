@@ -92,6 +92,15 @@ public class WeaponController : MonoBehaviour
             newWeapon.isKnockback = newWeapon.isKnockback || item.isKnockback;
         }
         weapon = newWeapon;
+        UpdateFireStats();
+    }
+
+    void UpdateFireStats()
+    {
+        if (GetComponent<Fire>() != null)
+        {
+            GetComponent<Fire>().UpdateFireModifiers();
+        }
     }
 
 }

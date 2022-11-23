@@ -10,7 +10,7 @@ public class Fire : MonoBehaviour
     [SerializeField] private GameObject ammoCounter;
 
     private float timer;
-    private float fireRate = 0.2f;
+    private float fireRate = 0.5f;
     private bool hasFired;
 
     void Update()
@@ -43,7 +43,7 @@ public class Fire : MonoBehaviour
         }
     }
 
-    void UpdateFireModifiers()
+    public void UpdateFireModifiers()
     {
         NewItemScriptableObject weapon = GetComponent<WeaponController>().weapon;
         fireRate = weapon.fireRate;

@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: BaseWeapon
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
+  sprite: {fileID: 0}
   weaponDamage: 5
-  fireRate: 1
+  fireRate: 0.5
   recoilModifier: 0
-  bulletVelocity: 5
+  bulletVelocity: 15
   isBouncy: 0
   numOfBounces: 0
   isPenetrate: 0

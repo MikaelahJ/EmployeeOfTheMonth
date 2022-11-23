@@ -42,6 +42,8 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        SendDamage(collision.collider);
+
         if (isExplode)
         {
             Explode(transform.position);
@@ -51,9 +53,8 @@ public class Bullet : MonoBehaviour
         if (isBouncy && bounces < maxBounce && !collision.gameObject.CompareTag("Player"))
         {
             if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
-            {
+            {   
                 Penetrate();
-                SendDamage(collision.collider);
 
                 return;
             }
@@ -73,7 +74,7 @@ public class Bullet : MonoBehaviour
         if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
         {
             Penetrate();
-            SendDamage(collision.collider);
+            
 
             return;
         }
@@ -86,6 +87,7 @@ public class Bullet : MonoBehaviour
 
     private void SendDamage(Collider2D collider)
     {
+        Debug.Log(damage);
         if (collider.transform.GetComponent<HasHealth>() != null)
         {
             collider.transform.GetComponent<HasHealth>().LoseHealth(damage);
