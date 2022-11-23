@@ -17,9 +17,11 @@ GameObject:
   - component: {fileID: 5290897133633115389}
   - component: {fileID: 4803261403359869887}
   - component: {fileID: 4783482353793102795}
+  - component: {fileID: 526400366}
+  - component: {fileID: 526400367}
   m_Layer: 0
   m_Name: Player2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,10 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b7840ae3f21e84690f03e5e4e52cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 30
+  acceleration: 120
   decelaration: 6
-  walkSpeed: 10
-  runSpeed: 15
+  walkSpeed: 8
+  runSpeed: 14
+  leftstickInput: {x: 0, y: 0}
 --- !u!114 &4803261403359869880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,14 +151,14 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 5
+  m_LinearDrag: 5
+  m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &5290897133633115389
 CircleCollider2D:
@@ -320,8 +323,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
-  maxHealth: 100
+  maxHealth: 10
   health: 0
+--- !u!114 &526400366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4803261403359869879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c078df50e64558643a8e8265cdf5aa4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &526400367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4803261403359869879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f78b21551457a6840a3ba3ddd57905e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &1043643390398182313
 PrefabInstance:
   m_ObjectHideFlags: 0

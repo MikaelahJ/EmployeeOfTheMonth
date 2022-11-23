@@ -11,12 +11,13 @@ public class Fire : MonoBehaviour
 
     private float timer;
     private float fireRate = 0.2f;
+    private bool hasFired;
 
     void Update()
     {
         timer += Time.deltaTime;
 
-        if (!controllerInput.HasFired) { return; }
+        if (!hasFired) { return; }
 
         if(timer < fireRate) { return; }
 
@@ -46,5 +47,10 @@ public class Fire : MonoBehaviour
     {
         NewItemScriptableObject weapon = GetComponent<WeaponController>().weapon;
         fireRate = weapon.fireRate;
+    }
+
+    public void GetFireButtonInput(bool input)
+    {
+        hasFired = input;
     }
 }

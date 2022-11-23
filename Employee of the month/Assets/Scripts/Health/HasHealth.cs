@@ -5,10 +5,12 @@ using UnityEngine;
 public class HasHealth : MonoBehaviour
 {
     public GameObject healthbar;
+    
 
     public int maxHealth = 100;
     public float health;
 
+    
     private bool isDead = false;
 
     void Start()
@@ -60,6 +62,11 @@ public class HasHealth : MonoBehaviour
     private void OnDeath()
     {
         isDead = true;
+        Debug.Log("Triggered");
+        if(GetComponent<Spawner>() != null)
+        {
+            GetComponent<Spawner>().TriggerRespawn();
+        }
     }
 
     public void HealthRegen(int health, float timeBetweenRegen, float duration)
