@@ -12,11 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40bb7cf003a8d7242881e46c28417936, type: 3}
   m_Name: Coffee Maker
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: a53237a9e6c98a841b2522b263f427d2, type: 3}
+  sprite: {fileID: -267758152, guid: faf28988e51185d4ca87ac4dfb59c7d5, type: 3}
+  weaponDamage: 0
   fireRate: 0.5
   recoilModifier: 0
+  bulletVelocity: 0
   isBouncy: 0
   numOfBounces: 0
   isPenetrate: 0
+  numOfPenetrations: 0
   isExplosive: 0
+  explosionRadius: 0
+  explosionDamage: 0
   isKnockback: 0
+  knockbackModifier: 0
