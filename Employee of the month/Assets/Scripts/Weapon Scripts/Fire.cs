@@ -21,7 +21,11 @@ public class Fire : MonoBehaviour
         if(timer < fireRate) { return; }
 
         if(ammoCounter != null)
-            if(ammoCounter.GetComponent<AmmoCounter>().currentAmmo == 0) { return; }
+            if(ammoCounter.GetComponent<AmmoCounter>().currentAmmo == 0)
+            {
+                //Insert Out Of ammo sound
+                return;
+            }
 
         FireBullet();
         timer = 0;
