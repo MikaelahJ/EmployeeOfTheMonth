@@ -9,6 +9,9 @@ public class NewItemScriptableObject : ScriptableObject
     [Header("Item Icon")]
     public Sprite itemIcon;
 
+    [Header("In Game Sprite")]
+    public Sprite sprite;
+
     [Header("Weapon modifiers")]
     public float weaponDamage = 0;
     public float fireRate = 0;

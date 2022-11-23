@@ -20,8 +20,6 @@ public class ItemHolder : MonoBehaviour
         RemoveItem(0);
     }
 
-
-
     public void AddItem(Sprite item, int index)
     {
         Image itemImage = items[index].GetComponent<Image>();
