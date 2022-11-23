@@ -13,7 +13,7 @@ public class AmmoCounter : MonoBehaviour
     {
         ammoCounter = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
 
-        SetAmmo(30);
+        SetAmmo(999);
     }
 
     public void SetAmmo(int ammo)

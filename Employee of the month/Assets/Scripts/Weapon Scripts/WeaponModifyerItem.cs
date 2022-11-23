@@ -6,6 +6,11 @@ public class WeaponModifyerItem : MonoBehaviour
 {
     public NewItemScriptableObject itemType;
 
+    private void Start()
+    {
+        GetComponent<SpriteRenderer>().sprite = itemType.sprite;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
