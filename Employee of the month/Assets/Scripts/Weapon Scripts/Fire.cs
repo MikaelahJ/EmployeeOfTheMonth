@@ -12,6 +12,9 @@ public class Fire : MonoBehaviour
     private float timer;
     private float fireRate = 0.5f;
     private bool hasFired;
+    private float accuracyPercentage = 1f;
+    private float bulletSpreadPercentage = 0f;
+
 
     void Update()
     {
@@ -22,7 +25,7 @@ public class Fire : MonoBehaviour
         if(timer < fireRate) { return; }
 
         if(ammoCounter != null)
-            if(ammoCounter.GetComponent<AmmoCounter>().currentAmmo == 0)
+            if(ammoCounter.GetComponent<UIAmmoCounter>().currentAmmo == 0)
             {
                 //Insert Out Of ammo sound
                 return;
@@ -37,9 +40,14 @@ public class Fire : MonoBehaviour
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
         newBullet.GetComponent<Bullet>().UpdateBulletModifyers(GetComponent<WeaponController>().weapon);
 
+        //Bullet Spread
+        float spread = bulletSpreadPercentage * (1 - accuracyPercentage);
+        newBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-spread, spread)));
+
+        //Ammo counter
         if (ammoCounter != null)
         {
-            ammoCounter.GetComponent<AmmoCounter>().LoseAmmo();
+            ammoCounter.GetComponent<UIAmmoCounter>().LoseAmmo();
         }
     }
 
@@ -47,6 +55,8 @@ public class Fire : MonoBehaviour
     {
         NewItemScriptableObject weapon = GetComponent<WeaponController>().weapon;
         fireRate = weapon.fireRate;
+        accuracyPercentage = weapon.accuracyPercentage;
+        bulletSpreadPercentage = weapon.bulletSpreadPercentage;
     }
 
     public void GetFireButtonInput(bool input)

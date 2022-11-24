@@ -42,7 +42,7 @@ public class WeaponController : MonoBehaviour
             if(itemHolder != null)
             {
                 int index = items.IndexOf(item);
-                itemHolder.GetComponent<ItemHolder>().AddItem(item.itemIcon, index);
+                itemHolder.GetComponent<UIItemHolder>().AddItem(item.itemIcon, index);
             }
 
             Debug.Log("Added item: " + item.name);
@@ -61,7 +61,7 @@ public class WeaponController : MonoBehaviour
         {
             if (itemHolder != null)
             {
-                itemHolder.GetComponent<ItemHolder>().RemoveItem(index);
+                itemHolder.GetComponent<UIItemHolder>().RemoveItem(index);
             }
 
             Debug.Log("Removed item: " + item.name);

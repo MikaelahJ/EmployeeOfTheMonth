@@ -97,6 +97,6 @@ public class HasHealth : MonoBehaviour
     private void UpdateHealthbar()
     {
         if (healthbar == null) { return; }
-        healthbar.GetComponent<Healthbar>().SetHealthBar(health);
+        healthbar.GetComponent<UIHealthbar>().SetHealthBar(health);
     }
 }
