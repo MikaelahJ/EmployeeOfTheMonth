@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class AmmoCounter : MonoBehaviour
+public class UIAmmoCounter : MonoBehaviour
 {
     public int currentAmmo = 0;
     string textAmmo = "000";
