@@ -32,8 +32,6 @@ public class ItemSpawner : MonoBehaviour
     private void GetAllItems()
     {
         allItems = new List<NewItemScriptableObject>(Resources.LoadAll<NewItemScriptableObject>("ItemData/Items/"));
-        Debug.Log("allitems: " + allItems.Count);
-        Debug.Log("item: " + allItems[2].name);
     }
 
     private void GetSpawnPoints()
@@ -42,7 +40,6 @@ public class ItemSpawner : MonoBehaviour
         {
             allSpawnPoints.Add(gameObject.transform.GetChild(i));
         }
-        Debug.Log("allSpawns: " + allSpawnPoints.Count);
     }
 
     private void SpawnItem()
