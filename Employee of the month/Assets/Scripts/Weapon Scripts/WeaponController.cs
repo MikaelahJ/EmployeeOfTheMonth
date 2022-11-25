@@ -127,6 +127,8 @@ public class WeaponController : MonoBehaviour
             newWeapon.recoilModifier += item.recoilModifier;
             newWeapon.accuracyPercentage += weapon.accuracyPercentage;
             newWeapon.bulletSpreadPercentage += weapon.bulletSpreadPercentage;
+            newWeapon.isShotgun = newWeapon.isShotgun || item.isShotgun;
+            newWeapon.shotgunAmmount += item.shotgunAmmount;
 
             //Bullet Modifiers
             newWeapon.isBouncy = newWeapon.isBouncy || item.isBouncy;

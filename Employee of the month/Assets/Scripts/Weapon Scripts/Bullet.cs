@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
     private int maxObjectPass = 1;
     private int objectsPassed = 0;
 
-    public bool isExplode = true;
+    public bool isExplode = false;
     private float explodeRadius = 1;
 
     void Start()
@@ -74,11 +74,8 @@ public class Bullet : MonoBehaviour
         if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
         {
             Penetrate();
-            
-
             return;
         }
-
         else
         {
             Destroy(gameObject);

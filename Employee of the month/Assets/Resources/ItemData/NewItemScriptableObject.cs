@@ -18,6 +18,8 @@ public class NewItemScriptableObject : ScriptableObject
     public float recoilModifier = 0;
     public float accuracyPercentage = 1;
     public float bulletSpreadPercentage = 0;
+    public bool isShotgun = false;
+    public int shotgunAmmount = 0;
 
     [Header("Bullet modifiers")]
     public float bulletVelocity = 0f;
