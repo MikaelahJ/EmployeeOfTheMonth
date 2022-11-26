@@ -62,7 +62,7 @@ public class Fire : MonoBehaviour
             ammoCounter.GetComponent<UIAmmoCounter>().LoseAmmo();
         }
     }
-
+     
     private void Shotgun()
     {
         //3,5,9 skott
@@ -87,7 +87,6 @@ public class Fire : MonoBehaviour
         fireRate = weapon.fireRate;
         accuracyPercentage = weapon.accuracyPercentage;
         bulletSpreadPercentage = weapon.bulletSpreadPercentage;
-        Debug.Log("hej");
         isShotgun = weapon.isShotgun;
         shotgunAmmount = weapon.shotgunAmmount;
     }
