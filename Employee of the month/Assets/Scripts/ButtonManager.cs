@@ -13,12 +13,12 @@ public class ButtonManager : MonoBehaviour
 
     public void OnHost()
     {
-
+        //TODO Network stuff
     }
 
     public void OnJoin()
     {
-
+        //TODO Network stuff
     }
 
     public void OnCredits()
