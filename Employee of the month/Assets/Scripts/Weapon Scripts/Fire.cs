@@ -62,22 +62,37 @@ public class Fire : MonoBehaviour
             ammoCounter.GetComponent<UIAmmoCounter>().LoseAmmo();
         }
     }
-     
+
     private void Shotgun()
     {
         //3,5,9 skott
+        Debug.Log(shotgunAmmount);
+        switch (shotgunAmmount)
+        {
+            case 3:
+                shotgunSpreadBetween = 5;
+                break;
+            case 6:
+                shotgunSpreadBetween = 7;
+                break;
+            case 9:
+                shotgunSpreadBetween = 9;
+                break;
+        }
         for (int i = 0; i < shotgunAmmount; i++)
         {
             GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
             newBullet.GetComponent<Bullet>().UpdateBulletModifyers(GetComponent<WeaponController>().weapon);
-            if(i == 0)
-            {
-                newBullet.transform.Rotate(new Vector3(0, 0,-shotgunSpreadBetween));
-            }
-            if (i == shotgunAmmount-1)
-            {
-                newBullet.transform.Rotate(new Vector3(0, 0, shotgunSpreadBetween));
-            }
+
+            newBullet.transform.Rotate(new Vector3(0, 0, -shotgunSpreadBetween + i*5));
+
+            //if (i == 0)
+            //{
+            //}
+            //if (i == shotgunAmmount - 1)
+            //{
+            //    newBullet.transform.Rotate(new Vector3(0, 0, shotgunSpreadBetween));
+            //}
         }
     }
 

@@ -56,9 +56,6 @@ public class WeaponController : MonoBehaviour
                 Debug.Log("Inventory full, can't add item: " + item.name);
             }
         }
-        
-
-
     }
 
     //OLD
