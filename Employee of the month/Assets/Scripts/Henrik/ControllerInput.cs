@@ -100,4 +100,5 @@ public class ControllerInput : MonoBehaviour
             cursor.SetMouseAim(input.ReadValue<Vector2>());
         }
     }
+    
 }

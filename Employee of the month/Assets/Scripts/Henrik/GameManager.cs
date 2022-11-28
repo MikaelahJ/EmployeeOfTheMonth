@@ -42,8 +42,10 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    public void ConnectCharacterToPlayer(int selectedCharacter, GameObject player)
+    public void ConnectCharacterToPlayer(string SelectedCharacter, GameObject player)
     {
+        Debug.Log("hej");
+        int selectedCharacter = System.Convert.ToInt32(SelectedCharacter);
         players.Add(new KeyValuePair<int, string>(selectedCharacter, nameof(player)));
     }
 
