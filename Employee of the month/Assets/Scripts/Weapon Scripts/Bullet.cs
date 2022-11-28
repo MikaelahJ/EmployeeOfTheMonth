@@ -21,11 +21,17 @@ public class Bullet : MonoBehaviour
     public bool isExplode = true;
     private float explodeRadius = 1;
 
+
     void Start()
     {
         direction = transform.up;
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.velocity = direction * bulletSpeed;
+    }
+
+    private void Update()
+    {
+        transform.up = rb2d.velocity;
     }
 
     public void UpdateBulletModifyers(NewItemScriptableObject weapon)
@@ -49,6 +55,8 @@ public class Bullet : MonoBehaviour
             Explode(transform.position);
             return;
         }
+
+
 
         if (isBouncy && bounces < maxBounce && !collision.gameObject.CompareTag("Player"))
         {
@@ -107,12 +115,15 @@ public class Bullet : MonoBehaviour
     {
         bounces++;
 
-        direction = Vector3.Reflect(direction, collisionPoint.normal);
-        rb2d.velocity = (direction).normalized * bulletSpeed;
+        rb2d.sharedMaterial.bounciness = 1;
 
-        float angle = Mathf.Atan2(rb2d.velocity.y, rb2d.velocity.x) * Mathf.Rad2Deg + 90;
-        Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = rot;
+        //direction = Vector3.Reflect(direction, collisionPoint.normal);
+
+        //rb2d.velocity = (direction).normalized * bulletSpeed;
+
+        //float angle = Mathf.Atan2(rb2d.velocity.y, rb2d.velocity.x) * Mathf.Rad2Deg + 90;
+        //Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
+        //transform.rotation = rot;
     }
 
     private void Penetrate()
