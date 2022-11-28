@@ -20,6 +20,11 @@ public class Fire : MonoBehaviour
     private int shotgunAmmount = 3;
     private float shotgunSpreadBetween = 5;
 
+    private AudioSource sound;
+    void Start()
+    {
+        sound = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -32,38 +37,44 @@ public class Fire : MonoBehaviour
         if (ammoCounter != null)
             if (ammoCounter.GetComponent<UIAmmoCounter>().currentAmmo == 0)
             {
-                //Insert Out Of ammo sound
+                //Out Of ammo sound
+                sound.clip = AudioManager.instance.audioClips.emptyMag;
+                sound.Play();
+                timer = 0;
                 return;
             }
 
-        FireBullet();
+        if (isShotgun)
+            FireShotgun();
+        else
+        {
+            FireGun();
+        }
         timer = 0;
     }
 
-    void FireBullet()
+    void FireGun()
     {
-        if (isShotgun)
-        {
-            Shotgun();
-        }
-        else
-        {
-            GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-            newBullet.GetComponent<Bullet>().UpdateBulletModifyers(GetComponent<WeaponController>().weapon);
+        GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
+        newBullet.GetComponent<Bullet>().UpdateBulletModifyers(GetComponent<WeaponController>().weapon);
 
-            //Bullet Spread
-            float spread = bulletSpreadPercentage * (1 - accuracyPercentage);
-            newBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-spread, spread)));
-        }
+        //Bullet Spread
+        float spread = bulletSpreadPercentage * (1 - accuracyPercentage);
+        newBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-spread, spread)));
 
         //Ammo counter
         if (ammoCounter != null)
         {
             ammoCounter.GetComponent<UIAmmoCounter>().LoseAmmo();
         }
+
+        //Play Fire Sound
+        sound.clip = AudioManager.instance.audioClips.fire;
+        sound.Play();
+
     }
 
-    private void Shotgun()
+    private void FireShotgun()
     {
         //3,5,9 skott
         Debug.Log(shotgunAmmount);

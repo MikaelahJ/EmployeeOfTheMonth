@@ -24,12 +24,18 @@ public class Movement : MonoBehaviour
     private int maxSpeed;
     private bool isRunning;
 
+    private AudioSource walksound;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         maxSpeed = walkSpeed;
+
+        //walking Audio
+        walksound = GetComponent<AudioSource>();
+        walksound.clip = AudioManager.instance.audioClips.walking;
+        walksound.Play();
     }
 
     // Update is called once per frame
@@ -67,6 +73,9 @@ public class Movement : MonoBehaviour
         }
 
         rb.velocity = movementVector;
+
+        //Set audio sound volume
+        walksound.volume = Mathf.Abs(leftstickInput.magnitude);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
