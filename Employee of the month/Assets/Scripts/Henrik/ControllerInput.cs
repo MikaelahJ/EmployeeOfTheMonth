@@ -18,13 +18,15 @@ public class ControllerInput : MonoBehaviour
     private GameObject cursorObject;
     private Cursor cursor;
 
+    public List<string> players;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
             playerInput.SwitchCurrentActionMap("UI");
-            cursorObject = Instantiate(cursorPrefab, Vector2.zero, Quaternion.identity);
+            cursorObject = Instantiate(cursorPrefab, Vector2.zero, cursorPrefab.transform.rotation);
             cursor = cursorObject.GetComponent<Cursor>();
         }
         else
@@ -33,13 +35,15 @@ public class ControllerInput : MonoBehaviour
             player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
             playerMovement = player.GetComponent<Movement>();
             aim = player.GetComponent<Aim>();
-            fire = player.GetComponentInChildren<Fire>();
+            fire = player.GetComponentInChildren<Fire>();  
         }
+        Debug.Log(playerInput.currentActionMap);
     }
 
     public void GetLeftStick(InputAction.CallbackContext input)
     {
         playerMovement.GetLeftStickInput(input.ReadValue<Vector2>());
+        
     }
 
     public void GetRightStick(InputAction.CallbackContext input)
@@ -87,6 +91,13 @@ public class ControllerInput : MonoBehaviour
 
     public void MoveCursor(InputAction.CallbackContext input)
     {
-        cursor.MouseAim(input.ReadValue<Vector2>());
+        if (playerInput.currentControlScheme == "Gamepad")
+        {
+            cursor.SetAimStickInput(input.ReadValue<Vector2>());
+        }
+        else
+        {
+            cursor.SetMouseAim(input.ReadValue<Vector2>());
+        }
     }
 }
