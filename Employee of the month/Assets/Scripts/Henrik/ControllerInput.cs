@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class ControllerInput : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class ControllerInput : MonoBehaviour
         aim = player.GetComponent<Aim>();
         fire = player.GetComponentInChildren<Fire>();
         playerInput = GetComponent<PlayerInput>();
+        if (SceneHandler.instance.currentScene == "CharacterSelect")
+        {
+            playerInput.SwitchCurrentActionMap("UI");
+        }
+        else
+            playerInput.SwitchCurrentActionMap("Player");
     }
 
 
@@ -31,6 +38,7 @@ public class ControllerInput : MonoBehaviour
 
     public void GetRightStick(InputAction.CallbackContext input)
     {
+
         if (playerInput.currentControlScheme == "Gamepad")
         {
             aim.SetAimStickInput(input.ReadValue<Vector2>());
