@@ -22,7 +22,7 @@ public class ControllerInput : MonoBehaviour
         aim = player.GetComponent<Aim>();
         fire = player.GetComponentInChildren<Fire>();
         playerInput = GetComponent<PlayerInput>();
-        if (SceneHandler.instance.currentScene == "CharacterSelect")
+        if (SceneManager. == "CharacterSelect")
         {
             playerInput.SwitchCurrentActionMap("UI");
         }

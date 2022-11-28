@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneHandler : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static SceneHandler instance;
+    public static GameManager instance;
     public string menuName;
     public string mainSceneName;
 
