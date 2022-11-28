@@ -23,10 +23,7 @@ public class ControllerInput : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
-
-
             playerInput.SwitchCurrentActionMap("UI");
-
             cursorObject = Instantiate(cursorPrefab, Vector2.zero, Quaternion.identity);
             cursor = cursorObject.GetComponent<Cursor>();
         }
