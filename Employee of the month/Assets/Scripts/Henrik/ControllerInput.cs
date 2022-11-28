@@ -5,42 +5,45 @@ using UnityEngine.InputSystem;
 
 public class ControllerInput : MonoBehaviour
 {
-    [SerializeField]
-    private Vector2 leftStick;
-    [SerializeField]
-    private Vector2 rightStick;
-    [SerializeField]
-    private Vector2 mousePosition;
+    public GameObject playerPrefab;
 
+    private GameObject player;
     private Movement playerMovement;
-    private MouseAim mouseAim;
-    private StickAim stickAim;
+    private Aim aim;
     private Fire fire;
+    private PlayerInput playerInput;
 
 
-
-    private void Start()
+    private void Awake()
     {
-        playerMovement = GetComponent<Movement>();
-        mouseAim = GetComponent<MouseAim>();
-        stickAim = GetComponent<StickAim>();
-        fire = GetComponentInChildren<Fire>();
+        player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
+        playerMovement = player.GetComponent<Movement>();
+        aim = player.GetComponent<Aim>();
+        fire = player.GetComponentInChildren<Fire>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
 
     public void GetLeftStick(InputAction.CallbackContext input)
     {
-        playerMovement.GetRightStickInput(input.ReadValue<Vector2>());
+        playerMovement.GetLeftStickInput(input.ReadValue<Vector2>());
     }
 
     public void GetRightStick(InputAction.CallbackContext input)
     {
-        stickAim.GetRightStick(input.ReadValue<Vector2>());
+        if (playerInput.currentControlScheme == "Gamepad")
+        {
+            aim.SetAimStickInput(input.ReadValue<Vector2>());
+        }
+        else
+        {
+            aim.SetAimMouse(input.ReadValue<Vector2>());
+        }
     }
 
     public void GetMousePosition(InputAction.CallbackContext input)
     {
-        mouseAim.GetMouseInput(input.ReadValue<Vector2>());
+        aim.GetMouseInput(input.ReadValue<Vector2>());
     }
 
     public void OnRun(InputAction.CallbackContext input)

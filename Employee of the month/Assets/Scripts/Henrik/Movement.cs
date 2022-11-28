@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     [Range(5, 500)]
     int acceleration;
     [SerializeField]
-    [Range(0, 10)]
+    [Range(0, 20)]
     int decelaration;
     [SerializeField]
     [Range(0, 50)]
@@ -18,7 +18,6 @@ public class Movement : MonoBehaviour
     int runSpeed;
 
     //Todo get Input script
-    private ControllerInput controllerInput;
     private Rigidbody2D rb;
     private Vector2 movementVector;
     public Vector2 leftstickInput;
@@ -30,7 +29,6 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        controllerInput = GetComponent<ControllerInput>();
         maxSpeed = walkSpeed;
     }
 
@@ -60,8 +58,7 @@ public class Movement : MonoBehaviour
 
         if (leftstickInput.magnitude < 0.2f)  // slow down rapidly if we dont give a movement input (12 is an arbitrary large number) 0.2 is the deadzone
         {
-         
-            movementVector = Vector3.Lerp(movementVector, Vector3.zero, Time.fixedDeltaTime * 12);
+            movementVector = Vector3.Lerp(movementVector, Vector3.zero, Time.fixedDeltaTime * decelaration);
         }
 
         if (movementVector.magnitude > maxSpeed) // limit movement speed to the maximum speed set from UpdateSpeed();
@@ -75,12 +72,11 @@ public class Movement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         movementVector = Vector2.zero;
-        Debug.Log(rb.velocity);
     }
 
 
     //Used in the controllerinput script
-    public void GetRightStickInput(Vector2 input)
+    public void GetLeftStickInput(Vector2 input)
     {
         leftstickInput = input;
     }
