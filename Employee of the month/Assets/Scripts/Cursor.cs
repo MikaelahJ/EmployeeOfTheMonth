@@ -8,14 +8,16 @@ public class Cursor : MonoBehaviour
 {
     public float cursorSpeed;
 
-
     private Vector2 mouseInput;
     private Vector3 mousePosition;
     private Vector3 stickInput;
     private bool hasGamepad;
+    private bool pressed;
 
+    private void Start()
+    {
 
-
+    }
     private void Update()
     {
         if(hasGamepad)
@@ -26,6 +28,31 @@ public class Cursor : MonoBehaviour
         {
             MousePosition();
         }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Debug.Log("hej" + collision.gameObject.name);
+
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+            Debug.Log("hej" + collision.gameObject.name);
+
+        if (pressed)
+        {
+            GameManager.instance.ConnectCharacterToPlayer(collision.gameObject.name, this.gameObject);
+            Debug.Log("hej");
+
+        }
+    }
+    public void Pressed()
+    {
+        pressed = true;
+        Invoke(nameof(PressedOff), 2f);
+    }
+    private void PressedOff()
+    {
+        pressed = false;
     }
 
     public void MousePosition()

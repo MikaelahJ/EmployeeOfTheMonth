@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6344617539168027587}
   - component: {fileID: 6695008708974636743}
   - component: {fileID: -1412270606179941897}
-  m_Layer: 0
+  - component: {fileID: -4418562741448730583}
+  m_Layer: 10
   m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,3 +99,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorSpeed: 15
+--- !u!58 &-4418562741448730583
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7267468052432219236}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.02334407, y: 0.565551}
+  serializedVersion: 2
+  m_Radius: 0.16439414
