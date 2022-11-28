@@ -18,6 +18,8 @@ public class ControllerInput : MonoBehaviour
     private GameObject cursorObject;
     private Cursor cursor;
 
+    public List<string> players;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -35,11 +37,13 @@ public class ControllerInput : MonoBehaviour
             aim = player.GetComponent<Aim>();
             fire = player.GetComponentInChildren<Fire>();  
         }
+        Debug.Log(playerInput.currentActionMap);
     }
 
     public void GetLeftStick(InputAction.CallbackContext input)
     {
         playerMovement.GetLeftStickInput(input.ReadValue<Vector2>());
+        
     }
 
     public void GetRightStick(InputAction.CallbackContext input)

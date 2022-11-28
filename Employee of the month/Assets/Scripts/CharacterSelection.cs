@@ -12,24 +12,27 @@ public class CharacterSelection : MonoBehaviour
 
         //TODO koppla selected character till rätt player osv 
         //sätta detta i singleton typ
-        switch (selectedCharacter)
-        {
-            case 1:
-                break;
+        //GameManager.instance.ConnectCharacterToPlayer(selectedCharacter, );
 
-            case 2:
+        //switch (selectedCharacter)
+        //{
+        //    case 1:
+                
+        //        break;
 
-                break;
+        //    case 2:
 
-            case 3:
+        //        break;
 
-                break;
+        //    case 3:
 
-            case 4:
+        //        break;
 
-                break;
+        //    case 4:
 
-        }
+        //        break;
+
+        //}
 
     }
 

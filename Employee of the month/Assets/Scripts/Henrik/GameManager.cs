@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public string currentScene;
 
+    private List<KeyValuePair<int,string>> players;
+
     private void Awake()
     {
         if(instance == null)
@@ -23,7 +25,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
-
     }
 
     void Start()
@@ -39,25 +40,11 @@ public class GameManager : MonoBehaviour
                 //current scene testScene
                 break;
         }
-
-        Debug.Log(SceneManager.GetActiveScene().name);
     }
-
-    public void LoadMainMenu()
+    
+    public void ConnectCharacterToPlayer(int selectedCharacter, GameObject player)
     {
-        if (currentScene != menuName)
-        {
-            SceneManager.LoadScene(menuName);
-            currentScene = menuName;
-        }
+        players.Add(new KeyValuePair<int, string>(selectedCharacter, nameof(player)));
     }
 
-    public void LoadMainScene()
-    {
-        if(currentScene != mainSceneName)
-        {
-            SceneManager.LoadScene(mainSceneName);
-            currentScene = mainSceneName;
-        }
-    }
 }
