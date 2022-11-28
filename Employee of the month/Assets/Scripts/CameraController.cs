@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-
+    public GameObject map;
     public GameObject[] players;
-
+        
     [SerializeField] [Range(0, 10)]   private float moveSpeed = 2;
     [SerializeField] [Range(0, 10)]   private float zoomSpeed = 1.5f;
     [SerializeField] [Range(-10, 10)] private float zoomOffset = 1;
@@ -15,10 +15,22 @@ public class CameraController : MonoBehaviour
     [SerializeField] [Range(0, 10)]   private float minOrthograpic = 4;
     [SerializeField] [Range(0, 100)]  private float maxOrthograpic = 15;
 
+    private float xMin, xMax, yMin, yMax;
+    private float camSize, camRatio;
+    Camera cam;
+
     // Start is called before the first frame update
     void Start()
     {
         players = new GameObject[4];
+
+        BoxCollider mapBounds = map.GetComponent<BoxCollider>();
+        cam = GetComponent<Camera>();
+
+        xMin = mapBounds.bounds.min.x;
+        xMax = mapBounds.bounds.max.x;
+        yMin = mapBounds.bounds.min.y;
+        yMax = mapBounds.bounds.max.y;
     }
 
     void Update()
@@ -57,17 +69,31 @@ public class CameraController : MonoBehaviour
 
     void MoveCameraOrthographic(GameObject[] players)
     {
+
+        //Set Size
+        float currentSize = cam.orthographicSize;
+        float targetSize = zoomOffset + GetCameraTargetSize(players);
+        float increment = (targetSize - currentSize) * Time.deltaTime * zoomSpeed;
+
+        cam.orthographicSize = Mathf.Clamp(currentSize + increment, minOrthograpic, maxOrthograpic);
+
         //Move camera
         Vector3 middle = GetCameraDestination(players);
         middle.z = 0;
         transform.position += middle * Time.deltaTime * moveSpeed;
 
-        //Set Size
-        float currentSize = GetComponent<Camera>().orthographicSize;
-        float targetSize = zoomOffset + GetCameraTargetSize(players);
-        float increment = (targetSize - currentSize) * Time.deltaTime * zoomSpeed;
+        //transform.position = ClampCamera();
+    }
 
-        GetComponent<Camera>().orthographicSize = Mathf.Clamp(currentSize + increment, minOrthograpic, maxOrthograpic);
+    //Doesn't work with multiple trackers
+    Vector3 ClampCamera()
+    {
+        camSize = cam.orthographicSize;
+        camRatio = (xMax + camSize) / 2.0f;
+
+        float camX = Mathf.Clamp(transform.position.x, xMin + camRatio, xMax - camRatio);
+        float camY = Mathf.Clamp(transform.position.y, yMin + camSize, yMax - camSize);
+        return new Vector3(camX, camY, -10);
     }
 
     float GetCameraTargetSize(GameObject[] players)
