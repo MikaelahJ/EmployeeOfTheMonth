@@ -107,7 +107,19 @@ MonoBehaviour:
     m_ActionId: ed793f03-4877-4112-8a4b-66e15455c4c1
     m_ActionName: Player/Fire[/DualShock4GamepadHID/rightTrigger,/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237240420590927659}
+        m_TargetAssemblyTypeName: ControllerInput, Assembly-CSharp
+        m_MethodName: MoveCursor
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 3ca60d14-0676-4aac-ad1e-450203ebfef6
     m_ActionName: UI/Navigate[/DualShock4GamepadHID/leftStick/up,/DualShock4GamepadHID/rightStick/up,/DualShock4GamepadHID/leftStick/down,/DualShock4GamepadHID/rightStick/down,/DualShock4GamepadHID/leftStick/left,/DualShock4GamepadHID/rightStick/left,/DualShock4GamepadHID/leftStick/right,/DualShock4GamepadHID/rightStick/right,/DualShock4GamepadHID/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
@@ -162,6 +174,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c579b1e5-401b-4b72-9582-592a45cab59e
     m_ActionName: Player/Run[/DualShock4GamepadHID/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bcc34092-6b2d-456e-ba9a-fe82b755a25d
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -180,6 +196,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5234566805939642093, guid: d8d21ce790ce3a141b6c7af09131b189, type: 3}
-  leftStick: {x: 0, y: 0}
-  rightStick: {x: 0, y: 0}
-  mousePosition: {x: 0, y: 0}
+  cursorPrefab: {fileID: 7267468052432219236, guid: 624f31e2bfded4640a15fb109334a68a, type: 3}

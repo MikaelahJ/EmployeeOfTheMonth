@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class ControllerInput : MonoBehaviour
 {
     public GameObject playerPrefab;
+    public GameObject cursorPrefab;
 
     private GameObject player;
     private Movement playerMovement;
@@ -14,22 +15,28 @@ public class ControllerInput : MonoBehaviour
     private Fire fire;
     private PlayerInput playerInput;
 
+    private GameObject cursorObject;
+    private Cursor cursor;
 
     private void Awake()
     {
-        player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
-        playerMovement = player.GetComponent<Movement>();
-        aim = player.GetComponent<Aim>();
-        fire = player.GetComponentInChildren<Fire>();
-        playerInput = GetComponent<PlayerInput>();
-        if (SceneManager. == "CharacterSelect")
+        if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
             playerInput.SwitchCurrentActionMap("UI");
+
+            cursorObject = Instantiate(cursorPrefab, Vector2.zero, Quaternion.identity);
+            cursor = cursorObject.GetComponent<Cursor>();
         }
         else
+        {
             playerInput.SwitchCurrentActionMap("Player");
+            player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
+            playerMovement = player.GetComponent<Movement>();
+            aim = player.GetComponent<Aim>();
+            fire = player.GetComponentInChildren<Fire>();
+            playerInput = GetComponent<PlayerInput>();
+        }
     }
-
 
     public void GetLeftStick(InputAction.CallbackContext input)
     {
@@ -71,11 +78,16 @@ public class ControllerInput : MonoBehaviour
     {
         if (input.started)
         {
-           fire.GetFireButtonInput(true);
+            fire.GetFireButtonInput(true);
         }
-        if(input.canceled)
+        if (input.canceled)
         {
             fire.GetFireButtonInput(false);
         }
+    }
+
+    public void MoveCursor(InputAction.CallbackContext input)
+    {
+      cursor.MouseAim( input.ReadValue<Vector2>());
     }
 }
