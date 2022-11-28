@@ -22,10 +22,14 @@ public class WeaponController : MonoBehaviour
 
     [SerializeField] private GameObject itemHolder;
 
+    private AudioSource sound;
     void Start()
     {
         items = new NewItemScriptableObject[itemSlots];
         UpdateWeaponStats();
+
+        //
+        sound = GetComponent<AudioSource>();
         //Test to add
         //Debug.Log(items.Count);
         //AddItem(item1);
@@ -47,7 +51,11 @@ public class WeaponController : MonoBehaviour
                     itemHolder.GetComponent<UIItemHolder>().AddItem(item.itemIcon, i);
                 }
                 Debug.Log("Added item: " + item.name);
+                //Play pickup sound
+                sound.PlayOneShot(AudioManager.instance.audioClips.itemPickup);
+
                 UpdateWeaponStats();
+
                 break;
             }
 
@@ -87,6 +95,8 @@ public class WeaponController : MonoBehaviour
         if (itemHolder != null)
         {
             itemHolder.GetComponent<UIItemHolder>().RemoveItem(index);
+            //Play item removed sound
+            sound.PlayOneShot(AudioManager.instance.audioClips.itemDestroyed);
         }
         UpdateWeaponStats();
     }

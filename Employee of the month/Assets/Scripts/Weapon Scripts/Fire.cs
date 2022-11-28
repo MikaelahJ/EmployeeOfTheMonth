@@ -38,8 +38,7 @@ public class Fire : MonoBehaviour
             if (ammoCounter.GetComponent<UIAmmoCounter>().currentAmmo == 0)
             {
                 //Out Of ammo sound
-                sound.clip = AudioManager.instance.audioClips.emptyMag;
-                sound.Play();
+                sound.PlayOneShot(AudioManager.instance.audioClips.emptyMag);
                 timer = 0;
                 return;
             }
@@ -69,8 +68,7 @@ public class Fire : MonoBehaviour
         }
 
         //Play Fire Sound
-        sound.clip = AudioManager.instance.audioClips.fire;
-        sound.Play();
+        sound.PlayOneShot(AudioManager.instance.audioClips.fire);
 
     }
 
