@@ -15,7 +15,6 @@ public class CharacterSelection : MonoBehaviour
         switch (selectedCharacter)
         {
             case 1:
-                playerPrefab.GetComponent<SpriteRenderer>().sprite = character1;
                 break;
 
             case 2:

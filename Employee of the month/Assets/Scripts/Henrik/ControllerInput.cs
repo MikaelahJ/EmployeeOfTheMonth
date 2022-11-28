@@ -20,8 +20,11 @@ public class ControllerInput : MonoBehaviour
 
     private void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
+
+
             playerInput.SwitchCurrentActionMap("UI");
 
             cursorObject = Instantiate(cursorPrefab, Vector2.zero, Quaternion.identity);
@@ -34,7 +37,6 @@ public class ControllerInput : MonoBehaviour
             playerMovement = player.GetComponent<Movement>();
             aim = player.GetComponent<Aim>();
             fire = player.GetComponentInChildren<Fire>();
-            playerInput = GetComponent<PlayerInput>();
         }
     }
 
@@ -88,6 +90,6 @@ public class ControllerInput : MonoBehaviour
 
     public void MoveCursor(InputAction.CallbackContext input)
     {
-      cursor.MouseAim( input.ReadValue<Vector2>());
+        cursor.MouseAim(input.ReadValue<Vector2>());
     }
 }
