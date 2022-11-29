@@ -21,6 +21,9 @@ public class Bullet : MonoBehaviour
     public bool isExplode = false;
     private float explodeRadius = 1;
 
+    public bool isHoming = false;
+    public float turnSpeed = 1;
+
 
     void Start()
     {
@@ -141,5 +144,19 @@ public class Bullet : MonoBehaviour
     {
         int defaultLayer = LayerMask.NameToLayer("Default");
         gameObject.layer = defaultLayer;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (isHoming && collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Homing Triggered");
+            Vector3 newDirection = collision.transform.position - transform.position;
+            newDirection.Normalize();
+            newDirection.z = 0;
+            transform.up = Vector2.Lerp(direction, newDirection, turnSpeed * Time.deltaTime);
+            direction = transform.up;
+            rb2d.velocity = transform.up * rb2d.velocity.magnitude;
+        }
     }
 }

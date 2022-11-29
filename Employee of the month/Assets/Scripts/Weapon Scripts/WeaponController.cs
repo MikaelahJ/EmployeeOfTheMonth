@@ -144,6 +144,7 @@ public class WeaponController : MonoBehaviour
             newWeapon.isPenetrate = newWeapon.isPenetrate || item.isPenetrate;
             newWeapon.isExplosive = newWeapon.isExplosive || item.isExplosive;
             newWeapon.isKnockback = newWeapon.isKnockback || item.isKnockback;
+            newWeapon.isHoming = newWeapon.isHoming || item.isHoming;
 
         }
         weapon = newWeapon;

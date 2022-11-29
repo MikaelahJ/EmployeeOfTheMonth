@@ -36,6 +36,9 @@ public class NewItemScriptableObject : ScriptableObject
     [Header("Knockback")]
     public bool isKnockback = false;
     public float knockbackModifier = 0f;
+    [Header("Homing")]
+    public bool isHoming = false;
+    public float turnSpeed = 0f;
 
     
 }

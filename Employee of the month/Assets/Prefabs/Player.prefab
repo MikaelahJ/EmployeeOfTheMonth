@@ -343,6 +343,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3847611636956470797, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 2297937692892492729, guid: 21869bbf1ccf89144ab556bd20aaa66d, type: 3}
+    - target: {fileID: 3847611636956470797, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
       propertyPath: controllerInput
       value: 
       objectReference: {fileID: 0}
