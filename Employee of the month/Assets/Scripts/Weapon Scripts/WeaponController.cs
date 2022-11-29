@@ -30,7 +30,7 @@ public class WeaponController : MonoBehaviour
         sound = GetComponent<AudioSource>();
     }
 
-    public void AddItem(NewItemScriptableObject item)
+    public bool AddItem(NewItemScriptableObject item)
     {
         for (int i = 0; i < items.Length; i++)
         {
@@ -47,14 +47,11 @@ public class WeaponController : MonoBehaviour
 
                 UpdateWeaponStats();
 
-                break;
-            }
-
-            if(i == items.Length - 1)
-            {
-                Debug.Log("Inventory full, can't add item: " + item.name);
+                return true;
             }
         }
+        Debug.Log("Inventory full, can't add item: " + item.name);
+        return false;
     }
 
 

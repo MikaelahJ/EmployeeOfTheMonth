@@ -15,8 +15,10 @@ public class WeaponModifyerItem : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(this.gameObject);
-            collision.gameObject.GetComponentInChildren<WeaponController>().AddItem(itemType);
+            if (collision.gameObject.GetComponentInChildren<WeaponController>().AddItem(itemType))
+            {
+                Destroy(this.gameObject);
+            }
             Debug.Log(itemType);
         }
     }
