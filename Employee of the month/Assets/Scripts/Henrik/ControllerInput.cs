@@ -52,7 +52,7 @@ public class ControllerInput : MonoBehaviour
         rectT.localPosition = new Vector3(rectT.rect.width * rectT.localScale.x * spacing * offset, rectT.localPosition.y, rectT.localPosition.z);
 
         player.GetComponentInChildren<WeaponController>().itemHolder = hud.GetComponentInChildren<UIItemHolder>();
-        player.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponent<UIAmmoCounter>();
+        player.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponentInChildren<UIAmmoCounter>();
         player.GetComponent<HasHealth>().healthbar = hud.GetComponentInChildren<UIHealthbar>();
     }
 

@@ -117,6 +117,7 @@ public class Fire : MonoBehaviour
     {
         ammo -= shots;
         weaponController.LoseItemAmmo(shots);
+        ammoCounter.SetAmmo(ammo);
 
     }
 
@@ -129,6 +130,7 @@ public class Fire : MonoBehaviour
         bulletSpreadPercentage = weapon.bulletSpreadPercentage;
         isShotgun = weapon.isShotgun;
         shotgunAmmount = weapon.shotgunAmmount;
+        ammoCounter.SetAmmo(ammo);
     }
 
     public void GetFireButtonInput(bool input)

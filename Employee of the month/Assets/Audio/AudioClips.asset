@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walking: {fileID: 8300000, guid: ff825f9c4bd26d64a98900c1fbc9ca42, type: 3}
   fire: {fileID: 8300000, guid: ce060504dcce7de4794dbb468e250188, type: 3}
+  shotgun: {fileID: 0}
   emptyMag: {fileID: 8300000, guid: f21d36f96c70b5b4c8733d8a4824fb64, type: 3}
   itemPickup: {fileID: 8300000, guid: ed997be5e765bea4c8f94346dd81622a, type: 3}
-  itemDestroyed: {fileID: 0}
+  itemDestroyed: {fileID: 8300000, guid: e333864e4cb56d3469d2ced16bb60c9f, type: 3}
+  impact: {fileID: 0}
+  bulletBounce: {fileID: 0}
+  bulletExplode: {fileID: 0}

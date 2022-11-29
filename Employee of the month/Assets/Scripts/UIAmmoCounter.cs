@@ -9,10 +9,9 @@ public class UIAmmoCounter : MonoBehaviour
     [SerializeField] private GameObject ammoCounter;
     TextMeshProUGUI ammoCount;
 
-    private void Start()
+    void Awake()
     {
         ammoCount = ammoCounter.GetComponent<TextMeshProUGUI>();
-
         SetAmmo(0);
     }
 
@@ -20,6 +19,6 @@ public class UIAmmoCounter : MonoBehaviour
     {
         if (ammo < 0)
             ammo = 0;
-        ammoCount.text = "" + ammo;
+        ammoCount.text = ammo.ToString();
     }
 }
