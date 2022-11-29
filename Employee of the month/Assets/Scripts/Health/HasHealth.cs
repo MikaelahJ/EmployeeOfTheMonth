@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HasHealth : MonoBehaviour
 {
-    public GameObject healthbar;
+    public UIHealthbar healthbar;
     
 
     public int maxHealth = 100;
@@ -97,6 +97,6 @@ public class HasHealth : MonoBehaviour
     private void UpdateHealthbar()
     {
         if (healthbar == null) { return; }
-        healthbar.GetComponent<UIHealthbar>().SetHealthBar(health);
+        healthbar.SetHealthBar(health);
     }
 }

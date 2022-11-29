@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class ControllerInput : MonoBehaviour
 {
     public GameObject playerPrefab;
+    public GameObject playerHUD;
     public GameObject cursorPrefab;
 
     private GameObject player;
@@ -35,9 +36,22 @@ public class ControllerInput : MonoBehaviour
             player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
             playerMovement = player.GetComponent<Movement>();
             aim = player.GetComponent<Aim>();
-            fire = player.GetComponentInChildren<Fire>();  
+            fire = player.GetComponentInChildren<Fire>();
+            SpawnPlayerHUD(player);
         }
         Debug.Log(playerInput.currentActionMap);
+    }
+
+    private void SpawnPlayerHUD(GameObject player)
+    {
+        GameObject canvas = GameObject.Find("Canvas");
+        GameObject hud = Instantiate(playerHUD, canvas.transform);
+        RectTransform rectT = hud.GetComponent<RectTransform>();
+        rectT.localPosition = new Vector3(rectT.rect.width * playerInput.playerIndex, rectT.localPosition.y, rectT.localPosition.z);
+
+        player.GetComponentInChildren<WeaponController>().itemHolder = hud.GetComponentInChildren<UIItemHolder>();
+        player.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponent<UIAmmoCounter>();
+        player.GetComponent<HasHealth>().healthbar = hud.GetComponentInChildren<UIHealthbar>();
     }
 
     public void GetLeftStick(InputAction.CallbackContext input)

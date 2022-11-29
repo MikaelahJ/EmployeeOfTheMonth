@@ -19,7 +19,7 @@ public class WeaponController : MonoBehaviour
     [Header("Equipped Items")]
     public NewItemScriptableObject[] items;
 
-    [SerializeField] private GameObject itemHolder;
+    public UIItemHolder itemHolder;
 
     private AudioSource sound;
     void Start()
