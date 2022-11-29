@@ -14,9 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: f4bda48d454f0fe409f2b5e223d4d388, type: 3}
   sprite: {fileID: 1243225260, guid: 46d74a4321618b3428227acefb6d5505, type: 3}
+  ammo: 0
   weaponDamage: 0
   fireRate: 0
   recoilModifier: 0
+  accuracyPercentage: 1
+  bulletSpreadPercentage: 0
+  isShotgun: 0
+  shotgunAmmount: 0
   bulletVelocity: 0
   isBouncy: 0
   numOfBounces: 0

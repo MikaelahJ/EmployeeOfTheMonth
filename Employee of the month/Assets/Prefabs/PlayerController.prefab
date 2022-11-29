@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5234566805939642093, guid: d8d21ce790ce3a141b6c7af09131b189, type: 3}
+  playerHUD: {fileID: 4128787644152966788, guid: b27fa7086269d2e4cb72a59aef17bbd6, type: 3}
   cursorPrefab: {fileID: 7267468052432219236, guid: 624f31e2bfded4640a15fb109334a68a, type: 3}
   players: []
 --- !u!1 &7006218077739066064
