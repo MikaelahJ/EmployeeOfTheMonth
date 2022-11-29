@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SoftWall
   - HardWall
+  - StartButton
   layers:
   - Default
   - TransparentFX

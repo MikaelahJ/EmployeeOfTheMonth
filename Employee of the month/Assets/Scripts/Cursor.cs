@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
 
 
 public class Cursor : MonoBehaviour
 {
+    [SerializeField] private GameObject selectedCharacterBall;
     public float cursorSpeed;
 
     private Vector2 mouseInput;
@@ -13,14 +16,12 @@ public class Cursor : MonoBehaviour
     private Vector3 stickInput;
     private bool hasGamepad;
     private bool pressed;
+    private GameObject selected;
 
-    private void Start()
-    {
 
-    }
     private void Update()
     {
-        if(hasGamepad)
+        if (hasGamepad)
         {
             StickPosition();
         }
@@ -29,26 +30,48 @@ public class Cursor : MonoBehaviour
             MousePosition();
         }
     }
-    private void OnCollisionStay2D(Collision2D collision)
+    public void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("hej" + collision.gameObject.name);
-
-    }
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-            Debug.Log("hej" + collision.gameObject.name);
-
-        if (pressed)
+        if (pressed && collision.gameObject.CompareTag("StartButton"))
         {
-            GameManager.instance.ConnectCharacterToPlayer(collision.gameObject.name, this.gameObject);
-            Debug.Log("hej");
+            if(GameManager.Instance.playersCount != GameManager.Instance.playersChosen)
+            {
+                Debug.Log("Everyone must select a character");
+            }
+            else
+            {
+                SceneManager.LoadScene("TestScene");
+            }
 
         }
+        if (pressed && !collision.gameObject.CompareTag("StartButton"))
+        {
+            SetSelectedBall(collision);
+            GameManager.Instance.ConnectCharacterToPlayer(this.name, collision.gameObject.name);
+            PressedOff();
+        }
     }
+
+    private void SetSelectedBall(Collider2D collision)
+    {
+        if (selected == null)
+        {
+            selected = Instantiate(selectedCharacterBall, collision.gameObject.transform);
+            selected.name = this.name + "Selected" + collision.gameObject.name;
+        }
+        else if (selected.name != this.name + "Selected" + collision.gameObject.name)
+        {
+            Destroy(selected.gameObject);
+
+            selected = Instantiate(selectedCharacterBall, collision.gameObject.transform);
+            selected.name = this.name + "Selected" + collision.gameObject.name;
+        }
+    }
+
     public void Pressed()
     {
         pressed = true;
-        Invoke(nameof(PressedOff), 2f);
+        Invoke(nameof(PressedOff), 0.02f);
     }
     private void PressedOff()
     {
