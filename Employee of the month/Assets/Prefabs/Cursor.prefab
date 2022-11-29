@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6695008708974636743}
   - component: {fileID: -1412270606179941897}
   - component: {fileID: -4418562741448730583}
+  - component: {fileID: 6585368121843491211}
   m_Layer: 10
   m_Name: Cursor
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 488fb0d660bcca54b9f6913074f50c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedCharacterBall: {fileID: 4846093588454617598, guid: 0235b45ff64b0194fbcd65484d8d10a7, type: 3}
   cursorSpeed: 15
 --- !u!58 &-4418562741448730583
 CircleCollider2D:
@@ -115,3 +117,24 @@ CircleCollider2D:
   m_Offset: {x: 0.02334407, y: 0.565551}
   serializedVersion: 2
   m_Radius: 0.16439414
+--- !u!50 &6585368121843491211
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7267468052432219236}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

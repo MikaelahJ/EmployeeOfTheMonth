@@ -5,48 +5,52 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-    public string menuName;
-    public string mainSceneName;
+    public static GameManager Instance = null;
 
-
-    public string currentScene;
-
-    private List<KeyValuePair<int,string>> players;
-
+    public Dictionary<string, int> players = new Dictionary<string, int>();
+    public int playersCount;
+    public int playersChosen;
     private void Awake()
     {
-        if(instance == null)
+        if (Instance != null && Instance != this)
         {
-            instance = this;
+            Destroy(this);
         }
         else
         {
-            Destroy(gameObject);
+            Instance = this;
+            DontDestroyOnLoad(this);
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        switch(sceneIndex)
+        switch (sceneIndex)
         {
             case 1:
-                   //current scene är character select 
+                //current scene är character select 
                 break;
             case 2:
                 //current scene testScene
                 break;
         }
     }
-    
-    public void ConnectCharacterToPlayer(string SelectedCharacter, GameObject player)
+
+    public void ConnectCharacterToPlayer(string playerName, string SelectedCharacter)
     {
-        Debug.Log("hej");
         int selectedCharacter = System.Convert.ToInt32(SelectedCharacter);
-        players.Add(new KeyValuePair<int, string>(selectedCharacter, nameof(player)));
+
+        if (players.ContainsKey(playerName))
+        {
+            players[playerName] = selectedCharacter;
+        }
+        else
+        {
+            players.Add(playerName, selectedCharacter);
+        }
+        playersChosen = players.Count;
     }
 
 }

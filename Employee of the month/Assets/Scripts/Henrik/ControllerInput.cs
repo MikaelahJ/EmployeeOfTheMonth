@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class ControllerInput : MonoBehaviour
 {
+    [SerializeField] private List<GameObject> characters = new List<GameObject>();
     public GameObject playerPrefab;
     public GameObject playerHUD;
     public GameObject cursorPrefab;
@@ -15,6 +17,8 @@ public class ControllerInput : MonoBehaviour
     private Aim aim;
     private Fire fire;
     private PlayerInput playerInput;
+    public Sprite sprite;
+    public int spriteIndex;
 
     private GameObject cursorObject;
     private Cursor cursor;
@@ -28,18 +32,46 @@ public class ControllerInput : MonoBehaviour
         {
             playerInput.SwitchCurrentActionMap("UI");
             cursorObject = Instantiate(cursorPrefab, Vector2.zero, cursorPrefab.transform.rotation);
+            cursorObject.name = "P" + playerInput.playerIndex.ToString();
             cursor = cursorObject.GetComponent<Cursor>();
+
+            GameManager.Instance.playersCount += 1;
         }
         else
         {
+            spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
+            SetCharacter();
+
             playerInput.SwitchCurrentActionMap("Player");
             player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
             playerMovement = player.GetComponent<Movement>();
             aim = player.GetComponent<Aim>();
             fire = player.GetComponentInChildren<Fire>();
+
             SpawnPlayerHUD(player);
         }
-        Debug.Log(playerInput.currentActionMap);
+    }
+
+    private void SetCharacter()
+    {
+        Debug.Log("Hej");
+
+        switch (spriteIndex)
+        {
+            case 0:
+                Instantiate(characters[0], player.transform);
+                break;
+            case 1:
+                Instantiate(characters[1], player.transform);
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+        }
     }
 
     private void SpawnPlayerHUD(GameObject player)
@@ -59,7 +91,6 @@ public class ControllerInput : MonoBehaviour
     public void GetLeftStick(InputAction.CallbackContext input)
     {
         playerMovement.GetLeftStickInput(input.ReadValue<Vector2>());
-        
     }
 
     public void GetRightStick(InputAction.CallbackContext input)
@@ -116,5 +147,5 @@ public class ControllerInput : MonoBehaviour
             cursor.SetMouseAim(input.ReadValue<Vector2>());
         }
     }
-    
+
 }

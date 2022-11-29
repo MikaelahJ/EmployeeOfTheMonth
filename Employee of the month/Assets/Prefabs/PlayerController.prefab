@@ -125,9 +125,9 @@ MonoBehaviour:
     m_ActionName: UI/Navigate[/DualShock4GamepadHID/leftStick/up,/DualShock4GamepadHID/rightStick/up,/DualShock4GamepadHID/leftStick/down,/DualShock4GamepadHID/rightStick/down,/DualShock4GamepadHID/leftStick/left,/DualShock4GamepadHID/rightStick/left,/DualShock4GamepadHID/leftStick/right,/DualShock4GamepadHID/rightStick/right,/DualShock4GamepadHID/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -1412270606179941897, guid: 624f31e2bfded4640a15fb109334a68a, type: 3}
-        m_TargetAssemblyTypeName: Cursor, Assembly-CSharp
-        m_MethodName: hej
+      - m_Target: {fileID: 237240420590927659}
+        m_TargetAssemblyTypeName: ControllerInput, Assembly-CSharp
+        m_MethodName: Pressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -192,9 +192,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c6ba728cec42447b3e004ef2e1b398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characters:
+  - {fileID: 9194419871203171396, guid: 4a959dbb9f9efdf4d98f49e2b14f2108, type: 3}
+  - {fileID: 9194419871203171396, guid: 152246b97c0761446877938befbd6495, type: 3}
   playerPrefab: {fileID: 5234566805939642093, guid: d8d21ce790ce3a141b6c7af09131b189, type: 3}
-  playerHUD: {fileID: 4128787644152966788, guid: b27fa7086269d2e4cb72a59aef17bbd6, type: 3}
+  playerHUD: {fileID: 0}
   cursorPrefab: {fileID: 7267468052432219236, guid: 624f31e2bfded4640a15fb109334a68a, type: 3}
+  sprite: {fileID: 0}
+  spriteIndex: 0
   players: []
 --- !u!1 &7006218077739066064
 GameObject:
