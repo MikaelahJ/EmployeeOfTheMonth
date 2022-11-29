@@ -13,6 +13,7 @@ public class NewItemScriptableObject : ScriptableObject
     public Sprite sprite;
 
     [Header("Weapon modifiers")]
+    public int ammo = 0;
     public float weaponDamage = 0;
     public float fireRate = 0;
     public float recoilModifier = 0;

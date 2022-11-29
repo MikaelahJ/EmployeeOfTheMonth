@@ -17,7 +17,6 @@ public class WeaponController : MonoBehaviour
     public NewItemScriptableObject item3;
 
     [Header("Equipped Items")]
-    private List<NewItemScriptableObject> itemsOLD;
     public NewItemScriptableObject[] items;
 
     [SerializeField] private GameObject itemHolder;
@@ -28,15 +27,7 @@ public class WeaponController : MonoBehaviour
         items = new NewItemScriptableObject[itemSlots];
         UpdateWeaponStats();
 
-        //
         sound = GetComponent<AudioSource>();
-        //Test to add
-        //Debug.Log(items.Count);
-        //AddItem(item1);
-        //AddItem(item2);
-        //AddItem(item3);
-        //AddItem(item1);
-        //RemoveItem(item1);
     }
 
     public void AddItem(NewItemScriptableObject item)
@@ -45,7 +36,7 @@ public class WeaponController : MonoBehaviour
         {
             if(items[i] == null)
             {
-                items[i] = item;
+                items[i] = Instantiate(item);
                 if (itemHolder != null)
                 {
                     itemHolder.GetComponent<UIItemHolder>().AddItem(item.itemIcon, i);
@@ -66,27 +57,6 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    //OLD
-    public void AddItem2(NewItemScriptableObject item)
-    {
-        if (itemsOLD.Count < itemSlots)
-        {
-            itemsOLD.Add(item);
-
-            if(itemHolder != null)
-            {
-                int index = itemsOLD.IndexOf(item);
-                itemHolder.GetComponent<UIItemHolder>().AddItem(item.itemIcon, index);
-            }
-
-            Debug.Log("Added item: " + item.name);
-        }
-        else
-        {
-            Debug.Log("Inventory full, can't add item: " + item.name);
-        }
-        UpdateWeaponStats();
-    }
 
     void RemoveItem(int index)
     {
@@ -100,26 +70,7 @@ public class WeaponController : MonoBehaviour
         }
         UpdateWeaponStats();
     }
-    //OLD
-    void RemoveItem2(NewItemScriptableObject item)
-    {
-        int index = itemsOLD.IndexOf(item);
-        if (itemsOLD.Remove(item))
-        {
-            if (itemHolder != null)
-            {
-                itemHolder.GetComponent<UIItemHolder>().RemoveItem(index);
-            }
-
-            Debug.Log("Removed item: " + item.name);
-        }
-        else
-        {
-            Debug.Log("Did not find item: " + item.name + " in inventory");
-        }
-        UpdateWeaponStats();
-    }
-
+    
     void UpdateWeaponStats()
     {
         NewItemScriptableObject newWeapon = Instantiate(baseWeapon);
@@ -130,6 +81,7 @@ public class WeaponController : MonoBehaviour
             if (items[i] == null) { continue; }
             NewItemScriptableObject item = items[i];
             //Weapon Modifiers
+            newWeapon.ammo += item.ammo;
             newWeapon.fireRate += item.fireRate;
             newWeapon.recoilModifier += item.recoilModifier;
             newWeapon.accuracyPercentage += weapon.accuracyPercentage;
@@ -150,6 +102,20 @@ public class WeaponController : MonoBehaviour
         UpdateFireStats();
     }
 
+    public void LoseItemAmmo(int shots)
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if(items[i] != null)
+            {
+                items[i].ammo -= shots;
+                if (items[i].ammo <= 0)
+                {
+                    RemoveItem(i);
+                }
+            }
+        }
+    }
 
     void UpdateFireStats()
     {

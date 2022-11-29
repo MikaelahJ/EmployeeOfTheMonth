@@ -8,8 +8,11 @@ public class Fire : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private ControllerInput controllerInput;
     [SerializeField] private GameObject ammoCounter;
+    private WeaponController weaponController;
 
     private float timer;
+
+    private int ammo = 0;
     private float fireRate = 0.5f;
     private bool hasFired;
 
@@ -23,6 +26,7 @@ public class Fire : MonoBehaviour
     private AudioSource sound;
     void Start()
     {
+        weaponController = GetComponent<WeaponController>();
         sound = GetComponent<AudioSource>();
     }
 
@@ -34,14 +38,13 @@ public class Fire : MonoBehaviour
 
         if (timer < fireRate) { return; }
 
-        if (ammoCounter != null)
-            if (ammoCounter.GetComponent<UIAmmoCounter>().currentAmmo == 0)
-            {
-                //Out Of ammo sound
-                sound.PlayOneShot(AudioManager.instance.audioClips.emptyMag);
-                timer = 0;
-                return;
-            }
+        if (ammo <= 0)
+        {
+            //Out Of ammo sound
+            sound.PlayOneShot(AudioManager.instance.audioClips.emptyMag);
+            timer = 0;
+            return;
+        }
 
         if (isShotgun)
             FireShotgun();
@@ -54,8 +57,10 @@ public class Fire : MonoBehaviour
 
     void FireGun()
     {
+        //Fire bullet
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-        newBullet.GetComponent<Bullet>().UpdateBulletModifyers(GetComponent<WeaponController>().weapon);
+        newBullet.GetComponent<Bullet>().UpdateBulletModifyers(weaponController.weapon);
+        LoseAmmo(1);
 
         //Bullet Spread
         float spread = bulletSpreadPercentage * (1 - accuracyPercentage);
@@ -64,9 +69,9 @@ public class Fire : MonoBehaviour
         //Ammo counter
         if (ammoCounter != null)
         {
-            ammoCounter.GetComponent<UIAmmoCounter>().LoseAmmo();
+            ammoCounter.GetComponent<UIAmmoCounter>().SetAmmo(ammo);
         }
-
+        
         //Play Fire Sound
         sound.PlayOneShot(AudioManager.instance.audioClips.fire);
 
@@ -74,6 +79,7 @@ public class Fire : MonoBehaviour
 
     private void FireShotgun()
     {
+        LoseAmmo(1);
         //3,5,9 skott
         Debug.Log(shotgunAmmount);
         switch (shotgunAmmount)
@@ -91,7 +97,8 @@ public class Fire : MonoBehaviour
         for (int i = 0; i < shotgunAmmount; i++)
         {
             GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
-            newBullet.GetComponent<Bullet>().UpdateBulletModifyers(GetComponent<WeaponController>().weapon);
+            newBullet.GetComponent<Bullet>().UpdateBulletModifyers(weaponController.weapon);
+            
 
             newBullet.transform.Rotate(new Vector3(0, 0, -shotgunSpreadBetween + i*5));
 
@@ -105,9 +112,17 @@ public class Fire : MonoBehaviour
         }
     }
 
+    private void LoseAmmo(int shots)
+    {
+        ammo -= shots;
+        weaponController.LoseItemAmmo(shots);
+
+    }
+
     public void UpdateFireModifiers()
     {
-        NewItemScriptableObject weapon = GetComponent<WeaponController>().weapon;
+        NewItemScriptableObject weapon = weaponController.weapon;
+        ammo = weapon.ammo;
         fireRate = weapon.fireRate;
         accuracyPercentage = weapon.accuracyPercentage;
         bulletSpreadPercentage = weapon.bulletSpreadPercentage;
