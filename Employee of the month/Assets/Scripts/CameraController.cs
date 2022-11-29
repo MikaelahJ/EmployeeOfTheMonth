@@ -16,8 +16,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] [Range(0, 100)]  private float maxOrthograpic = 15;
 
     private float xMin, xMax, yMin, yMax;
-    private float camSize, camRatio;
-    Camera cam;
+    private Camera cam;
 
     // Start is called before the first frame update
     void Start()
@@ -27,10 +26,14 @@ public class CameraController : MonoBehaviour
         BoxCollider mapBounds = map.GetComponent<BoxCollider>();
         cam = GetComponent<Camera>();
 
+        //Lock the camera to the map
         xMin = mapBounds.bounds.min.x;
         xMax = mapBounds.bounds.max.x;
         yMin = mapBounds.bounds.min.y;
         yMax = mapBounds.bounds.max.y;
+
+        //Set the max cam size to view whole map
+        maxOrthograpic = yMax;
     }
 
     void Update()
@@ -82,17 +85,16 @@ public class CameraController : MonoBehaviour
         middle.z = 0;
         transform.position += middle * Time.deltaTime * moveSpeed;
 
-        //transform.position = ClampCamera();
+        transform.position = ClampCameraToMap();
     }
 
-    //Doesn't work with multiple trackers
-    Vector3 ClampCamera()
+    Vector3 ClampCameraToMap()
     {
-        camSize = cam.orthographicSize;
-        camRatio = (xMax + camSize) / 2.0f;
+        float height = cam.orthographicSize;
+        float width = height * cam.aspect;
 
-        float camX = Mathf.Clamp(transform.position.x, xMin + camRatio, xMax - camRatio);
-        float camY = Mathf.Clamp(transform.position.y, yMin + camSize, yMax - camSize);
+        float camX = Mathf.Clamp(transform.position.x, xMin + width, xMax - width);
+        float camY = Mathf.Clamp(transform.position.y, yMin + height, yMax - height);
         return new Vector3(camX, camY, -10);
     }
 

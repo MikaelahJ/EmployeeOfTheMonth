@@ -7,6 +7,8 @@ public class AudioScriptableObject : ScriptableObject
     [Header("Player Sounds")]
     public AudioClip walking; 
 
+
+
     [Header("Gun Sounds")]
     public AudioClip fire;
     public AudioClip emptyMag;
