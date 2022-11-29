@@ -7,12 +7,9 @@ public class Fire : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private ControllerInput controllerInput;
-<<<<<<< Updated upstream
-    [SerializeField] private GameObject ammoCounter;
+
     private WeaponController weaponController;
-=======
     public UIAmmoCounter ammoCounter;
->>>>>>> Stashed changes
 
     private float timer;
 
@@ -42,7 +39,6 @@ public class Fire : MonoBehaviour
 
         if (timer < fireRate) { return; }
 
-<<<<<<< Updated upstream
         if (ammo <= 0)
         {
             //Out Of ammo sound
@@ -50,16 +46,6 @@ public class Fire : MonoBehaviour
             timer = 0;
             return;
         }
-=======
-        if (ammoCounter != null)
-            if (ammoCounter.currentAmmo == 0)
-            {
-                //Out Of ammo sound
-                sound.PlayOneShot(AudioManager.instance.audioClips.emptyMag);
-                timer = 0;
-                return;
-            }
->>>>>>> Stashed changes
 
         if (isShotgun)
             FireShotgun();
@@ -67,6 +53,12 @@ public class Fire : MonoBehaviour
         {
             FireGun();
         }
+        //Ammo counter
+        if (ammoCounter != null)
+        {
+            ammoCounter.SetAmmo(ammo);
+        }
+
         timer = 0;
     }
 
@@ -80,12 +72,6 @@ public class Fire : MonoBehaviour
         //Bullet Spread
         float spread = bulletSpreadPercentage * (1 - accuracyPercentage);
         newBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-spread, spread)));
-
-        //Ammo counter
-        if (ammoCounter != null)
-        {
-            ammoCounter.GetComponent<UIAmmoCounter>().SetAmmo(ammo);
-        }
         
         //Play Fire Sound
         sound.PlayOneShot(AudioManager.instance.audioClips.fire);

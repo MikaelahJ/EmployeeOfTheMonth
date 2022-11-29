@@ -39,7 +39,7 @@ public class WeaponController : MonoBehaviour
                 items[i] = Instantiate(item);
                 if (itemHolder != null)
                 {
-                    itemHolder.GetComponent<UIItemHolder>().AddItem(item.itemIcon, i);
+                    itemHolder.AddItem(item.itemIcon, i);
                 }
                 Debug.Log("Added item: " + item.name);
                 //Play pickup sound
@@ -64,7 +64,7 @@ public class WeaponController : MonoBehaviour
         items[index] = null;
         if (itemHolder != null)
         {
-            itemHolder.GetComponent<UIItemHolder>().RemoveItem(index);
+            itemHolder.RemoveItem(index);
             //Play item removed sound
             sound.PlayOneShot(AudioManager.instance.audioClips.itemDestroyed);
         }

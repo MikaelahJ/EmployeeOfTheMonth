@@ -47,7 +47,9 @@ public class ControllerInput : MonoBehaviour
         GameObject canvas = GameObject.Find("Canvas");
         GameObject hud = Instantiate(playerHUD, canvas.transform);
         RectTransform rectT = hud.GetComponent<RectTransform>();
-        rectT.localPosition = new Vector3(rectT.rect.width * playerInput.playerIndex, rectT.localPosition.y, rectT.localPosition.z);
+        float spacing = 1.2f; // 1 puts them next to each other
+        int offset = playerInput.playerIndex - 2; // offset from bottom middle
+        rectT.localPosition = new Vector3(rectT.rect.width * rectT.localScale.x * spacing * offset, rectT.localPosition.y, rectT.localPosition.z);
 
         player.GetComponentInChildren<WeaponController>().itemHolder = hud.GetComponentInChildren<UIItemHolder>();
         player.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponent<UIAmmoCounter>();
