@@ -42,8 +42,15 @@ public class ControllerInput : MonoBehaviour
             playerInput.SwitchCurrentActionMap("Player");
             player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
 
-            spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
-            SetCharacter();
+            if(GameManager.Instance.playersCount != 0)
+            {
+                spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
+                SetCharacter();
+            }
+            else
+            {
+                player.GetComponent<SpriteRenderer>().enabled = true;
+            }
 
             playerMovement = player.GetComponent<Movement>();
             aim = player.GetComponent<Aim>();
