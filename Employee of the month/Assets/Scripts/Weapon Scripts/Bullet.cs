@@ -34,7 +34,6 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.up = rb2d.velocity;
     }
 
     public void UpdateBulletModifyers(NewItemScriptableObject weapon)
@@ -58,8 +57,6 @@ public class Bullet : MonoBehaviour
             Explode(transform.position);
             return;
         }
-
-
 
         if (isBouncy && bounces < maxBounce && !collision.gameObject.CompareTag("Player"))
         {
@@ -91,6 +88,10 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        transform.up = rb2d.velocity;
     }
 
     private void SendDamage(Collider2D collider)
@@ -140,6 +141,7 @@ public class Bullet : MonoBehaviour
             Invoke(nameof(ChangeLayer), 0.5f);
         }
     }
+
     private void ChangeLayer()
     {
         int defaultLayer = LayerMask.NameToLayer("Default");
@@ -156,7 +158,7 @@ public class Bullet : MonoBehaviour
             newDirection.z = 0;
             transform.up = Vector2.Lerp(direction, newDirection, turnSpeed * Time.deltaTime);
             direction = transform.up;
-            rb2d.velocity = transform.up * rb2d.velocity.magnitude;
+            rb2d.velocity = transform.up * bulletSpeed;
         }
     }
 }

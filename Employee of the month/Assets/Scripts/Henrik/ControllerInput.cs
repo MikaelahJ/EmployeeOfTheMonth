@@ -65,7 +65,6 @@ public class ControllerInput : MonoBehaviour
                 break;
             case 2:
                 Debug.Log("c2");
-                Debug.Log(characters[1]);
 
                 Instantiate(characters[1], player.transform);
 
