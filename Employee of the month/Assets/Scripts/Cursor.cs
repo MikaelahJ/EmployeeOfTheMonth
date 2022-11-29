@@ -44,10 +44,9 @@ public class Cursor : MonoBehaviour
             }
 
         }
-        if (pressed)
+        if (pressed && !collision.gameObject.CompareTag("StartButton"))
         {
             SetSelectedBall(collision);
-            Debug.Log(this.name);
             GameManager.Instance.ConnectCharacterToPlayer(this.name, collision.gameObject.name);
             PressedOff();
         }

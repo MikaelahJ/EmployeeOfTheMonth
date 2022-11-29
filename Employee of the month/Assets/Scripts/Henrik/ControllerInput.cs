@@ -39,11 +39,12 @@ public class ControllerInput : MonoBehaviour
         }
         else
         {
+            playerInput.SwitchCurrentActionMap("Player");
+            player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
+
             spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
             SetCharacter();
 
-            playerInput.SwitchCurrentActionMap("Player");
-            player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
             playerMovement = player.GetComponent<Movement>();
             aim = player.GetComponent<Aim>();
             fire = player.GetComponentInChildren<Fire>();
@@ -54,21 +55,25 @@ public class ControllerInput : MonoBehaviour
 
     private void SetCharacter()
     {
-        Debug.Log("Hej");
-
+        Debug.Log(spriteIndex);
+        Debug.Log("hejsan");
         switch (spriteIndex)
         {
-            case 0:
+            case 1:
+                Debug.Log("c1");
                 Instantiate(characters[0], player.transform);
                 break;
-            case 1:
+            case 2:
+                Debug.Log("c2");
+                Debug.Log(characters[1]);
+
                 Instantiate(characters[1], player.transform);
 
                 break;
-            case 2:
+            case 3:
 
                 break;
-            case 3:
+            case 4:
 
                 break;
         }
@@ -87,7 +92,10 @@ public class ControllerInput : MonoBehaviour
         player.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponentInChildren<UIAmmoCounter>();
         player.GetComponent<HasHealth>().healthbar = hud.GetComponentInChildren<UIHealthbar>();
     }
-
+    public void OnClick()
+    {
+        cursor.Pressed();
+    }
     public void GetLeftStick(InputAction.CallbackContext input)
     {
         playerMovement.GetLeftStickInput(input.ReadValue<Vector2>());
