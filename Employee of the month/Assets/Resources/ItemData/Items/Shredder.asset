@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 9c0d6ec706e01ce448aea81584af092b, type: 3}
   sprite: {fileID: 21300000, guid: 9c0d6ec706e01ce448aea81584af092b, type: 3}
-  ammo: 0
+  ammo: 15
   weaponDamage: 0
   fireRate: 0
   recoilModifier: 0
@@ -32,3 +32,5 @@ MonoBehaviour:
   explosionDamage: 0
   isKnockback: 0
   knockbackModifier: 0
+  isHoming: 0
+  turnSpeed: 0
