@@ -17,71 +17,74 @@ public class WeaponController : MonoBehaviour
     public NewItemScriptableObject item3;
 
     [Header("Equipped Items")]
-    public List<NewItemScriptableObject> items;
+    public NewItemScriptableObject[] items;
 
-    [SerializeField] private GameObject itemHolder;
+    public UIItemHolder itemHolder;
 
+    private AudioSource sound;
     void Start()
     {
+        items = new NewItemScriptableObject[itemSlots];
         UpdateWeaponStats();
-        //Test to add
-        //Debug.Log(items.Count);
-        //AddItem(item1);
-        //AddItem(item2);
-        //AddItem(item3);
-        //AddItem(item1);
-        //RemoveItem(item1);
+
+        sound = GetComponent<AudioSource>();
     }
 
-    public void AddItem(NewItemScriptableObject item)
+    public bool AddItem(NewItemScriptableObject item)
     {
-        if (items.Count < itemSlots)
+        for (int i = 0; i < items.Length; i++)
         {
-            items.Add(item);
-
-            if(itemHolder != null)
+            if(items[i] == null)
             {
-                int index = items.IndexOf(item);
-                itemHolder.GetComponent<ItemHolder>().AddItem(item.itemIcon, index);
-            }
+                items[i] = Instantiate(item);
+                if (itemHolder != null)
+                {
+                    itemHolder.AddItem(item.itemIcon, i);
+                }
+                Debug.Log("Added item: " + item.name);
+                //Play pickup sound
+                sound.PlayOneShot(AudioManager.instance.audioClips.itemPickup);
 
-            Debug.Log("Added item: " + item.name);
+                UpdateWeaponStats();
+
+                return true;
+            }
         }
-        else
-        {
-            Debug.Log("Inventory full, can't add item: " + item.name);
-        }
-        UpdateWeaponStats();
+        Debug.Log("Inventory full, can't add item: " + item.name);
+        return false;
     }
 
-    void RemoveItem(NewItemScriptableObject item)
+
+    void RemoveItem(int index)
     {
-        int index = items.IndexOf(item);
-        if (items.Remove(item))
+        Debug.Log("Removed item: " + items[index].name);
+        items[index] = null;
+        if (itemHolder != null)
         {
-            if (itemHolder != null)
-            {
-                itemHolder.GetComponent<ItemHolder>().RemoveItem(index);
-            }
-
-            Debug.Log("Removed item: " + item.name);
-        }
-        else
-        {
-            Debug.Log("Did not find item: " + item.name + " in inventory");
+            itemHolder.RemoveItem(index);
+            //Play item removed sound
+            sound.PlayOneShot(AudioManager.instance.audioClips.itemDestroyed);
         }
         UpdateWeaponStats();
     }
-
+    
     void UpdateWeaponStats()
     {
         NewItemScriptableObject newWeapon = Instantiate(baseWeapon);
         newWeapon.name = "Weapon";
-        foreach (NewItemScriptableObject item in items)
+
+        for (int i = 0; i < items.Length; i++)
         {
+            if (items[i] == null) { continue; }
+            NewItemScriptableObject item = items[i];
             //Weapon Modifiers
+            newWeapon.ammo += item.ammo;
             newWeapon.fireRate += item.fireRate;
             newWeapon.recoilModifier += item.recoilModifier;
+            newWeapon.accuracyPercentage += weapon.accuracyPercentage;
+            newWeapon.bulletSpreadPercentage += weapon.bulletSpreadPercentage;
+            newWeapon.isShotgun = newWeapon.isShotgun || item.isShotgun;
+            newWeapon.shotgunAmmount += item.shotgunAmmount;
 
             //Bullet Modifiers
             newWeapon.isBouncy = newWeapon.isBouncy || item.isBouncy;
@@ -90,8 +93,34 @@ public class WeaponController : MonoBehaviour
             newWeapon.isPenetrate = newWeapon.isPenetrate || item.isPenetrate;
             newWeapon.isExplosive = newWeapon.isExplosive || item.isExplosive;
             newWeapon.isKnockback = newWeapon.isKnockback || item.isKnockback;
+            newWeapon.isHoming = newWeapon.isHoming || item.isHoming;
+
         }
         weapon = newWeapon;
+        UpdateFireStats();
+    }
+
+    public void LoseItemAmmo(int shots)
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if(items[i] != null)
+            {
+                items[i].ammo -= shots;
+                if (items[i].ammo <= 0)
+                {
+                    RemoveItem(i);
+                }
+            }
+        }
+    }
+
+    void UpdateFireStats()
+    {
+        if (GetComponent<Fire>() != null)
+        {
+            GetComponent<Fire>().UpdateFireModifiers();
+        }
     }
 
 }

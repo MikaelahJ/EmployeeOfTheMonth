@@ -6,12 +6,19 @@ public class WeaponModifyerItem : MonoBehaviour
 {
     public NewItemScriptableObject itemType;
 
+    private void Start()
+    {
+        GetComponent<SpriteRenderer>().sprite = itemType.sprite;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Destroy(this.gameObject);
-            collision.gameObject.GetComponentInChildren<WeaponController>().AddItem(itemType);
+            if (collision.gameObject.GetComponentInChildren<WeaponController>().AddItem(itemType))
+            {
+                Destroy(this.gameObject);
+            }
             Debug.Log(itemType);
         }
     }

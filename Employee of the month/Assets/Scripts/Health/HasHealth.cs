@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class HasHealth : MonoBehaviour
 {
-    public GameObject healthbar;
+    public UIHealthbar healthbar;
+    private Animator animator;
     
 
     public int maxHealth = 100;
@@ -16,7 +17,7 @@ public class HasHealth : MonoBehaviour
     void Start()
     {
         health = maxHealth;
-
+        animator = transform.GetComponentInChildren<Animator>();
         //HealthRegen(1, 0.2f, 50);
     }
 
@@ -32,6 +33,8 @@ public class HasHealth : MonoBehaviour
 
     public void LoseHealth(float damage)
     {
+        animator.SetTrigger("TookDamage");
+      
         if (damage < 0)
         {
             Debug.LogWarning("Used LoseHealth to add Negative damage, use GainHealth instead");
@@ -97,6 +100,6 @@ public class HasHealth : MonoBehaviour
     private void UpdateHealthbar()
     {
         if (healthbar == null) { return; }
-        healthbar.GetComponent<Healthbar>().SetHealthBar(health);
+        healthbar.SetHealthBar(health);
     }
 }
