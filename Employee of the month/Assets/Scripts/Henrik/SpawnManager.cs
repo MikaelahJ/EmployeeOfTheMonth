@@ -6,9 +6,10 @@ public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager instance;
 
+    public GameObject gameOverText;
     public List<GameObject> spawnPositions;
     private List<int> assigned;
-
+    public int alivePlayers = 0;
     
     private void Awake()
     {
@@ -25,7 +26,24 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         assigned = new List<int>();
+        gameOverText.SetActive(false);
     }
+
+    public void PlayerDied()
+    {
+        alivePlayers -= 1;
+        if(alivePlayers <= 1)
+        {
+            gameOverText.SetActive(true);
+            Invoke("RestartMatch", 5);
+        }
+    }
+
+    public void RestartMatch()
+    {
+        GameManager.Instance.ReloadScene();
+    }
+
 
     public Vector3 GetRandomSpawnPoint()
     {

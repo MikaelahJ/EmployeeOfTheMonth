@@ -51,7 +51,7 @@ public class ControllerInput : MonoBehaviour
             {
                 player.GetComponent<SpriteRenderer>().enabled = true;
             }
-
+            player.GetComponent<HasHealth>().playerIndex = playerInput.playerIndex;
             playerMovement = player.GetComponent<Movement>();
             aim = player.GetComponent<Aim>();
             fire = player.GetComponentInChildren<Fire>();
