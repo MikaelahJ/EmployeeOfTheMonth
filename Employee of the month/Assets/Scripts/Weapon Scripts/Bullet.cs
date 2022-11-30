@@ -100,9 +100,9 @@ public class Bullet : MonoBehaviour
     private void SendDamage(Collider2D collider)
     {
         Debug.Log(damage);
-        if (collider.transform.transform.parent.GetComponent<HasHealth>() != null)
+        if (collider.transform.parent.GetComponent<HasHealth>() != null)
         {
-            collider.transform.transform.parent.GetComponent<HasHealth>().LoseHealth(damage);
+            collider.transform.parent.GetComponent<HasHealth>().LoseHealth(damage);
         }
         if(collider.transform.GetComponent<HasHealth>() != null)
         {
