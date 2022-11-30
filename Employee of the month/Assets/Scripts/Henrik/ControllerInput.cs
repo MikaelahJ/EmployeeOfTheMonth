@@ -49,7 +49,7 @@ public class ControllerInput : MonoBehaviour
             }
             else
             {
-                player.GetComponent<SpriteRenderer>().enabled = true;
+                SetCharacterTestScenes();
             }
             player.GetComponent<HasHealth>().playerIndex = playerInput.playerIndex;
             playerMovement = player.GetComponent<Movement>();
@@ -79,6 +79,12 @@ public class ControllerInput : MonoBehaviour
 
                 break;
         }
+    }
+
+    private void SetCharacterTestScenes()
+    {
+        Instantiate(characters[0], player.transform);
+
     }
 
     private void SpawnPlayerHUD(GameObject player)

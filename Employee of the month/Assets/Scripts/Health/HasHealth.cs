@@ -91,7 +91,7 @@ public class HasHealth : MonoBehaviour
             SpawnManager.instance.PlayerDied();
 
             GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
-            GetComponent<CircleCollider2D>().enabled = false;
+            GetComponentInChildren<CircleCollider2D>().enabled = false;
             GetComponent<Movement>().enabled = false;
             GetComponent<Aim>().enabled = false;
             GetComponentInChildren<Fire>().enabled = false;

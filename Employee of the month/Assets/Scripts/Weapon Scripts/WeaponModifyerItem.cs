@@ -12,7 +12,8 @@ public class WeaponModifyerItem : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.transform.parent.transform.CompareTag("Player"))
+        
+        if (collision.gameObject.transform.CompareTag("Player"))
         {
             if (collision.gameObject.transform.parent.transform.GetComponentInChildren<WeaponController>().AddItem(itemType))
             {
