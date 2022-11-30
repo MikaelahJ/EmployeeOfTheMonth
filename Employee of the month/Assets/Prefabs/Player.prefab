@@ -12,10 +12,8 @@ GameObject:
   - component: {fileID: 7815352911500529440}
   - component: {fileID: 5234566805939642083}
   - component: {fileID: 5234566805939642084}
-  - component: {fileID: 8031132490591320507}
   - component: {fileID: 1940466002630421828}
   - component: {fileID: 672739431118636492}
-  - component: {fileID: 2930663342979400925}
   - component: {fileID: 1575183137811590513}
   m_Layer: 0
   m_Name: Player
@@ -80,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 1c1d7eabdc1b20c4db14202b26cf2dd2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -130,22 +128,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!58 &8031132490591320507
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5234566805939642093}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.03183107, y: -0.069772616}
-  serializedVersion: 2
-  m_Radius: 0.15657611
 --- !u!114 &1940466002630421828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,21 +154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
+  playerIndex: 0
   maxHealth: 10
   health: 0
---- !u!114 &2930663342979400925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5234566805939642093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c078df50e64558643a8e8265cdf5aa4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTriggered: 0
 --- !u!82 &1575183137811590513
 AudioSource:
   m_ObjectHideFlags: 0

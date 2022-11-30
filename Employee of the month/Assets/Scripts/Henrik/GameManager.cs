@@ -38,6 +38,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void LoadScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void ConnectCharacterToPlayer(string playerName, string SelectedCharacter)
     {
         int selectedCharacter = System.Convert.ToInt32(SelectedCharacter);
