@@ -39,7 +39,9 @@ public class HasHealth : MonoBehaviour
     {
         if(animator != null)
             animator.SetTrigger("TookDamage");
-      
+
+        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.damaged, transform.position);
+
         if (damage < 0)
         {
             Debug.LogWarning("Used LoseHealth to add Negative damage, use GainHealth instead");
@@ -89,6 +91,7 @@ public class HasHealth : MonoBehaviour
         else if(gameObject.CompareTag("Player"))
         {
             SpawnManager.instance.PlayerDied();
+            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.death, transform.position);
 
             GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
             GetComponentInChildren<CircleCollider2D>().enabled = false;

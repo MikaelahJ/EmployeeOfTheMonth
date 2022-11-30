@@ -21,6 +21,7 @@ public class AudioScriptableObject : ScriptableObject
 
     [Header("Bullet Sounds")]
     public AudioClip impact_wall;
+    public AudioClip impact_wood;
     public AudioClip impact_glass;
     public AudioClip bulletBounce;
     public AudioClip bulletExplode;

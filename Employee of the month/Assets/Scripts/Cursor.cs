@@ -30,6 +30,11 @@ public class Cursor : MonoBehaviour
             MousePosition();
         }
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        pressed = false;
+    }
     public void OnTriggerStay2D(Collider2D collision)
     {
         if (pressed && collision.gameObject.CompareTag("StartButton"))
@@ -48,8 +53,9 @@ public class Cursor : MonoBehaviour
         {
             SetSelectedBall(collision);
             GameManager.Instance.ConnectCharacterToPlayer(this.name, collision.gameObject.name);
-            PressedOff();
+            //PressedOff();
         }
+        pressed = false;
     }
 
     private void SetSelectedBall(Collider2D collision)
@@ -71,11 +77,6 @@ public class Cursor : MonoBehaviour
     public void Pressed()
     {
         pressed = true;
-        Invoke(nameof(PressedOff), 0.02f);
-    }
-    private void PressedOff()
-    {
-        pressed = false;
     }
 
     public void MousePosition()

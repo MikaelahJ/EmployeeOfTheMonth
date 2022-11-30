@@ -154,9 +154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
-  bloodPool: {fileID: 3588549943567129536, guid: d5fc92b4b61abb54ab82593a9f1dcd57, type: 3}
+  bloodPool: {fileID: 173959096280478694, guid: d5fc92b4b61abb54ab82593a9f1dcd57, type: 3}
   playerIndex: 0
-  maxHealth: 10
+  maxHealth: 100
   health: 0
 --- !u!82 &1575183137811590513
 AudioSource:

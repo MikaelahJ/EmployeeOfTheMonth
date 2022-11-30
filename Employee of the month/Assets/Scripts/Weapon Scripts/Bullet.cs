@@ -23,6 +23,8 @@ public class Bullet : MonoBehaviour
     private float explodeRadius = 1;
     private float explosionDamage;
 
+    public float knockBackModifier = 10;
+
     public bool isHoming = false;
     public float turnSpeed = 1;
 
@@ -49,41 +51,55 @@ public class Bullet : MonoBehaviour
         isExplode = weapon.isExplosive;
         explodeRadius = weapon.explosionRadius;
         explosionDamage = weapon.explosionDamage;
+        knockBackModifier = weapon.knockbackModifier;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        SendDamage(collision.collider);
+        SendDamage(collision.collider, collision);
 
-        if (isBouncy && bounces < maxBounce && !collision.gameObject.CompareTag("Player"))
+        //Bounce
+        if (isBouncy && bounces < maxBounce)
         {
+            //Penetrate soft walls
             if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
             {
+
                 Penetrate();
 
                 return;
             }
+            //Bounce on other
             else
             {
-                Bounce(collision.GetContact(0));
+                Bounce();
 
-                if (collision.gameObject.transform.parent.CompareTag("Player"))
+                if (collision.gameObject.CompareTag("Player"))
                 {
-                    //send knockback
+                    Debug.Log("AppliedForce");
+                    ApplyKnockBack(collision);
                 }
                 return;
             }
         }
 
         if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
-        {
+        { 
             Penetrate();
-            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
+            if (collision.gameObject.CompareTag("SoftWall"))
+            {
+                AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
+            }
+            else
+            {
+                AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position);
+            }
             return;
         }
+
         if (isExplode)
         {
-            Explode(transform.position);
+            Explode(transform.position, collision);
             Destroy(gameObject);
         }
         else
@@ -97,12 +113,12 @@ public class Bullet : MonoBehaviour
         transform.up = rb2d.velocity;
     }
 
-    private void SendDamage(Collider2D collider)
+    private void SendDamage(Collider2D collider, Collision2D collision)
     {
         if (collider.gameObject.transform.CompareTag("Player"))
         {
             collider.transform.parent.transform.GetComponent<HasHealth>().LoseHealth(damage);
-            collider.transform.parent.transform.GetComponent<HasHealth>().AddBlood(gameObject);
+            ApplyKnockBack(collision);
         }
 
         if(collider.transform.GetComponent<HasHealth>() != null)
@@ -111,24 +127,34 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void Explode(Vector2 collisionPoint)
+    private void Explode(Vector2 collisionPoint, Collision2D collision)
     {
         damage += explosionDamage;
         Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll(collisionPoint, explodeRadius);
         var explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, 1f);
+        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletExplode, transform.position);
 
         foreach (var target in targetsInRadius)
         {
-            SendDamage(target);
+            SendDamage(target, collision);
         }
+
     }
 
-    private void Bounce(ContactPoint2D collisionPoint)
+    private void ApplyKnockBack(Collision2D playerCollider)
+    {
+        Rigidbody2D playerRb = playerCollider.gameObject.GetComponent<Rigidbody2D>();
+        playerRb.AddForce(rb2d.velocity.normalized * knockBackModifier, ForceMode2D.Impulse);
+    }
+
+    private void Bounce()
     {
         bounces++;
 
         rb2d.sharedMaterial.bounciness = 1;
+
+        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position);
 
         //direction = Vector3.Reflect(direction, collisionPoint.normal);
 
