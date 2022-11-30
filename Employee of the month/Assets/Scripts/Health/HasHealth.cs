@@ -6,11 +6,13 @@ public class HasHealth : MonoBehaviour
 {
     public UIHealthbar healthbar;
     private Animator animator;
+    public GameObject bloodPool;
 
     public int playerIndex;
     public int maxHealth = 100;
     public float health;
 
+    
     private bool isDead = false;
 
     void Start()
@@ -25,7 +27,7 @@ public class HasHealth : MonoBehaviour
 
     public void GainHealth(int heal)
     {
-        if (heal < 0)
+        if(heal < 0)
         {
             Debug.LogWarning("Used GainHealth to add Negative HP, use LoseHealth instead");
         }
@@ -37,9 +39,7 @@ public class HasHealth : MonoBehaviour
     {
         if(animator != null)
             animator.SetTrigger("TookDamage");
-
-        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.damaged, transform.position);
-
+      
         if (damage < 0)
         {
             Debug.LogWarning("Used LoseHealth to add Negative damage, use GainHealth instead");
@@ -56,7 +56,7 @@ public class HasHealth : MonoBehaviour
             return;
         }
         health += healthChange;
-
+        
         if (health > maxHealth)
         {
             health = maxHealth;
@@ -73,11 +73,14 @@ public class HasHealth : MonoBehaviour
         UpdateHealthbar();
     }
 
+    public void AddBlood(GameObject bullet)
+    {
+        Instantiate(bloodPool, transform.position, bullet.transform.rotation );
+    }
+
     private void OnDeath()
     {
-        Destroy(gameObject);
         isDead = true;
-
         Debug.Log("Death Triggered");
         if(GetComponent<Spawner>() != null)
         {
@@ -85,7 +88,6 @@ public class HasHealth : MonoBehaviour
         }
         else if(gameObject.CompareTag("Player"))
         {
-            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.death, transform.position);
             SpawnManager.instance.PlayerDied();
 
             GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
@@ -95,6 +97,7 @@ public class HasHealth : MonoBehaviour
             GetComponentInChildren<Fire>().enabled = false;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
+
     }
 
     public void OnRespawn()
@@ -111,7 +114,7 @@ public class HasHealth : MonoBehaviour
     private IEnumerator HealthRegenCouroutine(int health, float timeBetweenRegen, float duration)
     {
         float timer = 0;
-        while (timer < duration && !isDead)
+        while(timer < duration && !isDead)
         {
             timer += timeBetweenRegen;
             switch (health > 0)
