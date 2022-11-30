@@ -111,6 +111,9 @@ public class Fire : MonoBehaviour
             //    newBullet.transform.Rotate(new Vector3(0, 0, shotgunSpreadBetween));
             //}
         }
+
+        //Play Shotgun Sound
+        sound.PlayOneShot(AudioManager.instance.audioClips.shotgun);
     }
 
     private void LoseAmmo(int shots)
