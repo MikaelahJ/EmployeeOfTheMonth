@@ -67,17 +67,13 @@ public class ControllerInput : MonoBehaviour
         switch (spriteIndex)
         {
             case 1:
-                Debug.Log("c1");
                 Instantiate(characters[0], player.transform);
                 break;
             case 2:
-                Debug.Log("c2");
-
                 Instantiate(characters[1], player.transform);
-
                 break;
             case 3:
-
+                Instantiate(characters[2], player.transform);
                 break;
             case 4:
 

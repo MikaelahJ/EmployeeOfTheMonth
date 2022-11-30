@@ -17,7 +17,7 @@ public class HasHealth : MonoBehaviour
     void Start()
     {
         health = maxHealth;
-        animator = GetComponentInChildren<Animator>();
+        animator = transform.GetComponentInChildren<Animator>();
         //HealthRegen(1, 0.2f, 50);
     }
 
