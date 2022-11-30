@@ -19,8 +19,10 @@ public class Bullet : MonoBehaviour
     private int maxObjectPass = 1;
     private int objectsPassed = 0;
 
+    [SerializeField] private GameObject explosionPrefab;
     public bool isExplode = false;
     private float explodeRadius = 1;
+    private float explosionDamage;
 
     public bool isHoming = false;
     public float turnSpeed = 1;
@@ -52,6 +54,7 @@ public class Bullet : MonoBehaviour
         isExplode = weapon.isExplosive;
         explodeRadius = weapon.explosionRadius;
         knockBackModifier = weapon.knockbackModifier;
+        explosionDamage = weapon.explosionDamage;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -70,10 +73,10 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        if (isBouncy && bounces < maxBounce && !collision.gameObject.CompareTag("Player"))
+        if (isBouncy && bounces < maxBounce && !collision.gameObject.transform.parent.CompareTag("Player"))
         {
             if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
-            {   
+            {
                 Penetrate();
 
                 return;
@@ -82,12 +85,11 @@ public class Bullet : MonoBehaviour
             {
                 Bounce(collision.GetContact(0));
 
-                if (collision.gameObject.CompareTag("Player"))
+                if (collision.gameObject.transform.parent.CompareTag("Player"))
                 {
                     Debug.Log("AppliedForce");
                     ApplyKnockBack(collision);
                 }
-
                 return;
             }
         }
@@ -96,6 +98,11 @@ public class Bullet : MonoBehaviour
         {
             Penetrate();
             return;
+        }
+        if (isExplode)
+        {
+            Explode(transform.position);
+            Destroy(gameObject);
         }
         else
         {
@@ -113,7 +120,11 @@ public class Bullet : MonoBehaviour
     private void SendDamage(Collider2D collider)
     {
         Debug.Log(damage);
-        if (collider.transform.GetComponent<HasHealth>() != null)
+        if (collider.transform.transform.parent.GetComponent<HasHealth>() != null)
+        {
+            collider.transform.transform.parent.GetComponent<HasHealth>().LoseHealth(damage);
+        }
+        if(collider.transform.GetComponent<HasHealth>() != null)
         {
             collider.transform.GetComponent<HasHealth>().LoseHealth(damage);
             collider.gameObject.GetComponent<HasHealth>().AddBlood(gameObject);
@@ -122,7 +133,11 @@ public class Bullet : MonoBehaviour
 
     private void Explode(Vector2 collisionPoint)
     {
+        damage += explosionDamage;
         Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll(collisionPoint, explodeRadius);
+        var explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        Destroy(explosion, 1f);
+
         foreach (var target in targetsInRadius)
         {
             SendDamage(target);
