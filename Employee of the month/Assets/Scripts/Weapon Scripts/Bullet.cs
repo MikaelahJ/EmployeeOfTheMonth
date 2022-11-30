@@ -102,6 +102,7 @@ public class Bullet : MonoBehaviour
         if (collider.gameObject.transform.CompareTag("Player"))
         {
             collider.transform.parent.transform.GetComponent<HasHealth>().LoseHealth(damage);
+            collider.transform.parent.transform.GetComponent<HasHealth>().AddBlood(gameObject);
         }
 
         if(collider.transform.GetComponent<HasHealth>() != null)

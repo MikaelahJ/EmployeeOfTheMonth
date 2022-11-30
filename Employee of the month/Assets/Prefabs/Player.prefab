@@ -102,8 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b7840ae3f21e84690f03e5e4e52cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 120
-  decelaration: 12
+  acceleration: 1000
+  decelaration: 56
   walkSpeed: 8
   runSpeed: 14
   leftstickInput: {x: 0, y: 0}
@@ -120,7 +120,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDrag: 5
+  m_LinearDrag: 10
   m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -154,13 +154,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
+  bloodPool: {fileID: 3588549943567129536, guid: d5fc92b4b61abb54ab82593a9f1dcd57, type: 3}
   playerIndex: 0
   maxHealth: 10
   health: 0
-<<<<<<< Updated upstream
-=======
-  bloodPool: {fileID: 173959096280478694, guid: d5fc92b4b61abb54ab82593a9f1dcd57, type: 3}
->>>>>>> Stashed changes
 --- !u!82 &1575183137811590513
 AudioSource:
   m_ObjectHideFlags: 0
