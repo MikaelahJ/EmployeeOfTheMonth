@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: AudioClips
   m_EditorClassIdentifier: 
   walking: {fileID: 8300000, guid: ff825f9c4bd26d64a98900c1fbc9ca42, type: 3}
+  death: {fileID: 8300000, guid: 347062b0e4cad7b4497a70c264448bb0, type: 3}
+  damaged: {fileID: 8300000, guid: 62d677f27f04a234cab7df98dd7c9308, type: 3}
   fire: {fileID: 8300000, guid: ce060504dcce7de4794dbb468e250188, type: 3}
-  shotgun: {fileID: 0}
+  shotgun: {fileID: 8300000, guid: e7ae83fae5de2164a9d997d62ca40281, type: 3}
   emptyMag: {fileID: 8300000, guid: f21d36f96c70b5b4c8733d8a4824fb64, type: 3}
   itemPickup: {fileID: 8300000, guid: ed997be5e765bea4c8f94346dd81622a, type: 3}
   itemDestroyed: {fileID: 8300000, guid: e333864e4cb56d3469d2ced16bb60c9f, type: 3}
-  impact: {fileID: 0}
-  bulletBounce: {fileID: 0}
+  impact_wall: {fileID: 8300000, guid: 62d677f27f04a234cab7df98dd7c9308, type: 3}
+  impact_glass: {fileID: 8300000, guid: cfabc955080443e4ca1c3525e20996e2, type: 3}
+  bulletBounce: {fileID: 8300000, guid: 9b1b573f6bb4a674db206047e5520e88, type: 3}
   bulletExplode: {fileID: 0}

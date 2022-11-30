@@ -5,8 +5,9 @@ using UnityEngine;
 public class AudioScriptableObject : ScriptableObject
 {
     [Header("Player Sounds")]
-    public AudioClip walking; 
-
+    public AudioClip walking;
+    public AudioClip death;
+    public AudioClip damaged;
 
 
     [Header("Gun Sounds")]
@@ -19,7 +20,8 @@ public class AudioScriptableObject : ScriptableObject
     public AudioClip itemDestroyed;
 
     [Header("Bullet Sounds")]
-    public AudioClip impact;
+    public AudioClip impact_wall;
+    public AudioClip impact_glass;
     public AudioClip bulletBounce;
     public AudioClip bulletExplode;
 }

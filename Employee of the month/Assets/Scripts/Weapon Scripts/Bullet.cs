@@ -97,6 +97,7 @@ public class Bullet : MonoBehaviour
         if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
         {
             Penetrate();
+            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
             return;
         }
         if (isExplode)
@@ -106,6 +107,7 @@ public class Bullet : MonoBehaviour
         }
         else
         {
+            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wall, transform.position);
             Destroy(gameObject);
         }
     }
