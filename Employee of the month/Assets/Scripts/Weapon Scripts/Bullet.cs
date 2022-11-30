@@ -124,11 +124,13 @@ public class Bullet : MonoBehaviour
         Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll(collisionPoint, explodeRadius);
         var explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, 1f);
+        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletExplode, transform.position);
 
         foreach (var target in targetsInRadius)
         {
             SendDamage(target);
         }
+
     }
 
     private void Bounce()
