@@ -13,22 +13,22 @@ public class Spawner : MonoBehaviour
         spawnPosition = transform.position;
     }
 
-    public void TriggerRespawn()
+    public void TriggerRespawn(float delay)
     {
         isTriggered = true;
         if (!isTriggered)
         {
             GetComponent<Rigidbody2D>().drag = 10;
             GetComponent<Rigidbody2D>().freezeRotation = true;
-            Invoke("Respawn", 5);
+            Invoke("Respawn", delay);
             isTriggered = false;
         }
     }
 
+
     public void Respawn()
     {
-        int health = GetComponent<HasHealth>().maxHealth;
-        GetComponent<HasHealth>().GainHealth(health);
+        GetComponent<HasHealth>().OnRespawn();
         GetComponent<Rigidbody2D>().drag = 5;
         GetComponent<Rigidbody2D>().freezeRotation = false;
         transform.position = spawnPosition;
