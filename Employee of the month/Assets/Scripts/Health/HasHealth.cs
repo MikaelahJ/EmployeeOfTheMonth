@@ -6,12 +6,12 @@ public class HasHealth : MonoBehaviour
 {
     public UIHealthbar healthbar;
     private Animator animator;
-    
+
 
     public int maxHealth = 100;
     public float health;
 
-    
+
     private bool isDead = false;
 
     void Start()
@@ -23,7 +23,7 @@ public class HasHealth : MonoBehaviour
 
     public void GainHealth(int heal)
     {
-        if(heal < 0)
+        if (heal < 0)
         {
             Debug.LogWarning("Used GainHealth to add Negative HP, use LoseHealth instead");
         }
@@ -33,8 +33,9 @@ public class HasHealth : MonoBehaviour
 
     public void LoseHealth(float damage)
     {
-        animator.SetTrigger("TookDamage");
-      
+        if (animator != null)
+            animator.SetTrigger("TookDamage");
+
         if (damage < 0)
         {
             Debug.LogWarning("Used LoseHealth to add Negative damage, use GainHealth instead");
@@ -46,7 +47,7 @@ public class HasHealth : MonoBehaviour
     private void ChangeHealth(float healthChange)
     {
         health += healthChange;
-        
+
         if (health > maxHealth)
         {
             health = maxHealth;
@@ -64,9 +65,10 @@ public class HasHealth : MonoBehaviour
 
     private void OnDeath()
     {
+        Destroy(gameObject);
         isDead = true;
         Debug.Log("Triggered");
-        if(GetComponent<Spawner>() != null)
+        if (GetComponent<Spawner>() != null)
         {
             GetComponent<Spawner>().TriggerRespawn();
         }
@@ -80,7 +82,7 @@ public class HasHealth : MonoBehaviour
     private IEnumerator HealthRegenCouroutine(int health, float timeBetweenRegen, float duration)
     {
         float timer = 0;
-        while(timer < duration && !isDead)
+        while (timer < duration && !isDead)
         {
             timer += timeBetweenRegen;
             switch (health > 0)
