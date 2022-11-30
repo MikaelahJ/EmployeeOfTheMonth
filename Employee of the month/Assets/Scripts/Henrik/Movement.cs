@@ -5,10 +5,10 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField]
-    [Range(5, 500)]
+    [Range(5, 2000)]
     int acceleration;
     [SerializeField]
-    [Range(0, 20)]
+    [Range(0, 1000)]
     int decelaration;
     [SerializeField]
     [Range(0, 50)]
@@ -72,7 +72,8 @@ public class Movement : MonoBehaviour
             movementVector = movementVector.normalized * maxSpeed;
         }
 
-        rb.velocity = movementVector;
+        rb.AddForce(movementVector, ForceMode2D.Impulse);
+       
 
         //Set audio sound volume
         walksound.volume = Mathf.Abs(leftstickInput.magnitude);
@@ -95,6 +96,4 @@ public class Movement : MonoBehaviour
     {
         isRunning = input;
     }
-
-
 }
