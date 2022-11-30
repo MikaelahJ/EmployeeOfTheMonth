@@ -65,9 +65,9 @@ public class Bullet : MonoBehaviour
             }
             else
             {
-                Bounce(collision.GetContact(0));
+                Bounce();
 
-                if (collision.gameObject.transform.parent.CompareTag("Player"))
+                if (collision.gameObject.CompareTag("Player"))
                 {
                     //send knockback
                 }
@@ -76,11 +76,19 @@ public class Bullet : MonoBehaviour
         }
 
         if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
-        {
+        { 
             Penetrate();
-            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
+            if (collision.gameObject.CompareTag("SoftWall"))
+            {
+                AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
+            }
+            else
+            {
+                AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position);
+            }
             return;
         }
+
         if (isExplode)
         {
             Explode(transform.position);
@@ -123,11 +131,13 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void Bounce(ContactPoint2D collisionPoint)
+    private void Bounce()
     {
         bounces++;
 
         rb2d.sharedMaterial.bounciness = 1;
+
+        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position);
 
         //direction = Vector3.Reflect(direction, collisionPoint.normal);
 
