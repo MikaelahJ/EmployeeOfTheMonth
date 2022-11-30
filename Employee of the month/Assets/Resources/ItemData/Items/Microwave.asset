@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 9745395a92f0b5c41875cd539d30ad88, type: 3}
   sprite: {fileID: -1420853966, guid: de3dee3095824b24d9e216751e515f5a, type: 3}
-  ammo: 5
-  weaponDamage: 0
+  ammo: 999
+  weaponDamage: 15
   fireRate: 0
   recoilModifier: 0
   accuracyPercentage: 1
@@ -27,9 +27,9 @@ MonoBehaviour:
   numOfBounces: 0
   isPenetrate: 0
   numOfPenetrations: 0
-  isExplosive: 0
-  explosionRadius: 0
-  explosionDamage: 0
+  isExplosive: 1
+  explosionRadius: 1
+  explosionDamage: 15
   isKnockback: 0
   knockbackModifier: 0
   isHoming: 0

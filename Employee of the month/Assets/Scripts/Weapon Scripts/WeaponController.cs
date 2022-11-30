@@ -79,6 +79,7 @@ public class WeaponController : MonoBehaviour
             NewItemScriptableObject item = items[i];
             //Weapon Modifiers
             newWeapon.ammo += item.ammo;
+            newWeapon.weaponDamage += item.weaponDamage;
             newWeapon.fireRate += item.fireRate;
             newWeapon.recoilModifier += item.recoilModifier;
             newWeapon.accuracyPercentage += weapon.accuracyPercentage;
@@ -92,6 +93,8 @@ public class WeaponController : MonoBehaviour
             newWeapon.numOfPenetrations += item.numOfPenetrations;
             newWeapon.isPenetrate = newWeapon.isPenetrate || item.isPenetrate;
             newWeapon.isExplosive = newWeapon.isExplosive || item.isExplosive;
+            newWeapon.explosionRadius += item.explosionRadius;
+            newWeapon.explosionDamage += item.explosionDamage;
             newWeapon.isKnockback = newWeapon.isKnockback || item.isKnockback;
             newWeapon.isHoming = newWeapon.isHoming || item.isHoming;
 

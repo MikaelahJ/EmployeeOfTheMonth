@@ -103,8 +103,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isBouncy: 0
   isPenetrate: 0
+  explosionPrefab: {fileID: 4296370996026009329, guid: e681ba27915daf9408bcea4081a84cfa, type: 3}
   isExplode: 0
-  isHoming: 1
+  isHoming: 0
   turnSpeed: 3
 --- !u!50 &1624548292394652931
 Rigidbody2D:
