@@ -10,6 +10,7 @@ public class HasHealth : MonoBehaviour
     public int playerIndex;
     public int maxHealth = 100;
     public float health;
+    public GameObject bloodPool;
 
     
     private bool isDead = false;
@@ -45,6 +46,8 @@ public class HasHealth : MonoBehaviour
         }
         ChangeHealth(-damage);
         Debug.Log(gameObject.name + " lost " + damage + "HP.");
+
+        Instantiate(bloodPool, transform.position, transform.rotation);
     }
 
     private void ChangeHealth(float healthChange)
@@ -70,6 +73,11 @@ public class HasHealth : MonoBehaviour
         }
 
         UpdateHealthbar();
+    }
+
+    public void AddBlood(GameObject bullet)
+    {
+        Instantiate(bloodPool, transform.position, bullet.transform.rotation);
     }
 
     private void OnDeath()

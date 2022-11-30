@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     private float bulletSpeed = 5;
     private Vector3 direction;
     private float damage = 5;
+    private Vector3 previousDirection;
 
     public bool isBouncy = false;
     private int maxBounce = 2;
@@ -24,16 +25,20 @@ public class Bullet : MonoBehaviour
     public bool isHoming = false;
     public float turnSpeed = 1;
 
+    public float knockBackModifier = 10;
+
 
     void Start()
     {
         direction = transform.up;
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.velocity = direction * bulletSpeed;
+        previousDirection = transform.up;
     }
 
     private void Update()
     {
+        transform.up = rb2d.velocity;
     }
 
     public void UpdateBulletModifyers(NewItemScriptableObject weapon)
@@ -46,11 +51,18 @@ public class Bullet : MonoBehaviour
         maxObjectPass = weapon.numOfPenetrations;
         isExplode = weapon.isExplosive;
         explodeRadius = weapon.explosionRadius;
+        knockBackModifier = weapon.knockbackModifier;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         SendDamage(collision.collider);
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("AppliedForce");
+            ApplyKnockBack(collision);
+        }
 
         if (isExplode)
         {
@@ -72,7 +84,8 @@ public class Bullet : MonoBehaviour
 
                 if (collision.gameObject.CompareTag("Player"))
                 {
-                    //send knockback
+                    Debug.Log("AppliedForce");
+                    ApplyKnockBack(collision);
                 }
 
                 return;
@@ -89,10 +102,13 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void OnCollisionExit2D(Collision2D collision)
+
+    private void ApplyKnockBack(Collision2D playerCollider)
     {
-        transform.up = rb2d.velocity;
+        Rigidbody2D playerRb = playerCollider.gameObject.GetComponent<Rigidbody2D>();
+        playerRb.AddForce(rb2d.velocity.normalized * knockBackModifier, ForceMode2D.Impulse);
     }
+
 
     private void SendDamage(Collider2D collider)
     {
@@ -100,6 +116,7 @@ public class Bullet : MonoBehaviour
         if (collider.transform.GetComponent<HasHealth>() != null)
         {
             collider.transform.GetComponent<HasHealth>().LoseHealth(damage);
+            collider.gameObject.GetComponent<HasHealth>().AddBlood(gameObject);
         }
     }
 
@@ -148,17 +165,23 @@ public class Bullet : MonoBehaviour
         gameObject.layer = defaultLayer;
     }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        
+        previousDirection = transform.up;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (isHoming && collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Homing Triggered");
             Vector3 newDirection = collision.transform.position - transform.position;
             newDirection.Normalize();
             newDirection.z = 0;
-            transform.up = Vector2.Lerp(direction, newDirection, turnSpeed * Time.deltaTime);
-            direction = transform.up;
-            rb2d.velocity = transform.up * bulletSpeed;
+            transform.up = Vector2.Lerp(previousDirection, newDirection, turnSpeed * Time.deltaTime);
+            previousDirection = transform.up;
+            rb2d.velocity = transform.up * rb2d.velocity.magnitude;
         }
     }
+
 }

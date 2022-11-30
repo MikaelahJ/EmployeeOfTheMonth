@@ -100,11 +100,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7932bb6c36bc899499b1c5b49f923f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBouncy: 0
+  isBouncy: 1
   isPenetrate: 0
   isExplode: 0
   isHoming: 1
   turnSpeed: 3
+  knockBackModifier: 500
 --- !u!50 &1624548292394652931
 Rigidbody2D:
   serializedVersion: 4
@@ -155,6 +156,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 31.14}
+  m_Offset: {x: 0, y: 21.8}
   serializedVersion: 2
-  m_Radius: 32.96
+  m_Radius: 20.59

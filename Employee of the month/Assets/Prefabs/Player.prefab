@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1940466002630421828}
   - component: {fileID: 672739431118636492}
   - component: {fileID: 1575183137811590513}
+  - component: {fileID: 2930663342979400925}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -103,10 +104,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b7840ae3f21e84690f03e5e4e52cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 120
-  decelaration: 12
-  walkSpeed: 8
-  runSpeed: 14
+  acceleration: 1000
+  decelaration: 100
+  walkSpeed: 15
+  runSpeed: 20
   leftstickInput: {x: 0, y: 0}
 --- !u!50 &5234566805939642084
 Rigidbody2D:
@@ -121,7 +122,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDrag: 5
+  m_LinearDrag: 10
   m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -174,6 +175,7 @@ MonoBehaviour:
   playerIndex: 0
   maxHealth: 10
   health: 0
+  bloodPool: {fileID: 8186622323319996173, guid: fdbdfa3a759895c4bb22120c0e8ecba5, type: 3}
 --- !u!82 &1575183137811590513
 AudioSource:
   m_ObjectHideFlags: 0
@@ -270,6 +272,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2930663342979400925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5234566805939642093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c078df50e64558643a8e8265cdf5aa4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTriggered: 0
 --- !u!1001 &321921786861098739
 PrefabInstance:
   m_ObjectHideFlags: 0
