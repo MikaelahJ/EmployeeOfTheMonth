@@ -157,7 +157,7 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 237240420590927659}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ControllerInput, Assembly-CSharp
         m_MethodName: OnRun
         m_Mode: 0
