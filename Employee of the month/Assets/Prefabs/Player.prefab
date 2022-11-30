@@ -154,13 +154,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
-  playerIndex: 0
-  maxHealth: 10
-  health: 0
-<<<<<<< Updated upstream
-=======
   bloodPool: {fileID: 173959096280478694, guid: d5fc92b4b61abb54ab82593a9f1dcd57, type: 3}
->>>>>>> Stashed changes
+  playerIndex: 0
+  maxHealth: 100
+  health: 0
 --- !u!82 &1575183137811590513
 AudioSource:
   m_ObjectHideFlags: 0

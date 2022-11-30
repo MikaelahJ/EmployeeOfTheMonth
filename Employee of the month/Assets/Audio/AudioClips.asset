@@ -21,6 +21,7 @@ MonoBehaviour:
   itemPickup: {fileID: 8300000, guid: ed997be5e765bea4c8f94346dd81622a, type: 3}
   itemDestroyed: {fileID: 8300000, guid: e333864e4cb56d3469d2ced16bb60c9f, type: 3}
   impact_wall: {fileID: 8300000, guid: 62d677f27f04a234cab7df98dd7c9308, type: 3}
+  impact_wood: {fileID: 8300000, guid: a79c5096d4157ca4fb4180a226684601, type: 3}
   impact_glass: {fileID: 8300000, guid: cfabc955080443e4ca1c3525e20996e2, type: 3}
   bulletBounce: {fileID: 8300000, guid: 9b1b573f6bb4a674db206047e5520e88, type: 3}
-  bulletExplode: {fileID: 0}
+  bulletExplode: {fileID: 8300000, guid: 773d596a0cfdae144b9242b067999e7a, type: 3}
