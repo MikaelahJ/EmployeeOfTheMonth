@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40bb7cf003a8d7242881e46c28417936, type: 3}
   m_Name: Shredder
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 9c0d6ec706e01ce448aea81584af092b, type: 3}
-  sprite: {fileID: 21300000, guid: 9c0d6ec706e01ce448aea81584af092b, type: 3}
+  itemIcon: {fileID: 21300000, guid: a3e491f99ea3ad74f8731ca93e84c497, type: 3}
+  sprite: {fileID: 21300000, guid: 4b4442ac25ee0104094959a7e11083f0, type: 3}
   ammo: 15
   weaponDamage: 0
   fireRate: 0

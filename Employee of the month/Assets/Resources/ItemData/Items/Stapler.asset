@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Stapler
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: f4bda48d454f0fe409f2b5e223d4d388, type: 3}
-  sprite: {fileID: 1243225260, guid: 46d74a4321618b3428227acefb6d5505, type: 3}
+  sprite: {fileID: 21300000, guid: e32cd9a03c0f15d4a83f6cd86e36ca24, type: 3}
   ammo: 15
   weaponDamage: 0
   fireRate: 0
