@@ -55,7 +55,7 @@ public class Bullet : MonoBehaviour
     {
         SendDamage(collision.collider);
 
-        if (isBouncy && bounces < maxBounce && !collision.gameObject.transform.parent.CompareTag("Player"))
+        if (isBouncy && bounces < maxBounce && !collision.gameObject.CompareTag("Player"))
         {
             if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
             {
@@ -99,11 +99,11 @@ public class Bullet : MonoBehaviour
 
     private void SendDamage(Collider2D collider)
     {
-        Debug.Log(damage);
-        if (collider.transform.parent.GetComponent<HasHealth>() != null)
+        if (collider.gameObject.transform.CompareTag("Player"))
         {
-            collider.transform.parent.GetComponent<HasHealth>().LoseHealth(damage);
+            collider.transform.parent.transform.GetComponent<HasHealth>().LoseHealth(damage);
         }
+
         if(collider.transform.GetComponent<HasHealth>() != null)
         {
             collider.transform.GetComponent<HasHealth>().LoseHealth(damage);
