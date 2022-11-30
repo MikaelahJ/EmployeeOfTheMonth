@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pencil Sharpener
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: f95f697d66d238446b1ab717def09945, type: 3}
-  sprite: {fileID: 21300000, guid: 046fa802d654d924f89a4612a2ef00c0, type: 3}
+  sprite: {fileID: 21300000, guid: 0a9948ae99fac9549a0f3f222b4a618e, type: 3}
   ammo: 15
   weaponDamage: 0
   fireRate: 0
