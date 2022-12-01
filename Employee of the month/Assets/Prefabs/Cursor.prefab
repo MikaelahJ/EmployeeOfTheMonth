@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCharacterBall: {fileID: 4846093588454617598, guid: 0235b45ff64b0194fbcd65484d8d10a7, type: 3}
   cursorSpeed: 15
-  col: {r: 0, g: 0, b: 0, a: 0}
+  col: {r: 1, g: 0.57254905, b: 0, a: 0}
 --- !u!58 &-4418562741448730583
 CircleCollider2D:
   m_ObjectHideFlags: 0

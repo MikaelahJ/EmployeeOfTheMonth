@@ -28,13 +28,15 @@ public class Cursor : MonoBehaviour
     private void Start()
     {
         transform.position = Vector3.zero;
-        Debug.Log(col);
+        Debug.Log("hej" + col);
         GetComponent<SpriteRenderer>().color = col;
         selectedCharacterBall.GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color;
     }
 
     private void Update()
     {
+        Debug.Log("hej2" + col);
+        Debug.Log("hej3" + GetComponent<SpriteRenderer>().color);
         if (hasGamepad)
         {
             StickPosition();

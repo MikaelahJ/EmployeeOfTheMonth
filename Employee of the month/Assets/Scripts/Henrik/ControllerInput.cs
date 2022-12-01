@@ -47,6 +47,7 @@ public class ControllerInput : MonoBehaviour
             cursor = cursorObject.GetComponent<Cursor>();
 
             //Set Cursor color
+            Debug.Log("Cursor Col:" + cursor.GetComponent<SpriteRenderer>().color);
             Debug.Log(pColors[playerInput.playerIndex]);
             cursor.col = pColors[playerInput.playerIndex];
 
