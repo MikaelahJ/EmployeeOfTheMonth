@@ -60,6 +60,7 @@ public class ControllerInput : MonoBehaviour
 
             SpawnPlayerHUD(player);
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void SetCharacter()
@@ -86,7 +87,6 @@ public class ControllerInput : MonoBehaviour
     private void SetCharacterTestScenes()
     {
         Instantiate(characters[0], player.transform);
-
     }
 
     private void SpawnPlayerHUD(GameObject player)
