@@ -69,7 +69,6 @@ public class HasHealth : MonoBehaviour
         {
             OnDeath();
             health = 0;
-            Debug.Log(gameObject.name + " reached 0 health!");
         }
 
         UpdateHealthbar();
@@ -109,29 +108,29 @@ public class HasHealth : MonoBehaviour
         isDead = false;
     }
 
-    public void HealthRegen(int health, float timeBetweenRegen, float duration)
+    public void HealthChange(int healthChange, float tickTime, float duration)
     {
-        StartCoroutine(HealthRegenCouroutine(health, timeBetweenRegen, duration));
+        StartCoroutine(HealthChangeCouroutine(healthChange, tickTime, duration));
     }
 
-    private IEnumerator HealthRegenCouroutine(int health, float timeBetweenRegen, float duration)
+    private IEnumerator HealthChangeCouroutine(int healthChange, float tickTime, float duration)
     {
         float timer = 0;
         while(timer < duration && !isDead)
         {
-            timer += timeBetweenRegen;
-            switch (health > 0)
+            timer += tickTime;
+            switch (healthChange > 0)
             {
-                case true:
-                    GainHealth(health);
+                case true://healthChange > 0 ger regen
+                    GainHealth(healthChange);
                     break;
-                case false:
-                    LoseHealth(-health);
+                case false://healthChange < 0 ger bleed/radiation damage
+                    LoseHealth(healthChange);
                     break;
             }
-            yield return new WaitForSeconds(timeBetweenRegen);
+            yield return new WaitForSeconds(tickTime);
         }
-        Debug.Log(gameObject.name + "'s " + health + " hp per " + timeBetweenRegen + " seconds wore off!");
+        Debug.Log(gameObject.name + "'s " + health + " hp per " + tickTime + " seconds wore off!");
     }
 
     private void UpdateHealthbar()

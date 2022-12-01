@@ -22,6 +22,7 @@ public class NewItemScriptableObject : ScriptableObject
     public bool isShotgun = false;
     public int shotgunAmmount = 0;
 
+
     [Header("Bullet modifiers")]
     public float bulletVelocity = 0f;
     [Header("Bouncy")]
@@ -31,7 +32,7 @@ public class NewItemScriptableObject : ScriptableObject
     public bool isPenetrate = false;
     public int numOfPenetrations = 0;
     [Header("Explosive")]
-    public bool isExplosive = false;
+    public bool isMicrowave = false;
     public float explosionRadius = 0f;
     public float explosionDamage = 0f;
     [Header("Knockback")]
@@ -41,5 +42,5 @@ public class NewItemScriptableObject : ScriptableObject
     public bool isHoming = false;
     public float turnSpeed = 0f;
 
-    
+
 }

@@ -34,7 +34,7 @@ public class WeaponController : MonoBehaviour
     {
         for (int i = 0; i < items.Length; i++)
         {
-            if(items[i] == null)
+            if (items[i] == null)
             {
                 items[i] = Instantiate(item);
                 if (itemHolder != null)
@@ -43,7 +43,8 @@ public class WeaponController : MonoBehaviour
                 }
                 Debug.Log("Added item: " + item.name);
                 //Play pickup sound
-                sound.PlayOneShot(AudioManager.instance.audioClips.itemPickup);
+                // sound.PlayOneShot(AudioManager.instance.audioClips.itemPickup);
+                // AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.itemPickup, transform.position);
 
                 UpdateWeaponStats();
 
@@ -67,7 +68,7 @@ public class WeaponController : MonoBehaviour
         }
         UpdateWeaponStats();
     }
-    
+
     void UpdateWeaponStats()
     {
         NewItemScriptableObject newWeapon = Instantiate(baseWeapon);
@@ -92,7 +93,7 @@ public class WeaponController : MonoBehaviour
             newWeapon.numOfBounces += item.numOfBounces;
             newWeapon.numOfPenetrations += item.numOfPenetrations;
             newWeapon.isPenetrate = newWeapon.isPenetrate || item.isPenetrate;
-            newWeapon.isExplosive = newWeapon.isExplosive || item.isExplosive;
+            newWeapon.isMicrowave = newWeapon.isMicrowave || item.isMicrowave;
             newWeapon.explosionRadius += item.explosionRadius;
             newWeapon.explosionDamage += item.explosionDamage;
             newWeapon.isKnockback = newWeapon.isKnockback || item.isKnockback;
@@ -107,7 +108,7 @@ public class WeaponController : MonoBehaviour
     {
         for (int i = 0; i < items.Length; i++)
         {
-            if(items[i] != null)
+            if (items[i] != null)
             {
                 items[i].ammo -= shots;
                 if (items[i].ammo <= 0)

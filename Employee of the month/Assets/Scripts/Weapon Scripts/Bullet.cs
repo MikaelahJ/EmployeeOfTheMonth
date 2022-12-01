@@ -19,9 +19,12 @@ public class Bullet : MonoBehaviour
     private int objectsPassed = 0;
 
     [SerializeField] private GameObject explosionPrefab;
-    public bool isExplode = false;
+    public bool isMicrowave = false;
     private float explodeRadius = 1;
     private float explosionDamage;
+
+    private float trailLength = 5;
+    private int radiationDamage = 2;
 
     public float knockBackModifier = 10;
 
@@ -36,22 +39,24 @@ public class Bullet : MonoBehaviour
         rb2d.velocity = direction * bulletSpeed;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-    }
+        var hit = Physics2D.Raycast(transform.position, -transform.up, trailLength);
+        Debug.DrawRay(transform.position, -transform.up, Color.red);
 
-    public void UpdateBulletModifyers(NewItemScriptableObject weapon)
+        if (hit.collider != null)
+        {
+            Debug.Log("hit: " + hit.collider);
+            if (hit.collider.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("Radiation");
+                SendRadiationDamage(hit.collider);
+            }
+        }
+    }
+    private void SendRadiationDamage(Collider2D collider)
     {
-        bulletSpeed = weapon.bulletVelocity;
-        damage = weapon.weaponDamage;
-        isBouncy = weapon.isBouncy;
-        maxBounce = weapon.numOfBounces;
-        isPenetrate = weapon.isPenetrate;
-        maxObjectPass = weapon.numOfPenetrations;
-        isExplode = weapon.isExplosive;
-        explodeRadius = weapon.explosionRadius;
-        explosionDamage = weapon.explosionDamage;
-        knockBackModifier = weapon.knockbackModifier;
+        collider.transform.parent.transform.GetComponent<HasHealth>().HealthChange(radiationDamage, 0.5f, 3f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -64,9 +69,7 @@ public class Bullet : MonoBehaviour
             //Penetrate soft walls
             if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
             {
-
                 Penetrate();
-
                 return;
             }
             //Bounce on other
@@ -84,7 +87,7 @@ public class Bullet : MonoBehaviour
         }
 
         if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
-        { 
+        {
             Penetrate();
             if (collision.gameObject.CompareTag("SoftWall"))
             {
@@ -97,7 +100,7 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        if (isExplode)
+        if (isMicrowave)
         {
             Explode(transform.position, collision);
             Destroy(gameObject);
@@ -117,11 +120,20 @@ public class Bullet : MonoBehaviour
     {
         if (collider.gameObject.transform.CompareTag("Player"))
         {
-            collider.transform.parent.transform.GetComponent<HasHealth>().LoseHealth(damage);
-            ApplyKnockBack(collision);
+            if (collider.transform.GetComponent<HasHealth>() != null)
+            {
+                collider.transform.GetComponent<HasHealth>().LoseHealth(damage);
+
+            }
+            else
+            {
+                collider.transform.parent.transform.GetComponent<HasHealth>().LoseHealth(damage);
+                ApplyKnockBack(collision);
+            }
+
         }
 
-        if(collider.transform.GetComponent<HasHealth>() != null)
+        if (collider.transform.GetComponent<HasHealth>() != null)
         {
             collider.transform.GetComponent<HasHealth>().LoseHealth(damage);
         }
@@ -155,14 +167,6 @@ public class Bullet : MonoBehaviour
         rb2d.sharedMaterial.bounciness = 1;
 
         AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position);
-
-        //direction = Vector3.Reflect(direction, collisionPoint.normal);
-
-        //rb2d.velocity = (direction).normalized * bulletSpeed;
-
-        //float angle = Mathf.Atan2(rb2d.velocity.y, rb2d.velocity.x) * Mathf.Rad2Deg + 90;
-        //Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
-        //transform.rotation = rot;
     }
 
     private void Penetrate()
@@ -198,5 +202,18 @@ public class Bullet : MonoBehaviour
             direction = transform.up;
             rb2d.velocity = transform.up * bulletSpeed;
         }
+    }
+    public void UpdateBulletModifyers(NewItemScriptableObject weapon)
+    {
+        bulletSpeed = weapon.bulletVelocity;
+        damage = weapon.weaponDamage;
+        isBouncy = weapon.isBouncy;
+        maxBounce = weapon.numOfBounces;
+        isPenetrate = weapon.isPenetrate;
+        maxObjectPass = weapon.numOfPenetrations;
+        isMicrowave = weapon.isMicrowave;
+        explodeRadius = weapon.explosionRadius;
+        explosionDamage = weapon.explosionDamage;
+        knockBackModifier = weapon.knockbackModifier;
     }
 }
