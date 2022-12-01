@@ -25,6 +25,7 @@ public class Bullet : MonoBehaviour
 
     private float trailLength = 5;
     private int radiationDamage = 2;
+    private int layerMask = 1 << 3;
 
     public float knockBackModifier = 10;
 
@@ -41,22 +42,21 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var hit = Physics2D.Raycast(transform.position, -transform.up, trailLength);
-        Debug.DrawRay(transform.position, -transform.up, Color.red);
+        var hit = Physics2D.Raycast(transform.position, -transform.up, trailLength, layerMask);
+        Debug.DrawLine(transform.position, -transform.up, Color.red);
 
         if (hit.collider != null)
         {
-            Debug.Log("hit: " + hit.collider);
-            if (hit.collider.gameObject.CompareTag("Player"))
-            {
-                Debug.Log("Radiation");
-                SendRadiationDamage(hit.collider);
-            }
+            Debug.Log("hit: " + hit.collider.gameObject);
+            Debug.Log("Radiation");
+            SendRadiationDamage(hit.collider);
         }
     }
     private void SendRadiationDamage(Collider2D collider)
     {
-        collider.transform.parent.transform.GetComponent<HasHealth>().HealthChange(radiationDamage, 0.5f, 3f);
+        collider.transform.parent.transform.GetComponent<HasHealth>().HealthChange(-radiationDamage, 1f, 3f);
+        collider.transform.parent.transform.GetComponent<HasHealth>().isRadiation = true;
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

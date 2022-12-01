@@ -42,7 +42,7 @@ public class ControllerInput : MonoBehaviour
             playerInput.SwitchCurrentActionMap("Player");
             player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
 
-            if(GameManager.Instance.playersCount != 0)
+            if (GameManager.Instance.playersCount != 0)
             {
                 spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
                 SetCharacter();

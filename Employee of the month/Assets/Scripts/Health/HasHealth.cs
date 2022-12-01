@@ -12,7 +12,7 @@ public class HasHealth : MonoBehaviour
     public int maxHealth = 100;
     public float health;
 
-    
+    public bool isRadiation;
     private bool isDead = false;
 
     void Start()
@@ -110,6 +110,8 @@ public class HasHealth : MonoBehaviour
 
     public void HealthChange(int healthChange, float tickTime, float duration)
     {
+        if (isRadiation == true)
+            return;
         StartCoroutine(HealthChangeCouroutine(healthChange, tickTime, duration));
     }
 
@@ -125,12 +127,14 @@ public class HasHealth : MonoBehaviour
                     GainHealth(healthChange);
                     break;
                 case false://healthChange < 0 ger bleed/radiation damage
-                    LoseHealth(healthChange);
+                    LoseHealth(-healthChange);
                     break;
             }
             yield return new WaitForSeconds(tickTime);
         }
-        Debug.Log(gameObject.name + "'s " + health + " hp per " + tickTime + " seconds wore off!");
+        Debug.Log(gameObject.name + "'s " + healthChange + " hp per " + tickTime + " seconds wore off!");
+        Debug.Log(health);
+        isRadiation = false;
     }
 
     private void UpdateHealthbar()

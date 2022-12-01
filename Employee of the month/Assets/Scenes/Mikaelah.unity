@@ -257,6 +257,10 @@ PrefabInstance:
       value: TestEnemy (6)
       objectReference: {fileID: 0}
     - target: {fileID: 7977116108554112120, guid: a0cca125c5a86ae47914b820a45b37ae, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7977116108554112120, guid: a0cca125c5a86ae47914b820a45b37ae, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
