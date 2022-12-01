@@ -126,4 +126,14 @@ public class WeaponController : MonoBehaviour
         }
     }
 
+    public int NumOfItems()
+    {
+        int count = 0;
+        foreach (var item in items)
+        {
+            if(item != null) { count++; }
+        }
+        return count;
+    }
+
 }

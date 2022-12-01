@@ -53,11 +53,6 @@ public class Fire : MonoBehaviour
         {
             FireGun();
         }
-        //Ammo counter
-        if (ammoCounter != null)
-        {
-            ammoCounter.SetAmmo(ammo);
-        }
 
         timer = 0;
     }
@@ -118,7 +113,7 @@ public class Fire : MonoBehaviour
 
     private void LoseAmmo(int shots)
     {
-        ammo -= shots;
+        ammo -= (shots * weaponController.NumOfItems());
         weaponController.LoseItemAmmo(shots);
         ammoCounter.SetAmmo(ammo);
 
