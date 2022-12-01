@@ -190,7 +190,7 @@ SpriteRenderer:
   m_Size: {x: 0.6047619, y: 0.61904764}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &22369295
@@ -244,6 +244,130 @@ PrefabInstance:
     - target: {fileID: 6104386963993132075, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
       propertyPath: m_Name
       value: PlayerManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinBehavior
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Reference
+      value: 
+      objectReference: {fileID: 4747261246571314175, guid: 26b3c03afbc988541b6e7adcb0c76bad, type: 3}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_Id
+      value: cd86caf8-609e-4cbf-b454-b13963523c50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_UseReference
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_Name
+      value: Join
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_Flags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_ExpectedControlType
+      value: Analog
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Id
+      value: a3300ab3-4a35-42d4-a9eb-1712919fa231
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[1].m_Id
+      value: 900076b0-e8ce-48a6-8974-8c6001890cc6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[2].m_Id
+      value: a3300ab3-4a35-42d4-a9eb-1712919fa231
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[3].m_Id
+      value: 900076b0-e8ce-48a6-8974-8c6001890cc6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[4].m_Id
+      value: bd2e3647-aa13-42e8-bd0e-30e29dd10f2c
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Name
+      value: One Modifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Path
+      value: OneModifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[1].m_Name
+      value: modifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[2].m_Name
+      value: One Modifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[2].m_Path
+      value: OneModifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[3].m_Name
+      value: modifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[4].m_Name
+      value: binding
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Flags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[1].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[2].m_Flags
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[3].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[4].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Join
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[1].m_Action
+      value: Join
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[2].m_Action
+      value: Join
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[3].m_Action
+      value: Join
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[4].m_Action
+      value: Join
       objectReference: {fileID: 0}
     - target: {fileID: 6104386963993132085, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
       propertyPath: m_RootOrder
@@ -1577,7 +1701,7 @@ SpriteRenderer:
   m_Size: {x: 0.8095238, y: 0.86190474}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &468117370
@@ -1688,7 +1812,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1.4809524}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &505997796
@@ -1799,7 +1923,7 @@ SpriteRenderer:
   m_Size: {x: 0.9190476, y: 1.3190476}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &520493167
@@ -1910,7 +2034,7 @@ SpriteRenderer:
   m_Size: {x: 0.8095238, y: 0.86190474}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &590142852
@@ -2194,7 +2318,7 @@ SpriteRenderer:
   m_Size: {x: 0.9809524, y: 1.5714285}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &696069587
@@ -2544,7 +2668,7 @@ SpriteRenderer:
   m_Size: {x: 1.395238, y: 1.8857143}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &799904237
@@ -2790,7 +2914,7 @@ SpriteRenderer:
   m_Size: {x: 0.6047619, y: 0.8952381}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &843626590
@@ -2941,7 +3065,7 @@ SpriteRenderer:
   m_Size: {x: 0.9190476, y: 1.3190476}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &855567667
@@ -3052,7 +3176,7 @@ SpriteRenderer:
   m_Size: {x: 0.9190476, y: 1.3190476}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &863494612
@@ -3259,7 +3383,7 @@ SpriteRenderer:
   m_Size: {x: 0.6047619, y: 0.8952381}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &943404858
@@ -3360,7 +3484,7 @@ SpriteRenderer:
   m_Size: {x: 0.6047619, y: 0.8952381}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &958825596
@@ -3572,7 +3696,7 @@ SpriteRenderer:
   m_Size: {x: 0.9714286, y: 1.0523809}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1053869125
@@ -3735,7 +3859,7 @@ SpriteRenderer:
   m_Size: {x: 0.6047619, y: 0.61904764}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1110753031
@@ -3957,7 +4081,7 @@ SpriteRenderer:
   m_Size: {x: 0.8095238, y: 0.86190474}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1121479201
@@ -4984,7 +5108,7 @@ SpriteRenderer:
   m_Size: {x: 1.395238, y: 1.8857143}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1313792467
@@ -5155,7 +5279,7 @@ SpriteRenderer:
   m_Size: {x: 0.9285714, y: 1.6952381}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1314291595
@@ -5811,7 +5935,7 @@ SpriteRenderer:
   m_Size: {x: 0.7809524, y: 0.74761903}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1440224098
@@ -6023,7 +6147,7 @@ SpriteRenderer:
   m_Size: {x: 0.8333333, y: 0.8142857}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1490049271
@@ -6134,7 +6258,7 @@ SpriteRenderer:
   m_Size: {x: 0.8095238, y: 0.86190474}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1510149732
@@ -6355,7 +6479,7 @@ SpriteRenderer:
   m_Size: {x: 0.64285713, y: 2.0285714}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1528346733
@@ -6551,7 +6675,7 @@ SpriteRenderer:
   m_Size: {x: 0.07, y: 0.06882353}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1604726280
@@ -6667,7 +6791,7 @@ SpriteRenderer:
   m_Size: {x: 0.8952381, y: 0.8238095}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1669298075
@@ -7111,7 +7235,7 @@ SpriteRenderer:
   m_Size: {x: 0.56666666, y: 0.55714285}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1695066651
@@ -7537,7 +7661,7 @@ SpriteRenderer:
   m_Size: {x: 0.9190476, y: 1.3190476}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1884067092
@@ -8147,7 +8271,7 @@ SpriteRenderer:
   m_Size: {x: 1.3904762, y: 2.4380953}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &2068684541
