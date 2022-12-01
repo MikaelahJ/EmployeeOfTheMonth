@@ -5,7 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - healthbar: {instanceID: 0}
-  - bloodPool: {fileID: 3588549943567129536, guid: d5fc92b4b61abb54ab82593a9f1dcd57, type: 3}
+  - bloodPool: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

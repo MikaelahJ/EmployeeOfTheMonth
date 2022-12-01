@@ -115,6 +115,8 @@ public class Bullet : MonoBehaviour
 
     private void SendDamage(Collider2D collider, Collision2D collision)
     {
+        
+
         if (collider.gameObject.transform.CompareTag("Player"))
         {
             HasHealth health = collider.transform.parent.transform.GetComponent<HasHealth>();
@@ -147,6 +149,7 @@ public class Bullet : MonoBehaviour
     private void ApplyKnockBack(Collision2D playerCollider)
     {
         Rigidbody2D playerRb = playerCollider.gameObject.GetComponent<Rigidbody2D>();
+        if(playerRb == null) { return; }
         playerRb.AddForce(rb2d.velocity.normalized * knockBackModifier, ForceMode2D.Impulse);
     }
 
