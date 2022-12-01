@@ -18,11 +18,13 @@ public class CameraController : MonoBehaviour
     private float xMin, xMax, yMin, yMax;
     private Camera cam;
 
+    void Awake()
+    {
+        players = new GameObject[4];
+    }
     // Start is called before the first frame update
     void Start()
     {
-        players = new GameObject[4];
-
         BoxCollider mapBounds = map.GetComponent<BoxCollider>();
         cam = GetComponent<Camera>();
 

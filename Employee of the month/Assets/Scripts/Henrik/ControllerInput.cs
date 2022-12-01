@@ -27,6 +27,7 @@ public class ControllerInput : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
         playerInput = GetComponent<PlayerInput>();
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
@@ -37,12 +38,22 @@ public class ControllerInput : MonoBehaviour
 
             GameManager.Instance.playersCount += 1;
         }
-        else
-        {
-            playerInput.SwitchCurrentActionMap("Player");
-            player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
+    }
 
-            if(GameManager.Instance.playersCount != 0)
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(scene.name == "TestScene")
+        {
+            playerInput = GetComponent<PlayerInput>();
+            playerInput.SwitchCurrentActionMap("Player");
+            SpawnPlayer();
+
+            if (GameManager.Instance.playersCount != 0)
             {
                 spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
                 SetCharacter();
@@ -51,16 +62,10 @@ public class ControllerInput : MonoBehaviour
             {
                 SetCharacterTestScenes();
             }
-            player.GetComponent<HasHealth>().playerIndex = playerInput.playerIndex;
-            playerMovement = player.GetComponent<Movement>();
-            aim = player.GetComponent<Aim>();
-            fire = player.GetComponentInChildren<Fire>();
-
             Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
-
             SpawnPlayerHUD(player);
         }
-        DontDestroyOnLoad(gameObject);
+
     }
 
     private void SetCharacter()
@@ -87,6 +92,15 @@ public class ControllerInput : MonoBehaviour
     private void SetCharacterTestScenes()
     {
         Instantiate(characters[0], player.transform);
+    }
+
+    private void SpawnPlayer()
+    {
+        player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
+        player.GetComponent<HasHealth>().playerIndex = playerInput.playerIndex;
+        playerMovement = player.GetComponent<Movement>();
+        aim = player.GetComponent<Aim>();
+        fire = player.GetComponentInChildren<Fire>();
     }
 
     private void SpawnPlayerHUD(GameObject player)

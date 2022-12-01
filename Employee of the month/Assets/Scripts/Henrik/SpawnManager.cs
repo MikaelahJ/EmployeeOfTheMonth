@@ -15,6 +15,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (instance == null)
         {
+            assigned = new List<int>();
             instance = this;
         }
         else
@@ -25,7 +26,6 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        assigned = new List<int>();
         gameOverText.SetActive(false);
     }
 
