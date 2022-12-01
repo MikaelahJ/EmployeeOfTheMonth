@@ -56,6 +56,8 @@ public class ControllerInput : MonoBehaviour
             aim = player.GetComponent<Aim>();
             fire = player.GetComponentInChildren<Fire>();
 
+            Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
+
             SpawnPlayerHUD(player);
         }
     }

@@ -93,6 +93,7 @@ public class HasHealth : MonoBehaviour
             SpawnManager.instance.PlayerDied();
             AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.death, transform.position);
 
+            Camera.main.GetComponent<CameraController>().RemoveCameraTracking(gameObject);
             GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
             GetComponentInChildren<CircleCollider2D>().enabled = false;
             GetComponent<Movement>().enabled = false;
