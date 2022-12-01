@@ -32,9 +32,17 @@ public class ControllerInput : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
             playerInput.SwitchCurrentActionMap("UI");
-            cursorObject = Instantiate(cursorPrefab, Vector2.zero, cursorPrefab.transform.rotation);
+
+            cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
             cursorObject.name = "P" + playerInput.playerIndex.ToString();
             cursor = cursorObject.GetComponent<Cursor>();
+
+            //Set Cursor color
+            if(playerInput.playerIndex != 0)
+            {
+                Color col = new Color(playerInput.playerIndex == 1 ? 225 : 0, playerInput.playerIndex == 2 ? 225 : 0, playerInput.playerIndex == 3 ? 225 : 0);
+                cursor.GetComponent<SpriteRenderer>().color = col;
+            }
 
             GameManager.Instance.playersCount += 1;
         }
@@ -170,6 +178,7 @@ public class ControllerInput : MonoBehaviour
 
     public void MoveCursor(InputAction.CallbackContext input)
     {
+
         if (playerInput.currentControlScheme == "Gamepad")
         {
             cursor.SetAimStickInput(input.ReadValue<Vector2>());

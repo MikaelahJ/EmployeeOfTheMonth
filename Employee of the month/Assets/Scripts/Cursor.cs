@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class Cursor : MonoBehaviour
 {
-    [SerializeField] private GameObject selectedCharacterBall;
+    [SerializeField] public GameObject selectedCharacterBall;
     public float cursorSpeed;
 
     private Vector2 mouseInput;
@@ -18,6 +18,16 @@ public class Cursor : MonoBehaviour
     private bool pressed;
     private GameObject selected;
 
+    private void Awake()
+    {
+        Invoke("Start", 0.01f);
+    }
+
+    private void Start()
+    {
+        transform.position = Vector3.zero;
+        selectedCharacterBall.GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color;
+    }
 
     private void Update()
     {
