@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class ControllerInput : MonoBehaviour
 {
     [SerializeField] private List<GameObject> characters = new List<GameObject>();
+    [SerializeField] private List<GameObject> playerHUDs = new List<GameObject>();
     public GameObject playerPrefab;
     public GameObject playerHUD;
     public GameObject cursorPrefab;
@@ -92,7 +93,7 @@ public class ControllerInput : MonoBehaviour
                 Instantiate(characters[2], player.transform);
                 break;
             case 4:
-
+                Instantiate(characters[3], player.transform);
                 break;
         }
     }
@@ -114,9 +115,10 @@ public class ControllerInput : MonoBehaviour
     private void SpawnPlayerHUD(GameObject player)
     {
         GameObject canvas = GameObject.Find("Canvas");
-        GameObject hud = Instantiate(playerHUD, canvas.transform);
+        GameObject hud = Instantiate(playerHUDs[playerInput.playerIndex], canvas.transform);
+
         RectTransform rectT = hud.GetComponent<RectTransform>();
-        float spacing = 1.2f; // 1 puts them next to each other
+        float spacing = 1f; // 1 puts them next to each other
         int offset = playerInput.playerIndex - 2; // offset from bottom middle
         rectT.localPosition = new Vector3(rectT.rect.width * rectT.localScale.x * spacing * offset, rectT.localPosition.y, rectT.localPosition.z);
 
