@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: {fileID: 0}
+  respawnTime: 15
 --- !u!61 &6951606707269242294
 BoxCollider2D:
   m_ObjectHideFlags: 0

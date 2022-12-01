@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponModifyerItem : MonoBehaviour
 {
     public NewItemScriptableObject itemType;
+    [SerializeField] [Range(1, 30)] float respawnTime;
 
     private void Start()
     {
@@ -17,9 +18,21 @@ public class WeaponModifyerItem : MonoBehaviour
         {
             if (collision.gameObject.transform.parent.transform.GetComponentInChildren<WeaponController>().AddItem(itemType))
             {
-                Destroy(this.gameObject);
+                Disable();
+                Invoke(nameof(Enable), respawnTime);
             }
             Debug.Log(itemType);
         }
+    }
+
+    private void Enable()
+    {
+        GetComponent<BoxCollider2D>().enabled = true;
+        GetComponent<SpriteRenderer>().enabled = true;
+    }
+    private void Disable()
+    {
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
     }
 }
