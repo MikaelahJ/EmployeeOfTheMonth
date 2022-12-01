@@ -12,6 +12,7 @@ public class ControllerInput : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject playerHUD;
     public GameObject cursorPrefab;
+    public GameObject playerHighlightCircle;
 
     private GameObject player;
     private Movement playerMovement;
@@ -23,12 +24,19 @@ public class ControllerInput : MonoBehaviour
 
     private GameObject cursorObject;
     private Cursor cursor;
+    private List<Color> pColors = new List<Color>();
 
     public List<string> players;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+
+        pColors.Add(new Color(255, 146, 0)); // P1 Orange
+        pColors.Add(new Color(169, 0, 255)); // P2 Purple
+        pColors.Add(new Color(0, 255, 109)); // P3 Green
+        pColors.Add(new Color(0, 192, 255)); // P4 Blue
+
         playerInput = GetComponent<PlayerInput>();
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
@@ -39,11 +47,8 @@ public class ControllerInput : MonoBehaviour
             cursor = cursorObject.GetComponent<Cursor>();
 
             //Set Cursor color
-            if(playerInput.playerIndex != 0)
-            {
-                Color col = new Color(playerInput.playerIndex == 1 ? 225 : 0, playerInput.playerIndex == 2 ? 225 : 0, playerInput.playerIndex == 3 ? 225 : 0);
-                cursor.GetComponent<SpriteRenderer>().color = col;
-            }
+            Debug.Log(pColors[playerInput.playerIndex]);
+            cursor.col = pColors[playerInput.playerIndex];
 
             GameManager.Instance.playersCount += 1;
         }
@@ -110,6 +115,9 @@ public class ControllerInput : MonoBehaviour
         playerMovement = player.GetComponent<Movement>();
         aim = player.GetComponent<Aim>();
         fire = player.GetComponentInChildren<Fire>();
+
+        GameObject circle = Instantiate(playerHighlightCircle, player.transform);
+        circle.GetComponent<SpriteRenderer>().color = pColors[playerInput.playerIndex];
     }
 
     private void SpawnPlayerHUD(GameObject player)
