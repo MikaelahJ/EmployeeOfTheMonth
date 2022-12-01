@@ -18,6 +18,8 @@ public class Cursor : MonoBehaviour
     private bool pressed;
     private GameObject selected;
 
+    public Color col;
+
     private void Awake()
     {
         Invoke("Start", 0.01f);
@@ -26,6 +28,8 @@ public class Cursor : MonoBehaviour
     private void Start()
     {
         transform.position = Vector3.zero;
+        Debug.Log(col);
+        GetComponent<SpriteRenderer>().color = col;
         selectedCharacterBall.GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color;
     }
 
