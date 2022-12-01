@@ -102,10 +102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b7840ae3f21e84690f03e5e4e52cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 120
-  decelaration: 12
-  walkSpeed: 8
-  runSpeed: 14
+  acceleration: 250
+  decelaration: 100
+  walkSpeed: 4
+  runSpeed: 6
   leftstickInput: {x: 0, y: 0}
 --- !u!50 &5234566805939642084
 Rigidbody2D:
@@ -120,7 +120,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDrag: 5
+  m_LinearDrag: 10
   m_AngularDrag: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}

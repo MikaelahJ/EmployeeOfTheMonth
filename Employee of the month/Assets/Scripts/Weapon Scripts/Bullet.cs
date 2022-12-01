@@ -117,7 +117,9 @@ public class Bullet : MonoBehaviour
     {
         if (collider.gameObject.transform.CompareTag("Player"))
         {
-            collider.transform.parent.transform.GetComponent<HasHealth>().LoseHealth(damage);
+            HasHealth health = collider.transform.parent.transform.GetComponent<HasHealth>();
+            health.LoseHealth(damage);
+            health.AddBlood(gameObject);
             ApplyKnockBack(collision);
         }
 
