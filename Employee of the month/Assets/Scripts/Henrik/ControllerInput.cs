@@ -24,7 +24,7 @@ public class ControllerInput : MonoBehaviour
 
     private GameObject cursorObject;
     private Cursor cursor;
-    private List<Color> pColors = new List<Color>();
+    private List<Color32> pColors = new List<Color32>();
 
     public List<string> players;
 
@@ -32,10 +32,10 @@ public class ControllerInput : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        pColors.Add(new Color(255, 146, 0)); // P1 Orange
-        pColors.Add(new Color(169, 0, 255)); // P2 Purple
-        pColors.Add(new Color(0, 255, 109)); // P3 Green
-        pColors.Add(new Color(0, 192, 255)); // P4 Blue
+        pColors.Add(new Color32(255, 146, 0, 255)); // P1 Orange
+        pColors.Add(new Color32(169, 0, 255, 255)); // P2 Purple
+        pColors.Add(new Color32(0, 255, 109, 255)); // P3 Green
+        pColors.Add(new Color32(0, 192, 255, 255)); // P4 Blue
 
         playerInput = GetComponent<PlayerInput>();
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
@@ -47,8 +47,6 @@ public class ControllerInput : MonoBehaviour
             cursor = cursorObject.GetComponent<Cursor>();
 
             //Set Cursor color
-            Debug.Log("Cursor Col:" + cursor.GetComponent<SpriteRenderer>().color);
-            Debug.Log(pColors[playerInput.playerIndex]);
             cursor.col = pColors[playerInput.playerIndex];
 
             GameManager.Instance.playersCount += 1;
