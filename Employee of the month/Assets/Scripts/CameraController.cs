@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
 
     private float xMin, xMax, yMin, yMax;
     private Camera cam;
+    private int numOfPlayers = 0;
 
     void Awake()
     {
@@ -40,7 +41,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        if(players[0] != null)
+        if(numOfPlayers != 0)
             MoveCameraOrthographic(players);
     }
 
@@ -52,6 +53,7 @@ public class CameraController : MonoBehaviour
             {
                 players[i] = player;
                 Debug.Log("Added " + player.name + " to camera tracking");
+                numOfPlayers++;
                 return;
             }
         }
@@ -66,6 +68,8 @@ public class CameraController : MonoBehaviour
             {
                 players[i] = null;
                 Debug.Log("Removed " + player.name + " from camera tracking");
+                numOfPlayers--;
+                return;
             }
         }
         Debug.Log("Can't Remove " + player.name + " in camera tracking list, does not exist in tracking");
