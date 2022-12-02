@@ -1,5 +1,53 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &57164729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 57164730}
+  - component: {fileID: 57164731}
+  m_Layer: 2
+  m_Name: SeekerCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &57164730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57164729}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2589492931177751264}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &57164731
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57164729}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 50}
+  serializedVersion: 2
+  m_Radius: 50
 --- !u!1 &2297937692892492729
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +61,6 @@ GameObject:
   - component: {fileID: 5916752283310628631}
   - component: {fileID: 1624548292394652931}
   - component: {fileID: 471386594015539393}
-  - component: {fileID: 4326839436726830221}
   - component: {fileID: 564052110150576421}
   m_Layer: 9
   m_Name: Bullet
@@ -33,7 +80,8 @@ Transform:
   m_LocalPosition: {x: 2.1032, y: -0.096, z: 0}
   m_LocalScale: {x: 0.08258566, y: 0.13418445, z: 0.120195135}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 57164730}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -105,8 +153,12 @@ MonoBehaviour:
   isPenetrate: 0
   explosionPrefab: {fileID: 4296370996026009329, guid: e681ba27915daf9408bcea4081a84cfa, type: 3}
   isExplode: 0
+  knockBackModifier: 10
   isHoming: 0
-  turnSpeed: 3
+  turnSpeed: 2
+  closest: {x: 0, y: 0, z: 0}
+  range: 0
+  targetsInRange: []
 --- !u!50 &1624548292394652931
 Rigidbody2D:
   serializedVersion: 4
@@ -144,22 +196,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2.0000002}
   m_Direction: 0
---- !u!58 &4326839436726830221
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2297937692892492729}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 31.14}
-  serializedVersion: 2
-  m_Radius: 32.96
 --- !u!82 &564052110150576421
 AudioSource:
   m_ObjectHideFlags: 0

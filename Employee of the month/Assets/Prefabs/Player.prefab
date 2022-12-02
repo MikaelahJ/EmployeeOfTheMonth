@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceleration: 1000
-  decelaration: 56
+  decelaration: 500
   walkSpeed: 8
   runSpeed: 14
   leftstickInput: {x: 0, y: 0}
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
-  bloodPool: {fileID: 173959096280478694, guid: d5fc92b4b61abb54ab82593a9f1dcd57, type: 3}
+  bloodPool: {fileID: 7241666120157689697, guid: d5fc92b4b61abb54ab82593a9f1dcd57, type: 3}
   playerIndex: 0
   maxHealth: 100
   health: 0

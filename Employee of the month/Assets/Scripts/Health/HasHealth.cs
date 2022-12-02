@@ -5,8 +5,9 @@ using UnityEngine;
 public class HasHealth : MonoBehaviour
 {
     public UIHealthbar healthbar;
-    private Animator animator;
     public GameObject bloodPool;
+    private Animator animator;
+    
 
     public int playerIndex;
     public int maxHealth = 100;
@@ -39,9 +40,7 @@ public class HasHealth : MonoBehaviour
     {
         if(animator != null)
             animator.SetTrigger("TookDamage");
-
-        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.damaged, transform.position);
-
+      
         if (damage < 0)
         {
             Debug.LogWarning("Used LoseHealth to add Negative damage, use GainHealth instead");
@@ -77,7 +76,7 @@ public class HasHealth : MonoBehaviour
 
     public void AddBlood(GameObject bullet)
     {
-        Instantiate(bloodPool, transform.position, bullet.transform.rotation );
+        Instantiate(bloodPool, transform.position, bullet.transform.rotation);
     }
 
     private void OnDeath()
@@ -91,10 +90,9 @@ public class HasHealth : MonoBehaviour
         else if(gameObject.CompareTag("Player"))
         {
             SpawnManager.instance.PlayerDied();
-            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.death, transform.position);
 
             GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
-            GetComponentInChildren<CircleCollider2D>().enabled = false;
+            GetComponent<CircleCollider2D>().enabled = false;
             GetComponent<Movement>().enabled = false;
             GetComponent<Aim>().enabled = false;
             GetComponentInChildren<Fire>().enabled = false;

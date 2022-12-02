@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
     [Range(5, 2000)]
     int acceleration;
     [SerializeField]
-    [Range(0, 100)]
+    [Range(0, 1000)]
     int decelaration;
     [SerializeField]
     [Range(0, 50)]
