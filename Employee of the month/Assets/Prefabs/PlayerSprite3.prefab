@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1527501751560705317}
   - component: {fileID: 94908409594777343}
   - component: {fileID: 9043131763967725611}
+  - component: {fileID: 3374547052959039942}
   m_Layer: 0
   m_Name: PlayerSprite3
   m_TagString: Player
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 496dffab6e8ae8e4db7ba7188c89db42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d6683a0393245624b91191c506f37f69, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,3 +102,23 @@ CircleCollider2D:
   m_Offset: {x: -0.03, y: -0.15}
   serializedVersion: 2
   m_Radius: 0.18
+--- !u!95 &3374547052959039942
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194419871203171396}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3eb6189d24f774545bea2292fe4c9379, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
