@@ -10,7 +10,6 @@ public class ControllerInput : MonoBehaviour
     [SerializeField] private List<GameObject> characters = new List<GameObject>();
     [SerializeField] private List<GameObject> playerHUDs = new List<GameObject>();
     public GameObject playerPrefab;
-    public GameObject playerHUD;
     public GameObject cursorPrefab;
     public GameObject playerHighlightCircle;
 
