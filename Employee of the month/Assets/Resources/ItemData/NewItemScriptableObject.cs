@@ -15,8 +15,8 @@ public class NewItemScriptableObject : ScriptableObject
     [Header("Weapon modifiers")]
     public int ammo = 0;
     public float weaponDamage = 0;
-    [Range(-0.15f, 0.5f)]public float fireRate = 0;
     public float recoilModifier = 0;
+    [Range(-0.15f, 0.5f)]public float fireRate = 0;
     [Range(0, 100)]public float accuracy = 100;
     [Range(0, 90)] public float maxMissDegAngle = 0;
     public bool isShotgun = false;
