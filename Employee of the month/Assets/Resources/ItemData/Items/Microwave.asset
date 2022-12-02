@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Microwave
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 9745395a92f0b5c41875cd539d30ad88, type: 3}
-  sprite: {fileID: 21300000, guid: aee4591563fb828408410c63896670c3, type: 3}
+  sprite: {fileID: 21300000, guid: 950c70a61977e1b479e4260e83df541a, type: 3}
   ammo: 5
   weaponDamage: 5
   fireRate: 0
