@@ -43,6 +43,10 @@ public class CameraController : MonoBehaviour
     {
         if(numOfPlayers != 0)
             MoveCameraOrthographic(players);
+        if(numOfPlayers == 1)
+        {
+            moveSpeed = 8;
+        }
     }
 
     public void AddCameraTracking(GameObject player)
