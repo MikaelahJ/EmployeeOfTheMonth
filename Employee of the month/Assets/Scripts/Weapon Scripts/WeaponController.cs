@@ -82,8 +82,8 @@ public class WeaponController : MonoBehaviour
             newWeapon.weaponDamage += item.weaponDamage;
             newWeapon.fireRate += item.fireRate;
             newWeapon.recoilModifier += item.recoilModifier;
-            newWeapon.accuracyPercentage += weapon.accuracyPercentage;
-            newWeapon.bulletSpreadPercentage += weapon.bulletSpreadPercentage;
+            newWeapon.accuracy *= (item.accuracy/100f);
+            newWeapon.maxMissDegAngle += item.maxMissDegAngle;
             newWeapon.isShotgun = newWeapon.isShotgun || item.isShotgun;
             newWeapon.shotgunAmmount += item.shotgunAmmount;
 

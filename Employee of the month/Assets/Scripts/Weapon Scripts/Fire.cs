@@ -18,8 +18,8 @@ public class Fire : MonoBehaviour
     private bool hasFired;
     public float recoil;
 
-    private float accuracyPercentage = 1f;
-    private float bulletSpreadPercentage = 0f;
+    private float accuracy = 1f;
+    private float maxMissDegAngle = 0f;
 
     private bool isShotgun = false;
     private int shotgunAmmount = 3;
@@ -67,7 +67,7 @@ public class Fire : MonoBehaviour
         ApplyRecoil();
 
         //Bullet Spread
-        float spread = bulletSpreadPercentage * (1 - accuracyPercentage);
+        float spread = maxMissDegAngle * (1 - accuracy/100);
         newBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-spread, spread)));
         
         //Play Fire Sound
@@ -126,8 +126,8 @@ public class Fire : MonoBehaviour
         NewItemScriptableObject weapon = weaponController.weapon;
         ammo = weapon.ammo;
         fireRate = weapon.fireRate;
-        accuracyPercentage = weapon.accuracyPercentage;
-        bulletSpreadPercentage = weapon.bulletSpreadPercentage;
+        accuracy = weapon.accuracy;
+        maxMissDegAngle = weapon.maxMissDegAngle;
         isShotgun = weapon.isShotgun;
         shotgunAmmount = weapon.shotgunAmmount;
         ammoCounter.SetAmmo(ammo);

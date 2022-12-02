@@ -18,8 +18,8 @@ MonoBehaviour:
   weaponDamage: 0
   fireRate: -0.15
   recoilModifier: 0
-  accuracyPercentage: 1
-  bulletSpreadPercentage: 0
+  accuracy: 70
+  maxMissDegAngle: 0
   isShotgun: 0
   shotgunAmmount: 0
   bulletVelocity: 0
