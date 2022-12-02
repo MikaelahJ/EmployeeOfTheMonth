@@ -136,6 +136,7 @@ public class Bullet : MonoBehaviour
         damage += explosionDamage;
         Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll(collisionPoint, explodeRadius);
         var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
+        explosion.transform.localScale = new Vector3 (explodeRadius, explodeRadius,explodeRadius);
         Destroy(explosion, 1f);
         AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletExplode, transform.position);
 

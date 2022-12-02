@@ -17,6 +17,9 @@ MonoBehaviour:
   ammo: 0
   weaponDamage: 5
   fireRate: 0.5
+  recoilModifier: 50
+  accuracyPercentage: 1
+  bulletSpreadPercentage: 0
   recoilModifier: 0
   accuracy: 100
   maxMissDegAngle: 30

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Coffee Maker
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: a53237a9e6c98a841b2522b263f427d2, type: 3}
-  sprite: {fileID: 21300000, guid: c62dcc726529f2046bcd5b4e487539fd, type: 3}
+  sprite: {fileID: 21300000, guid: cf246a7576cdb524490e0345576927db, type: 3}
   ammo: 30
   weaponDamage: 0
   fireRate: -0.15
