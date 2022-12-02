@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rubber
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: d11dd6b46d813894db43fc9d070aff09, type: 3}
-  sprite: {fileID: 21300000, guid: e42477d42a6680b41a1fa15bf1adcb19, type: 3}
+  sprite: {fileID: 21300000, guid: 92fc85553075ebb419086cf7038d42ac, type: 3}
   ammo: 15
   weaponDamage: 1
   fireRate: 0

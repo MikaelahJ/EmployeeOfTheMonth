@@ -48,6 +48,8 @@ public class Fire : MonoBehaviour
             return;
         }
 
+        ApplyRecoil();
+
         if (isShotgun)
             FireShotgun();
         else
@@ -64,7 +66,6 @@ public class Fire : MonoBehaviour
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
         newBullet.GetComponent<Bullet>().UpdateBulletModifyers(weaponController.weapon);
         LoseAmmo(1);
-        ApplyRecoil();
 
         //Bullet Spread
         float spread = maxMissDegAngle * (1 - accuracy/100);
