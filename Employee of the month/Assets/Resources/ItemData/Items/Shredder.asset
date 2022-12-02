@@ -16,8 +16,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 6fecd2c16fca45f4a9cf21cfb081db93, type: 3}
   ammo: 15
   weaponDamage: 3
-  recoilModifier: 10
   fireRate: 0.15
+  recoilModifier: 0
   accuracy: 100
   maxMissDegAngle: 0
   isShotgun: 1

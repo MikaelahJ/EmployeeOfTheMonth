@@ -16,8 +16,11 @@ MonoBehaviour:
   sprite: {fileID: 0}
   ammo: 0
   weaponDamage: 5
-  recoilModifier: 25
   fireRate: 0.5
+  recoilModifier: 50
+  accuracyPercentage: 1
+  bulletSpreadPercentage: 0
+  recoilModifier: 0
   accuracy: 100
   maxMissDegAngle: 30
   isShotgun: 0
