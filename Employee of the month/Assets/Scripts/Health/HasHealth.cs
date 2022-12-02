@@ -84,6 +84,7 @@ public class HasHealth : MonoBehaviour
     {
         isDead = true;
         Debug.Log("Death Triggered");
+        animator.SetTrigger("OnDeath");
         if(GetComponent<Spawner>() != null)
         {
             GetComponent<Spawner>().TriggerRespawn(5f);
