@@ -16,6 +16,7 @@ public class Fire : MonoBehaviour
     private int ammo = 0;
     private float fireRate = 0.5f;
     private bool hasFired;
+    public float recoil;
 
     private float accuracyPercentage = 1f;
     private float bulletSpreadPercentage = 0f;
@@ -63,6 +64,7 @@ public class Fire : MonoBehaviour
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
         newBullet.GetComponent<Bullet>().UpdateBulletModifyers(weaponController.weapon);
         LoseAmmo(1);
+        ApplyRecoil();
 
         //Bullet Spread
         float spread = bulletSpreadPercentage * (1 - accuracyPercentage);
@@ -129,10 +131,16 @@ public class Fire : MonoBehaviour
         isShotgun = weapon.isShotgun;
         shotgunAmmount = weapon.shotgunAmmount;
         ammoCounter.SetAmmo(ammo);
+        recoil = weapon.recoilModifier;
     }
 
     public void GetFireButtonInput(bool input)
     {
         hasFired = input;
+    }
+
+    public void ApplyRecoil()
+    {
+        transform.GetComponentInParent<Rigidbody2D>().AddForce(-transform.up * recoil, ForceMode2D.Impulse);
     }
 }
