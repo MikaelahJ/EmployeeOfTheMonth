@@ -27,6 +27,7 @@ public class WeaponModifyerItem : MonoBehaviour
 
     private void Enable()
     {
+        AudioSource.PlayClipAtPoint(itemType.onRespawn, transform.position);
         GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<SpriteRenderer>().enabled = true;
     }

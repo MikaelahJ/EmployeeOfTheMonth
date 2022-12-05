@@ -13,6 +13,7 @@ public class NewItemScriptableObject : ScriptableObject
     public Sprite sprite;
 
     [Header("Sounds")]
+    public AudioClip onRespawn;
     public AudioClip onPickup;
     public AudioClip onDestroy;
     public AudioClip fire;
