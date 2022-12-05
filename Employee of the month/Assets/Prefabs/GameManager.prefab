@@ -44,6 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76d0b84be35d214baf84e9a99b11d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuName: Menu
-  mainSceneName: Henrik
-  currentScene: 
+  playersCount: 0
+  playersChosen: 0

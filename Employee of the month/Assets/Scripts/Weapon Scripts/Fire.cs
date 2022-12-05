@@ -28,6 +28,7 @@ public class Fire : MonoBehaviour
     private bool isInWall = false;
 
     private AudioSource sound;
+
     void Start()
     {
         weaponController = GetComponent<WeaponController>();
@@ -55,7 +56,9 @@ public class Fire : MonoBehaviour
         ApplyRecoil();
 
         if (isShotgun)
+        {
             FireShotgun();
+        }
         else
         {
             FireGun();
@@ -109,7 +112,6 @@ public class Fire : MonoBehaviour
         ammo -= (shots * weaponController.NumOfItems());
         weaponController.LoseItemAmmo(shots);
         ammoCounter.SetAmmo(ammo);
-
     }
 
     public void UpdateFireModifiers()
@@ -143,9 +145,6 @@ public class Fire : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall"))
-        {
-            isInWall = false;
-        }
+        isInWall = false;
     }
 }

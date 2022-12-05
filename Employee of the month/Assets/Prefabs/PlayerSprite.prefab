@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 1407968172363830946}
   - component: {fileID: 6514454618895433701}
   - component: {fileID: -8105158988766851767}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerSprite
   m_TagString: Player
   m_Icon: {fileID: 0}

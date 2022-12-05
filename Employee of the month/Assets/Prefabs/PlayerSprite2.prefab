@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1233932650}
   - component: {fileID: 3915440918819083477}
   - component: {fileID: -3058923131449323703}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerSprite2
   m_TagString: Player
   m_Icon: {fileID: 0}

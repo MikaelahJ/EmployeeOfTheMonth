@@ -110,7 +110,6 @@ public class ControllerInput : MonoBehaviour
 
     private void SetCharacter()
     {
-        Debug.Log(spriteIndex);
         Debug.Log("hejsan");
         switch (spriteIndex)
         {
