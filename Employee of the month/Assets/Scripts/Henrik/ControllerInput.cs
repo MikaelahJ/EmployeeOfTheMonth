@@ -37,18 +37,14 @@ public class ControllerInput : MonoBehaviour
         pColors.Add(new Color32(0, 192, 255, 255)); // P4 Blue
 
         playerInput = GetComponent<PlayerInput>();
+
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
-            playerInput.SwitchCurrentActionMap("UI");
-
-            cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
-            cursorObject.name = "P" + playerInput.playerIndex.ToString();
-            cursor = cursorObject.GetComponent<Cursor>();
-
-            //Set Cursor color
-            cursor.col = pColors[playerInput.playerIndex];
-
-            GameManager.Instance.playersCount += 1;
+            LoadCharacterSelect();
+        }
+        else
+        {
+            LoadGame();
         }
     }
 
@@ -59,25 +55,57 @@ public class ControllerInput : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name == "TestScene")
+        if(scene.name == "MainMenu")
         {
-            playerInput = GetComponent<PlayerInput>();
-            playerInput.SwitchCurrentActionMap("Player");
-            SpawnPlayer();
 
-            if (GameManager.Instance.playersCount != 0)
-            {
-                spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
-                SetCharacter();
-            }
-            else
-            {
-                SetCharacterTestScenes();
-            }
-            Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
-            SpawnPlayerHUD(player);
         }
 
+        else if(scene.name == "CharacterSelect")
+        {
+            LoadCharacterSelect();
+        }
+        else if(scene.name == "EndGame")
+        {
+
+        }
+        else
+        {
+            LoadGame();
+        }
+
+    }
+
+    private void LoadCharacterSelect()
+    {
+        playerInput.SwitchCurrentActionMap("UI");
+
+        cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
+        cursorObject.name = "P" + playerInput.playerIndex.ToString();
+        cursor = cursorObject.GetComponent<Cursor>();
+
+        //Set Cursor color
+        cursor.col = pColors[playerInput.playerIndex];
+
+        GameManager.Instance.playersCount += 1;
+    }
+
+    private void LoadGame()
+    {
+        playerInput = GetComponent<PlayerInput>();
+        playerInput.SwitchCurrentActionMap("Player");
+        SpawnPlayer();
+
+        if (GameManager.Instance.playersCount != 0)
+        {
+            spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
+            SetCharacter();
+        }
+        else
+        {
+            SetCharacterTestScenes();
+        }
+        Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
+        SpawnPlayerHUD(player);
     }
 
     private void SetCharacter()
