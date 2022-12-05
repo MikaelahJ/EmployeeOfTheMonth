@@ -42,21 +42,23 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var hit = Physics2D.Raycast(transform.position, -transform.up, trailLength, layerMask);
-        Debug.DrawLine(transform.position, -transform.up, Color.red);
-
-        if (hit.collider != null)
+        if (isMicrowave)
         {
-            Debug.Log("hit: " + hit.collider.gameObject);
-            Debug.Log("Radiation");
-            SendRadiationDamage(hit.collider);
+            var hit = Physics2D.Raycast(transform.position, -transform.up, trailLength, layerMask);
+            Debug.DrawLine(transform.position, -transform.up, Color.red);
+
+            if (hit.collider != null)
+            {
+                Debug.Log("hit: " + hit.collider.gameObject);
+                Debug.Log("Radiation");
+                SendRadiationDamage(hit.collider);
+            }
         }
     }
     private void SendRadiationDamage(Collider2D collider)
     {
         collider.transform.parent.transform.GetComponent<HasHealth>().HealthChange(-radiationDamage, 1f, 3f);
         collider.transform.parent.transform.GetComponent<HasHealth>().isRadiation = true;
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
