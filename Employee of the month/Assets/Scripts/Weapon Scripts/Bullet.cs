@@ -28,6 +28,7 @@ public class Bullet : MonoBehaviour
     public bool isHoming = false;
     public float turnSpeed = 1;
 
+    public AudioClip bulletImpactSound;
 
     void Start()
     {
@@ -52,6 +53,7 @@ public class Bullet : MonoBehaviour
         explodeRadius = weapon.explosionRadius;
         explosionDamage = weapon.explosionDamage;
         knockBackModifier = weapon.knockbackModifier;
+        bulletImpactSound = weapon.bulletImpactSound;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -83,6 +85,7 @@ public class Bullet : MonoBehaviour
             }
         }
 
+        //Penetrate
         if (isPenetrate && objectsPassed < maxObjectPass && !collision.gameObject.CompareTag("HardWall"))
         { 
             Penetrate();
@@ -97,6 +100,9 @@ public class Bullet : MonoBehaviour
             return;
         }
 
+        //Play bullet hit sound
+        AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position);
+
         if (isExplode)
         {
             Explode(transform.position, collision);
@@ -104,7 +110,6 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wall, transform.position);
             Destroy(gameObject);
         }
     }
@@ -138,7 +143,6 @@ public class Bullet : MonoBehaviour
         var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
         explosion.transform.localScale = new Vector3 (explodeRadius, explodeRadius,explodeRadius);
         Destroy(explosion, 1f);
-        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletExplode, transform.position);
 
         foreach (var target in targetsInRadius)
         {

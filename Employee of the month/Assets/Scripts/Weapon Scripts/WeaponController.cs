@@ -43,7 +43,7 @@ public class WeaponController : MonoBehaviour
                 }
                 Debug.Log("Added item: " + item.name);
                 //Play pickup sound
-                sound.PlayOneShot(AudioManager.instance.audioClips.itemPickup);
+                sound.PlayOneShot(item.onPickup);
 
                 UpdateWeaponStats();
 
@@ -57,13 +57,21 @@ public class WeaponController : MonoBehaviour
 
     void RemoveItem(int index)
     {
+        if(items[index] == null)
+        {
+            Debug.Log("Can't remove item at position " + index + ", item not found");
+            return;
+        }
+
+        //Play item removed sound
+        sound.PlayOneShot(items[index].onDestroy);
+
         Debug.Log("Removed item: " + items[index].name);
         items[index] = null;
         if (itemHolder != null)
         {
             itemHolder.RemoveItem(index);
-            //Play item removed sound
-            sound.PlayOneShot(AudioManager.instance.audioClips.itemDestroyed);
+            
         }
         UpdateWeaponStats();
     }
@@ -78,6 +86,12 @@ public class WeaponController : MonoBehaviour
             if (items[i] == null) { continue; }
             NewItemScriptableObject item = items[i];
             //Weapon Modifiers
+            if(newWeapon.fireSoundPriority < item.fireSoundPriority)
+                newWeapon.fire = item.fire;
+
+            if (newWeapon.bulletImpactPriority < item.bulletImpactPriority)
+                newWeapon.bulletImpactSound = item.bulletImpactSound;
+            
             newWeapon.ammo += item.ammo;
             newWeapon.weaponDamage += item.weaponDamage;
             newWeapon.fireRate += item.fireRate;
@@ -85,7 +99,7 @@ public class WeaponController : MonoBehaviour
             newWeapon.accuracy *= (item.accuracy/100f);
             newWeapon.maxMissDegAngle += item.maxMissDegAngle;
             newWeapon.isShotgun = newWeapon.isShotgun || item.isShotgun;
-            newWeapon.shotgunAmmount += item.shotgunAmmount;
+            newWeapon.shotgunAmount += item.shotgunAmount;
 
             //Bullet Modifiers
             newWeapon.isBouncy = newWeapon.isBouncy || item.isBouncy;

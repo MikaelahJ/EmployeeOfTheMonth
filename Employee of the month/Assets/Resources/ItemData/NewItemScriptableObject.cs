@@ -12,6 +12,14 @@ public class NewItemScriptableObject : ScriptableObject
     [Header("In Game Sprite")]
     public Sprite sprite;
 
+    [Header("Sounds")]
+    public AudioClip onPickup;
+    public AudioClip onDestroy;
+    public AudioClip fire;
+    public int fireSoundPriority = 0;
+    public AudioClip bulletImpactSound;
+    public int bulletImpactPriority = 0;
+
     [Header("Weapon modifiers")]
     public int ammo = 0;
     public float weaponDamage = 0;
@@ -20,7 +28,7 @@ public class NewItemScriptableObject : ScriptableObject
     [Range(0, 100)]public float accuracy = 100;
     [Range(0, 90)] public float maxMissDegAngle = 0;
     public bool isShotgun = false;
-    public int shotgunAmmount = 0;
+    public int shotgunAmount = 0;
 
     [Header("Bullet modifiers")]
     public float bulletVelocity = 0f;

@@ -22,7 +22,7 @@ public class Fire : MonoBehaviour
     private float maxMissDegAngle = 0f;
 
     private bool isShotgun = false;
-    private int shotgunAmmount = 3;
+    private int shotgunAmount = 3;
     private float shotgunSpreadBetween = 5;
 
     private AudioSource sound;
@@ -57,6 +57,9 @@ public class Fire : MonoBehaviour
             FireGun();
         }
 
+        //Play fire sound
+        sound.PlayOneShot(weaponController.weapon.fire);
+
         timer = 0;
     }
 
@@ -70,18 +73,13 @@ public class Fire : MonoBehaviour
         //Bullet Spread
         float spread = maxMissDegAngle * (1 - accuracy/100);
         newBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-spread, spread)));
-        
-        //Play Fire Sound
-        sound.PlayOneShot(AudioManager.instance.audioClips.fire);
-
     }
 
     private void FireShotgun()
     {
         LoseAmmo(1);
         //3,5,9 skott
-        Debug.Log(shotgunAmmount);
-        switch (shotgunAmmount)
+        switch (shotgunAmount)
         {
             case 3:
                 shotgunSpreadBetween = 5;
@@ -93,25 +91,14 @@ public class Fire : MonoBehaviour
                 shotgunSpreadBetween = 9;
                 break;
         }
-        for (int i = 0; i < shotgunAmmount; i++)
+        for (int i = 0; i < shotgunAmount; i++)
         {
             GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
             newBullet.GetComponent<Bullet>().UpdateBulletModifyers(weaponController.weapon);
             
 
             newBullet.transform.Rotate(new Vector3(0, 0, -shotgunSpreadBetween + i*5));
-
-            //if (i == 0)
-            //{
-            //}
-            //if (i == shotgunAmmount - 1)
-            //{
-            //    newBullet.transform.Rotate(new Vector3(0, 0, shotgunSpreadBetween));
-            //}
         }
-
-        //Play Shotgun Sound
-        sound.PlayOneShot(AudioManager.instance.audioClips.shotgun);
     }
 
     private void LoseAmmo(int shots)
@@ -130,7 +117,7 @@ public class Fire : MonoBehaviour
         accuracy = weapon.accuracy;
         maxMissDegAngle = weapon.maxMissDegAngle;
         isShotgun = weapon.isShotgun;
-        shotgunAmmount = weapon.shotgunAmmount;
+        shotgunAmount = weapon.shotgunAmount;
         ammoCounter.SetAmmo(ammo);
         recoil = weapon.recoilModifier;
     }
