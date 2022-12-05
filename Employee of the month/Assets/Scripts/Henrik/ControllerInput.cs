@@ -155,7 +155,7 @@ public class ControllerInput : MonoBehaviour
         int offset = playerInput.playerIndex - 2; // offset from bottom middle
         rectT.localPosition = new Vector3(rectT.rect.width * rectT.localScale.x * spacing * offset, rectT.localPosition.y, rectT.localPosition.z);
 
-        player.GetComponentInChildren<WeaponController>().itemHolder = hud.GetComponentInChildren<UIItemHolder>();
+        player.GetComponentInChildren<WeaponController>().itemHolder = player.GetComponentInChildren<UIItemHolder>();
         player.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponentInChildren<UIAmmoCounter>();
         player.GetComponent<HasHealth>().healthbar = hud.GetComponentInChildren<UIHealthbar>();
     }
