@@ -6,7 +6,7 @@ using UnityEngine;
 //After you added a variable, update the UpdateWeaponStats Function in WeaponController
 public class NewItemScriptableObject : ScriptableObject
 {
-    [Header("Item Icon")]
+    [Header("Item On Weapon Sprite")]
     public Sprite itemIcon;
 
     [Header("In Game Sprite")]
