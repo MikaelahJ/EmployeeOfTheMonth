@@ -40,6 +40,7 @@ public class Bullet : MonoBehaviour
 
     public void UpdateBulletModifyers(NewItemScriptableObject weapon)
     {
+        pencil.GetComponent<SpriteRenderer>().sprite = weapon.bulletSprite;
         bulletSpeed = weapon.bulletVelocity;
         damage = weapon.weaponDamage;
         isBouncy = weapon.isBouncy;

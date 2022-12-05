@@ -102,6 +102,9 @@ public class WeaponController : MonoBehaviour
             newWeapon.shotgunAmount += item.shotgunAmount;
 
             //Bullet Modifiers
+            if (newWeapon.bulletSpritePriority < item.bulletSpritePriority)
+                newWeapon.bulletSprite = item.bulletSprite;
+
             newWeapon.isBouncy = newWeapon.isBouncy || item.isBouncy;
             newWeapon.numOfBounces += item.numOfBounces;
             newWeapon.numOfPenetrations += item.numOfPenetrations;

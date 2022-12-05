@@ -32,6 +32,9 @@ public class NewItemScriptableObject : ScriptableObject
     public int shotgunAmount = 0;
 
     [Header("Bullet modifiers")]
+    public Sprite bulletSprite;
+    public int bulletSpritePriority = 0;
+
     public float bulletVelocity = 0f;
     [Header("Bouncy")]
     public bool isBouncy = false;

@@ -29,6 +29,8 @@ MonoBehaviour:
   maxMissDegAngle: 0
   isShotgun: 0
   shotgunAmount: 0
+  bulletSprite: {fileID: 21300000, guid: f15876b3ae3aecf4dbaabaeeb45b1e11, type: 3}
+  bulletSpritePriority: 1
   bulletVelocity: 0
   isBouncy: 0
   numOfBounces: 0
