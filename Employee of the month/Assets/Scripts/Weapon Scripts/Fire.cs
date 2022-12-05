@@ -25,6 +25,8 @@ public class Fire : MonoBehaviour
     private int shotgunAmount = 3;
     private float shotgunSpreadBetween = 5;
 
+    private bool isInWall = false;
+
     private AudioSource sound;
     void Start()
     {
@@ -35,6 +37,8 @@ public class Fire : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+
+        if (isInWall) { return; }
 
         if (!hasFired) { return; }
 
@@ -71,7 +75,7 @@ public class Fire : MonoBehaviour
         LoseAmmo(1);
 
         //Bullet Spread
-        float spread = maxMissDegAngle * (1 - accuracy/100);
+        float spread = maxMissDegAngle * (1 - accuracy / 100);
         newBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-spread, spread)));
     }
 
@@ -95,9 +99,8 @@ public class Fire : MonoBehaviour
         {
             GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
             newBullet.GetComponent<Bullet>().UpdateBulletModifyers(weaponController.weapon);
-            
 
-            newBullet.transform.Rotate(new Vector3(0, 0, -shotgunSpreadBetween + i*5));
+            newBullet.transform.Rotate(new Vector3(0, 0, -shotgunSpreadBetween + i * 5));
         }
     }
 
@@ -130,5 +133,19 @@ public class Fire : MonoBehaviour
     public void ApplyRecoil()
     {
         transform.GetComponentInParent<Rigidbody2D>().AddForce(-transform.up * recoil, ForceMode2D.Impulse);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall"))
+        {
+            isInWall = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall"))
+        {
+            isInWall = false;
+        }
     }
 }
