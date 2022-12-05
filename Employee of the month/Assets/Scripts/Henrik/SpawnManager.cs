@@ -10,7 +10,9 @@ public class SpawnManager : MonoBehaviour
     public List<GameObject> spawnPositions;
     private List<int> assigned;
     public int alivePlayers = 0;
-    
+    private int roundsPlayed = 0;
+    private int roundsInMatch = 3;
+
     private void Awake()
     {
         if (instance == null)
@@ -35,15 +37,28 @@ public class SpawnManager : MonoBehaviour
         if(alivePlayers <= 1)
         {
             gameOverText.SetActive(true);
-            Invoke("RestartMatch", 5);
+            Debug.Log(roundsPlayed);
+            if(roundsPlayed < roundsInMatch)
+            {
+                Invoke("RestartMatch", 5);
+            }
+            else
+            {
+                EndMatch();
+            }
         }
     }
 
     public void RestartMatch()
     {
+        roundsPlayed++;
         GameManager.Instance.ReloadScene();
     }
 
+    private void EndMatch()
+    {
+        GameManager.Instance.LoadScene("EndGame");
+    }
 
     public Vector3 GetRandomSpawnPoint()
     {

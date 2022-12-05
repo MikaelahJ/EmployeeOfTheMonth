@@ -26,7 +26,7 @@ public class UIItemHolder : MonoBehaviour
         SpriteRenderer itemImage = items[index].GetComponent<SpriteRenderer>();
         var tempColor = itemImage.color;
         tempColor.a = 1f;
-        itemImage.color = tempColor;  
+        itemImage.color = tempColor;
         items[index].GetComponent<SpriteRenderer>().sprite = item;
     }
 

@@ -23,21 +23,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-        switch (sceneIndex)
-        {
-            case 1:
-                //current scene är character select 
-                break;
-            case 2:
-                //current scene testScene
-                break;
-        }
-    }
-
     public void LoadScene(string scene)
     {
         SceneManager.LoadScene(scene);
