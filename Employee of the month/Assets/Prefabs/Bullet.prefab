@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 082ec22eaa0c1f04c8df9ef64eb898fd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -193,6 +193,7 @@ MonoBehaviour:
   knockBackModifier: 10
   isHoming: 0
   turnSpeed: 3
+  bulletImpactSound: {fileID: 0}
 --- !u!50 &1624548292394652931
 Rigidbody2D:
   serializedVersion: 4

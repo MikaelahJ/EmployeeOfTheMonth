@@ -27,7 +27,7 @@ MonoBehaviour:
   accuracy: 100
   maxMissDegAngle: 0
   isShotgun: 1
-  shotgunAmount: 0
+  shotgunAmount: 3
   bulletVelocity: 0
   isBouncy: 0
   numOfBounces: 0
