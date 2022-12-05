@@ -11,7 +11,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - BulletPenetrate
@@ -19,7 +19,7 @@ TagManager:
   - Modifyer
   - Bullet
   - Cursor
-  - 
+  - SoftWall
   - 
   - 
   - 
