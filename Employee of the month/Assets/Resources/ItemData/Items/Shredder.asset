@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: e05ca20c12e94f34e958c5d82164ac35, type: 3}
   sprite: {fileID: 21300000, guid: 6fecd2c16fca45f4a9cf21cfb081db93, type: 3}
+  onPickup: {fileID: 0}
+  onDestroy: {fileID: 0}
+  fire: {fileID: 8300000, guid: e7ae83fae5de2164a9d997d62ca40281, type: 3}
+  fireSoundPriority: 2
+  bulletImpactSound: {fileID: 0}
+  bulletImpactPriority: 0
   ammo: 15
   weaponDamage: 3
   recoilModifier: 10
@@ -21,7 +27,7 @@ MonoBehaviour:
   accuracy: 100
   maxMissDegAngle: 0
   isShotgun: 1
-  shotgunAmmount: 3
+  shotgunAmount: 0
   bulletVelocity: 0
   isBouncy: 0
   numOfBounces: 0
