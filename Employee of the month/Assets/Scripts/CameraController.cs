@@ -26,17 +26,18 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        BoxCollider mapBounds = map.GetComponent<BoxCollider>();
         cam = GetComponent<Camera>();
-
         //Lock the camera to the map
-        xMin = mapBounds.bounds.min.x;
-        xMax = mapBounds.bounds.max.x;
-        yMin = mapBounds.bounds.min.y;
-        yMax = mapBounds.bounds.max.y;
+        if (map.TryGetComponent<BoxCollider>(out BoxCollider mapBounds))
+        {
+            xMin = mapBounds.bounds.min.x;
+            xMax = mapBounds.bounds.max.x;
+            yMin = mapBounds.bounds.min.y;
+            yMax = mapBounds.bounds.max.y;
 
-        //Set the max cam size to view whole map
-        maxOrthograpic = yMax;
+            //Set the max cam size to view whole map
+            maxOrthograpic = yMax;
+        }
     }
 
     void Update()
@@ -95,7 +96,8 @@ public class CameraController : MonoBehaviour
         middle.z = 0;
         transform.position += middle * Time.deltaTime * moveSpeed;
 
-        transform.position = ClampCameraToMap();
+        if(map != null)
+            transform.position = ClampCameraToMap();
     }
 
     Vector3 ClampCameraToMap()
