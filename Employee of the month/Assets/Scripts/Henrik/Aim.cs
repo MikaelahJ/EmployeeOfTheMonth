@@ -43,8 +43,14 @@ public class Aim : MonoBehaviour
 
     public void StickAim()
     {
-        transform.up = Vector2.Lerp(previousDirection, aimDirection, rotationSpeed * Time.deltaTime);
-        previousDirection = transform.up;
+        if (aimDirection != Vector2.zero)
+        {
+            transform.up = aimDirection;
+        }
+
+        //For slower turning speed if needed
+        //transform.up = Vector2.Lerp(previousDirection, aimDirection, rotationSpeed * Time.deltaTime);
+        //previousDirection = transform.up;
     }
 
     //Used in the controllerinput script
