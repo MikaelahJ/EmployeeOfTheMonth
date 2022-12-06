@@ -75,8 +75,6 @@ public class Cursor : MonoBehaviour
                     {
                         //hitta den man valt innan och ändra tag på den
                         GameObject.Find(GameManager.Instance.players[this.name].ToString()).tag = "Free";
-
-                        Debug.Log(GameObject.Find(GameManager.Instance.players[this.name].ToString()));
                     }
                 }
 

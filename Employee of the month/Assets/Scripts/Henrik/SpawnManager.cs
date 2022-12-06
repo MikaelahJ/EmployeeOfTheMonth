@@ -49,7 +49,6 @@ public class SpawnManager : MonoBehaviour
     public void RestartMatch()
     {
         GameManager.Instance.roundsPlayed++;
-        Debug.Log(GameManager.Instance.roundsPlayed);
 
         GameManager.Instance.ReloadScene();
     }

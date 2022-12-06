@@ -108,7 +108,6 @@ public class ControllerInput : MonoBehaviour
 
     private void LoadGame()
     {
-        Debug.Log("hej");
         playerInput = GetComponent<PlayerInput>();
         playerInput.SwitchCurrentActionMap("Player");
         SpawnPlayer();
