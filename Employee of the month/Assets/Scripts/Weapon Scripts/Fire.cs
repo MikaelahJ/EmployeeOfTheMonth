@@ -28,18 +28,20 @@ public class Fire : MonoBehaviour
     private bool isInWall = false;
 
     private AudioSource sound;
+    private Vector3 startFirePoint;
 
     void Start()
     {
         weaponController = GetComponent<WeaponController>();
         sound = GetComponent<AudioSource>();
+        startFirePoint = firePoint.transform.localPosition;
     }
 
     void Update()
     {
         timer += Time.deltaTime;
 
-        if (isInWall) { return; }
+        //if (isInWall) { return; }
 
         if (!hasFired) { return; }
 
@@ -133,15 +135,17 @@ public class Fire : MonoBehaviour
     {
         transform.GetComponentInParent<Rigidbody2D>().AddForce(-transform.up * recoil, ForceMode2D.Impulse);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall"))
         {
-            isInWall = true;
+            firePoint.transform.localPosition = new Vector3(0, -startFirePoint.y, 0);
+            //isInWall = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isInWall = false;
+        firePoint.transform.localPosition = startFirePoint;
+        //isInWall = false;
     }
 }
