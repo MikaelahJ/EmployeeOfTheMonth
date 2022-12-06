@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     public Dictionary<string, int> players = new Dictionary<string, int>();
     public int playersCount;
     public int playersChosen;
+
+    public int roundsPlayed;
+    public int roundsInMatch = 3;
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)

@@ -7,6 +7,8 @@ TagManager:
   - SoftWall
   - HardWall
   - StartButton
+  - ResetButton
+  - MainMenuButton
   layers:
   - Default
   - TransparentFX
