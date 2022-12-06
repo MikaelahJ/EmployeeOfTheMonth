@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
     private int maxSpeed;
     private bool isRunning;
 
-    private AudioSource walksound;
+    public AudioSource walksound;
 
     // Start is called before the first frame update
     void Start()

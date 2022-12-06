@@ -54,8 +54,16 @@ public class WeaponController : MonoBehaviour
         return false;
     }
 
+    public void RemoveAllItems()
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            RemoveItem(i, false);
+        }
+        Debug.Log("Removed all items from weapon!");
+    }
 
-    void RemoveItem(int index)
+    public void RemoveItem(int index, bool playSound)
     {
         if (items[index] == null)
         {
@@ -64,7 +72,8 @@ public class WeaponController : MonoBehaviour
         }
 
         //Play item removed sound
-        sound.PlayOneShot(items[index].onDestroy);
+        if(playSound)
+            sound.PlayOneShot(items[index].onDestroy);
 
         Debug.Log("Removed item: " + items[index].name);
         items[index] = null;
@@ -129,7 +138,7 @@ public class WeaponController : MonoBehaviour
                 items[i].ammo -= shots;
                 if (items[i].ammo <= 0)
                 {
-                    RemoveItem(i);
+                    RemoveItem(i, true);
                 }
             }
         }
