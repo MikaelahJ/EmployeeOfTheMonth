@@ -32,9 +32,17 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         maxSpeed = walkSpeed;
 
+        //Get Audio source in PlayerSprite
+        AudioSource[] audiosources = GetComponentsInChildren<AudioSource>();
+        foreach (AudioSource source in audiosources)
+        {
+            if(source.clip != null)
+            {
+                walksound = source;
+            }
+        }
+
         //walking Audio
-        walksound = GetComponent<AudioSource>();
-        walksound.clip = AudioManager.instance.audioClips.walking;
         walksound.Play();
     }
 
@@ -75,7 +83,7 @@ public class Movement : MonoBehaviour
         rb.AddForce(movementVector, ForceMode2D.Impulse);
 
         //Set audio sound volume
-        walksound.volume = Mathf.Abs(leftstickInput.magnitude);
+        walksound.volume = Mathf.Abs(leftstickInput.magnitude/2f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

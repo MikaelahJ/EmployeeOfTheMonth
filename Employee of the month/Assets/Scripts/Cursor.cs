@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,25 +51,59 @@ public class Cursor : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D collision)
     {
-        if (pressed && collision.gameObject.CompareTag("StartButton"))
+        if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
-            if(GameManager.Instance.playersCount != GameManager.Instance.playersChosen)
+            if (pressed && collision.gameObject.CompareTag("StartButton"))
             {
-                Debug.Log("Everyone must select a character");
-            }
-            else
-            {
-                SceneManager.LoadScene("TestScene");
+                if (GameManager.Instance.playersCount != GameManager.Instance.playersChosen)
+                {
+                    Debug.Log("Everyone must select a character");
+                }
+                else
+                {
+                    LoadScene("TestScene");
+                }
             }
 
+            if (pressed && collision.gameObject.CompareTag("Free"))
+            {
+                //är denna spelare kopplad till en karaktär
+                if (GameManager.Instance.players.ContainsKey(this.name))
+                {
+                    //är karaktären inte den man nyss klickade på
+                    if (GameManager.Instance.players[this.name] != Convert.ToInt32(collision.gameObject.name))
+                    {
+                        //hitta den man valt innan och ändra tag på den
+                        GameObject.Find(GameManager.Instance.players[this.name].ToString()).tag = "Free";
+                    }
+                }
+
+                collision.tag = "Selected";
+                SetSelectedBall(collision);
+                GameManager.Instance.ConnectCharacterToPlayer(this.name, collision.gameObject.name);
+            }
         }
-        if (pressed && !collision.gameObject.CompareTag("StartButton"))
+
+        else if (SceneManager.GetActiveScene().name == "EndGame")
         {
-            SetSelectedBall(collision);
-            GameManager.Instance.ConnectCharacterToPlayer(this.name, collision.gameObject.name);
-            //PressedOff();
+            GameManager.Instance.roundsPlayed = 0;
+
+            if (pressed && collision.gameObject.CompareTag("ResetButton"))
+            {
+                LoadScene("TestScene");
+            }
+            else if (pressed && collision.gameObject.CompareTag("MainMenuButton"))
+            {
+                LoadScene("MainMenu");
+            }
         }
+
         pressed = false;
+    }
+
+    private void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 
     private void SetSelectedBall(Collider2D collision)

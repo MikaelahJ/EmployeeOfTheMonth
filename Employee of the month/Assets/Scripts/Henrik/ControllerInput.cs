@@ -58,24 +58,23 @@ public class ControllerInput : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(scene.name == "MainMenu")
+        if (scene.name == "MainMenu")
         {
 
         }
 
-        else if(scene.name == "CharacterSelect")
+        else if (scene.name == "CharacterSelect")
         {
             LoadCharacterSelect();
         }
-        else if(scene.name == "EndGame")
+        else if (scene.name == "EndGame")
         {
-
+            LoadCursors();
         }
         else
         {
             LoadGame();
         }
-
     }
 
     private void LoadCharacterSelect()
@@ -92,6 +91,23 @@ public class ControllerInput : MonoBehaviour
         GameManager.Instance.playersCount += 1;
     }
 
+    private void LoadCursors()
+    {
+        playerInput.SwitchCurrentActionMap("UI");
+
+        if (GameManager.Instance.playersCount != 0)
+        {
+            cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
+            cursorObject.name = "P" + playerInput.playerIndex.ToString();
+            cursor = cursorObject.GetComponent<Cursor>();
+
+            cursor.col = pColors[playerInput.playerIndex];
+        }
+        else
+        {
+            SetCursorTestScenes();
+        }
+    }
 
     private void LoadGame()
     {
@@ -116,7 +132,6 @@ public class ControllerInput : MonoBehaviour
 
     private void SetCharacter()
     {
-        Debug.Log(spriteIndex);
         Debug.Log("hejsan");
         switch (spriteIndex)
         {
@@ -138,6 +153,10 @@ public class ControllerInput : MonoBehaviour
     private void SetCharacterTestScenes()
     {
         Instantiate(characters[0], player.transform);
+    }
+    private void SetCursorTestScenes()
+    {
+        Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
     }
 
     private void SpawnPlayer()
@@ -169,7 +188,7 @@ public class ControllerInput : MonoBehaviour
         int offset = playerInput.playerIndex - 2; // offset from bottom middle
         rectT.localPosition = new Vector3(rectT.rect.width * rectT.localScale.x * spacing * offset, rectT.localPosition.y, rectT.localPosition.z);
 
-        player.GetComponentInChildren<WeaponController>().itemHolder = hud.GetComponentInChildren<UIItemHolder>();
+        player.GetComponentInChildren<WeaponController>().itemHolder = player.GetComponentInChildren<UIItemHolder>();
         //player.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponentInChildren<UIAmmoCounter>();
         //player.GetComponent<HasHealth>().healthbar = hud.GetComponentInChildren<UIHealthbar>();
     }
@@ -237,5 +256,14 @@ public class ControllerInput : MonoBehaviour
             cursor.SetMouseAim(input.ReadValue<Vector2>());
         }
     }
+
+
+
+    //testing
+    public void KillSelf()
+    {
+        player.GetComponent<HasHealth>().LoseHealth(100);
+    }
+
 
 }

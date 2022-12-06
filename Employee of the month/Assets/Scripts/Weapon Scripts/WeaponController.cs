@@ -34,7 +34,7 @@ public class WeaponController : MonoBehaviour
     {
         for (int i = 0; i < items.Length; i++)
         {
-            if(items[i] == null)
+            if (items[i] == null)
             {
                 items[i] = Instantiate(item);
                 if (itemHolder != null)
@@ -57,7 +57,7 @@ public class WeaponController : MonoBehaviour
 
     void RemoveItem(int index)
     {
-        if(items[index] == null)
+        if (items[index] == null)
         {
             Debug.Log("Can't remove item at position " + index + ", item not found");
             return;
@@ -71,11 +71,11 @@ public class WeaponController : MonoBehaviour
         if (itemHolder != null)
         {
             itemHolder.RemoveItem(index);
-            
+
         }
         UpdateWeaponStats();
     }
-    
+
     void UpdateWeaponStats()
     {
         NewItemScriptableObject newWeapon = Instantiate(baseWeapon);
@@ -86,22 +86,25 @@ public class WeaponController : MonoBehaviour
             if (items[i] == null) { continue; }
             NewItemScriptableObject item = items[i];
             //Weapon Modifiers
-            if(newWeapon.fireSoundPriority < item.fireSoundPriority)
+            if (newWeapon.fireSoundPriority < item.fireSoundPriority)
                 newWeapon.fire = item.fire;
 
             if (newWeapon.bulletImpactPriority < item.bulletImpactPriority)
                 newWeapon.bulletImpactSound = item.bulletImpactSound;
-            
+
             newWeapon.ammo += item.ammo;
             newWeapon.weaponDamage += item.weaponDamage;
             newWeapon.fireRate += item.fireRate;
             newWeapon.recoilModifier += item.recoilModifier;
-            newWeapon.accuracy *= (item.accuracy/100f);
+            newWeapon.accuracy *= (item.accuracy / 100f);
             newWeapon.maxMissDegAngle += item.maxMissDegAngle;
             newWeapon.isShotgun = newWeapon.isShotgun || item.isShotgun;
             newWeapon.shotgunAmount += item.shotgunAmount;
 
             //Bullet Modifiers
+            if (newWeapon.bulletSpritePriority < item.bulletSpritePriority)
+                newWeapon.bulletSprite = item.bulletSprite;
+
             newWeapon.isBouncy = newWeapon.isBouncy || item.isBouncy;
             newWeapon.numOfBounces += item.numOfBounces;
             newWeapon.numOfPenetrations += item.numOfPenetrations;
@@ -121,7 +124,7 @@ public class WeaponController : MonoBehaviour
     {
         for (int i = 0; i < items.Length; i++)
         {
-            if(items[i] != null)
+            if (items[i] != null)
             {
                 items[i].ammo -= shots;
                 if (items[i].ammo <= 0)
@@ -145,7 +148,7 @@ public class WeaponController : MonoBehaviour
         int count = 0;
         foreach (var item in items)
         {
-            if(item != null) { count++; }
+            if (item != null) { count++; }
         }
         return count;
     }

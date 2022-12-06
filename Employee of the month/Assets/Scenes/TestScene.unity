@@ -3475,7 +3475,7 @@ GameObject:
   - component: {fileID: 1235349617}
   - component: {fileID: 1235349619}
   - component: {fileID: 1235349618}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SoftWall
   m_TagString: SoftWall
   m_Icon: {fileID: 0}

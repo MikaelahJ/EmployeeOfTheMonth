@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class AudioScriptableObject : ScriptableObject
 {
+    // Maybe individual sounds
     [Header("Player Sounds")]
-    public AudioClip walking;
-    public AudioClip death;
+    public AudioClip death; 
     public AudioClip damaged;
 
+    [Header("Weapon Sounds")]
     public AudioClip emptyMag;
 
     [Header("Bullet Sounds")]

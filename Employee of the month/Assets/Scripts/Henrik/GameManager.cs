@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     public Dictionary<string, int> players = new Dictionary<string, int>();
     public int playersCount;
     public int playersChosen;
+
+    public int roundsPlayed;
+    public int roundsInMatch = 3;
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -20,21 +25,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this);
-        }
-    }
-
-    void Start()
-    {
-        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-        switch (sceneIndex)
-        {
-            case 1:
-                //current scene är character select 
-                break;
-            case 2:
-                //current scene testScene
-                break;
         }
     }
 

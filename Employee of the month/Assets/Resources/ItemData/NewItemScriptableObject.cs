@@ -6,13 +6,14 @@ using UnityEngine;
 //After you added a variable, update the UpdateWeaponStats Function in WeaponController
 public class NewItemScriptableObject : ScriptableObject
 {
-    [Header("Item Icon")]
+    [Header("Item On Weapon Sprite")]
     public Sprite itemIcon;
 
     [Header("In Game Sprite")]
     public Sprite sprite;
 
     [Header("Sounds")]
+    public AudioClip onRespawn;
     public AudioClip onPickup;
     public AudioClip onDestroy;
     public AudioClip fire;
@@ -31,6 +32,9 @@ public class NewItemScriptableObject : ScriptableObject
     public int shotgunAmount = 0;
 
     [Header("Bullet modifiers")]
+    public Sprite bulletSprite;
+    public int bulletSpritePriority = 0;
+
     public float bulletVelocity = 0f;
     [Header("Bouncy")]
     public bool isBouncy = false;

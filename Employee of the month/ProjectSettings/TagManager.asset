@@ -7,12 +7,15 @@ TagManager:
   - SoftWall
   - HardWall
   - StartButton
-  - Healthbar
+  - ResetButton
+  - MainMenuButton
+  - Selected
+  - Free
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - BulletPenetrate
@@ -20,7 +23,7 @@ TagManager:
   - Modifyer
   - Bullet
   - Cursor
-  - 
+  - SoftWall
   - 
   - 
   - 
