@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HasHealth : MonoBehaviour
 {
-    public UIHealthbar healthbar;
-    private Animator animator;
+    private HudHealthBar hudHealthbar;
     public GameObject bloodPool;
+    private Animator animator;
 
     public int playerIndex;
     public int maxHealth = 100;
@@ -17,6 +17,7 @@ public class HasHealth : MonoBehaviour
 
     void Start()
     {
+        hudHealthbar = GetComponentInChildren<HudHealthBar>();
         health = maxHealth;
         animator = transform.GetComponentInChildren<Animator>();
         if (gameObject.CompareTag("Player"))
@@ -138,8 +139,11 @@ public class HasHealth : MonoBehaviour
 
     private void UpdateHealthbar()
     {
-        if (healthbar == null) { return; }
-        healthbar.SetHealthBar(health);
+        if (hudHealthbar == null) { return; }
+        hudHealthbar.SetHealth(health, maxHealth);
+
+        //if (healthbar == null) { return; }
+        //healthbar.SetHealthBar(health);
     }
 
 

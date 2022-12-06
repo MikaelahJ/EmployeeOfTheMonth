@@ -193,6 +193,7 @@ MonoBehaviour:
   knockBackModifier: 10
   isHoming: 0
   turnSpeed: 3
+  bulletImpactSound: {fileID: 0}
 --- !u!50 &1624548292394652931
 Rigidbody2D:
   serializedVersion: 4
