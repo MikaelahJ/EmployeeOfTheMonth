@@ -149,13 +149,13 @@ public class ControllerInput : MonoBehaviour
                 playerSprite = Instantiate(characters[3], player.transform);
                 break;
         }
-        fire = playerSprite.GetComponentInChildren<Fire>();
+        LoadPlayerChildScripts();
     }
 
     private void SetCharacterTestScenes()
     {
         playerSprite = Instantiate(characters[0], player.transform);
-        fire = playerSprite.GetComponentInChildren<Fire>();
+        LoadPlayerChildScripts();
     }
     private void SetCursorTestScenes()
     {
@@ -179,6 +179,14 @@ public class ControllerInput : MonoBehaviour
         healthbar = Instantiate(healthbars[playerInput.playerIndex], player.transform);
         healthbar.transform.SetParent(player.transform);
         healthbar.transform.position = player.transform.position;
+
+        
+    }
+
+    private void LoadPlayerChildScripts()
+    {
+        player.GetComponentInChildren<WeaponController>().itemHolder = player.GetComponentInChildren<UIItemHolder>();
+        fire = playerSprite.GetComponentInChildren<Fire>();
     }
 
     private void SpawnPlayerHUD(GameObject player)
