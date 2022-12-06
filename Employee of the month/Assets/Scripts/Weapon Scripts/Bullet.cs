@@ -120,11 +120,19 @@ public class Bullet : MonoBehaviour
 
     public void SendDamage(Collider2D collider, Collision2D collision = null)
     {
+        SendDamage(damage, collider, collision);
+    }
+
+    public void SendDamage(float damage, Collider2D collider, Collision2D collision = null)
+    {
         if (collider.gameObject.transform.CompareTag("Player"))
         {
-            HasHealth health = collider.transform.parent.transform.GetComponent<HasHealth>();
-            health.LoseHealth(damage);
-            health.AddBlood(gameObject);
+            if(collider.transform.parent.transform.TryGetComponent<HasHealth>(out HasHealth health))
+            {
+                health.LoseHealth(damage);
+                health.AddBlood(gameObject);
+            }
+
             ApplyKnockBack(collider);
         }
 
@@ -136,7 +144,7 @@ public class Bullet : MonoBehaviour
 
     private void Explode(Vector2 collisionPoint, Collision2D collision)
     {
-        damage += explosionDamage;
+        //damage += explosionDamage;
         Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll(collisionPoint, explodeRadius);
         var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
         explosion.transform.localScale = new Vector3(explodeRadius, explodeRadius, explodeRadius);
@@ -144,7 +152,7 @@ public class Bullet : MonoBehaviour
 
         foreach (var target in targetsInRadius)
         {
-            SendDamage(target, collision);
+            SendDamage(explosionDamage, target, collision);
         }
     }
 
