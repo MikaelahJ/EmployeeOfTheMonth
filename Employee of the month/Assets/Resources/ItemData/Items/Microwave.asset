@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40bb7cf003a8d7242881e46c28417936, type: 3}
   m_Name: Microwave
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: f15876b3ae3aecf4dbaabaeeb45b1e11, type: 3}
+  itemIcon: {fileID: 21300000, guid: eecf5db3af6519743b0155122f1ccddf, type: 3}
   sprite: {fileID: 21300000, guid: 950c70a61977e1b479e4260e83df541a, type: 3}
   onRespawn: {fileID: 0}
   onPickup: {fileID: 0}

@@ -21,6 +21,7 @@ public class ControllerInput : MonoBehaviour
     public Sprite sprite;
     public int spriteIndex;
 
+    private GameObject playerSprite;
     private GameObject cursorObject;
     private Cursor cursor;
     private List<Color32> pColors = new List<Color32>();
@@ -131,23 +132,25 @@ public class ControllerInput : MonoBehaviour
         switch (spriteIndex)
         {
             case 1:
-                Instantiate(characters[0], player.transform);
+                playerSprite = Instantiate(characters[0], player.transform);
                 break;
             case 2:
-                Instantiate(characters[1], player.transform);
+                playerSprite = Instantiate(characters[1], player.transform);
                 break;
             case 3:
-                Instantiate(characters[2], player.transform);
+                playerSprite = Instantiate(characters[2], player.transform);
                 break;
             case 4:
-                Instantiate(characters[3], player.transform);
+                playerSprite = Instantiate(characters[3], player.transform);
                 break;
         }
+        fire = playerSprite.GetComponentInChildren<Fire>();
     }
 
     private void SetCharacterTestScenes()
     {
-        Instantiate(characters[0], player.transform);
+        playerSprite = Instantiate(characters[0], player.transform);
+        fire = playerSprite.GetComponentInChildren<Fire>();
     }
     private void SetCursorTestScenes()
     {
@@ -160,7 +163,7 @@ public class ControllerInput : MonoBehaviour
         player.GetComponent<HasHealth>().playerIndex = playerInput.playerIndex;
         playerMovement = player.GetComponent<Movement>();
         aim = player.GetComponent<Aim>();
-        fire = player.GetComponentInChildren<Fire>();
+        
 
         GameObject circle = Instantiate(playerHighlightCircle, player.transform);
         circle.GetComponent<SpriteRenderer>().color = pColors[playerInput.playerIndex];
@@ -177,7 +180,7 @@ public class ControllerInput : MonoBehaviour
         rectT.localPosition = new Vector3(rectT.rect.width * rectT.localScale.x * spacing * offset, rectT.localPosition.y, rectT.localPosition.z);
 
         player.GetComponentInChildren<WeaponController>().itemHolder = player.GetComponentInChildren<UIItemHolder>();
-        player.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponentInChildren<UIAmmoCounter>();
+        playerSprite.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponentInChildren<UIAmmoCounter>();
         player.GetComponent<HasHealth>().healthbar = hud.GetComponentInChildren<UIHealthbar>();
     }
     public void OnClick()

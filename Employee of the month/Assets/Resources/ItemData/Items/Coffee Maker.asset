@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40bb7cf003a8d7242881e46c28417936, type: 3}
   m_Name: Coffee Maker
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 1952452254, guid: da3576310fc2ec043b5cd776e4d7f1b3, type: 3}
+  itemIcon: {fileID: 21300000, guid: 5e83928a4ca4ba649ac5cb78cb1b8e94, type: 3}
   sprite: {fileID: 21300000, guid: f1227769fe330734f9482d2ace1f8bdc, type: 3}
   onRespawn: {fileID: 8300000, guid: 29b505c85f5593248a26fc1ad521959c, type: 3}
   onPickup: {fileID: 0}
@@ -29,6 +29,8 @@ MonoBehaviour:
   maxMissDegAngle: 0
   isShotgun: 0
   shotgunAmount: 0
+  bulletSprite: {fileID: 0}
+  bulletSpritePriority: 0
   bulletVelocity: 0
   isBouncy: 0
   numOfBounces: 0

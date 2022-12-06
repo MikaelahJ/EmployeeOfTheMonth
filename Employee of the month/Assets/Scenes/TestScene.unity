@@ -247,7 +247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6104386963993132075, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
       propertyPath: m_JoinBehavior
@@ -3882,8 +3882,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 18, y: 10.125, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 18, y: 9.4, z: 0.2}
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!4 &1313792467 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3908948756821052375, guid: 35f57fbb3e9096e4faa5edb8a85c3e81, type: 3}
