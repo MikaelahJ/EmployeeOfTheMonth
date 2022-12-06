@@ -9,6 +9,8 @@ TagManager:
   - StartButton
   - ResetButton
   - MainMenuButton
+  - Selected
+  - Free
   layers:
   - Default
   - TransparentFX

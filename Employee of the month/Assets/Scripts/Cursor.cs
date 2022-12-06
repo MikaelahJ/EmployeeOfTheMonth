@@ -65,8 +65,22 @@ public class Cursor : MonoBehaviour
                 }
             }
 
-            if (pressed && !collision.gameObject.CompareTag("StartButton"))
+            if (pressed && collision.gameObject.CompareTag("Free"))
             {
+                //är denna spelare kopplad till en karaktär
+                if (GameManager.Instance.players.ContainsKey(this.name))
+                {
+                    //är karaktären inte den man nyss klickade på
+                    if (GameManager.Instance.players[this.name] != Convert.ToInt32(collision.gameObject.name))
+                    {
+                        //hitta den man valt innan och ändra tag på den
+                        GameObject.Find(GameManager.Instance.players[this.name].ToString()).tag = "Free";
+
+                        Debug.Log(GameObject.Find(GameManager.Instance.players[this.name].ToString()));
+                    }
+                }
+
+                collision.tag = "Selected";
                 SetSelectedBall(collision);
                 GameManager.Instance.ConnectCharacterToPlayer(this.name, collision.gameObject.name);
             }
