@@ -9,7 +9,7 @@ public class Fire : MonoBehaviour
     [SerializeField] private ControllerInput controllerInput;
 
     private WeaponController weaponController;
-    public UIAmmoCounter ammoCounter;
+    //public UIAmmoCounter ammoCounter;
 
     private float timer;
 
@@ -64,9 +64,6 @@ public class Fire : MonoBehaviour
             FireGun();
         }
 
-        //Play fire sound
-        sound.PlayOneShot(weaponController.weapon.fire);
-
         timer = 0;
     }
 
@@ -111,7 +108,7 @@ public class Fire : MonoBehaviour
     {
         ammo -= (shots * weaponController.NumOfItems());
         weaponController.LoseItemAmmo(shots);
-        ammoCounter.SetAmmo(ammo);
+        //ammoCounter.SetAmmo(ammo);
     }
 
     public void UpdateFireModifiers()
@@ -123,7 +120,7 @@ public class Fire : MonoBehaviour
         maxMissDegAngle = weapon.maxMissDegAngle;
         isShotgun = weapon.isShotgun;
         shotgunAmount = weapon.shotgunAmount;
-        ammoCounter.SetAmmo(ammo);
+        //ammoCounter.SetAmmo(ammo);
         recoil = weapon.recoilModifier;
     }
 

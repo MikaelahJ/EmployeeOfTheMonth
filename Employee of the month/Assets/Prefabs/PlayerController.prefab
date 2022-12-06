@@ -213,6 +213,11 @@ MonoBehaviour:
   - {fileID: 9194419871203171396, guid: 152246b97c0761446877938befbd6495, type: 3}
   - {fileID: 9194419871203171396, guid: 610d70d6dc806f341ac90120aa775474, type: 3}
   - {fileID: 9194419871203171396, guid: 3ac36896e5f1cd141bf802f3e07d23d0, type: 3}
+  healthbars:
+  - {fileID: 3183501555196415677, guid: 0627fb4051e9413448a24abe0aceb3ab, type: 3}
+  - {fileID: 7995112521068793267, guid: cd993eeba001ddd419431861abfac1c8, type: 3}
+  - {fileID: 3893573542126725122, guid: 181c2865d12201e4aac88ce5936e61f2, type: 3}
+  - {fileID: 1975625406862357386, guid: 769c8024591bdf545a75124ddd0f61b8, type: 3}
   playerHUDs:
   - {fileID: 4128787644152966788, guid: 43e165339da3f234c9c03494787e95fb, type: 3}
   - {fileID: 4128787644152966788, guid: b97e88c4ef656604a8ec67469fdaaa43, type: 3}
@@ -220,6 +225,7 @@ MonoBehaviour:
   - {fileID: 4128787644152966788, guid: 1e026d889fcebed4cb32f19bc103477b, type: 3}
   playerPrefab: {fileID: 5234566805939642093, guid: d8d21ce790ce3a141b6c7af09131b189, type: 3}
   cursorPrefab: {fileID: 7267468052432219236, guid: 624f31e2bfded4640a15fb109334a68a, type: 3}
+  healthbarPrefab: {fileID: 0}
   playerHighlightCircle: {fileID: 2503362734398707608, guid: 4bcdec645315e0f48b1df196c442d9c3, type: 3}
   sprite: {fileID: 0}
   spriteIndex: 0

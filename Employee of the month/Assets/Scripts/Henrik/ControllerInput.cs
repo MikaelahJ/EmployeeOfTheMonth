@@ -8,15 +8,18 @@ using UnityEngine.SceneManagement;
 public class ControllerInput : MonoBehaviour
 {
     [SerializeField] private List<GameObject> characters = new List<GameObject>();
+    [SerializeField] private List<GameObject> healthbars = new List<GameObject>();
     [SerializeField] private List<GameObject> playerHUDs = new List<GameObject>();
     public GameObject playerPrefab;
     public GameObject cursorPrefab;
+    public GameObject healthbarPrefab;
     public GameObject playerHighlightCircle;
 
     private GameObject player;
     private Movement playerMovement;
     private Aim aim;
     private Fire fire;
+    private GameObject healthbar;
     private PlayerInput playerInput;
     public Sprite sprite;
     public int spriteIndex;
@@ -112,6 +115,7 @@ public class ControllerInput : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerInput.SwitchCurrentActionMap("Player");
         SpawnPlayer();
+        LoadHealthBar();
 
         if (GameManager.Instance.playersCount != 0)
         {
@@ -123,7 +127,8 @@ public class ControllerInput : MonoBehaviour
             SetCharacterTestScenes();
         }
         Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
-        SpawnPlayerHUD(player);
+        //SpawnPlayerHUD(player);
+  
     }
 
     private void SetCharacter()
@@ -169,6 +174,13 @@ public class ControllerInput : MonoBehaviour
         circle.GetComponent<SpriteRenderer>().color = pColors[playerInput.playerIndex];
     }
 
+    private void LoadHealthBar()
+    {
+        healthbar = Instantiate(healthbars[playerInput.playerIndex], player.transform);
+        healthbar.transform.SetParent(player.transform);
+        healthbar.transform.position = player.transform.position;
+    }
+
     private void SpawnPlayerHUD(GameObject player)
     {
         GameObject canvas = GameObject.Find("Canvas");
@@ -180,8 +192,8 @@ public class ControllerInput : MonoBehaviour
         rectT.localPosition = new Vector3(rectT.rect.width * rectT.localScale.x * spacing * offset, rectT.localPosition.y, rectT.localPosition.z);
 
         player.GetComponentInChildren<WeaponController>().itemHolder = player.GetComponentInChildren<UIItemHolder>();
-        playerSprite.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponentInChildren<UIAmmoCounter>();
-        player.GetComponent<HasHealth>().healthbar = hud.GetComponentInChildren<UIHealthbar>();
+        //player.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponentInChildren<UIAmmoCounter>();
+        //player.GetComponent<HasHealth>().healthbar = hud.GetComponentInChildren<UIHealthbar>();
     }
     public void OnClick()
     {
