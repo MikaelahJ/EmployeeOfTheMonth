@@ -82,7 +82,6 @@ public class Bullet : MonoBehaviour
         //Bounce
         if (isBouncy && bounces < maxBounce)
         {
-            //Bounce
             Bounce();
 
             if (collision.gameObject.CompareTag("Player"))
@@ -134,7 +133,6 @@ public class Bullet : MonoBehaviour
 
     public void SendDamage(float damage, Collider2D collider, Collision2D collision = null)
     {
-
         if (collider.gameObject.transform.CompareTag("Player"))
         {
             if(collider.transform.parent.transform.TryGetComponent<HasHealth>(out HasHealth health))
@@ -149,6 +147,10 @@ public class Bullet : MonoBehaviour
         if (collider.transform.GetComponent<HasHealth>() != null)
         {
             collider.transform.GetComponent<HasHealth>().LoseHealth(damage);
+        }
+        if (collider.gameObject.GetComponent<ItemBreak>() != null && damage >= 10)
+        {
+            collider.gameObject.GetComponent<ItemBreak>().TakeDamage();
         }
     }
 
