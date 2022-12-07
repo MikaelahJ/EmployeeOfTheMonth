@@ -25,12 +25,15 @@ public class Movement : MonoBehaviour
     private bool isRunning;
 
     public AudioSource walksound;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         maxSpeed = walkSpeed;
+
+        animator = GetComponentInChildren<Animator>();
 
         //Get Audio source in PlayerSprite
         AudioSource[] audiosources = GetComponentsInChildren<AudioSource>();
@@ -65,7 +68,6 @@ public class Movement : MonoBehaviour
             maxSpeed = walkSpeed;
         }
     }
-
     private void UpdateMovement()
     {
         movementVector += leftstickInput * acceleration * Time.fixedDeltaTime;
@@ -73,6 +75,11 @@ public class Movement : MonoBehaviour
         if (leftstickInput.magnitude < 0.2f)  // slow down rapidly if we dont give a movement input (12 is an arbitrary large number) 0.2 is the deadzone
         {
             movementVector = Vector3.Lerp(movementVector, Vector3.zero, Time.fixedDeltaTime * decelaration);
+            animator.SetBool("isWalking", false);
+        }
+        else
+        {
+            animator.SetBool("isWalking", true);
         }
 
         if (movementVector.magnitude > maxSpeed) // limit movement speed to the maximum speed set from UpdateSpeed();
