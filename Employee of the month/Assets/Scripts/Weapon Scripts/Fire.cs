@@ -25,7 +25,7 @@ public class Fire : MonoBehaviour
     private int shotgunAmount = 3;
     private float shotgunSpreadBetween = 5;
 
-    private bool isInWall = false;
+    //private bool isInWall = false;
 
     private AudioSource sound;
     private Vector3 startFirePoint;
