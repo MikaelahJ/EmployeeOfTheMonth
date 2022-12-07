@@ -20,7 +20,7 @@ public class ControllerInput : MonoBehaviour
     private Aim aim;
     private Fire fire;
     private GameObject healthbar;
-    private PlayerInput playerInput;
+    public PlayerInput playerInput;
     public Sprite sprite;
     public int spriteIndex;
 
@@ -63,7 +63,6 @@ public class ControllerInput : MonoBehaviour
         {
 
         }
-
         else if (scene.name == "CharacterSelect")
         {
             LoadCharacterSelect();
@@ -128,7 +127,7 @@ public class ControllerInput : MonoBehaviour
         }
         Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
         //SpawnPlayerHUD(player);
-  
+
     }
 
     private void SetCharacter()
@@ -168,7 +167,6 @@ public class ControllerInput : MonoBehaviour
         player.GetComponent<HasHealth>().playerIndex = playerInput.playerIndex;
         playerMovement = player.GetComponent<Movement>();
         aim = player.GetComponent<Aim>();
-        
 
         GameObject circle = Instantiate(playerHighlightCircle, player.transform);
         circle.GetComponent<SpriteRenderer>().color = pColors[playerInput.playerIndex];
@@ -179,8 +177,6 @@ public class ControllerInput : MonoBehaviour
         healthbar = Instantiate(healthbars[playerInput.playerIndex], player.transform);
         healthbar.transform.SetParent(player.transform);
         healthbar.transform.position = player.transform.position;
-
-        
     }
 
     private void LoadPlayerChildScripts()
@@ -270,11 +266,9 @@ public class ControllerInput : MonoBehaviour
 
 
 
-    //testing
+    //for testing
     public void KillSelf()
     {
         player.GetComponent<HasHealth>().LoseHealth(100);
     }
-
-
 }
