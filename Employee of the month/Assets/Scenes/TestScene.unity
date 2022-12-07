@@ -6458,6 +6458,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 353888322}
     m_Modifications:
+    - target: {fileID: 5271581782318828697, guid: 6a7d832e7d181f344a565caa50969e44, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5271581782318828700, guid: 6a7d832e7d181f344a565caa50969e44, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -6505,6 +6509,18 @@ PrefabInstance:
     - target: {fileID: 5271581782318828701, guid: 6a7d832e7d181f344a565caa50969e44, type: 3}
       propertyPath: m_Name
       value: GlassWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271581782318828702, guid: 6a7d832e7d181f344a565caa50969e44, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 184323286, guid: b4cbee40eb1ccd144b89dc4595c27b6f, type: 3}
+    - target: {fileID: 5271581782318828702, guid: 6a7d832e7d181f344a565caa50969e44, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271581782318828702, guid: 6a7d832e7d181f344a565caa50969e44, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a7d832e7d181f344a565caa50969e44, type: 3}

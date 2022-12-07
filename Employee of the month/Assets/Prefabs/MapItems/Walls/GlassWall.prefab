@@ -104,6 +104,7 @@ MonoBehaviour:
   - {fileID: 481590377, guid: f7c2611a21e4cd54ba05c9b7bd12ca54, type: 3}
   - {fileID: -1425895654, guid: 803564bbf963a374897e0b416e99892a, type: 3}
   animator: {fileID: 5271581782318828697}
+  spriteRenderer: {fileID: 5271581782318828702}
 --- !u!61 &5271581782318828703
 BoxCollider2D:
   m_ObjectHideFlags: 0
