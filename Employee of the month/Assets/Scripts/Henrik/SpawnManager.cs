@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager instance;
 
-    public GameObject gameOverText;
+    [SerializeField] private CameraController camController;
+
+    public TextMeshProUGUI gameOverText;
     public List<GameObject> spawnPositions;
     private List<int> assigned;
     public int alivePlayers = 0;
@@ -22,34 +25,67 @@ public class SpawnManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        AddToDictionary();
     }
 
-    private void Start()
+    private void AddToDictionary()
     {
-        gameOverText.SetActive(false);
+        for (int i = 0; i < camController.players.Length; i++)
+        {
+            if (camController.players[i] != null)
+            {
+                int player = camController.players[i].gameObject.GetComponent<HasHealth>().playerIndex;
+                GameManager.Instance.AddPointsToPlayer("P" + player.ToString(), 0);
+            }
+        }
     }
 
     public void PlayerDied()
     {
         alivePlayers -= 1;
-        if(alivePlayers <= 1)
+        if (alivePlayers <= 1)
         {
-            gameOverText.SetActive(true);
-            if(GameManager.Instance.roundsPlayed < GameManager.Instance.roundsInMatch)
+            Invoke(nameof(CheckRoundWinner), 2);
+        }
+    }
+
+    public void CheckRoundWinner()
+    {
+        GameManager.Instance.roundsPlayed++;
+
+        if (alivePlayers == 0)
+        {
+            gameOverText.text = "DRAW";
+        }
+        else
+        {
+            int player = 0;
+            for (int i = 0; i < camController.players.Length; i++)
             {
-                Invoke(nameof(RestartMatch), 5);
+                if (camController.players[i] != null)
+                {
+                    player = camController.players[i].gameObject.GetComponent<HasHealth>().playerIndex;
+                }
             }
-            else
-            {
-                Invoke(nameof(EndMatch), 5);
-            }
+
+            //Debug.Log("P" + player.ToString());
+            GameManager.Instance.AddPointsToPlayer("P" + player.ToString(), 1);
+
+            gameOverText.text = "PLAYER " + (player += 1) + " WON";
+        }
+
+        if (GameManager.Instance.roundsPlayed < GameManager.Instance.roundsInMatch)
+        {
+            Invoke(nameof(RestartMatch), 3);
+        }
+        else
+        {
+            Invoke(nameof(EndMatch), 3);
         }
     }
 
     public void RestartMatch()
     {
-        GameManager.Instance.roundsPlayed++;
-
         GameManager.Instance.ReloadScene();
     }
 
@@ -62,7 +98,7 @@ public class SpawnManager : MonoBehaviour
     {
         int spawnPosition = Random.Range(0, 4);
 
-        while(assigned.Contains(spawnPosition))
+        while (assigned.Contains(spawnPosition))
         {
             spawnPosition = Random.Range(0, 4);
         }
