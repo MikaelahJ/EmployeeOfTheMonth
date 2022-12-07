@@ -29,6 +29,8 @@ public class Bullet : MonoBehaviour
     public bool isHoming = false;
     public float turnSpeed = 1;
 
+    private bool canTakeDamage = false;
+
     public AudioClip bulletImpactSound;
 
     void Start()
@@ -36,6 +38,12 @@ public class Bullet : MonoBehaviour
         direction = transform.up;
         rb2d = GetComponent<Rigidbody2D>();
         rb2d.velocity = direction * bulletSpeed;
+        Invoke(nameof(CanTakeDamage), 0.05f);
+    }
+
+    private void CanTakeDamage()
+    {
+        canTakeDamage = true;
     }
 
     public void UpdateBulletModifyers(NewItemScriptableObject weapon)
@@ -120,11 +128,13 @@ public class Bullet : MonoBehaviour
 
     public void SendDamage(Collider2D collider, Collision2D collision = null)
     {
+        if (!canTakeDamage) { return; }
         SendDamage(damage, collider, collision);
     }
 
     public void SendDamage(float damage, Collider2D collider, Collision2D collision = null)
     {
+
         if (collider.gameObject.transform.CompareTag("Player"))
         {
             if(collider.transform.parent.transform.TryGetComponent<HasHealth>(out HasHealth health))

@@ -192,7 +192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3847611636834874355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.017, y: 0.394, z: 0}
+  m_LocalPosition: {x: -0, y: 0.328, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 2885860497341314348}
   m_Layer: 9
   m_Name: Weapon
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -304,7 +304,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2297937692892492729, guid: 21869bbf1ccf89144ab556bd20aaa66d, type: 3}
   firePoint: {fileID: 3847611636834874352}
   controllerInput: {fileID: 0}
-  ammoCounter: {fileID: 0}
   recoil: 0
 --- !u!114 &-6732671962525501779
 MonoBehaviour:
@@ -435,7 +434,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.029770155, y: 0.07146758}
+  m_Offset: {x: -0.038478877, y: -0.0025536492}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.50582516, y: 0.47957188}
@@ -446,7 +445,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.085928075, y: 0.7895225}
+  m_Size: {x: 0.06851063, y: 0.22180466}
   m_EdgeRadius: 0
 --- !u!1 &6226219381964147855
 GameObject:

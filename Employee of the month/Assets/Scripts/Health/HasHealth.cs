@@ -96,8 +96,11 @@ public class HasHealth : MonoBehaviour
             AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.death, transform.position);
 
             Camera.main.GetComponent<CameraController>().RemoveCameraTracking(gameObject);
-            GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+
+
+            GetComponentInChildren<WeaponController>().RemoveAllItems();
             GetComponentInChildren<CircleCollider2D>().enabled = false;
+            GetComponent<Movement>().walksound.Stop();
             GetComponent<Movement>().enabled = false;
             GetComponent<Aim>().enabled = false;
             GetComponentInChildren<Fire>().enabled = false;
