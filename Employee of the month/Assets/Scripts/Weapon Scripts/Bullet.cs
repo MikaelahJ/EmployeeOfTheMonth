@@ -172,7 +172,7 @@ public class Bullet : MonoBehaviour
     {
         Rigidbody2D playerRb = playerCollider.gameObject.GetComponent<Rigidbody2D>();
         if (playerRb == null) { return; }
-        playerRb.AddForce(rb2d.velocity.normalized * knockBackModifier, ForceMode2D.Impulse);
+        playerRb.AddForce(transform.up * knockBackModifier, ForceMode2D.Impulse);
     }
 
     private void Bounce()
