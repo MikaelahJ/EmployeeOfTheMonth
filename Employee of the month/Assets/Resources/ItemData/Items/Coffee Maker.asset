@@ -26,7 +26,7 @@ MonoBehaviour:
   weaponDamage: 0
   recoilModifier: -5
   fireRate: -0.15
-  accuracy: 80
+  accuracy: 90
   maxMissDegAngle: 0
   isShotgun: 0
   shotgunAmount: 0
