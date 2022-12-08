@@ -17,6 +17,7 @@ public class NewItemScriptableObject : ScriptableObject
     public AudioClip onRespawn;
     public AudioClip onPickup;
     public AudioClip onDestroy;
+    public AudioClip ultimateFire;
     public AudioClip fire;
     public int fireSoundPriority = 0;
     public AudioClip bulletImpactSound;

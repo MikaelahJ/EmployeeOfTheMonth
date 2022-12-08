@@ -11,11 +11,6 @@ public class WeaponController : MonoBehaviour
     [Header("Base Weapon")]
     public NewItemScriptableObject baseWeapon;
 
-    [Header("Test of items")]
-    public NewItemScriptableObject item1;
-    public NewItemScriptableObject item2;
-    public NewItemScriptableObject item3;
-
     [Header("Equipped Items")]
     public NewItemScriptableObject[] items;
 
@@ -90,11 +85,21 @@ public class WeaponController : MonoBehaviour
     {
         NewItemScriptableObject newWeapon = Instantiate(baseWeapon);
         newWeapon.name = "Weapon";
-
+        bool checkIfUltimate = true;
         for (int i = 0; i < items.Length; i++)
         {
-            if (items[i] == null) { continue; }
+            if (items[i] == null)
+            {
+                checkIfUltimate = false;
+                continue;
+            }
             NewItemScriptableObject item = items[i];
+
+            if(i != 0)
+            {
+                checkIfUltimate = checkIfUltimate && item.name == items[i - 1].name;
+            }
+
             //Weapon Modifiers
             if (newWeapon.fireSoundPriority < item.fireSoundPriority)
             {
@@ -141,6 +146,11 @@ public class WeaponController : MonoBehaviour
             newWeapon.knockbackModifier += item.knockbackModifier;
             newWeapon.isHoming = newWeapon.isHoming || item.isHoming;
 
+        }
+
+        if (checkIfUltimate)
+        {
+            newWeapon.fire = items[0].ultimateFire;
         }
         weapon = newWeapon;
         UpdateFireStats();
