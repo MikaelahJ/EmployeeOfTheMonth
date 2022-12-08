@@ -61,7 +61,7 @@ public class ItemRemovedFromGun : MonoBehaviour
 
         if (wall == null)
         {
-            Debug.Log("Break Item: Wall is null");
+            //Debug.Log("Break Item: Wall is null");
             return;
         }
 
@@ -73,29 +73,31 @@ public class ItemRemovedFromGun : MonoBehaviour
         float itemDistanceFromCenter = Mathf.Abs(Vector2.Dot((Vector2)transform.position, wallNormal));
         float wallDistanceFromCenter = Mathf.Abs(Vector2.Dot((Vector2)wall.transform.position, wallNormal));
 
-        Debug.Log("Wall: " + wallDistanceFromCenter);
-        Debug.Log("Item: " + itemDistanceFromCenter);
+        //Debug.Log("Wall: " + wallDistanceFromCenter);
+        //Debug.Log("Item: " + itemDistanceFromCenter);
 
         if (wallDistanceFromCenter > itemDistanceFromCenter)
         {
             Debug.Log("Put item on wall");
             //Set the items angle to 70deg relative to the walls face
-            transform.localEulerAngles = new Vector3(wallDirection.x * 70, wallDirection.y * 70, transform.localEulerAngles.z);
+            transform.localEulerAngles = new Vector3(wallDirection.x * -70, wallDirection.y * 70, transform.localEulerAngles.z);
             GetComponent<SpriteRenderer>().sortingOrder = 1;
 
             float wallX = Mathf.Abs(wallNormal.x);
             float wallY = Mathf.Abs(wallNormal.y);
 
 
-            Vector2 getPositionFromWall = new Vector2(wall.transform.position.x * wallX, wall.transform.position.y * wallY);
-            Vector2 getPositionFromItem = new Vector2(transform.position.x * wallY, transform.position.y * wallX);
-            Vector2 offset = wallNormal / 10;
-            Debug.Log("Offset " + offset);
-            transform.position = getPositionFromWall + getPositionFromItem + offset;
+            //Vector2 getPositionFromWall = new Vector2(wall.transform.position.x * wallX, wall.transform.position.y * wallY);
+            //Vector2 getPositionFromItem = new Vector2(transform.position.x * wallY, transform.position.y * wallX);
+            Vector2 offset = wallNormal / 8;
+            //Debug.Log("Offset " + offset);
+            //transform.position = getPositionFromWall + getPositionFromItem + offset;
+            transform.position -= (Vector3)offset;
         }
         else
         {
-            //GetComponent<SpriteRenderer>().sortingOrder = -5;
+            //Item is behind a wall
+            Destroy(gameObject);
         }
     }
 
