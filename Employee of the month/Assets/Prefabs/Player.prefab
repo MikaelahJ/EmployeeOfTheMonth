@@ -106,6 +106,7 @@ MonoBehaviour:
   walkSpeed: 4
   runSpeed: 6
   leftstickInput: {x: 0, y: 0}
+  walksound: {fileID: 0}
 --- !u!50 &5234566805939642084
 Rigidbody2D:
   serializedVersion: 4
@@ -152,7 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d9aa7cb5bd53a4ab54a2b5e356cc48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthbar: {fileID: -871405260266059366, guid: 36d081e9f9d8dc9459d51bb00afbf730, type: 3}
   bloodPool: {fileID: 300826701084828303, guid: d5fc92b4b61abb54ab82593a9f1dcd57, type: 3}
   playerIndex: 0
   maxHealth: 100

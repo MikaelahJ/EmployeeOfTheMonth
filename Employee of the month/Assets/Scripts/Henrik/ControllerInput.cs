@@ -44,6 +44,8 @@ public class ControllerInput : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
 
+        Debug.Log(playerInput.playerIndex);
+
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
             LoadCharacterSelect();
@@ -91,6 +93,9 @@ public class ControllerInput : MonoBehaviour
         cursor.col = pColors[playerInput.playerIndex];
 
         GameManager.Instance.playersCount += 1;
+
+        //Sets the index of the player
+        cursor.playerIndex = playerInput.playerIndex;
     }
 
     private void LoadCursors()
@@ -104,6 +109,7 @@ public class ControllerInput : MonoBehaviour
             cursor = cursorObject.GetComponent<Cursor>();
 
             cursor.col = pColors[playerInput.playerIndex];
+            cursor.playerIndex = playerInput.playerIndex;
         }
         else
         {

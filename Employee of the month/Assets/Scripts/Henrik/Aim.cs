@@ -43,7 +43,7 @@ public class Aim : MonoBehaviour
 
     public void StickAim()
     {
-        if (aimDirection.magnitude > 0.2f)
+        if (aimDirection.magnitude > 0.5f)
         {
             transform.up = aimDirection;
         }
