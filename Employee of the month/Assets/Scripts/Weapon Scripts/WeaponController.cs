@@ -74,14 +74,15 @@ public class WeaponController : MonoBehaviour
         //Play item removed sound
         if(playSound)
             sound.PlayOneShot(items[index].onDestroy);
-
-        Debug.Log("Removed item: " + items[index].name);
-        items[index] = null;
+        
+        //Remove item sprite from weapon
         if (itemHolder != null)
         {
-            itemHolder.RemoveItem(index);
-
+            itemHolder.RemoveItem(index, items[index]);
         }
+        //Remove item from weapon
+        Debug.Log("Removed item: " + items[index].name);
+        items[index] = null;
         UpdateWeaponStats();
     }
 

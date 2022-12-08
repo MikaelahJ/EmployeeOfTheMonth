@@ -392,6 +392,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 6602777356754906250, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
+      propertyPath: itemPopOffSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602777356754906250, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
+      propertyPath: itemRemovedFromGun
+      value: 
+      objectReference: {fileID: 6470032077583709217, guid: d5fd7e3937d392f49aa8af85d914b21f, type: 3}
     - target: {fileID: 7791699388728669882, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
       propertyPath: m_FlipX
       value: 0
