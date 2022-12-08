@@ -34,7 +34,7 @@ public class WeaponController : MonoBehaviour
                 items[i] = Instantiate(item);
                 if (itemHolder != null)
                 {
-                    itemHolder.AddItem(item.itemIcon, i);
+                    itemHolder.AddItem(item, i);
                 }
                 Debug.Log("Added item: " + item.name);
                 //Play pickup sound
@@ -123,11 +123,6 @@ public class WeaponController : MonoBehaviour
             newWeapon.shotgunAmount += item.shotgunAmount;
 
             //Bullet Modifiers
-
-            Debug.Log(item.name);
-            Debug.Log("Weapon bullet prio " + newWeapon.bulletSpritePriority);
-            Debug.Log("Item bullet prio " + item.bulletSpritePriority);
-
             if (newWeapon.bulletSpritePriority < item.bulletSpritePriority)
             {
                 newWeapon.bulletSpritePriority = item.bulletSpritePriority;

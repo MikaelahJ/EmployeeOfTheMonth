@@ -7,29 +7,39 @@ public class UIItemHolder : MonoBehaviour
 {
     [SerializeField] private GameObject itemRemovedFromGun;
 
-    GameObject[] items;
+    [SerializeField] private GameObject[] items;
 
-    [SerializeField] private GameObject item1;
-    [SerializeField] private GameObject item2;
-    [SerializeField] private GameObject item3;
+    [SerializeField] private GameObject itemHolder;
 
+    Animator[] animators;
 
     void Start()
     {
         items = new GameObject[3];
 
-        items[0] = item1;
-        items[1] = item2;
-        items[2] = item3;
+        items[0] = Instantiate(itemHolder, transform);
+        items[1] = Instantiate(itemHolder, transform);
+        items[2] = Instantiate(itemHolder, transform);
+
+        items[0].transform.localPosition += new Vector3(0, 0.214f, 0);
+
+        items[2].transform.localPosition += new Vector3(0, -0.214f, 0);
+
+        animators = GetComponentsInChildren<Animator>();
     }
 
-    public void AddItem(Sprite item, int index)
+    public void AddItem(NewItemScriptableObject item, int index)
     {
-        SpriteRenderer itemImage = items[index].GetComponent<SpriteRenderer>();
-        var tempColor = itemImage.color;
-        tempColor.a = 1f;
-        itemImage.color = tempColor;
-        items[index].GetComponent<SpriteRenderer>().sprite = item;
+        if (item.hasAnimations)
+        {
+            animators[index].enabled = true;
+
+            animators[index].SetBool(item.name, true);
+            Debug.Log("Tried to apply item animation bool: " + item.name);
+        }
+
+
+        items[index].GetComponent<SpriteRenderer>().sprite = item.itemIcon;
     }
 
     public void RemoveItem(int index, NewItemScriptableObject item)
@@ -41,10 +51,19 @@ public class UIItemHolder : MonoBehaviour
         }
         GameObject newItem = Instantiate(itemRemovedFromGun, items[index].transform.position, transform.rotation);
 
+        if (item.hasAnimations)
+        {
+            animators[index].SetBool(item.name, false);
+            animators[index].enabled = false;
+        }
+
+
         newItem.GetComponent<ItemRemovedFromGun>().moveDirection = transform.right.normalized;
         newItem.GetComponent<ItemRemovedFromGun>().sprite = item.itemIcon;
         newItem.GetComponent<ItemRemovedFromGun>().brokenSprite = item.itemBrokenOnGround;
+        newItem.GetComponent<ItemRemovedFromGun>().sticksToWalls = item.brokenItemSticksToWall;
         items[index].GetComponent<SpriteRenderer>().sprite = null;
+        
 
         //var tempColor = itemImage.color;
         //tempColor.a = 0f;
