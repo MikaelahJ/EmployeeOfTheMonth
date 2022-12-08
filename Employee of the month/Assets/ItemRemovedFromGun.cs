@@ -25,7 +25,7 @@ public class ItemRemovedFromGun : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = sprite;
         startLocalScale = transform.localScale;
         //For Dynamic mode
-        Debug.Log("Distance: " + moveDirection * throwDistance);
+        //Debug.Log("Distance: " + moveDirection * throwDistance);
         rb2d.AddForce(moveDirection * throwDistance, ForceMode2D.Impulse);
     }
 
