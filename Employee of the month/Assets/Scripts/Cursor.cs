@@ -203,9 +203,9 @@ public class Cursor : MonoBehaviour
             Destroy(frame.transform.GetChild(0).gameObject); //Remove the empty character frame
             selectedFrame = Instantiate(frame.transform.parent.GetComponent<Selector>().characterFrames[playerIndex], frame.transform.position, frame.transform.rotation, frame.transform);
             selectedFrame.transform.localScale = emptyFrame.transform.localScale;
-            selectedFrame.name = this.name + "Selected" + frame.gameObject.name;
+            selectedFrame.name = name + "Selected" + frame.gameObject.name;
         }
-        else if (selectedFrame.name != this.name + "Selected" + frame.gameObject.name)
+        else if (selectedFrame.name != name + "Selected" + frame.gameObject.name)
         {
             //Sets the previous choice to correct characterframe
             Transform ParentframeTransform = selectedFrame.transform.parent.GetComponent<Transform>(); //Save the parent transform for emptyframe to set position
@@ -219,7 +219,7 @@ public class Cursor : MonoBehaviour
             Destroy(frame.transform.GetChild(0).gameObject);
             selectedFrame = Instantiate(frame.transform.parent.GetComponent<Selector>().characterFrames[playerIndex], frame.transform.position, frame.transform.rotation);
             selectedFrame.transform.SetParent(frame.GetComponent<Transform>());
-            selectedFrame.name = this.name + "Selected" + frame.gameObject.name;
+            selectedFrame.name = name + "Selected" + frame.gameObject.name;
             Debug.Log(selectedFrame.name);
         }
     }
