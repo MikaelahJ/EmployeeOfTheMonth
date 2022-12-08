@@ -32,8 +32,8 @@ public class CameraController : MonoBehaviour
         {
             xMin = -mapBounds.bounds.extents.x;
             xMax = mapBounds.bounds.extents.x;
-            yMin = -mapBounds.bounds.extents.y + mapBounds.bounds.center.y;
-            yMax = mapBounds.bounds.extents.y + mapBounds.bounds.center.y;
+            yMin = -mapBounds.bounds.extents.y;
+            yMax = mapBounds.bounds.extents.y;
 
             //Set the max cam size to view whole map
             maxOrthograpic = yMax;
