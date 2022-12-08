@@ -64,7 +64,7 @@ public class Bullet : MonoBehaviour
         if (isPenetrate)
         {
             pencil.GetComponent<CapsuleCollider2D>().enabled = true;
-            Physics2D.IgnoreLayerCollision(3, 9); //köra igenom player och softwall layer
+            Physics2D.IgnoreLayerCollision(3, 9); //kï¿½ra igenom player och softwall layer
             Physics2D.IgnoreLayerCollision(11, 9);
         }
         else
