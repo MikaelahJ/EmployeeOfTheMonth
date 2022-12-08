@@ -23,11 +23,11 @@ public class Movement : MonoBehaviour
     public Vector2 leftstickInput;
     private int maxSpeed;
     private bool isRunning;
+    public bool justTeleported;
 
     public AudioSource walksound;
     private Animator animator;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -49,7 +49,6 @@ public class Movement : MonoBehaviour
         walksound.Play();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         UpdateSpeed();

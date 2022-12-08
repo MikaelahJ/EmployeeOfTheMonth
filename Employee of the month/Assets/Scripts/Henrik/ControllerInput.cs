@@ -31,6 +31,8 @@ public class ControllerInput : MonoBehaviour
 
     public List<string> players;
 
+   [SerializeField] private GameObject vent;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -264,6 +266,10 @@ public class ControllerInput : MonoBehaviour
         }
     }
 
+    public void Vent()
+    {
+     //   vent.GetComponent<Vent>().WhereToGo(player);
+    }
 
 
     //for testing

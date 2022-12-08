@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "New action",
+                    "name": "Vent",
                     "type": "Button",
                     "id": "bcc34092-6b2d-456e-ba9a-fe82b755a25d",
                     "expectedControlType": "Button",
@@ -284,11 +284,22 @@
                 {
                     "name": "",
                     "id": "d60e7dd7-6952-4aae-8b54-d33d99f20a9b",
-                    "path": "",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "New action",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Vent",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b4f5fc0b-5479-4289-80dc-947676061cc7",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad;Joystick",
+                    "action": "Vent",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
