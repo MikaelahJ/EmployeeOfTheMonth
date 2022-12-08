@@ -97,10 +97,16 @@ public class WeaponController : MonoBehaviour
             NewItemScriptableObject item = items[i];
             //Weapon Modifiers
             if (newWeapon.fireSoundPriority < item.fireSoundPriority)
+            {
+                newWeapon.fireSoundPriority = item.fireSoundPriority;
                 newWeapon.fire = item.fire;
+            }
 
             if (newWeapon.bulletImpactPriority < item.bulletImpactPriority)
+            {
+                newWeapon.bulletImpactPriority = item.bulletImpactPriority;
                 newWeapon.bulletImpactSound = item.bulletImpactSound;
+            }
 
             newWeapon.ammo += item.ammo;
             newWeapon.weaponDamage += item.weaponDamage;
@@ -112,9 +118,18 @@ public class WeaponController : MonoBehaviour
             newWeapon.shotgunAmount += item.shotgunAmount;
 
             //Bullet Modifiers
-            if (newWeapon.bulletSpritePriority < item.bulletSpritePriority)
-                newWeapon.bulletSprite = item.bulletSprite;
 
+            Debug.Log(item.name);
+            Debug.Log("Weapon bullet prio " + newWeapon.bulletSpritePriority);
+            Debug.Log("Item bullet prio " + item.bulletSpritePriority);
+
+            if (newWeapon.bulletSpritePriority < item.bulletSpritePriority)
+            {
+                newWeapon.bulletSpritePriority = item.bulletSpritePriority;
+                newWeapon.bulletSprite = item.bulletSprite;
+            }
+
+            newWeapon.bulletVelocity += item.bulletVelocity;
             newWeapon.isBouncy = newWeapon.isBouncy || item.isBouncy;
             newWeapon.numOfBounces += item.numOfBounces;
             newWeapon.numOfPenetrations += item.numOfPenetrations;

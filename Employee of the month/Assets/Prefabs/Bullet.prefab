@@ -26,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214079517262277402}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.05, y: 0.01, z: 0}
-  m_LocalScale: {x: 5.6607895, y: 12.58494, z: 8.319804}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2589492931177751264}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3848138449991117317
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 082ec22eaa0c1f04c8df9ef64eb898fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3c0134488a8d604f94ca702e3a201c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,15 +93,15 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214079517262277402}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.033489015, y: -0.0013599405}
-  m_Size: {x: 0.45640215, y: 0.082281604}
-  m_Direction: 1
+  m_Offset: {x: -0.020423532, y: 0.40166277}
+  m_Size: {x: 0.53706664, y: 3.1590743}
+  m_Direction: 0
 --- !u!114 &3600374397166907326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,9 +145,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2297937692892492729}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1032, y: -0.096, z: 0}
-  m_LocalScale: {x: 0.08258566, y: 0.13418445, z: 0.120195135}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5315756294049155620}
   m_Father: {fileID: 0}
@@ -260,8 +260,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.034775443, y: 0}
-  m_Size: {x: 0.9304491, y: 2.0000002}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1.5}
   m_Direction: 0
 --- !u!58 &4326839436726830221
 CircleCollider2D:
@@ -276,9 +276,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 31.14}
+  m_Offset: {x: 0, y: 8}
   serializedVersion: 2
-  m_Radius: 32.96
+  m_Radius: 8
 --- !u!82 &564052110150576421
 AudioSource:
   m_ObjectHideFlags: 0
