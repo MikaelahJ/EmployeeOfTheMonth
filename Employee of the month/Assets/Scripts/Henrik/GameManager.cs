@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public int playersChosen;
 
     public int roundsPlayed;
-    public int roundsInMatch = 3;
+    public int roundsInMatch = 5;
     public Dictionary<string, int> playerPoints = new Dictionary<string, int>();
 
 
@@ -56,8 +56,6 @@ public class GameManager : MonoBehaviour
 
     public void AddPointsToPlayer(string playerName, int points)
     {
-        Debug.Log("playername " + playerName);
-
         if (playerPoints.ContainsKey(playerName))
         {
             playerPoints[playerName] += points;
@@ -72,20 +70,22 @@ public class GameManager : MonoBehaviour
         //}
     }
 
-    public int GetWinner()
+    public List<int> GetWinner()
     {
-        int winner = CountPoints();
+        List<int> winner = CountPoints();
         return (winner);
     }
+
     public int GetWinnerSprite(int winner)
     {
         int winnerSprite = players["P" + winner.ToString()];
         return winnerSprite;
     }
-    public int CountPoints()
+
+    public List<int> CountPoints()
     {
         int result = 0;
-        int winner = 0;
+        List<int> winner = new List<int>(playersCount);
         foreach (KeyValuePair<string, int> kvp in playerPoints)
         {
             Debug.LogFormat("playerPoints: {0} - {1}", kvp.Key, kvp.Value);
@@ -95,7 +95,11 @@ public class GameManager : MonoBehaviour
             if (playerPoints["P" + i.ToString()] > result)
             {
                 result = playerPoints["P" + i];
-                winner = i;
+                winner.Insert(0, i);
+            }
+            else if (playerPoints["P" + i.ToString()] == result)
+            {
+                winner.Add(i);
             }
         }
         return winner;

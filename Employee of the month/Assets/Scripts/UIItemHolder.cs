@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIItemHolder : MonoBehaviour
 {
+    [SerializeField] private GameObject itemRemovedFromGun;
+
     GameObject[] items;
 
     [SerializeField] private GameObject item1;
@@ -30,11 +32,22 @@ public class UIItemHolder : MonoBehaviour
         items[index].GetComponent<SpriteRenderer>().sprite = item;
     }
 
-    public void RemoveItem(int index)
+    public void RemoveItem(int index, NewItemScriptableObject item)
     {
-        SpriteRenderer itemImage = items[index].GetComponent<SpriteRenderer>();
-        var tempColor = itemImage.color;
-        tempColor.a = 0f;
-        itemImage.color = tempColor;
+        if (item == null)
+        {
+            Debug.Log("UIItemHolder: can't remove item at index " + index + ", item not found");
+            return;
+        }
+        GameObject newItem = Instantiate(itemRemovedFromGun, items[index].transform.position, transform.rotation);
+
+        newItem.GetComponent<ItemRemovedFromGun>().moveDirection = transform.right.normalized;
+        newItem.GetComponent<ItemRemovedFromGun>().sprite = item.itemIcon;
+        newItem.GetComponent<ItemRemovedFromGun>().brokenSprite = item.itemBrokenOnGround;
+        items[index].GetComponent<SpriteRenderer>().sprite = null;
+
+        //var tempColor = itemImage.color;
+        //tempColor.a = 0f;
+        //itemImage.color = tempColor;
     }
 }

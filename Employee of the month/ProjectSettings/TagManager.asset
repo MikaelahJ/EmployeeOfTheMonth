@@ -24,8 +24,10 @@ TagManager:
   - Bullet
   - Cursor
   - SoftWall
+  - ItemRemovedFromGun
   - 
   - 
+  - MapEffects
   - 
   - 
   - 
