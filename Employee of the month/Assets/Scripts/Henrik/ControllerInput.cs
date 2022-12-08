@@ -44,7 +44,7 @@ public class ControllerInput : MonoBehaviour
 
         Debug.Log(playerInput.playerIndex);
 
-        if (SceneManager.GetActiveScene().name == "CharacterSelectTest")
+        if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
             LoadCharacterSelect();
         }
@@ -65,7 +65,7 @@ public class ControllerInput : MonoBehaviour
         {
 
         }
-        else if (scene.name == "CharacterSelectTest")
+        else if (scene.name == "CharacterSelect")
         {
             LoadCharacterSelect();
         }

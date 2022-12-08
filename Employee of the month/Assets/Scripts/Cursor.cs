@@ -63,7 +63,7 @@ public class Cursor : MonoBehaviour
 
     public void CharacterSelection(Collider2D collision)
     {
-        if (SceneManager.GetActiveScene().name == "CharacterSelectTest")
+        if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
             if (pressed && collision.gameObject.CompareTag("StartButton"))
             {
@@ -117,7 +117,7 @@ public class Cursor : MonoBehaviour
 
     //public void OnTriggerStay2D(Collider2D collision)
     //{
-    //    if (SceneManager.GetActiveScene().name == "CharacterSelectTest")
+    //    if (SceneManager.GetActiveScene().name == "CharacterSelect")
     //    {
     //        if (pressed && collision.gameObject.CompareTag("StartButton"))
     //        {
