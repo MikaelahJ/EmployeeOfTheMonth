@@ -18,10 +18,10 @@ MonoBehaviour:
   onRespawn: {fileID: 0}
   onPickup: {fileID: 0}
   onDestroy: {fileID: 0}
-  fire: {fileID: 0}
-  fireSoundPriority: 0
-  bulletImpactSound: {fileID: 0}
-  bulletImpactPriority: 0
+  fire: {fileID: 8300000, guid: 423ca9c0af3654c48b41d4495dd4e33f, type: 3}
+  fireSoundPriority: 3
+  bulletImpactSound: {fileID: 8300000, guid: a30a02e848b4894458030c11967b15e3, type: 3}
+  bulletImpactPriority: 4
   ammo: 15
   weaponDamage: 1
   recoilModifier: 0

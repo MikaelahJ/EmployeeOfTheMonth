@@ -138,6 +138,7 @@ public class WeaponController : MonoBehaviour
             newWeapon.explosionRadius += item.explosionRadius;
             newWeapon.explosionDamage += item.explosionDamage;
             newWeapon.isKnockback = newWeapon.isKnockback || item.isKnockback;
+            newWeapon.knockbackModifier += item.knockbackModifier;
             newWeapon.isHoming = newWeapon.isHoming || item.isHoming;
 
         }

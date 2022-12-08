@@ -170,9 +170,10 @@ public class Bullet : MonoBehaviour
 
     private void ApplyKnockBack(Collider2D playerCollider)
     {
-        Rigidbody2D playerRb = playerCollider.gameObject.GetComponent<Rigidbody2D>();
+        Rigidbody2D playerRb = playerCollider.gameObject.GetComponentInParent<Rigidbody2D>();
         if (playerRb == null) { return; }
-        playerRb.AddForce(rb2d.velocity.normalized * knockBackModifier, ForceMode2D.Impulse);
+        playerRb.AddForce(transform.up.normalized * knockBackModifier, ForceMode2D.Impulse);
+        Debug.Log("Applied " + rb2d.velocity.normalized * knockBackModifier + " Knockback to " + playerCollider.name);
     }
 
     private void Bounce()
