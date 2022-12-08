@@ -12,7 +12,6 @@ public class HasHealth : MonoBehaviour
     public int maxHealth = 100;
     public float health;
 
-    
     private bool isDead = false;
 
     void Start()
@@ -28,7 +27,7 @@ public class HasHealth : MonoBehaviour
 
     public void GainHealth(int heal)
     {
-        if(heal < 0)
+        if (heal < 0)
         {
             Debug.LogWarning("Used GainHealth to add Negative HP, use LoseHealth instead");
         }
@@ -38,17 +37,22 @@ public class HasHealth : MonoBehaviour
 
     public void LoseHealth(float damage)
     {
-        if(animator != null)
-            animator.SetTrigger("TookDamage");
-
-        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.damaged, transform.position);
-
-        if (damage < 0)
+        if (gameObject.CompareTag("Player"))
         {
-            Debug.LogWarning("Used LoseHealth to add Negative damage, use GainHealth instead");
+
+            if (animator != null)
+                animator.SetTrigger("TookDamage");
+
+            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.damaged, transform.position);
+
+            if (damage < 0)
+            {
+                Debug.LogWarning("Used LoseHealth to add Negative damage, use GainHealth instead");
+            }
+            ChangeHealth(-damage);
+            Debug.Log(gameObject.name + " lost " + damage + "HP.");
+
         }
-        ChangeHealth(-damage);
-        Debug.Log(gameObject.name + " lost " + damage + "HP.");
     }
 
     private void ChangeHealth(float healthChange)
@@ -59,7 +63,7 @@ public class HasHealth : MonoBehaviour
             return;
         }
         health += healthChange;
-        
+
         if (health > maxHealth)
         {
             health = maxHealth;
@@ -78,7 +82,7 @@ public class HasHealth : MonoBehaviour
 
     public void AddBlood(GameObject bullet)
     {
-        Instantiate(bloodPool, transform.position, bullet.transform.rotation );
+        Instantiate(bloodPool, transform.position, bullet.transform.rotation);
     }
 
     private void OnDeath()
@@ -86,11 +90,11 @@ public class HasHealth : MonoBehaviour
         isDead = true;
         Debug.Log("Death Triggered");
         animator.SetTrigger("OnDeath");
-        if(GetComponent<Spawner>() != null)
+        if (GetComponent<Spawner>() != null)
         {
             GetComponent<Spawner>().TriggerRespawn(5f);
         }
-        else if(gameObject.CompareTag("Player"))
+        else if (gameObject.CompareTag("Player"))
         {
             SpawnManager.instance.PlayerDied();
             AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.death, transform.position);
@@ -106,7 +110,6 @@ public class HasHealth : MonoBehaviour
             GetComponentInChildren<Fire>().enabled = false;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
-
     }
 
     public void OnRespawn()
@@ -123,7 +126,7 @@ public class HasHealth : MonoBehaviour
     private IEnumerator HealthRegenCouroutine(int health, float timeBetweenRegen, float duration)
     {
         float timer = 0;
-        while(timer < duration && !isDead)
+        while (timer < duration && !isDead)
         {
             timer += timeBetweenRegen;
             switch (health > 0)
