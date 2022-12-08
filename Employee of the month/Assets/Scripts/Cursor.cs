@@ -213,14 +213,12 @@ public class Cursor : MonoBehaviour
             Destroy(selectedFrame.transform.gameObject);
             GameObject emptyFrame = Instantiate(frame.transform.parent.GetComponent<Selector>().characterFrames[4], ParentframeTransform);
             emptyFrame.transform.localScale = frameTransform.localScale; //Set correct scale
-            Debug.Log(selectedFrame.name);
 
             //Sets new choice to correct characterframe
             Destroy(frame.transform.GetChild(0).gameObject);
             selectedFrame = Instantiate(frame.transform.parent.GetComponent<Selector>().characterFrames[playerIndex], frame.transform.position, frame.transform.rotation);
             selectedFrame.transform.SetParent(frame.GetComponent<Transform>());
             selectedFrame.name = name + "Selected" + frame.gameObject.name;
-            Debug.Log(selectedFrame.name);
         }
     }
 
