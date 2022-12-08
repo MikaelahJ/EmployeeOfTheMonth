@@ -139,7 +139,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   brokenSprite: {fileID: 0}
   moveDirection: {x: 0, y: 0, z: 0}
-  throwDistance: 4
+  throwDistance: 5
   throwHeight: 1
   animationSpeed: 4
   breakSize: 1
