@@ -8,6 +8,7 @@ public class NewItemScriptableObject : ScriptableObject
 {
     [Header("Item On Weapon Sprite")]
     public Sprite itemIcon;
+    public Sprite itemBrokenOnGround;
 
     [Header("In Game Sprite")]
     public Sprite sprite;
