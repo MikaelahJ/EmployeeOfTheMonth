@@ -13,6 +13,9 @@ public class ItemBreak : MonoBehaviour
     private int maxHealth;
     private int health;
 
+    private float timer;
+    private float breakRate = 0.5f;
+
     private void Start()
     {
         animator.enabled = false;
@@ -20,18 +23,27 @@ public class ItemBreak : MonoBehaviour
         maxHealth = spritesBeforeBreak.Count;
         health = maxHealth;
     }
+    private void Update()
+    {
+        timer += Time.deltaTime;
+    }
     public void TakeDamage(float damage)
     {
+        Debug.Log("damage" + damage);
         if (!(damage >= damageThreshold))
         {
             Debug.Log("damage threshold not reached");
             return;
-
         }
-        if (damage >= 50)
+        if (damage >= 25)
             health = 0;
 
-        health--;
+        if (timer >= breakRate)
+        {
+            health--;
+            timer = 0;
+        }
+
         if (health <= 0)
         {
             animator.enabled = true;
@@ -44,28 +56,4 @@ public class ItemBreak : MonoBehaviour
         Debug.Log("sprite " + spriteRenderer.sprite);
     }
 }
-
-//private int maxDamage;
-//private int damageTaken = 0;
-
-//private void Start()
-//{
-//    animator.enabled = false;
-//    maxDamage = spritesBeforeBreak.Count + 1;
-//}
-//public void TakeDamage()
-//{
-
-//    damageTaken++;
-//    if (damageTaken <= 0)
-//    {
-//        animator.enabled = true;
-//        animator.SetTrigger("Break");
-//        gameObject.GetComponent<BoxCollider2D>().enabled = false;
-//        return;
-//    }
-
-//    spriteRenderer.sprite = spritesBeforeBreak[health];
-//    Debug.Log("sprite " + spriteRenderer.sprite);
-//}
 
