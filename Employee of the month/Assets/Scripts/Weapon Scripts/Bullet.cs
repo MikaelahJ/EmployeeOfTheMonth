@@ -148,9 +148,9 @@ public class Bullet : MonoBehaviour
         {
             collider.transform.GetComponent<HasHealth>().LoseHealth(damage);
         }
-        if (collider.gameObject.GetComponent<ItemBreak>() != null && damage >= 10)
+        if (collider.gameObject.GetComponent<ItemBreak>() != null)
         {
-            collider.gameObject.GetComponent<ItemBreak>().TakeDamage();
+            collider.gameObject.GetComponent<ItemBreak>().TakeDamage(damage);
         }
     }
 

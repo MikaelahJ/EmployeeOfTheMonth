@@ -9,6 +9,7 @@ public class ItemBreak : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    public int damageThreshold = 5;
     private int maxHealth;
     private int health;
 
@@ -19,8 +20,17 @@ public class ItemBreak : MonoBehaviour
         maxHealth = spritesBeforeBreak.Count;
         health = maxHealth;
     }
-    public void TakeDamage()
+    public void TakeDamage(float damage)
     {
+        if (!(damage >= damageThreshold))
+        {
+            Debug.Log("damage threshold not reached");
+            return;
+
+        }
+        if (damage >= 50)
+            health = 0;
+
         health--;
         if (health <= 0)
         {
