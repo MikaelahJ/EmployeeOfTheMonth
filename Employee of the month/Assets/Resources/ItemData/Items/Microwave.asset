@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: eecf5db3af6519743b0155122f1ccddf, type: 3}
   itemBrokenOnGround: {fileID: 21300000, guid: 4bfe923489ea1a843a28151e95a8909f, type: 3}
+  brokenItemSticksToWall: 0
   sprite: {fileID: 21300000, guid: 950c70a61977e1b479e4260e83df541a, type: 3}
   onRespawn: {fileID: 8300000, guid: e846848ccf4f858449af3128645b8293, type: 3}
   onPickup: {fileID: 8300000, guid: 718deacb10c12ba428ff70f0d42c12c0, type: 3}
   onDestroy: {fileID: 0}
+  ultimateFire: {fileID: 0}
   fire: {fileID: 0}
   fireSoundPriority: 0
   bulletImpactSound: {fileID: 8300000, guid: bc76ad31a689c924e9f957ce5fd24257, type: 3}
@@ -39,8 +41,9 @@ MonoBehaviour:
   numOfPenetrations: 0
   isExplosive: 1
   explosionRadius: 1
-  explosionDamage: 15
+  explosionDamage: 10
   isKnockback: 0
   knockbackModifier: 0
   isHoming: 0
   turnSpeed: 0
+  hasAnimations: 0
