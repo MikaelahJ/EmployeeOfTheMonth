@@ -8,10 +8,12 @@ public class ItemRemovedFromGun : MonoBehaviour
     public Sprite brokenSprite;
     public Vector3 moveDirection;
 
+    public bool sticksToWalls = false;
+
     public float throwDistance = 0.5f;
     public float throwHeight = 1;
     public float animationSpeed = 4;
-    public float breakSize = 0.7f;
+    public float breakSize = 1f;
 
     private Vector3 startLocalScale;
     private Rigidbody2D rb2d;
@@ -103,6 +105,8 @@ public class ItemRemovedFromGun : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if(!sticksToWalls) { return; }
+
         Debug.Log("Collided with " + other.transform.name);
         if (other.gameObject.CompareTag("HardWall") || other.gameObject.CompareTag("SoftWall"))
         {

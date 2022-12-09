@@ -15,8 +15,8 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: eecf5db3af6519743b0155122f1ccddf, type: 3}
   itemBrokenOnGround: {fileID: 21300000, guid: 4bfe923489ea1a843a28151e95a8909f, type: 3}
   sprite: {fileID: 21300000, guid: 950c70a61977e1b479e4260e83df541a, type: 3}
-  onRespawn: {fileID: 0}
-  onPickup: {fileID: 0}
+  onRespawn: {fileID: 8300000, guid: e846848ccf4f858449af3128645b8293, type: 3}
+  onPickup: {fileID: 8300000, guid: 718deacb10c12ba428ff70f0d42c12c0, type: 3}
   onDestroy: {fileID: 0}
   fire: {fileID: 0}
   fireSoundPriority: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
   isShotgun: 0
   shotgunAmount: 0
   bulletSprite: {fileID: 21300000, guid: f15876b3ae3aecf4dbaabaeeb45b1e11, type: 3}
-  bulletSpritePriority: 10
+  bulletSpritePriority: 60
   bulletVelocity: 0
   isBouncy: 0
   numOfBounces: 0

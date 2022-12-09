@@ -9,6 +9,7 @@ public class NewItemScriptableObject : ScriptableObject
     [Header("Item On Weapon Sprite")]
     public Sprite itemIcon;
     public Sprite itemBrokenOnGround;
+    public bool brokenItemSticksToWall = false;
 
     [Header("In Game Sprite")]
     public Sprite sprite;
@@ -17,6 +18,7 @@ public class NewItemScriptableObject : ScriptableObject
     public AudioClip onRespawn;
     public AudioClip onPickup;
     public AudioClip onDestroy;
+    public AudioClip ultimateFire;
     public AudioClip fire;
     public int fireSoundPriority = 0;
     public AudioClip bulletImpactSound;
@@ -54,5 +56,6 @@ public class NewItemScriptableObject : ScriptableObject
     public bool isHoming = false;
     public float turnSpeed = 0f;
 
-    
+    [Header("Animations")]
+    public bool hasAnimations = false;
 }

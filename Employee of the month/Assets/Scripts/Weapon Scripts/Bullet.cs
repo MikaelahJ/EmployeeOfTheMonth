@@ -66,7 +66,7 @@ public class Bullet : MonoBehaviour
         if (isPenetrate)
         {
             pencil.GetComponent<CapsuleCollider2D>().enabled = true;
-            Physics2D.IgnoreLayerCollision(3, 9); //köra igenom player och softwall layer
+            Physics2D.IgnoreLayerCollision(3, 9); //kï¿½ra igenom player och softwall layer
             Physics2D.IgnoreLayerCollision(11, 9);
         }
         else
@@ -172,9 +172,10 @@ public class Bullet : MonoBehaviour
 
     private void ApplyKnockBack(Collider2D playerCollider)
     {
-        Rigidbody2D playerRb = playerCollider.gameObject.GetComponent<Rigidbody2D>();
+        Rigidbody2D playerRb = playerCollider.gameObject.GetComponentInParent<Rigidbody2D>();
         if (playerRb == null) { return; }
-        playerRb.AddForce(transform.up * knockBackModifier, ForceMode2D.Impulse);
+        playerRb.AddForce(transform.up.normalized * knockBackModifier, ForceMode2D.Impulse);
+        Debug.Log("Applied " + rb2d.velocity.normalized * knockBackModifier + " Knockback to " + playerCollider.name);
     }
 
     private void Bounce()

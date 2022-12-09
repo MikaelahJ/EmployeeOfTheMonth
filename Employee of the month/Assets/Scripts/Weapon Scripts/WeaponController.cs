@@ -11,11 +11,6 @@ public class WeaponController : MonoBehaviour
     [Header("Base Weapon")]
     public NewItemScriptableObject baseWeapon;
 
-    [Header("Test of items")]
-    public NewItemScriptableObject item1;
-    public NewItemScriptableObject item2;
-    public NewItemScriptableObject item3;
-
     [Header("Equipped Items")]
     public NewItemScriptableObject[] items;
 
@@ -39,7 +34,7 @@ public class WeaponController : MonoBehaviour
                 items[i] = Instantiate(item);
                 if (itemHolder != null)
                 {
-                    itemHolder.AddItem(item.itemIcon, i);
+                    itemHolder.AddItem(item, i);
                 }
                 Debug.Log("Added item: " + item.name);
                 //Play pickup sound
@@ -90,11 +85,21 @@ public class WeaponController : MonoBehaviour
     {
         NewItemScriptableObject newWeapon = Instantiate(baseWeapon);
         newWeapon.name = "Weapon";
-
+        bool checkIfUltimate = true;
         for (int i = 0; i < items.Length; i++)
         {
-            if (items[i] == null) { continue; }
+            if (items[i] == null)
+            {
+                checkIfUltimate = false;
+                continue;
+            }
             NewItemScriptableObject item = items[i];
+
+            if(i != 0)
+            {
+                checkIfUltimate = checkIfUltimate && item.name == items[i - 1].name;
+            }
+
             //Weapon Modifiers
             if (newWeapon.fireSoundPriority < item.fireSoundPriority)
             {
@@ -118,11 +123,6 @@ public class WeaponController : MonoBehaviour
             newWeapon.shotgunAmount += item.shotgunAmount;
 
             //Bullet Modifiers
-
-            Debug.Log(item.name);
-            Debug.Log("Weapon bullet prio " + newWeapon.bulletSpritePriority);
-            Debug.Log("Item bullet prio " + item.bulletSpritePriority);
-
             if (newWeapon.bulletSpritePriority < item.bulletSpritePriority)
             {
                 newWeapon.bulletSpritePriority = item.bulletSpritePriority;
@@ -138,8 +138,14 @@ public class WeaponController : MonoBehaviour
             newWeapon.explosionRadius += item.explosionRadius;
             newWeapon.explosionDamage += item.explosionDamage;
             newWeapon.isKnockback = newWeapon.isKnockback || item.isKnockback;
+            newWeapon.knockbackModifier += item.knockbackModifier;
             newWeapon.isHoming = newWeapon.isHoming || item.isHoming;
 
+        }
+
+        if (checkIfUltimate)
+        {
+            newWeapon.fire = items[0].ultimateFire;
         }
         weapon = newWeapon;
         UpdateFireStats();

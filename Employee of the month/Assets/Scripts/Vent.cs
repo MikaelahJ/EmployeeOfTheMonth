@@ -47,15 +47,12 @@ public class Vent : MonoBehaviour
 
         playerToMove.gameObject.GetComponentInParent<Rigidbody2D>().position = spawnPos.position;
 
-
-        Invoke(nameof(CloseVent), 0.5f);
+        StartCoroutine(CloseVent(playerToMove));
     }
-    private void CloseVent() { gameObject.GetComponent<SpriteRenderer>().sprite = closedSprite; }
-
-    private void OnTriggerExit2D(Collider2D collision)
+    IEnumerator CloseVent(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-            collision.gameObject.GetComponentInParent<Movement>().justTeleported = false;
+        yield return new WaitForSeconds(0.5f);
+        collision.gameObject.GetComponentInParent<Movement>().justTeleported = false;
+        gameObject.GetComponent<SpriteRenderer>().sprite = closedSprite;
     }
-
 }

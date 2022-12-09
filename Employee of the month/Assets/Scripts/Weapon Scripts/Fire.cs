@@ -66,6 +66,8 @@ public class Fire : MonoBehaviour
             FireGun();
         }
 
+        sound.clip = weaponController.weapon.fire;
+        sound.Play();
         timer = 0;
     }
 
