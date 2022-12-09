@@ -86,10 +86,10 @@ public class GameManager : MonoBehaviour
     {
         int result = 0;
         List<int> winner = new List<int>(playersCount);
-        foreach (KeyValuePair<string, int> kvp in playerPoints)
-        {
-            Debug.LogFormat("playerPoints: {0} - {1}", kvp.Key, kvp.Value);
-        }
+        //foreach (KeyValuePair<string, int> kvp in playerPoints)
+        //{
+        //    Debug.LogFormat("playerPoints: {0} - {1}", kvp.Key, kvp.Value);
+        //}
         for (int i = 0; i < playerPoints.Count; i++)
         {
             if (playerPoints["P" + i.ToString()] > result)
