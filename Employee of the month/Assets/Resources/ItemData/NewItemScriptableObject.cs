@@ -46,6 +46,7 @@ public class NewItemScriptableObject : ScriptableObject
     public bool isPenetrate = false;
     public int numOfPenetrations = 0;
     [Header("Explosive")]
+    public bool isSuperMicro = false;
     public bool isExplosive = false;
     public float explosionRadius = 0f;
     public float explosionDamage = 0f;

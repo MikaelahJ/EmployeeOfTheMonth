@@ -25,6 +25,8 @@ public class Fire : MonoBehaviour
     private int shotgunAmount = 3;
     private float shotgunSpreadBetween = 5;
 
+    public bool isSuperMicro = false;
+
     //private bool isInWall = false;
 
     private AudioSource sound;
@@ -57,10 +59,10 @@ public class Fire : MonoBehaviour
 
         ApplyRecoil();
 
-        if (isShotgun)
-        {
+        if (isSuperMicro)
+            FireSuperMicro();
+        else if (isShotgun)
             FireShotgun();
-        }
         else
         {
             FireGun();
@@ -107,7 +109,10 @@ public class Fire : MonoBehaviour
             newBullet.transform.Rotate(new Vector3(0, 0, -shotgunSpreadBetween + i * 5));
         }
     }
+    private void FireSuperMicro()
+    {
 
+    }
     private void LoseAmmo(int shots)
     {
         ammo -= (shots * weaponController.NumOfItems());
@@ -123,6 +128,7 @@ public class Fire : MonoBehaviour
         accuracy = weapon.accuracy;
         maxMissDegAngle = weapon.maxMissDegAngle;
         isShotgun = weapon.isShotgun;
+        isSuperMicro = weapon.isSuperMicro;
         shotgunAmount = weapon.shotgunAmount;
         //ammoCounter.SetAmmo(ammo);
         recoil = weapon.recoilModifier;
