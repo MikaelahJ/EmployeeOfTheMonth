@@ -8,13 +8,19 @@ public class CheckIfPenetrate : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        //if collision is not Player or SoftWall and is not bouncy
-        if (!collider.gameObject.CompareTag("Player") && !collider.gameObject.CompareTag("SoftWall") && !bulletScript.isBouncy)
+        if (collider.gameObject.CompareTag("Untagged"))
         {
-            Destroy(bulletScript.gameObject);
+            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position);
         }
-        else //go through and send damage to Player or SoftWall
+
+        if (collider.gameObject.CompareTag("Player"))
         {
+            bulletScript.SendDamage(collider);
+        }
+
+        if (collider.gameObject.CompareTag("SoftWall"))
+        {
+            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
             bulletScript.SendDamage(collider);
         }
     }

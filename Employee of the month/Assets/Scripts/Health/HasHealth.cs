@@ -6,6 +6,7 @@ public class HasHealth : MonoBehaviour
 {
     private HudHealthBar hudHealthbar;
     public GameObject bloodPool;
+    public GameObject BloodAnimation;
     private Animator animator;
 
     public int playerIndex;
@@ -83,6 +84,12 @@ public class HasHealth : MonoBehaviour
     public void AddBlood(GameObject bullet)
     {
         Instantiate(bloodPool, transform.position, bullet.transform.rotation);
+        if (BloodAnimation != null)
+        {
+            GameObject bloodAnim = Instantiate(BloodAnimation, transform);
+            bloodAnim.GetComponent<BloodAnimation>().setRotation = bullet.transform.rotation;
+            bloodAnim.GetComponent<BloodAnimation>().isPenetrate = bullet.GetComponent<Bullet>().isPenetrate;
+        }
     }
 
     private void OnDeath()

@@ -66,16 +66,20 @@ public class Bullet : MonoBehaviour
         if (isPenetrate)
         {
             pencil.GetComponent<CapsuleCollider2D>().enabled = true;
-            Physics2D.IgnoreLayerCollision(3, 9); //k�ra igenom player och softwall layer
-            Physics2D.IgnoreLayerCollision(11, 9);
+            Physics2D.IgnoreLayerCollision(3, 9); //Ignore Player + Bullet
+            Physics2D.IgnoreLayerCollision(11, 9); //Ignore Soft Wall + Bullet
+            Physics2D.IgnoreLayerCollision(0, 9); //Ignore Default + Bullet
         }
         else
         {
             pencil.GetComponent<CapsuleCollider2D>().enabled = false;
             Physics2D.IgnoreLayerCollision(3, 9, false);
             Physics2D.IgnoreLayerCollision(11, 9, false);
+            Physics2D.IgnoreLayerCollision(0, 9, false);
         }
     }
+
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -97,6 +101,7 @@ public class Bullet : MonoBehaviour
 
         if (isPenetrate && !collision.gameObject.CompareTag("HardWall"))
         {
+            Debug.Log("Penetrate through object: " + collision.gameObject.name);
             if (collision.gameObject.CompareTag("SoftWall"))
             {
                 AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
@@ -105,7 +110,7 @@ public class Bullet : MonoBehaviour
             {
                 AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position);
             }
-            return;
+            //return;
         }
 
         //Play bullet hit sound
