@@ -484,7 +484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 571.1, y: -99.99748}
+  m_AnchoredPosition: {x: 571.1, y: -99.99747}
   m_SizeDelta: {x: 1142.2, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &247157628
@@ -1074,10 +1074,10 @@ MonoBehaviour:
   TieNames: {fileID: 247157627}
   TieSprites: {fileID: 1851857311}
   winnerSprites:
-  - {fileID: 21300000, guid: 1a8723b7a963cc3468fe02c8958aa9a6, type: 3}
-  - {fileID: 21300000, guid: 8a51279a1af493543bfaaf90a010364d, type: 3}
-  - {fileID: 21300000, guid: fc8a5f69850b3c0468aab29dfcf6e18a, type: 3}
-  - {fileID: 21300000, guid: 9ba2a6e91aa8e7542a41a2268577c34f, type: 3}
+  - {fileID: 21300000, guid: f64372b3430f57246ab9e1e3f5fbf700, type: 3}
+  - {fileID: 21300000, guid: 4e84e86a06efbd14e923e1bcd81161dc, type: 3}
+  - {fileID: 21300000, guid: 8c47ef82fbcbdea44a97dff27098046c, type: 3}
+  - {fileID: 21300000, guid: 0b0c2c4f0e92c2e49b14fe2ff74f08a4, type: 3}
 --- !u!1 &1452847161
 GameObject:
   m_ObjectHideFlags: 0

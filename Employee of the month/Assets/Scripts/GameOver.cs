@@ -46,19 +46,21 @@ public class GameOver : MonoBehaviour
         switch (playerSprite)
         {
             case 1:
-                var image = Instantiate(winnerImage);
+                var image = Instantiate(winnerImage, winnerSpritePosition);
                 image.sprite = winnerSprites[0];
+                Debug.Log("playersprite" + playerSprite);
+
                 break;
             case 2:
-                var image2 = Instantiate(winnerImage);
+                var image2 = Instantiate(winnerImage, winnerSpritePosition);
                 image2.sprite = winnerSprites[1];
                 break;
             case 3:
-                var image3 = Instantiate(winnerImage);
+                var image3 = Instantiate(winnerImage, winnerSpritePosition);
                 image3.sprite = winnerSprites[2];
                 break;
             case 4:
-                var image4 = Instantiate(winnerImage);
+                var image4 = Instantiate(winnerImage, winnerSpritePosition);
                 image4.sprite = winnerSprites[3];
                 break;
         }

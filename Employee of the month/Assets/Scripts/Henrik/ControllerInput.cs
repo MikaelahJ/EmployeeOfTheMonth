@@ -31,7 +31,7 @@ public class ControllerInput : MonoBehaviour
 
     public List<string> players;
 
-   [SerializeField] private GameObject vent;
+    [SerializeField] private GameObject vent;
 
     private void Awake()
     {
@@ -274,13 +274,13 @@ public class ControllerInput : MonoBehaviour
 
     public void Vent()
     {
-     //   vent.GetComponent<Vent>().WhereToGo(player);
+        //   vent.GetComponent<Vent>().WhereToGo(player);
     }
 
 
     //for testing
     public void KillSelf()
     {
-        player.GetComponent<HasHealth>().LoseHealth(100);
+        //player.GetComponent<HasHealth>().LoseHealth(100);
     }
 }
