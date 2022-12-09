@@ -15,7 +15,7 @@ public class HudHealthBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = transform.parent.position + Vector3.up * offsetY;
+        transform.position = transform.parent.position + Vector3.up * offsetY; //Make sure the bar is over player
         transform.LookAt(transform.position + Camera.main.transform.forward);
     }
 

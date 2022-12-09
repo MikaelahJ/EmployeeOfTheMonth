@@ -18,6 +18,7 @@ public class Aim : MonoBehaviour
 
     private void Update()
     {
+        //Set controls for aim
         if (hasGamePad)
         {
             StickAim();
@@ -43,7 +44,7 @@ public class Aim : MonoBehaviour
 
     public void StickAim()
     {
-        if (aimDirection.magnitude > 0.5f)
+        if (aimDirection.magnitude > 0.5f) //0,5 is deadzone
         {
             transform.up = aimDirection;
         }

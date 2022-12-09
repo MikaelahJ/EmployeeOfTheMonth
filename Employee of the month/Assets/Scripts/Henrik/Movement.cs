@@ -71,7 +71,7 @@ public class Movement : MonoBehaviour
     {
         movementVector += leftstickInput * acceleration * Time.fixedDeltaTime;
 
-        if (leftstickInput.magnitude < 0.2f)  // slow down rapidly if we dont give a movement input (12 is an arbitrary large number) 0.2 is the deadzone
+        if (leftstickInput.magnitude < 0.2f)  // slow down rapidly if we dont give a movement input 0.2 is the deadzone
         {
             movementVector = Vector3.Lerp(movementVector, Vector3.zero, Time.fixedDeltaTime * decelaration);
             animator.SetBool("isWalking", false);

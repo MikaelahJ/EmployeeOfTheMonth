@@ -15,6 +15,8 @@ public class Bullet : MonoBehaviour
     private int maxBounce = 2;
     private int bounces = 0;
 
+    public AnimationCurve animSpeed;
+
     public bool isPenetrate = false;
     //private int maxObjectPass = 1;
     //private int objectsPassed = 0;
