@@ -55,7 +55,7 @@ public class Fire : MonoBehaviour
             FireShotgun();
 
         if (isMicrowave)
-            FireMicrowave();
+            FireLaser();
 
 
         else
@@ -113,7 +113,10 @@ public class Fire : MonoBehaviour
         //Play Shotgun Sound
         sound.PlayOneShot(AudioManager.instance.audioClips.shotgun);
     }
+    private void FireLaser()
+    {
 
+    }
     private void FireMicrowave()
     {
         Vector3 right = firePoint.transform.right;
