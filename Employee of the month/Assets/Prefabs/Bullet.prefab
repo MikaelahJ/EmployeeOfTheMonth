@@ -96,7 +96,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.020423532, y: 0.40166277}
@@ -124,9 +124,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2714047111922087215}
-  - component: {fileID: 1974720143316219374}
   m_Layer: 2
-  m_Name: Seeker
+  m_Name: IgnoreRaycast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,22 +146,6 @@ Transform:
   m_Father: {fileID: 2589492931177751264}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &1974720143316219374
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1869552888233145339}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 25.5}
-  serializedVersion: 2
-  m_Radius: 25.93
 --- !u!1 &2297937692892492729
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +332,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 8}
