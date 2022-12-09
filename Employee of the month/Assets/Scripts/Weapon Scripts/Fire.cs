@@ -56,6 +56,8 @@ public class Fire : MonoBehaviour
         }
 
         ApplyRecoil();
+        sound.clip = weaponController.weapon.fire;
+        sound.Play();
 
         if (isShotgun)
         {
@@ -66,8 +68,6 @@ public class Fire : MonoBehaviour
             FireGun();
         }
 
-        sound.clip = weaponController.weapon.fire;
-        sound.Play();
         timer = 0;
     }
 
