@@ -89,7 +89,7 @@ public class Movement : MonoBehaviour
         rb.AddForce(movementVector, ForceMode2D.Impulse);
 
         //Set audio sound volume
-        walksound.volume = Mathf.Abs(leftstickInput.magnitude * 0.25f);
+        walksound.volume = Mathf.Abs(leftstickInput.magnitude * 0.10f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
