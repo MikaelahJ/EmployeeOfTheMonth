@@ -5,9 +5,11 @@ using UnityEngine;
 public class Fire : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject animationPoint;
     [SerializeField] private Transform firePoint;
     [SerializeField] private ControllerInput controllerInput;
 
+    private Animator fireAnimation;
     private WeaponController weaponController;
     //public UIAmmoCounter ammoCounter;
 
@@ -32,6 +34,7 @@ public class Fire : MonoBehaviour
 
     void Start()
     {
+        fireAnimation = animationPoint.GetComponent<Animator>();
         weaponController = GetComponent<WeaponController>();
         sound = GetComponent<AudioSource>();
         startFirePoint = firePoint.transform.localPosition;
@@ -81,6 +84,9 @@ public class Fire : MonoBehaviour
         //Bullet Spread
         float spread = maxMissDegAngle * (1 - accuracy / 100);
         newBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-spread, spread)));
+
+        //Play fire animation
+        fireAnimation.SetTrigger("fireGun");
     }
 
     private void FireShotgun()
@@ -106,6 +112,9 @@ public class Fire : MonoBehaviour
 
             newBullet.transform.Rotate(new Vector3(0, 0, -shotgunSpreadBetween + i * 5));
         }
+
+        //Play shotgun fire animation
+        fireAnimation.SetTrigger("fireShotgun");
     }
 
     private void LoseAmmo(int shots)

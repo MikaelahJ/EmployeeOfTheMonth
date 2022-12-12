@@ -88,15 +88,18 @@ public class WeaponController : MonoBehaviour
         bool checkIfUltimate = true;
         for (int i = 0; i < items.Length; i++)
         {
+            //Check if we have item to add to gun
             if (items[i] == null)
             {
                 checkIfUltimate = false;
                 continue;
             }
+
             NewItemScriptableObject item = items[i];
 
             if(i != 0)
             {
+                //Check if previous item we added is the same
                 checkIfUltimate = checkIfUltimate && item.name == items[i - 1].name;
             }
 
@@ -143,6 +146,7 @@ public class WeaponController : MonoBehaviour
 
         }
 
+        //Add ultimate effects
         if (checkIfUltimate)
         {
             if(items[0].ultimateFire != null)
