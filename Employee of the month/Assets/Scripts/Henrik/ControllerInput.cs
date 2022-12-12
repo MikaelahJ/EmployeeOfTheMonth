@@ -132,9 +132,8 @@ public class ControllerInput : MonoBehaviour
         {
             SetCharacterTestScenes();
         }
-        Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
-        //SpawnPlayerHUD(player);
 
+        Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
     }
 
     private void SetCharacter()
