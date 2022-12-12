@@ -45,6 +45,7 @@ public class ControllerInput : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         Debug.Log(playerInput.playerIndex);
+        GameManager.Instance.playersCount += 1;
 
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
@@ -84,15 +85,13 @@ public class ControllerInput : MonoBehaviour
     private void LoadCharacterSelect()
     {
         playerInput.SwitchCurrentActionMap("UI");
-
+        GameManager.Instance.playersChosen = 0;
         cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
         cursorObject.name = "P" + playerInput.playerIndex.ToString();
         cursor = cursorObject.GetComponent<Cursor>();
 
         //Set Cursor color
         cursor.col = pColors[playerInput.playerIndex];
-
-        GameManager.Instance.playersCount += 1;
 
         //Sets the index of the player
         cursor.playerIndex = playerInput.playerIndex;
@@ -124,7 +123,7 @@ public class ControllerInput : MonoBehaviour
         SpawnPlayer();
         LoadHealthBar();
 
-        if (GameManager.Instance.playersCount != 0)
+        if (GameManager.Instance.playersChosen != 0)
         {
             spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
             SetCharacter();
@@ -172,6 +171,7 @@ public class ControllerInput : MonoBehaviour
     private void SpawnPlayer()
     {
         player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
+        player.name = "P" + (playerInput.playerIndex + 1).ToString() + " Player";
         player.GetComponent<HasHealth>().playerIndex = playerInput.playerIndex;
         playerMovement = player.GetComponent<Movement>();
         aim = player.GetComponent<Aim>();
