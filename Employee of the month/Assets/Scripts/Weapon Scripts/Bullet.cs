@@ -37,6 +37,7 @@ public class Bullet : MonoBehaviour
     public LayerMask bulletMask;
 
     private bool canTakeDamage = false;
+    private bool hasExploded = false;
 
     public AudioClip bulletImpactSound;
 
@@ -179,15 +180,20 @@ public class Bullet : MonoBehaviour
 
     private void Explode(Vector2 collisionPoint, Collision2D collision)
     {
+        //Sometimes the player gets hit multiple times by same explosion
+        if (hasExploded) { return; }
+        hasExploded = true;
         //damage += explosionDamage;
         Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll(collisionPoint, explodeRadius);
         var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
         explosion.transform.localScale = new Vector3(explodeRadius, explodeRadius, explodeRadius);
         Destroy(explosion, 1f);
+        //Debug.Log("Explosion Happened!");
 
         foreach (var target in targetsInRadius)
         {
             SendDamage(explosionDamage, target, collision);
+            //Debug.Log("Tried to deal explosiondamage to: " + target.name);
         }
     }
 
