@@ -34,6 +34,7 @@ public class Bullet : MonoBehaviour
     public Vector3 closest; //The position of the closest Player
     public float range; //Current range to closest Player
     public List<Collider2D> targetsInRange;
+    public LayerMask bulletMask;
 
     private bool canTakeDamage = false;
 
@@ -217,7 +218,7 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator ToggleSeeking()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
         transform.up = rb2d.velocity;
         previousDirection = transform.up;
         isHoming = true;
@@ -235,14 +236,14 @@ public class Bullet : MonoBehaviour
             Vector2 deltaPos = closest - transform.position;
 
             RaycastHit2D hit;
-            hit = Physics2D.Raycast(startPos, deltaPos); //Raycast to check if player is in line of sight of the bullet
-            Debug.Log(hit.collider.name);
+            hit = Physics2D.Raycast(startPos, deltaPos, Mathf.Infinity, bulletMask); //Raycast to check if player is in line of sight of the bullet
+            //Debug.Log(hit.collider.name);
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
             {
                 Debug.Log("Homing Triggered");
                 Vector3 newDirection = hit.collider.transform.position - transform.position;
                 newDirection.z = 0;
-                transform.up = Vector2.Lerp(previousDirection, newDirection, turnSpeed * Time.deltaTime);
+                transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime)/newDirection.magnitude);
                 previousDirection = transform.up;
                 rb2d.velocity = transform.up * rb2d.velocity.magnitude;
             }
