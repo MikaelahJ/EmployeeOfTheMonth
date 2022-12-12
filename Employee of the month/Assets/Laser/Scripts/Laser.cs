@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    [SerializeField] Animator animator;
+    [SerializeField] Transform superMicroPos;
+    [SerializeField] GameObject superMicro;
+    [SerializeField] GameObject superMicroPull;
+
     private Aim aim;
     private Movement movement;
     private Fire fire;
@@ -16,6 +19,7 @@ public class Laser : MonoBehaviour
     public GameObject endVFX;
     private float damage = 20;
     public bool isCharged = false;
+    public bool isCharging = false;
 
     private Quaternion rotation;
     private List<ParticleSystem> particles = new List<ParticleSystem>();
@@ -38,17 +42,29 @@ public class Laser : MonoBehaviour
 
     public void PowerUpLaser()
     {
-        animator.SetTrigger("Shoot");
+        isCharging = true;
+        if (superMicroPos.childCount == 0)
+        {
+            var superMicroSprite = Instantiate(superMicro, superMicroPos);
+            var superMicroSpritePull = Instantiate(superMicroPull, superMicroPos);
+        }
+
+        superMicroPos.GetChild(0).GetComponent<Animator>().SetTrigger("Charging");
+        superMicroPos.GetChild(1).GetComponent<Animator>().SetTrigger("Charging");
         Invoke(nameof(SetCharged), 1);
     }
 
     private void SetCharged()
     {
+        isCharging = false;
         isCharged = true;
     }
+
     public void FireLaser()
     {
         isCharged = false;
+        superMicroPos.GetChild(0).GetComponent<Animator>().SetTrigger("Fired");
+
         EnableLaser();
         UpdateLaser();
         Invoke(nameof(DisableLaser), 3f);
@@ -101,8 +117,6 @@ public class Laser : MonoBehaviour
 
     public void DisableLaser()
     {
-        Debug.Log("hej");
-
         lineRenderer.enabled = false;
         movement.enabled = true;
 

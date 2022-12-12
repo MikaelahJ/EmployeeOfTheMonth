@@ -397,6 +397,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3374000898557904932}
+  superMicroPos: {fileID: 3714246423797805009}
+  superMicro: {fileID: 8087196095396860935, guid: 77eb790777c86c5449936c77ea55e605, type: 3}
+  superMicroPull: {fileID: 6422954220056447050, guid: 143798c293a67814c9c8dd652ca039cb, type: 3}
   lineRenderer: {fileID: 1280536569715761126}
   firePoint: {fileID: 3847611636834874352}
   startVFX: {fileID: 1597704508533721515}
@@ -432,7 +435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3714246423797805009}
   m_Layer: 9
-  m_Name: MuzzlePos
+  m_Name: SuperMicroPos
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -446,7 +449,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7627217953944066285}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.074, y: 0.349, z: 0}
+  m_LocalPosition: {x: 0.086, y: 0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

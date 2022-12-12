@@ -53,9 +53,9 @@ public class Fire : MonoBehaviour
 
         if (isSuperMicro)
         {
-            if (!laserScript.isCharged)
+            if (!laserScript.isCharged && !laserScript.isCharging)
                 ChargeSuperMicro();
-            else
+            else if (!laserScript.isCharging && laserScript.isCharged)
                 FireSuperMicro();
             return;
         }
