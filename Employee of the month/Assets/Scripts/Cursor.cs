@@ -232,12 +232,24 @@ public class Cursor : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(mouseInput);
         mousePosition.z = 0;
 
-        transform.position = mousePosition;
+        transform.position = ClampCursorToCamera(mousePosition);
+    }
+
+    private Vector3 ClampCursorToCamera(Vector3 mousePosition)
+    {
+        Camera cam = Camera.main;
+        float height = cam.orthographicSize;
+        float width = height * cam.aspect;
+
+        float camX = Mathf.Clamp(mousePosition.x, -width, width);
+        float camY = Mathf.Clamp(mousePosition.y, -height, height);
+        return new Vector3(camX, camY, mousePosition.z);
     }
 
     public void StickPosition()
     {
         transform.position += stickInput * cursorSpeed * Time.deltaTime;
+        transform.position = ClampCursorToCamera(transform.position);
     }
 
 
