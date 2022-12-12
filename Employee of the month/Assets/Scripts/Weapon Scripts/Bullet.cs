@@ -99,19 +99,14 @@ public class Bullet : MonoBehaviour
         {
             Bounce();
 
-            if (isHoming)
-            {
-                transform.up = rb2d.velocity;
-                previousDirection = transform.up;
-                isHoming = false;
-                StartCoroutine(ToggleSeeking()); //Turn off homing on player to get new bullet direction
-            }
+            
 
             if (collision.gameObject.CompareTag("Player"))
             {
                 Debug.Log("AppliedForce");
                 ApplyKnockBack(collision.collider);
             }
+
             return;
 
         }
@@ -141,6 +136,14 @@ public class Bullet : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+
+        if (isHoming)
+        {
+            transform.up = rb2d.velocity;
+            previousDirection = transform.up;
+            isHoming = false;
+            StartCoroutine(ToggleSeeking()); //Turn off homing on player to get new bullet direction
         }
     }
 
@@ -264,8 +267,8 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log("Player in Circle");
             FindClosest(); //Finds closest player
-            float bulletBoundsY = GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.1f;
-            Vector2 startPos = new Vector2(transform.position.x, transform.position.y + bulletBoundsY);
+            //float bulletBoundsY = GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.2f;
+            Vector2 startPos = new Vector2(transform.position.x, transform.position.y);
             Vector2 deltaPos = closest - transform.position;
 
             RaycastHit2D hit;

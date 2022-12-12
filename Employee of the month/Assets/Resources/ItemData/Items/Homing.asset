@@ -34,7 +34,7 @@ MonoBehaviour:
   shotgunAmount: 0
   bulletSprite: {fileID: 0}
   bulletSpritePriority: 0
-  bulletVelocity: 0
+  bulletVelocity: -3
   isBouncy: 0
   numOfBounces: 0
   isPenetrate: 0
@@ -45,5 +45,5 @@ MonoBehaviour:
   isKnockback: 0
   knockbackModifier: 0
   isHoming: 1
-  turnSpeed: 20
+  turnSpeed: 50
   hasAnimations: 0

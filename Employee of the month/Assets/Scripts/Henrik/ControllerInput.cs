@@ -26,6 +26,7 @@ public class ControllerInput : MonoBehaviour
 
     private GameObject playerSprite;
     private GameObject cursorObject;
+    private WeaponController weaponController;
     private Cursor cursor;
     private List<Color32> pColors = new List<Color32>();
 
@@ -176,6 +177,7 @@ public class ControllerInput : MonoBehaviour
         playerMovement = player.GetComponent<Movement>();
         aim = player.GetComponent<Aim>();
 
+
         GameObject circle = Instantiate(playerHighlightCircle, player.transform);
         circle.GetComponent<SpriteRenderer>().color = pColors[playerInput.playerIndex];
     }
@@ -191,6 +193,7 @@ public class ControllerInput : MonoBehaviour
     {
         player.GetComponentInChildren<WeaponController>().itemHolder = player.GetComponentInChildren<UIItemHolder>();
         fire = playerSprite.GetComponentInChildren<Fire>();
+        weaponController = player.GetComponentInChildren<WeaponController>();
     }
 
     private void SpawnPlayerHUD(GameObject player)
@@ -256,6 +259,14 @@ public class ControllerInput : MonoBehaviour
         if (input.canceled)
         {
             fire.GetFireButtonInput(false);
+        }
+    }
+
+    public void OnDiscard(InputAction.CallbackContext input)
+    {
+        if (input.performed)
+        {
+            weaponController.RemoveAllItems();
         }
     }
 
