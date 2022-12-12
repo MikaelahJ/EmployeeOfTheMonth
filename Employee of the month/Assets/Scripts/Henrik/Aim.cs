@@ -8,12 +8,12 @@ public class Aim : MonoBehaviour
     [Range(5, 20)]
     public int rotationSpeed;
 
-    private Vector3 mousePosition;
+    public Vector3 mousePosition;
     private Vector3 previousMousePosition;
     private Vector2 mouseInput;
     private Vector2 previousDirection;
-    private Vector2 aimDirection;
-    private bool hasGamePad;
+    public Vector2 aimDirection;
+    public bool hasGamePad;
 
 
     private void Update()

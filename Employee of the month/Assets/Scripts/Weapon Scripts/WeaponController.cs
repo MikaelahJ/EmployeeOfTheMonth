@@ -135,7 +135,6 @@ public class WeaponController : MonoBehaviour
             newWeapon.numOfPenetrations += item.numOfPenetrations;
             newWeapon.isPenetrate = newWeapon.isPenetrate || item.isPenetrate;
             newWeapon.isExplosive = newWeapon.isExplosive || item.isExplosive;
-            newWeapon.isSuperMicro = newWeapon.isSuperMicro || item.isSuperMicro;
             newWeapon.explosionRadius += item.explosionRadius;
             newWeapon.explosionDamage += item.explosionDamage;
             newWeapon.isKnockback = newWeapon.isKnockback || item.isKnockback;
@@ -147,6 +146,9 @@ public class WeaponController : MonoBehaviour
         if (checkIfUltimate)
         {
             newWeapon.fire = items[0].ultimateFire;
+            newWeapon.isSuperMicro = true;
+            Debug.Log("true");
+
         }
         weapon = newWeapon;
         UpdateFireStats();

@@ -7,6 +7,8 @@ public class Fire : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private ControllerInput controllerInput;
+    [SerializeField] private GameObject laser;
+    [SerializeField] private Laser laserScript;
 
     private WeaponController weaponController;
     //public UIAmmoCounter ammoCounter;
@@ -27,6 +29,7 @@ public class Fire : MonoBehaviour
 
     public bool isSuperMicro = false;
 
+
     //private bool isInWall = false;
 
     private AudioSource sound;
@@ -37,6 +40,7 @@ public class Fire : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
         sound = GetComponent<AudioSource>();
         startFirePoint = firePoint.transform.localPosition;
+        laser.SetActive(false);
     }
 
     void Update()
@@ -46,6 +50,15 @@ public class Fire : MonoBehaviour
         //if (isInWall) { return; }
 
         if (!hasFired) { return; }
+
+        if (isSuperMicro)
+        {
+            if (!laserScript.isCharged)
+                ChargeSuperMicro();
+            else
+                FireSuperMicro();
+            return;
+        }
 
         if (timer < fireRate) { return; }
 
@@ -59,14 +72,11 @@ public class Fire : MonoBehaviour
 
         ApplyRecoil();
 
-        if (isSuperMicro)
-            FireSuperMicro();
-        else if (isShotgun)
+        if (isShotgun)
             FireShotgun();
+
         else
-        {
             FireGun();
-        }
 
         sound.clip = weaponController.weapon.fire;
         sound.Play();
@@ -109,10 +119,25 @@ public class Fire : MonoBehaviour
             newBullet.transform.Rotate(new Vector3(0, 0, -shotgunSpreadBetween + i * 5));
         }
     }
+
+    private void ChargeSuperMicro()
+    {
+        laserScript.PowerUpLaser();
+    }
+
     private void FireSuperMicro()
     {
+        laser.SetActive(true);
+        Debug.Log("activate");
 
+        laserScript.FireLaser();
     }
+
+    public void DeActivateLaser()
+    {
+        laser.SetActive(false);
+    }
+
     private void LoseAmmo(int shots)
     {
         ammo -= (shots * weaponController.NumOfItems());
