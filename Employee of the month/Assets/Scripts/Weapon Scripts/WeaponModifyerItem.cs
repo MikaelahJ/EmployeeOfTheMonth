@@ -39,7 +39,6 @@ public class WeaponModifyerItem : MonoBehaviour
                 Disable();
                 Invoke(nameof(Enable), respawnTime);
             }
-            Debug.Log(itemType);
         }
     }
 
