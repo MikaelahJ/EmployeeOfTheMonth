@@ -61,9 +61,11 @@ public class ItemRemovedFromGun : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = brokenSprite;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
+        transform.localScale = new Vector3(breakSize, breakSize, breakSize);
+
+        //If not broken by wall
         if (wall == null)
         {
-            //Debug.Log("Break Item: Wall is null");
             return;
         }
 
