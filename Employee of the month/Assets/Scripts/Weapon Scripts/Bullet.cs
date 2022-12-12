@@ -28,8 +28,8 @@ public class Bullet : MonoBehaviour
 
     public float knockBackModifier = 10;
 
-    public bool isHoming = false;
-    public float turnSpeed = 1;
+    public bool isHoming = true;
+    public float turnSpeed = 50;
     private Vector2 previousDirection;
     public Vector3 closest; //The position of the closest Player
     public float range; //Current range to closest Player
@@ -70,6 +70,7 @@ public class Bullet : MonoBehaviour
         knockBackModifier = weapon.knockbackModifier;
         bulletImpactSound = weapon.bulletImpactSound;
         isHoming = weapon.isHoming;
+        turnSpeed = weapon.turnSpeed;
 
         if (isPenetrate)
         {
@@ -231,7 +232,34 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
+        BulletPlayerTracking();
+
         //Runs if there is a player in range of the bullet
+        //if (targetsInRange.Count > 0 && isHoming)
+        //{
+        //    Debug.Log("Player in Circle");
+        //    FindClosest(); //Finds closest player
+        //    float bulletBoundsY = GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.1f;
+        //    Vector2 startPos = new Vector2(transform.position.x, transform.position.y + bulletBoundsY);
+        //    Vector2 deltaPos = closest - transform.position;
+
+        //    RaycastHit2D hit;
+        //    hit = Physics2D.Raycast(startPos, deltaPos, Mathf.Infinity, bulletMask); //Raycast to check if player is in line of sight of the bullet
+        //    //Debug.Log(hit.collider.name);
+        //    if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
+        //    {
+        //        Debug.Log("Homing Triggered");
+        //        Vector3 newDirection = hit.collider.transform.position - transform.position;
+        //        newDirection.z = 0;
+        //        transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime) / newDirection.magnitude);
+        //        previousDirection = transform.up;
+        //        rb2d.velocity = transform.up * rb2d.velocity.magnitude;
+        //    }
+        //}
+    }
+
+    private void BulletPlayerTracking()
+    {
         if (targetsInRange.Count > 0)
         {
             Debug.Log("Player in Circle");
@@ -248,13 +276,21 @@ public class Bullet : MonoBehaviour
                 Debug.Log("Homing Triggered");
                 Vector3 newDirection = hit.collider.transform.position - transform.position;
                 newDirection.z = 0;
-                transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime)/newDirection.magnitude);
+                if (isHoming)
+                {
+                    Debug.Log("Homing");
+                    transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime) / newDirection.magnitude);
+                }
+                else
+                {
+                    Debug.Log("No Homing");
+                    transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime));
+                }
                 previousDirection = transform.up;
                 rb2d.velocity = transform.up * rb2d.velocity.magnitude;
             }
         }
     }
-
 
     //Finds the player that are closest to the bullet
     private void FindClosest()
@@ -280,7 +316,7 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Add players that are in range of the bullet
-        if (isHoming && collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             if (!targetsInRange.Contains(collision))
             {
@@ -293,7 +329,7 @@ public class Bullet : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         //Remove players that are not in range of the bullet
-        if (isHoming && collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             if (targetsInRange.Contains(collision))
             {
