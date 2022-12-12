@@ -297,7 +297,7 @@ MonoBehaviour:
   isExplode: 0
   knockBackModifier: 10
   isHoming: 0
-  turnSpeed: 10
+  turnSpeed: 0
   closest: {x: 0, y: 0, z: 0}
   range: 0
   targetsInRange: []
