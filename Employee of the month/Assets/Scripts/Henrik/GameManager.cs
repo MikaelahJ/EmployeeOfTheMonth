@@ -155,11 +155,7 @@ public class GameManager : MonoBehaviour
     private void LoadPauseMenu()
     {
         tempPauseMenu = Instantiate(pauseMenu);
-        tempPauseMenu.GetComponent<Canvas>().worldCamera = Camera.main;
-
-        var eventSystem = EventSystem.current;
-        GameObject firstbutton = GameObject.Find("OnlyButtonsAsChild").transform.GetChild(0).gameObject;
-        eventSystem.SetSelectedGameObject(firstbutton, new BaseEventData(eventSystem));
+        tempPauseMenu.GetComponent<PauseMenuController>().OpenMainPauseMenu();
     }
 
     private bool InGameScene()
