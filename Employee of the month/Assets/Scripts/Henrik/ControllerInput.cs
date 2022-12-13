@@ -47,7 +47,6 @@ public class ControllerInput : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         GameManager.Instance.playerControllers.Add(gameObject);
 
-        Debug.Log(playerInput.playerIndex);
         GameManager.Instance.playersCount += 1;
 
         if (SceneManager.GetActiveScene().name == "CharacterSelect")

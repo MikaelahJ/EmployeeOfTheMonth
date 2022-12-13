@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Vent : MonoBehaviour
 {
-    [SerializeField] private Sprite openVent;
-    private Sprite closedSprite;
-    private Sprite sprite;
+    //[SerializeField] private Sprite openVent;
+    //private Sprite closedSprite;
+    //private Sprite sprite;
 
     private VentManager ventManager;
     private int spawnVentPos;
@@ -14,7 +14,7 @@ public class Vent : MonoBehaviour
 
     private void Start()
     {
-        closedSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+        //closedSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         ventManager = GameObject.Find("VentManager").GetComponent<VentManager>();
     }
 
@@ -33,15 +33,24 @@ public class Vent : MonoBehaviour
     {
         playerToMove.gameObject.GetComponentInParent<Movement>().justTeleported = true;
 
-        gameObject.GetComponent<SpriteRenderer>().sprite = openVent;
+        // gameObject.GetComponent<SpriteRenderer>().sprite = openVent;
 
         //which vent to spawn player at
         spawnVentPos = ventManager.ventConnection[gameObject];
+        char ventNumber = this.gameObject.name[name.Length - 1];
         foreach (var pos in ventManager.ventConnection)
         {
-            if (pos.Key.GetComponent<SpriteRenderer>().sprite == ventManager.ventSprites[spawnVentPos])
+            //if (pos.Key.GetComponent<SpriteRenderer>().sprite == ventManager.ventSprites[spawnVentPos])
+            //{
+            //    spawnPos = pos.Key.transform;
+            //}
+            Debug.Log("ventnumber" + ventNumber);
+            Debug.Log("posvalue" + pos.Value.ToString());
+            Debug.Log("poskey" + pos.Key);
+            if (pos.Value.ToString() == ventNumber.ToString())
             {
                 spawnPos = pos.Key.transform;
+                Debug.Log("spawnpos" + spawnPos);
             }
         }
 
@@ -49,10 +58,11 @@ public class Vent : MonoBehaviour
 
         StartCoroutine(CloseVent(playerToMove));
     }
+
     IEnumerator CloseVent(Collider2D collision)
     {
         yield return new WaitForSeconds(0.5f);
         collision.gameObject.GetComponentInParent<Movement>().justTeleported = false;
-        gameObject.GetComponent<SpriteRenderer>().sprite = closedSprite;
+        //gameObject.GetComponent<SpriteRenderer>().sprite = closedSprite;
     }
 }
