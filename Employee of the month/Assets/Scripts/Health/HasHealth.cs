@@ -40,7 +40,6 @@ public class HasHealth : MonoBehaviour
     {
         if (gameObject.CompareTag("Player"))
         {
-
             if (animator != null)
                 animator.SetTrigger("TookDamage");
 

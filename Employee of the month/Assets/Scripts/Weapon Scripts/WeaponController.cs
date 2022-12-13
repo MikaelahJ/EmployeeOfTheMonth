@@ -151,7 +151,10 @@ public class WeaponController : MonoBehaviour
         if (checkIfUltimate)
         {
             if(items[0].ultimateFire != null)
+            {            
                 newWeapon.fire = items[0].ultimateFire;
+                newWeapon.isSuperMicro = true;
+            }
         }
         weapon = newWeapon;
         UpdateFireStats();
