@@ -45,7 +45,6 @@ public class ControllerInput : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
 
-        Debug.Log(playerInput.playerIndex);
         GameManager.Instance.playersCount += 1;
 
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
@@ -271,7 +270,6 @@ public class ControllerInput : MonoBehaviour
 
     public void MoveCursor(InputAction.CallbackContext input)
     {
-
         if (playerInput.currentControlScheme == "Gamepad")
         {
             cursor.SetAimStickInput(input.ReadValue<Vector2>());
