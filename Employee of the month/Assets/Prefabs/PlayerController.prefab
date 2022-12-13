@@ -232,7 +232,19 @@ MonoBehaviour:
     m_ActionId: 27a46850-5fc5-480f-88d7-766643a586a7
     m_ActionName: Player/Discard[/DualShock4GamepadHID/buttonWest]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 237240420590927659}
+        m_TargetAssemblyTypeName: ControllerInput, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: fe9e19fb-d1a2-494b-abf6-89f1651e00ae
     m_ActionName: UI/Pause[/DualShock4GamepadHID/start,/Keyboard/escape]
   - m_PersistentCalls:
