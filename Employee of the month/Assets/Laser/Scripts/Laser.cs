@@ -16,8 +16,6 @@ public class Laser : MonoBehaviour
     public LineRenderer lineRenderer;
     public Transform firePoint;
 
-    public Transform endPoint;
-
     public GameObject startVFX;
     public GameObject endVFX;
     private float damage = 20;
@@ -88,15 +86,10 @@ public class Laser : MonoBehaviour
 
     public void UpdateLaser()
     {
-        Vector2 direction = endPoint.position - firePoint.position;
-        direction = direction.normalized;
-        // direction.z = direction.z % 360;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 20, ~(1 << 8));//send raycast and ignore modifyers
-        Debug.DrawRay(transform.position, direction, Color.green);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, firePoint.transform.up, 20, ~(1 << 8));//send raycast and ignore modifyers
+
         if (hit)
         {
-           
-            Debug.Log("hitCollider" + hit.collider.gameObject.name);
             SendDamage(hit.collider, damage);
             lineRenderer.SetPosition(1, hit.point);
         }
@@ -105,14 +98,6 @@ public class Laser : MonoBehaviour
         startVFX.transform.position = (Vector2)firePoint.position;
 
         endVFX.transform.position = lineRenderer.GetPosition(1);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Vector3 direction = endPoint.position - firePoint.position;
-        direction = direction.normalized;
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(transform.position + (4 * direction), 0.2f);
     }
 
     private void SendDamage(Collider2D collider, float damage)
