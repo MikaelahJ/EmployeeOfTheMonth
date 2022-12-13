@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class Aim : MonoBehaviour
 {
-    [Range(5, 40)]
-    public int rotationSpeed;
+    [Range(0, 40)]
+    public float rotationSpeed;
 
     public Vector3 mousePosition;
     private Vector3 previousMousePosition;

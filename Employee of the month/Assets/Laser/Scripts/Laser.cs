@@ -66,6 +66,10 @@ public class Laser : MonoBehaviour
     {
         isShooting = true;
 
+        if (aim == null)
+            aim = GetComponentInParent<Aim>();
+        aim.rotationSpeed = 0.5f;
+
         EnableLaser();
         UpdateLaser();
         StartCoroutine(DisableLaser());
@@ -74,6 +78,7 @@ public class Laser : MonoBehaviour
     public void EnableLaser()
     {
         lineRenderer.enabled = true;
+
 
         if (movement == null)
             movement = GetComponentInParent<Movement>();
@@ -130,6 +135,8 @@ public class Laser : MonoBehaviour
         isCharged = false;
         lineRenderer.enabled = false;
         movement.enabled = true;
+        aim.rotationSpeed = 30;
+
 
         for (int i = 0; i < particles.Count; i++)
             particles[i].Stop();
