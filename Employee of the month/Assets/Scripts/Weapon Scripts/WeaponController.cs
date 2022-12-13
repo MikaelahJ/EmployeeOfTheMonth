@@ -147,7 +147,7 @@ public class WeaponController : MonoBehaviour
         {
             newWeapon.fire = items[0].ultimateFire;
             newWeapon.isSuperMicro = true;
-            Debug.Log("true");
+            //Debug.Log("true");
 
         }
         weapon = newWeapon;

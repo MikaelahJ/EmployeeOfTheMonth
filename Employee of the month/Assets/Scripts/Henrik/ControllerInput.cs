@@ -44,7 +44,7 @@ public class ControllerInput : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
 
-        Debug.Log(playerInput.playerIndex);
+        //Debug.Log(playerInput.playerIndex);
 
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {

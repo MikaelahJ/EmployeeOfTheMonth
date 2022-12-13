@@ -29,7 +29,7 @@ public class ItemBreak : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        Debug.Log("damage" + damage);
+        //Debug.Log("damage" + damage);
         if (!(damage >= damageThreshold))
         {
             Debug.Log("damage threshold not reached");

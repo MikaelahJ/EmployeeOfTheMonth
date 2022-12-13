@@ -58,8 +58,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4153753324146723734}
-  m_LocalRotation: {x: -0, y: -0, z: 0.5492443, w: 0.8356619}
-  m_LocalPosition: {x: 0.15746893, y: -1.7711444, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -81,15 +81,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae4107127f756c543a35681badf61b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2586177175806603451}
-  superMicroPos: {fileID: 0}
-  superMicro: {fileID: 0}
-  superMicroPull: {fileID: 0}
+  superMicroPos: {fileID: 8982384539837043253}
+  superMicro: {fileID: 8087196095396860935, guid: 77eb790777c86c5449936c77ea55e605, type: 3}
+  superMicroPull: {fileID: 6422954220056447050, guid: 143798c293a67814c9c8dd652ca039cb, type: 3}
   lineRenderer: {fileID: 2715642505122083775}
   firePoint: {fileID: 8811580955890978324}
+  endPoint: {fileID: 0}
   startVFX: {fileID: 1015679208595447066}
   endVFX: {fileID: 5778271946798555305}
   isCharged: 0
+  isCharging: 0
+  isShooting: 0
 --- !u!95 &2586177175806603451
 Animator:
   serializedVersion: 4
@@ -677,7 +679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3714246423797805009, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3714246423797805009, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -775,13 +777,17 @@ PrefabInstance:
       propertyPath: itemRemovedFromGun
       value: 
       objectReference: {fileID: 6470032077583709217, guid: d5fd7e3937d392f49aa8af85d914b21f, type: 3}
+    - target: {fileID: 7116110864012531636, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7791699388728669882, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8622085840284844255, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
@@ -793,6 +799,11 @@ Transform:
 --- !u!4 &8811580955890978324 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3847611636834874352, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
+  m_PrefabInstance: {fileID: 5705058336169868772}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8982384539837043253 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3714246423797805009, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
   m_PrefabInstance: {fileID: 5705058336169868772}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5882075107083368521

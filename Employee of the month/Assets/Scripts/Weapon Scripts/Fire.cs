@@ -53,10 +53,12 @@ public class Fire : MonoBehaviour
 
         if (isSuperMicro)
         {
-            if (!laserScript.isCharged && !laserScript.isCharging)
+            if (!laserScript.isCharged && !laserScript.isCharging && !laserScript.isShooting)
                 ChargeSuperMicro();
-            else if (!laserScript.isCharging && laserScript.isCharged)
+
+            else if (!laserScript.isCharging && laserScript.isCharged && !laserScript.isShooting)
                 FireSuperMicro();
+
             return;
         }
 
@@ -95,6 +97,24 @@ public class Fire : MonoBehaviour
         newBullet.transform.Rotate(new Vector3(0, 0, Random.Range(-spread, spread)));
     }
 
+    private void ChargeSuperMicro()
+    {
+        laserScript.PowerUpLaser();
+    }
+
+    private void FireSuperMicro()
+    {
+        LoseAmmo(1);
+
+        laser.SetActive(true);
+        laserScript.FireLaser();
+    }
+
+    public void DeActivateLaser()
+    {
+        laser.SetActive(false);
+    }
+
     private void FireShotgun()
     {
         LoseAmmo(1);
@@ -120,23 +140,7 @@ public class Fire : MonoBehaviour
         }
     }
 
-    private void ChargeSuperMicro()
-    {
-        laserScript.PowerUpLaser();
-    }
 
-    private void FireSuperMicro()
-    {
-        laser.SetActive(true);
-        Debug.Log("activate");
-
-        laserScript.FireLaser();
-    }
-
-    public void DeActivateLaser()
-    {
-        laser.SetActive(false);
-    }
 
     private void LoseAmmo(int shots)
     {
