@@ -7,11 +7,29 @@ public class WeaponModifyerItem : MonoBehaviour
     public NewItemScriptableObject itemType;
     [SerializeField] [Range(1, 30)] float respawnTime;
 
+    private Vector3 startScale;
+    [SerializeField] [Range(0, 1)] float scaleOccilation = 0.05f;
+    [SerializeField] float speedOccilation = 3f;
+
+    private float timer = 0f;
+
     private void Start()
     {
         GetComponent<SpriteRenderer>().sprite = itemType.sprite;
+        startScale = transform.localScale;
+
+        timer = Random.Range(0, 360f);
+}
+
+    private void Update()
+    {
+        transform.localScale = startScale + scaleOccilation * startScale * Mathf.Sin(timer* speedOccilation);
+
+        timer += Time.deltaTime;
+        timer %= 360f;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
         
         if (collision.gameObject.transform.CompareTag("Player"))
@@ -21,7 +39,6 @@ public class WeaponModifyerItem : MonoBehaviour
                 Disable();
                 Invoke(nameof(Enable), respawnTime);
             }
-            Debug.Log(itemType);
         }
     }
 

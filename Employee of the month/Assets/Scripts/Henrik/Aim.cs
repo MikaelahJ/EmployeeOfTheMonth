@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Aim : MonoBehaviour
 {
-    [Range(5, 20)]
+    [Range(5, 40)]
     public int rotationSpeed;
 
     public Vector3 mousePosition;
@@ -44,14 +44,14 @@ public class Aim : MonoBehaviour
 
     public void StickAim()
     {
-        if (aimDirection.magnitude > 0.5f) //0,5 is deadzone
-        {
-            transform.up = aimDirection;
-        }
+        //if (aimDirection.magnitude > 0.5f) //0,5 is deadzone
+        //{
+        //    transform.up = aimDirection;
+        //}
 
         //For slower turning speed if needed
-        //transform.up = Vector2.Lerp(previousDirection, aimDirection, rotationSpeed * Time.deltaTime);
-        //previousDirection = transform.up;
+        transform.up = Vector2.Lerp(previousDirection, aimDirection, rotationSpeed * Time.deltaTime);
+        previousDirection = transform.up;
     }
 
     //Used in the controllerinput script

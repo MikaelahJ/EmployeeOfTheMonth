@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: {fileID: 0}
   respawnTime: 15
+  scaleOccilation: 0.1
+  speedOccilation: 3
 --- !u!61 &6951606707269242294
 BoxCollider2D:
   m_ObjectHideFlags: 0

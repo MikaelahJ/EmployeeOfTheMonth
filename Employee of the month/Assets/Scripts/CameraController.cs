@@ -30,10 +30,30 @@ public class CameraController : MonoBehaviour
         //Lock the camera to the map
         if (map.TryGetComponent<BoxCollider>(out BoxCollider mapBounds))
         {
-            xMin = -mapBounds.bounds.extents.x;
-            xMax = mapBounds.bounds.extents.x;
-            yMin = -mapBounds.bounds.extents.y;
-            yMax = mapBounds.bounds.extents.y;
+            if(mapBounds.bounds.extents.x/cam.aspect > mapBounds.bounds.extents.y)
+            {
+                xMin = -mapBounds.bounds.extents.x + mapBounds.bounds.center.x;
+                xMax = mapBounds.bounds.extents.x + mapBounds.bounds.center.x;
+                yMin = xMin / cam.aspect;
+                yMax = xMax / cam.aspect;
+
+                Debug.Log("Camera limited by Width");
+            }
+            else
+            {
+                yMin = -mapBounds.bounds.extents.y + mapBounds.bounds.center.y;
+                yMax = mapBounds.bounds.extents.y + mapBounds.bounds.center.y;
+
+                xMin = yMin * cam.aspect;
+                xMax = yMax * cam.aspect;
+                Debug.Log("Camera limited by height");
+            }
+
+
+            //xMin = -mapBounds.bounds.extents.x;
+            //xMax = mapBounds.bounds.extents.x;
+            //yMin = -mapBounds.bounds.extents.y;
+            //yMax = mapBounds.bounds.extents.y;
 
             //Set the max cam size to view whole map
             maxOrthograpic = yMax;

@@ -88,15 +88,18 @@ public class WeaponController : MonoBehaviour
         bool checkIfUltimate = true;
         for (int i = 0; i < items.Length; i++)
         {
+            //Check if we have item to add to gun
             if (items[i] == null)
             {
                 checkIfUltimate = false;
                 continue;
             }
+
             NewItemScriptableObject item = items[i];
 
             if(i != 0)
             {
+                //Check if previous item we added is the same
                 checkIfUltimate = checkIfUltimate && item.name == items[i - 1].name;
             }
 
@@ -140,15 +143,18 @@ public class WeaponController : MonoBehaviour
             newWeapon.isKnockback = newWeapon.isKnockback || item.isKnockback;
             newWeapon.knockbackModifier += item.knockbackModifier;
             newWeapon.isHoming = newWeapon.isHoming || item.isHoming;
+            newWeapon.turnSpeed += item.turnSpeed;
 
         }
 
+        //Add ultimate effects
         if (checkIfUltimate)
         {
-            newWeapon.fire = items[0].ultimateFire;
-            newWeapon.isSuperMicro = true;
-            //Debug.Log("true");
-
+            if(items[0].ultimateFire != null)
+            {            
+                newWeapon.fire = items[0].ultimateFire;
+                newWeapon.isSuperMicro = true;
+            }
         }
         weapon = newWeapon;
         UpdateFireStats();

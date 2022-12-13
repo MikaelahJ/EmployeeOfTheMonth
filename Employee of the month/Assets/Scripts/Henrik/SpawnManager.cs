@@ -25,7 +25,12 @@ public class SpawnManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        AddToDictionary();
+
+        if (Camera.main.TryGetComponent<CameraController>(out camController))
+        {
+            AddToDictionary();
+        }
+
     }
 
     private void AddToDictionary()

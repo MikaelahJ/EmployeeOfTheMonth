@@ -42,7 +42,7 @@ MonoBehaviour:
   isSuperMicro: 0
   isExplosive: 1
   explosionRadius: 1
-  explosionDamage: 15
+  explosionDamage: 10
   isKnockback: 0
   knockbackModifier: 0
   isHoming: 0

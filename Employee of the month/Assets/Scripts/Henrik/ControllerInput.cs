@@ -26,12 +26,13 @@ public class ControllerInput : MonoBehaviour
 
     private GameObject playerSprite;
     private GameObject cursorObject;
+    private WeaponController weaponController;
     private Cursor cursor;
     private List<Color32> pColors = new List<Color32>();
 
     public List<string> players;
 
-   [SerializeField] private GameObject vent;
+    [SerializeField] private GameObject vent;
 
     private void Awake()
     {
@@ -44,7 +45,8 @@ public class ControllerInput : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
 
-        //Debug.Log(playerInput.playerIndex);
+        Debug.Log(playerInput.playerIndex);
+        GameManager.Instance.playersCount += 1;
 
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
@@ -84,15 +86,13 @@ public class ControllerInput : MonoBehaviour
     private void LoadCharacterSelect()
     {
         playerInput.SwitchCurrentActionMap("UI");
-
+        GameManager.Instance.playersChosen = 0;
         cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
         cursorObject.name = "P" + playerInput.playerIndex.ToString();
         cursor = cursorObject.GetComponent<Cursor>();
 
         //Set Cursor color
         cursor.col = pColors[playerInput.playerIndex];
-
-        GameManager.Instance.playersCount += 1;
 
         //Sets the index of the player
         cursor.playerIndex = playerInput.playerIndex;
@@ -124,7 +124,7 @@ public class ControllerInput : MonoBehaviour
         SpawnPlayer();
         LoadHealthBar();
 
-        if (GameManager.Instance.playersCount != 0)
+        if (GameManager.Instance.playersChosen != 0)
         {
             spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
             SetCharacter();
@@ -133,9 +133,8 @@ public class ControllerInput : MonoBehaviour
         {
             SetCharacterTestScenes();
         }
-        Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
-        //SpawnPlayerHUD(player);
 
+        Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
     }
 
     private void SetCharacter()
@@ -172,9 +171,11 @@ public class ControllerInput : MonoBehaviour
     private void SpawnPlayer()
     {
         player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
+        player.name = "P" + (playerInput.playerIndex + 1).ToString() + " Player";
         player.GetComponent<HasHealth>().playerIndex = playerInput.playerIndex;
         playerMovement = player.GetComponent<Movement>();
         aim = player.GetComponent<Aim>();
+
 
         GameObject circle = Instantiate(playerHighlightCircle, player.transform);
         circle.GetComponent<SpriteRenderer>().color = pColors[playerInput.playerIndex];
@@ -191,6 +192,7 @@ public class ControllerInput : MonoBehaviour
     {
         player.GetComponentInChildren<WeaponController>().itemHolder = player.GetComponentInChildren<UIItemHolder>();
         fire = playerSprite.GetComponentInChildren<Fire>();
+        weaponController = player.GetComponentInChildren<WeaponController>();
     }
 
     private void SpawnPlayerHUD(GameObject player)
@@ -259,6 +261,14 @@ public class ControllerInput : MonoBehaviour
         }
     }
 
+    public void OnDiscard(InputAction.CallbackContext input)
+    {
+        if (input.performed)
+        {
+            weaponController.RemoveAllItems();
+        }
+    }
+
     public void MoveCursor(InputAction.CallbackContext input)
     {
 
@@ -274,13 +284,13 @@ public class ControllerInput : MonoBehaviour
 
     public void Vent()
     {
-     //   vent.GetComponent<Vent>().WhereToGo(player);
+        //   vent.GetComponent<Vent>().WhereToGo(player);
     }
 
 
     //for testing
     public void KillSelf()
     {
-        player.GetComponent<HasHealth>().LoseHealth(100);
+        //player.GetComponent<HasHealth>().LoseHealth(100);
     }
 }
