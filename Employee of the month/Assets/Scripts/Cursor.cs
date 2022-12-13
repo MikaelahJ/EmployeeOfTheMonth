@@ -27,12 +27,15 @@ public class Cursor : MonoBehaviour
 
     private void Awake()
     {
-        Invoke("Start", 0.01f);
+        //Invoke("Start", 0.01f);
     }
 
     private void Start()
     {
-        transform.position = Vector3.zero;
+        Vector3 spawnpoint = Camera.main.transform.position;
+        spawnpoint.z = 0;
+        transform.position = spawnpoint;
+
         GetComponent<SpriteRenderer>().color = col;
         selectedCharacterBall.GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color;
     }
@@ -238,11 +241,12 @@ public class Cursor : MonoBehaviour
     private Vector3 ClampCursorToCamera(Vector3 mousePosition)
     {
         Camera cam = Camera.main;
+        Vector3 camPosition = cam.transform.position;
         float height = cam.orthographicSize;
         float width = height * cam.aspect;
 
-        float camX = Mathf.Clamp(mousePosition.x, -width, width);
-        float camY = Mathf.Clamp(mousePosition.y, -height, height);
+        float camX = Mathf.Clamp(mousePosition.x, -width + camPosition.x, width + camPosition.x);
+        float camY = Mathf.Clamp(mousePosition.y, -height + camPosition.y, height + camPosition.y);
         return new Vector3(camX, camY, mousePosition.z);
     }
 

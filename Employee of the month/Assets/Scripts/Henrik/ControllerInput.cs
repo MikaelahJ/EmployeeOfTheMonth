@@ -20,6 +20,7 @@ public class ControllerInput : MonoBehaviour
     private Aim aim;
     private Fire fire;
     private GameObject healthbar;
+
     public PlayerInput playerInput;
     public Sprite sprite;
     public int spriteIndex;
@@ -44,6 +45,7 @@ public class ControllerInput : MonoBehaviour
         pColors.Add(new Color32(0, 192, 255, 255)); // P4 Blue
 
         playerInput = GetComponent<PlayerInput>();
+        GameManager.Instance.playerControllers.Add(gameObject);
 
         GameManager.Instance.playersCount += 1;
 
@@ -97,7 +99,7 @@ public class ControllerInput : MonoBehaviour
         cursor.playerIndex = playerInput.playerIndex;
     }
 
-    private void LoadCursors()
+    public void LoadCursors()
     {
         playerInput.SwitchCurrentActionMap("UI");
 
@@ -114,6 +116,12 @@ public class ControllerInput : MonoBehaviour
         {
             SetCursorTestScenes();
         }
+    }
+
+    public void DestroyCursor()
+    {
+        Destroy(cursorObject);
+        playerInput.SwitchCurrentActionMap("Player");
     }
 
     private void LoadGame()
@@ -210,16 +218,18 @@ public class ControllerInput : MonoBehaviour
     }
     public void OnClick()
     {
+        if (cursor == null) { return; }
         cursor.Pressed();
     }
     public void GetLeftStick(InputAction.CallbackContext input)
     {
+        if(playerMovement == null) { return; }
         playerMovement.GetLeftStickInput(input.ReadValue<Vector2>());
     }
 
     public void GetRightStick(InputAction.CallbackContext input)
     {
-
+        if (aim == null) { return; }
         if (playerInput.currentControlScheme == "Gamepad")
         {
             aim.SetAimStickInput(input.ReadValue<Vector2>());
@@ -232,11 +242,13 @@ public class ControllerInput : MonoBehaviour
 
     public void GetMousePosition(InputAction.CallbackContext input)
     {
+        if (aim == null) { return; }
         aim.GetMouseInput(input.ReadValue<Vector2>());
     }
 
     public void OnRun(InputAction.CallbackContext input)
     {
+        if (playerMovement == null) { return; }
         if (input.started)
         {
             playerMovement.GetRunButtonInput(true);
@@ -250,6 +262,7 @@ public class ControllerInput : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext input)
     {
+        if (fire == null) { return; }
         if (input.started)
         {
             fire.GetFireButtonInput(true);
@@ -270,6 +283,7 @@ public class ControllerInput : MonoBehaviour
 
     public void MoveCursor(InputAction.CallbackContext input)
     {
+        if (cursor == null) { return; }
         if (playerInput.currentControlScheme == "Gamepad")
         {
             cursor.SetAimStickInput(input.ReadValue<Vector2>());
@@ -290,5 +304,27 @@ public class ControllerInput : MonoBehaviour
     public void KillSelf()
     {
         //player.GetComponent<HasHealth>().LoseHealth(100);
+    }
+
+    public void Pause(InputAction.CallbackContext input)
+    {
+        if (!input.performed) { return; }
+
+        if (GameManager.Instance.isPaused)
+        {
+            GameManager.Instance.UnpauseGame();
+        }
+        else
+        {
+            GameManager.Instance.PauseGame();
+        }
+    }
+
+    public void EnableAim(bool enable)
+    {
+        if(aim != null)
+        {
+            aim.enabled = enable;
+        }
     }
 }
