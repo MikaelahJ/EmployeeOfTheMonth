@@ -102,7 +102,7 @@ MonoBehaviour:
   spritesBeforeBreak: []
   animator: {fileID: 8710409104064692459}
   spriteRenderer: {fileID: 0}
-  damageThreshold: 5
+  health: 10
 --- !u!95 &8710409104064692459
 Animator:
   serializedVersion: 4

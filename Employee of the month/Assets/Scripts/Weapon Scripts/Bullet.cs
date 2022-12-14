@@ -57,7 +57,6 @@ public class Bullet : MonoBehaviour
 
         if (!isHoming)
         {
-            Debug.Log("Magnetic");
             aimAssistCollider[2] = new Vector2(aimAssistRightBounds.x, aimAssistRightBounds.y -10);
             aimAssistCollider[3] = aimAssistRightBounds;
             aimAssistCollider[4] = aimAssistLeftBounds;
@@ -66,7 +65,6 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            Debug.Log("Homing");
             aimAssistCollider[2] = new Vector2(aimAssistCollider[2].x, aimAssistCollider[2].y - scanBounds);
             aimAssistCollider[5] = new Vector2(aimAssistCollider[5].x, aimAssistCollider[5].y - scanBounds);
             GetComponentInChildren<EdgeCollider2D>().points = aimAssistCollider; 
@@ -193,7 +191,7 @@ public class Bullet : MonoBehaviour
         }
         if (collider.gameObject.GetComponent<ItemBreak>() != null)
         {
-            collider.gameObject.GetComponent<ItemBreak>().TakeDamage(damage);
+            collider.gameObject.GetComponent<ItemBreak>().TakeDamage((int)damage);
         }
     }
 

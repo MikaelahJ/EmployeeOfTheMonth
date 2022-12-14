@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3468377440831192398}
-  m_LocalRotation: {x: -0, y: -0, z: 0.31649715, w: 0.9485935}
+  m_LocalRotation: {x: 0, y: 0, z: 0.31649357, w: 0.9485947}
   m_LocalPosition: {x: -8.184, y: -0.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   spritesBeforeBreak: []
   animator: {fileID: 7056245065097246112}
   spriteRenderer: {fileID: 0}
-  damageThreshold: 5
+  health: 20
 --- !u!95 &7056245065097246112
 Animator:
   serializedVersion: 4
@@ -113,7 +113,7 @@ Animator:
   m_GameObject: {fileID: 3468377440831192398}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae686388e948ecd4cb18cdc3496b563c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
