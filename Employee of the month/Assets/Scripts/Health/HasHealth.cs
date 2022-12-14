@@ -94,7 +94,6 @@ public class HasHealth : MonoBehaviour
     private void OnDeath()
     {
         isDead = true;
-        Debug.Log("Death Triggered");
         animator.SetTrigger("OnDeath");
         if (GetComponent<Spawner>() != null)
         {

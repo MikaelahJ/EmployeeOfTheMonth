@@ -39,11 +39,13 @@ MonoBehaviour:
   numOfBounces: 0
   isPenetrate: 0
   numOfPenetrations: 0
+  isSuperMicro: 0
   isExplosive: 0
   explosionRadius: 0
   explosionDamage: 0
   isKnockback: 0
   knockbackModifier: 0
   isHoming: 0
-  turnSpeed: 1
+  turnSpeed: 30
+  scanBounds: 0
   hasAnimations: 0

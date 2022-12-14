@@ -18,7 +18,7 @@ public class Laser : MonoBehaviour
 
     public GameObject startVFX;
     public GameObject endVFX;
-    private float damage = 20;
+    private float damage = 3;
     public bool isCharged = false;
     public bool isCharging = false;
     public bool isShooting = false;

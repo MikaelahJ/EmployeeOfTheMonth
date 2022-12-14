@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
                 result = playerPoints["P" + i];
                 winner.Insert(0, i);
             }
-            else if (playerPoints["P" + i.ToString()] == result)
+            else if (playerPoints["P" + i.ToString()] == result && playerPoints["P" + i.ToString()] > 0)
             {
                 winner.Add(i);
             }

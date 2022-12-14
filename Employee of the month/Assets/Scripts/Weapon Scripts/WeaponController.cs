@@ -156,13 +156,19 @@ public class WeaponController : MonoBehaviour
             newWeapon.knockbackModifier += item.knockbackModifier;
             newWeapon.isHoming = newWeapon.isHoming || item.isHoming;
             newWeapon.turnSpeed += item.turnSpeed;
+            newWeapon.scanBounds += item.scanBounds;
 
         }
 
         //Add ultimate effects
         if (checkIfUltimate)
         {
-            newWeapon.isSuperMicro = true;
+            Debug.Log("itemName" + items[0].name);
+            if (items[0].name == "Microwave(Clone)")
+            {
+                newWeapon.isSuperMicro = true;
+
+            }
             if (items[0].ultimateFire != null)
             {
                 newWeapon.fire = items[0].ultimateFire;
