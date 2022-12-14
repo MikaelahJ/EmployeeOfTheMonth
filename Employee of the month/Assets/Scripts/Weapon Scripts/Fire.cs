@@ -42,6 +42,7 @@ public class Fire : MonoBehaviour
         fireAnimation = animationPoint.GetComponent<Animator>();
         weaponController = GetComponent<WeaponController>();
         sound = GetComponent<AudioSource>();
+        
         startFirePoint = firePoint.transform.localPosition;
         laser.SetActive(false);
     }
@@ -66,6 +67,9 @@ public class Fire : MonoBehaviour
         }
 
         if (timer < fireRate) { return; }
+
+        //set volume to selected volume in options
+        sound.volume = AudioManager.instance.audioClips.sfxVolume;
 
         if (ammo <= 0)
         {

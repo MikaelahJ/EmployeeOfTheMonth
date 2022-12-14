@@ -43,7 +43,7 @@ public class HasHealth : MonoBehaviour
             if (animator != null)
                 animator.SetTrigger("TookDamage");
 
-            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.damaged, transform.position);
+            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.damaged, transform.position, AudioManager.instance.audioClips.sfxVolume);
 
             if (damage < 0)
             {
@@ -103,7 +103,7 @@ public class HasHealth : MonoBehaviour
         else if (gameObject.CompareTag("Player"))
         {
             SpawnManager.instance.PlayerDied();
-            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.death, transform.position);
+            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.death, transform.position, AudioManager.instance.audioClips.characterVolume);
 
             Camera.main.GetComponent<CameraController>().RemoveCameraTracking(gameObject);
 

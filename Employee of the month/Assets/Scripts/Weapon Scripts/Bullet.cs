@@ -112,22 +112,22 @@ public class Bullet : MonoBehaviour
 
         }
 
-        if (isPenetrate && !collision.gameObject.CompareTag("HardWall"))
-        {
-            Debug.Log("Penetrate through object: " + collision.gameObject.name);
-            if (collision.gameObject.CompareTag("SoftWall"))
-            {
-                AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
-            }
-            else
-            {
-                AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position);
-            }
-            //return;
-        }
+        //if (isPenetrate && !collision.gameObject.CompareTag("HardWall"))
+        //{
+        //    Debug.Log("Penetrate through object: " + collision.gameObject.name);
+        //    if (collision.gameObject.CompareTag("SoftWall"))
+        //    {
+        //        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
+        //    }
+        //    else
+        //    {
+        //        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position);
+        //    }
+        //    //return;
+        //}
 
         //Play bullet hit sound
-        AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position);
+        AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position, AudioManager.instance.audioClips.sfxVolume);
 
         if (isExplode)
         {
@@ -214,7 +214,7 @@ public class Bullet : MonoBehaviour
         bounces++;
         rb2d.sharedMaterial.bounciness = 1;
 
-        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position);
+        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position, AudioManager.instance.audioClips.sfxVolume);
     }
 
     //private void OnTriggerStay2D(Collider2D collider)
