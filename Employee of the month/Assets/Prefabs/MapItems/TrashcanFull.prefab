@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6669198166189197809}
   - component: {fileID: 4365187260295444759}
   - component: {fileID: 4347871497130993935}
-  - component: {fileID: 1311743621}
   m_Layer: 0
   m_Name: TrashcanFull
   m_TagString: Untagged
@@ -140,19 +139,3 @@ CircleCollider2D:
   m_Offset: {x: 0.0008740422, y: 0.010039501}
   serializedVersion: 2
   m_Radius: 0.14601992
---- !u!114 &1311743621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7103973809424275659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a25c479672f3ec044b7951de558a0cdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spritesBeforeBreak: []
-  animator: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  damageThreshold: 5
