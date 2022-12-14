@@ -38,13 +38,10 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < camController.players.Length; i++)
         {
-            Debug.Log("hejhej");
-
             if (camController.players[i] != null)
             {
                 int player = camController.players[i].gameObject.GetComponent<HasHealth>().playerIndex;
                 GameManager.Instance.AddPointsToPlayer("P" + player.ToString(), 0);
-                Debug.Log("player " + "P" + player.ToString());
             }
         }
     }

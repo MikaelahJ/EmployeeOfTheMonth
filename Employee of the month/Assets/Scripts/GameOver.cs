@@ -26,7 +26,6 @@ public class GameOver : MonoBehaviour
     public void CheckWinner()
     {
         List<int> winner = GameManager.Instance.GetWinner();
-        Debug.Log("winnerCount " + winner.Count);
         if (winner.Count == 1)
         {
             int winnerSprite = GameManager.Instance.GetWinnerSprite(winner[0]);
@@ -42,14 +41,12 @@ public class GameOver : MonoBehaviour
     {
         playerIndex += 1;
         winnerText.text = "Player " + playerIndex;
-        Debug.Log("playersprite" + playerSprite);
+
         switch (playerSprite)
         {
             case 1:
                 var image = Instantiate(winnerImage, winnerSpritePosition);
                 image.sprite = winnerSprites[0];
-                Debug.Log("playersprite" + playerSprite);
-
                 break;
             case 2:
                 var image2 = Instantiate(winnerImage, winnerSpritePosition);
