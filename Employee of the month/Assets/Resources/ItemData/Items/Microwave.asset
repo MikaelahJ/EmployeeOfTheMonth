@@ -39,6 +39,7 @@ MonoBehaviour:
   numOfBounces: 0
   isPenetrate: 0
   numOfPenetrations: 0
+  isSuperMicro: 0
   isExplosive: 1
   explosionRadius: 1
   explosionDamage: 10

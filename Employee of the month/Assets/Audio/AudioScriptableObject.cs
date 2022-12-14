@@ -17,4 +17,7 @@ public class AudioScriptableObject : ScriptableObject
     public AudioClip impact_wood;
     public AudioClip impact_glass;
     public AudioClip bulletBounce;
+
+    [Header("Soundtrack volume (Controlled by AudioManager)")]
+    public float volume;
 }

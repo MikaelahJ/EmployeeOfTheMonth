@@ -8,6 +8,8 @@ public class Fire : MonoBehaviour
     [SerializeField] private GameObject animationPoint;
     [SerializeField] private Transform firePoint;
     [SerializeField] private ControllerInput controllerInput;
+    [SerializeField] private GameObject laser;
+    [SerializeField] private Laser laserScript;
 
     private Animator fireAnimation;
     private WeaponController weaponController;
@@ -27,6 +29,9 @@ public class Fire : MonoBehaviour
     private int shotgunAmount = 3;
     private float shotgunSpreadBetween = 5;
 
+    public bool isSuperMicro = false;
+
+
     //private bool isInWall = false;
 
     private AudioSource sound;
@@ -38,6 +43,7 @@ public class Fire : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
         sound = GetComponent<AudioSource>();
         startFirePoint = firePoint.transform.localPosition;
+        laser.SetActive(false);
     }
 
     void Update()
@@ -47,6 +53,17 @@ public class Fire : MonoBehaviour
         //if (isInWall) { return; }
 
         if (!hasFired) { return; }
+
+        if (isSuperMicro)
+        {
+            if (!laserScript.isCharged && !laserScript.isCharging && !laserScript.isShooting)
+                ChargeSuperMicro();
+
+            else if (!laserScript.isCharging && laserScript.isCharged && !laserScript.isShooting)
+                FireSuperMicro();
+
+            return;
+        }
 
         if (timer < fireRate) { return; }
 
@@ -63,13 +80,10 @@ public class Fire : MonoBehaviour
         sound.Play();
 
         if (isShotgun)
-        {
             FireShotgun();
-        }
+
         else
-        {
             FireGun();
-        }
 
         timer = 0;
     }
@@ -87,6 +101,24 @@ public class Fire : MonoBehaviour
 
         //Play fire animation
         fireAnimation.SetTrigger("fireGun");
+    }
+
+    private void ChargeSuperMicro()
+    {
+        laserScript.PowerUpLaser();
+    }
+
+    private void FireSuperMicro()
+    {
+        LoseAmmo(1);
+
+        laser.SetActive(true);
+        laserScript.FireLaser();
+    }
+
+    public void DeActivateLaser()
+    {
+        laser.SetActive(false);
     }
 
     private void FireShotgun()
@@ -117,6 +149,8 @@ public class Fire : MonoBehaviour
         fireAnimation.SetTrigger("fireShotgun");
     }
 
+
+
     private void LoseAmmo(int shots)
     {
         ammo -= (shots * weaponController.NumOfItems());
@@ -132,6 +166,7 @@ public class Fire : MonoBehaviour
         accuracy = weapon.accuracy;
         maxMissDegAngle = weapon.maxMissDegAngle;
         isShotgun = weapon.isShotgun;
+        isSuperMicro = weapon.isSuperMicro;
         shotgunAmount = weapon.shotgunAmount;
         //ammoCounter.SetAmmo(ammo);
         recoil = weapon.recoilModifier;

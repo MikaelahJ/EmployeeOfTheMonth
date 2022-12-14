@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,12 @@ public class GameManager : MonoBehaviour
     public int roundsPlayed;
     public int roundsInMatch = 5;
     public Dictionary<string, int> playerPoints = new Dictionary<string, int>();
+
+    public List<GameObject> playerControllers;
+
+    public bool isPaused = false;
+    public GameObject pauseMenu;
+    private GameObject tempPauseMenu;
 
 
     private void Awake()
@@ -32,6 +39,9 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string scene)
     {
+        Instance.isPaused = false;
+        isPaused = false;
+        Time.timeScale = 1;
         SceneManager.LoadScene(scene);
     }
 
@@ -104,4 +114,60 @@ public class GameManager : MonoBehaviour
         }
         return winner;
     }
+
+    public void PauseGame()
+    {
+        if (!InGameScene()) { return; }
+
+        Debug.Log("Pausing Game!");
+        Instance.isPaused = true;
+        isPaused = true;
+        Time.timeScale = 0;
+
+        foreach (GameObject playerController in Instance.playerControllers)
+        {
+            Debug.Log("Found input " + playerController.name);
+            playerController.GetComponent<ControllerInput>().EnableAim(false);
+            playerController.GetComponent<ControllerInput>().LoadCursors();
+        }
+        Instance.LoadPauseMenu();
+    }
+
+    public void UnpauseGame()
+    {
+        if (!InGameScene()) { return; }
+
+        Debug.Log("Unpausing Game!");
+        Instance.isPaused = false;
+        isPaused = false;
+
+        foreach (GameObject playerController in Instance.playerControllers)
+        {
+            Debug.Log("Found input " + playerController.name);
+            playerController.GetComponent<ControllerInput>().EnableAim(true);
+            playerController.GetComponent<ControllerInput>().DestroyCursor();
+        }
+
+        Destroy(Instance.tempPauseMenu);
+        Time.timeScale = 1;
+    }
+
+    private void LoadPauseMenu()
+    {
+        tempPauseMenu = Instantiate(pauseMenu);
+        tempPauseMenu.GetComponent<PauseMenuController>().OpenMainPauseMenu();
+    }
+
+    private bool InGameScene()
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+            return false;
+        if (SceneManager.GetActiveScene().name == "CharacterSelect")
+            return false;
+        if (SceneManager.GetActiveScene().name == "EndGame")
+            return false;
+
+        return true;
+    }
+
 }

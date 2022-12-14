@@ -67,9 +67,9 @@ public class WeaponController : MonoBehaviour
         }
 
         //Play item removed sound
-        if(playSound)
+        if (playSound)
             sound.PlayOneShot(items[index].onDestroy);
-        
+
         //Remove item sprite from weapon
         if (itemHolder != null)
         {
@@ -97,7 +97,7 @@ public class WeaponController : MonoBehaviour
 
             NewItemScriptableObject item = items[i];
 
-            if(i != 0)
+            if (i != 0)
             {
                 //Check if previous item we added is the same
                 checkIfUltimate = checkIfUltimate && item.name == items[i - 1].name;
@@ -150,8 +150,11 @@ public class WeaponController : MonoBehaviour
         //Add ultimate effects
         if (checkIfUltimate)
         {
-            if(items[0].ultimateFire != null)
+            newWeapon.isSuperMicro = true;
+            if (items[0].ultimateFire != null)
+            {
                 newWeapon.fire = items[0].ultimateFire;
+            }
         }
         weapon = newWeapon;
         UpdateFireStats();
