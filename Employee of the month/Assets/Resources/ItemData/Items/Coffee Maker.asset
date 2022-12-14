@@ -25,10 +25,12 @@ MonoBehaviour:
   bulletImpactSound: {fileID: 0}
   bulletImpactPriority: 0
   ammo: 30
+  ammoWeight: 0.7
   weaponDamage: 0
   recoilModifier: -5
-  fireRate: -0.15
-  accuracy: 90
+  baseFireRate: 0
+  fireRatePercentage: 100
+  accuracy: 95
   maxMissDegAngle: 0
   isShotgun: 0
   shotgunAmount: 0
@@ -39,6 +41,7 @@ MonoBehaviour:
   numOfBounces: 0
   isPenetrate: 0
   numOfPenetrations: 0
+  isSuperMicro: 0
   isExplosive: 0
   explosionRadius: 0
   explosionDamage: 0
@@ -46,4 +49,5 @@ MonoBehaviour:
   knockbackModifier: 0
   isHoming: 0
   turnSpeed: 0
+  scanBounds: 0
   hasAnimations: 0

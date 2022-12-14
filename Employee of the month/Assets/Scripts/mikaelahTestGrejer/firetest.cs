@@ -26,6 +26,6 @@ public class firetest : MonoBehaviour
     void UpdateFireModifiers()
     {
         NewItemScriptableObject weapon = GetComponent<WeaponController>().weapon;
-        fireRate = weapon.fireRate;
+        fireRate = weapon.baseFireRate;
     }
 }

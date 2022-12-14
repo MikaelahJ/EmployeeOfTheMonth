@@ -17,7 +17,8 @@ public class Fire : MonoBehaviour
 
     private float timer;
 
-    private int ammo = 0;
+    private float ammo = 0;
+    private float ammoWeight = 1;
     private float fireRate = 0.5f;
     private bool hasFired;
     public float recoil;
@@ -66,12 +67,12 @@ public class Fire : MonoBehaviour
             return;
         }
 
-        if (timer < fireRate) { return; }
+        if (timer < 1/fireRate) { return; }
 
         //set volume to selected volume in options
         sound.volume = AudioManager.instance.audioClips.sfxVolume;
 
-        if (ammo <= 0)
+        if (ammo <= 0f)
         {
             //Out Of ammo sound
             sound.PlayOneShot(AudioManager.instance.audioClips.emptyMag);
@@ -97,7 +98,7 @@ public class Fire : MonoBehaviour
         //Fire bullet
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
         newBullet.GetComponent<Bullet>().UpdateBulletModifyers(weaponController.weapon);
-        LoseAmmo(1);
+        
 
         //Bullet Spread
         float spread = maxMissDegAngle * (1 - accuracy / 100);
@@ -105,6 +106,8 @@ public class Fire : MonoBehaviour
 
         //Play fire animation
         fireAnimation.SetTrigger("fireGun");
+
+        LoseAmmo();
     }
 
     private void ChargeSuperMicro()
@@ -123,12 +126,12 @@ public class Fire : MonoBehaviour
     public void DeActivateLaser()
     {
         laser.SetActive(false);
-        LoseAmmo(1);
+        LoseAmmo();
     }
 
     private void FireShotgun()
     {
-        LoseAmmo(1);
+        
         //3,5,9 skott
         switch (shotgunAmount)
         {
@@ -152,14 +155,19 @@ public class Fire : MonoBehaviour
 
         //Play shotgun fire animation
         fireAnimation.SetTrigger("fireShotgun");
+        LoseAmmo();
     }
 
 
-
+    private void LoseAmmo()
+    {
+        LoseAmmo(1);
+    }
     private void LoseAmmo(int shots)
     {
-        ammo -= (shots * weaponController.NumOfItems());
-        weaponController.LoseItemAmmo(shots);
+        float ammoLost = shots * ammoWeight;
+        ammo -= (ammoLost * weaponController.NumOfItems());
+        weaponController.LoseItemAmmo(ammoLost);
         //ammoCounter.SetAmmo(ammo);
     }
 
@@ -167,7 +175,8 @@ public class Fire : MonoBehaviour
     {
         NewItemScriptableObject weapon = weaponController.weapon;
         ammo = weapon.ammo;
-        fireRate = weapon.fireRate;
+        ammoWeight = weapon.ammoWeight;
+        fireRate = weapon.baseFireRate;
         accuracy = weapon.accuracy;
         maxMissDegAngle = weapon.maxMissDegAngle;
         isShotgun = weapon.isShotgun;
