@@ -17,28 +17,30 @@ public class ItemBreak : MonoBehaviour
 
     private float timer;
     private float breakRate = 0.5f;
+    private int damageDealt = 0;
 
     private void Start()
     {
         animator.enabled = false;
         spritesBeforeBreak.Reverse(); //känns enklast att kunna lägga in dom i rätt ordning i editorn så vi reversar den här ba
-        healthMultiplier = spritesBeforeBreak.Count + 1;
+        healthMultiplier = spritesBeforeBreak.Count;
         startHealth = health;
         if (healthMultiplier != 0)
-            health *= healthMultiplier;
+            health *= healthMultiplier + 1;
     }
 
     private void Update()
     {
         timer += Time.deltaTime;
     }
-    public void TakeDamage(int damage)//damage ska skickas som int
+    public void TakeDamage(int damage)//damage ska skickas in som int
     {
         //if (timer >= breakRate)
         //{
         //    health -= damage;
         //    timer = 0;
         //}
+        damageDealt += damage;
 
         health -= damage;
         Debug.Log("health " + health);
@@ -51,14 +53,14 @@ public class ItemBreak : MonoBehaviour
             return;
         }
 
-        Debug.Log("health Modulus " + health % healthMultiplier);
-        //health = 150
-        if (health % healthMultiplier == startHealth)
+        //damagedealt kolla om över starthealth
+        if (damageDealt >= startHealth)
         {
-            spriteRenderer.sprite = spritesBeforeBreak[health];
-
             healthMultiplier--;
-            Debug.Log("healthMultiplier " + healthMultiplier);
+            spriteRenderer.sprite = spritesBeforeBreak[healthMultiplier];
+
+            damageDealt -= startHealth;
+            Debug.Log("damageDealt " + damageDealt);
         }
 
     }
