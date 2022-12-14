@@ -5,6 +5,12 @@ using UnityEngine;
 public class CheckIfPenetrate : MonoBehaviour
 {
     [SerializeField] private Bullet bulletScript;
+    private Bullet bullet;
+
+    private void Start()
+    {
+        bullet = GetComponentInParent<Bullet>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -16,6 +22,7 @@ public class CheckIfPenetrate : MonoBehaviour
         if (collider.gameObject.CompareTag("Player"))
         {
             bulletScript.SendDamage(collider);
+            bullet.DisableTracking();
         }
 
         if (collider.gameObject.CompareTag("SoftWall"))

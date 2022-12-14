@@ -28,13 +28,16 @@ public class Bullet : MonoBehaviour
 
     public float knockBackModifier = 10;
 
-    public bool isHoming = true;
-    public float turnSpeed = 50;
+    public bool isHoming = false;
+    public float turnSpeed = 2;
+    public Vector2 aimAssistRightBounds;
+    public Vector2 aimAssistLeftBounds;
     private Vector2 previousDirection;
     public Vector3 closest; //The position of the closest Player
     public float range; //Current range to closest Player
     public List<Collider2D> targetsInRange;
     public LayerMask bulletMask;
+    private Vector2[] aimAssistCollider;
 
     private bool canTakeDamage = false;
     private bool hasExploded = false;
@@ -49,6 +52,15 @@ public class Bullet : MonoBehaviour
         Invoke(nameof(CanTakeDamage), 0.05f);
         previousDirection = transform.up;
         range = 0;
+
+
+        if (!isHoming)
+        {
+            aimAssistCollider = GetComponent<EdgeCollider2D>().points;
+            aimAssistCollider[2] = aimAssistRightBounds;
+            aimAssistCollider[3] = aimAssistLeftBounds;
+            GetComponent<EdgeCollider2D>().points = aimAssistCollider;
+        }
     }
 
     private void CanTakeDamage()
@@ -138,14 +150,6 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        if (isHoming)
-        {
-            transform.up = rb2d.velocity;
-            previousDirection = transform.up;
-            isHoming = false;
-            StartCoroutine(ToggleSeeking()); //Turn off homing on player to get new bullet direction
-        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -215,22 +219,33 @@ public class Bullet : MonoBehaviour
         rb2d.sharedMaterial.bounciness = 1;
 
         AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position);
+
+        //Turn off tracking to calculate new trajectory
+        DisableTracking();
     }
 
-    //private void OnTriggerStay2D(Collider2D collider)
-    //{
-    //    if (isHoming && collider.gameObject.CompareTag("Player"))
-    //    {
-    //        Debug.Log("Homing Triggered");
-    //        Vector3 newDirection = collider.transform.position - transform.position;
-    //        newDirection.Normalize();
-    //        newDirection.z = 0;
-    //        transform.up = Vector2.Lerp(direction, newDirection, turnSpeed * Time.deltaTime);
-    //        direction = transform.up;
-    //        rb2d.velocity = transform.up * bulletSpeed;
-    //    }
-    //}
 
+    private void FixedUpdate()
+    {
+        BulletPlayerTracking();
+    }
+
+
+    #region Homing/Aimassist
+    //turns off tracking and sets a new previousDirection
+    public void DisableTracking()
+    {
+        if (isHoming)
+        {
+            transform.up = rb2d.velocity;
+            previousDirection = transform.up;
+            isHoming = false;
+            StartCoroutine(ToggleSeeking()); //Turn off homing on player to get new bullet direction
+        }
+    }
+
+
+    //To turn off seeking when bouncing etc...
     private IEnumerator ToggleSeeking()
     {
         yield return new WaitForSeconds(0.1f);
@@ -239,67 +254,43 @@ public class Bullet : MonoBehaviour
         isHoming = true;
     }
 
-    private void FixedUpdate()
-    {
-        BulletPlayerTracking();
-
-        //Runs if there is a player in range of the bullet
-        //if (targetsInRange.Count > 0 && isHoming)
-        //{
-        //    Debug.Log("Player in Circle");
-        //    FindClosest(); //Finds closest player
-        //    float bulletBoundsY = GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.1f;
-        //    Vector2 startPos = new Vector2(transform.position.x, transform.position.y + bulletBoundsY);
-        //    Vector2 deltaPos = closest - transform.position;
-
-        //    RaycastHit2D hit;
-        //    hit = Physics2D.Raycast(startPos, deltaPos, Mathf.Infinity, bulletMask); //Raycast to check if player is in line of sight of the bullet
-        //    //Debug.Log(hit.collider.name);
-        //    if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
-        //    {
-        //        Debug.Log("Homing Triggered");
-        //        Vector3 newDirection = hit.collider.transform.position - transform.position;
-        //        newDirection.z = 0;
-        //        transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime) / newDirection.magnitude);
-        //        previousDirection = transform.up;
-        //        rb2d.velocity = transform.up * rb2d.velocity.magnitude;
-        //    }
-        //}
-    }
-
     private void BulletPlayerTracking()
     {
+        //only runs when there are players inside collider
         if (targetsInRange.Count > 0)
         {
-            Debug.Log("Player in Circle");
+            Debug.Log("Player in Collider");
             FindClosest(); //Finds closest player
-            //float bulletBoundsY = GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.2f;
             Vector2 startPos = new Vector2(transform.position.x, transform.position.y);
             Vector2 deltaPos = closest - transform.position;
 
+            //raycast to see if any of the players are in line of sight of bullet
             RaycastHit2D hit;
             hit = Physics2D.Raycast(startPos, deltaPos, Mathf.Infinity, bulletMask); //Raycast to check if player is in line of sight of the bullet
-            //Debug.Log(hit.collider.name);
+            //Debug.Log("Träffade: " + hit.collider.name);
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
             {
-                Debug.Log("Homing Triggered");
+                //Debug.Log("Homing Triggered");
                 Vector3 newDirection = hit.collider.transform.position - transform.position;
                 newDirection.z = 0;
-                if (isHoming)
+
+                if (isHoming) //homing
                 {
                     Debug.Log("Homing");
                     transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime) / newDirection.magnitude);
                 }
-                else
+                else //Aim assist
                 {
-                    Debug.Log("No Homing");
+                    Debug.Log("Magnetism");
                     transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime));
                 }
+
                 previousDirection = transform.up;
                 rb2d.velocity = transform.up * rb2d.velocity.magnitude;
             }
         }
     }
+
 
     //Finds the player that are closest to the bullet
     private void FindClosest()
@@ -335,6 +326,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         //Remove players that are not in range of the bullet
@@ -347,4 +339,5 @@ public class Bullet : MonoBehaviour
             }
         }
     }
+    #endregion; 
 }
