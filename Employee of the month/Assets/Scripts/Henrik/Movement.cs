@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     int decelaration;
     [SerializeField]
     [Range(0, 50)]
-    int walkSpeed;
+    public float walkSpeed;
     [SerializeField]
     [Range(0, 50)]
     int runSpeed;
@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movementVector;
     public Vector2 leftstickInput;
-    private int maxSpeed;
+    private float maxSpeed;
     private bool isRunning;
     public bool justTeleported;
 
@@ -39,7 +39,7 @@ public class Movement : MonoBehaviour
         AudioSource[] audiosources = GetComponentsInChildren<AudioSource>();
         foreach (AudioSource source in audiosources)
         {
-            if(source.clip != null)
+            if (source.clip != null)
             {
                 walksound = source;
             }

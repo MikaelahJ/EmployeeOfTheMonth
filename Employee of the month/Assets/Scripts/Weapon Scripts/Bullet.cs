@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
     public float knockBackModifier = 10;
 
     public bool isHoming = false;
-    public float turnSpeed = 2;
+    public float turnSpeed;
     public Vector2 aimAssistRightBounds;
     public Vector2 aimAssistLeftBounds;
     private Vector2 previousDirection;

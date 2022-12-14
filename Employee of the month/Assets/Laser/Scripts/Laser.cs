@@ -18,10 +18,12 @@ public class Laser : MonoBehaviour
 
     public GameObject startVFX;
     public GameObject endVFX;
-    private float damage = 3;
+    private float damage = 100;
     public bool isCharged = false;
     public bool isCharging = false;
     public bool isShooting = false;
+
+    private float defaultWalkSpeed;
 
     private Quaternion rotation;
     private List<ParticleSystem> particles = new List<ParticleSystem>();
@@ -68,7 +70,7 @@ public class Laser : MonoBehaviour
 
         if (aim == null)
             aim = GetComponentInParent<Aim>();
-        aim.rotationSpeed = 0.5f;
+        aim.rotationSpeed = 0.7f;
 
         EnableLaser();
         UpdateLaser();
@@ -83,7 +85,9 @@ public class Laser : MonoBehaviour
         if (movement == null)
             movement = GetComponentInParent<Movement>();
 
-        movement.enabled = false;
+        //movement.enabled = false;
+        defaultWalkSpeed = movement.walkSpeed;
+        movement.walkSpeed *= 0.1f;
 
         for (int i = 0; i < particles.Count; i++)
             particles[i].Play();
@@ -95,7 +99,7 @@ public class Laser : MonoBehaviour
 
         if (hit)
         {
-            SendDamage(hit.collider, damage);
+            SendDamage(hit.collider, damage * Time.deltaTime);
             lineRenderer.SetPosition(1, hit.point);
         }
 
@@ -134,8 +138,9 @@ public class Laser : MonoBehaviour
         isShooting = false;
         isCharged = false;
         lineRenderer.enabled = false;
-        movement.enabled = true;
+        //movement.enabled = true;
         aim.rotationSpeed = 30;
+        movement.walkSpeed = defaultWalkSpeed;
 
 
         for (int i = 0; i < particles.Count; i++)
