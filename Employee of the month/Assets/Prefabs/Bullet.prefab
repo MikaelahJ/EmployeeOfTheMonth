@@ -165,10 +165,10 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.52, y: 0.52}
   - {x: 0.49999997, y: 0.52}
+  - {x: 40, y: 70}
   - {x: 40, y: 80}
-  - {x: 40, y: 90}
-  - {x: -40, y: 90}
   - {x: -40, y: 80}
+  - {x: -40, y: 70}
   - {x: -0.52, y: 0.52}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
