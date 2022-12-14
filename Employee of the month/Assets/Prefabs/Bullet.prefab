@@ -165,8 +165,10 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.52, y: 0.52}
   - {x: 0.49999997, y: 0.52}
+  - {x: 40, y: 80}
   - {x: 40, y: 90}
   - {x: -40, y: 90}
+  - {x: -40, y: 80}
   - {x: -0.52, y: 0.52}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
@@ -186,7 +188,6 @@ GameObject:
   - component: {fileID: 1624548292394652931}
   - component: {fileID: 471386594015539393}
   - component: {fileID: 564052110150576421}
-  - component: {fileID: 9179727793397247108}
   m_Layer: 9
   m_Name: Bullet
   m_TagString: Untagged
@@ -315,6 +316,7 @@ MonoBehaviour:
   bulletMask:
     serializedVersion: 2
     m_Bits: 40127
+  scanBounds: 0
   bulletImpactSound: {fileID: 0}
 --- !u!50 &1624548292394652931
 Rigidbody2D:
@@ -449,28 +451,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!68 &9179727793397247108
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2297937692892492729}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.52, y: 0.52}
-  - {x: 0.49999997, y: 0.52}
-  - {x: 40, y: 90}
-  - {x: -40, y: 90}
-  - {x: -0.52, y: 0.52}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
