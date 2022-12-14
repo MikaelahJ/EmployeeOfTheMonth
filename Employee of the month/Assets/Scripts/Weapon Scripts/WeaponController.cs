@@ -163,11 +163,11 @@ public class WeaponController : MonoBehaviour
         if (checkIfUltimate)
         {
             Debug.Log("itemName" + items[0].name);
-            //if(items[0].name == "Microwave")
-            //{
-            //    newWeapon.isSuperMicro = true;
+            if (items[0].name == "Microwave(Clone)")
+            {
+                newWeapon.isSuperMicro = true;
 
-            //}
+            }
             if (items[0].ultimateFire != null)
             {
                 newWeapon.fire = items[0].ultimateFire;

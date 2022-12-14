@@ -41,9 +41,9 @@ public class VentManager : MonoBehaviour
             k--;
 
         }
-        foreach (KeyValuePair<GameObject, int> kvp in ventConnection)
-        {
-            Debug.LogFormat("ventconnection: {0} - {1}", kvp.Key, kvp.Value);
-        }
+        //foreach (KeyValuePair<GameObject, int> kvp in ventConnection)
+        //{
+        //    Debug.LogFormat("ventconnection: {0} - {1}", kvp.Key, kvp.Value);
+        //}
     }
 }

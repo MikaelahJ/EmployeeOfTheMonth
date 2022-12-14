@@ -26,21 +26,25 @@ public class SpawnManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (Camera.main.TryGetComponent<CameraController>(out camController))
+        if (Camera.main.TryGetComponent(out camController))
         {
-            AddToDictionary();
+            Invoke(nameof(AddToDictionary), 0.5f);
         }
-
     }
 
     private void AddToDictionary()
     {
+        Debug.Log(camController.players.Length);
+
         for (int i = 0; i < camController.players.Length; i++)
         {
+            Debug.Log("hejhej");
+
             if (camController.players[i] != null)
             {
                 int player = camController.players[i].gameObject.GetComponent<HasHealth>().playerIndex;
                 GameManager.Instance.AddPointsToPlayer("P" + player.ToString(), 0);
+                Debug.Log("player " + "P" + player.ToString());
             }
         }
     }
@@ -48,7 +52,7 @@ public class SpawnManager : MonoBehaviour
     public void PlayerDied()
     {
         alivePlayers -= 1;
-        if (alivePlayers <= 1)
+        if (alivePlayers == 1)
         {
             Invoke(nameof(CheckRoundWinner), 2);
             AudioManager.instance.activateFadeVolume();
