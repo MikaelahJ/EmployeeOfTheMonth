@@ -25,12 +25,10 @@ TagManager:
   - Cursor
   - SoftWall
   - ItemRemovedFromGun
-  - 
+  - HomingBullet
   - 
   - MapEffects
   - Laser
-  - 
-  - 
   - 
   - 
   - 
