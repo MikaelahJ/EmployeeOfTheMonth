@@ -10,9 +10,10 @@ public class ItemBreak : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    public int damageThreshold = 5;
-    private int maxHealth;
-    private int health;
+    //public int damageThreshold = 5;
+    private int healthMultiplier;
+    public int health;
+    private int startHealth;
 
     private float timer;
     private float breakRate = 0.5f;
@@ -21,30 +22,26 @@ public class ItemBreak : MonoBehaviour
     {
         animator.enabled = false;
         spritesBeforeBreak.Reverse(); //känns enklast att kunna lägga in dom i rätt ordning i editorn så vi reversar den här ba
-        maxHealth = spritesBeforeBreak.Count;
-        health = maxHealth;
+        healthMultiplier = spritesBeforeBreak.Count + 1;
+        startHealth = health;
+        if (healthMultiplier != 0)
+            health *= healthMultiplier;
     }
 
     private void Update()
     {
         timer += Time.deltaTime;
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)//damage ska skickas som int
     {
-        //Debug.Log("damage" + damage);
-        if (!(damage >= damageThreshold))
-        {
-            Debug.Log("damage threshold not reached");
-            return;
-        }
-        if (damage >= 25)
-            health = 0;
+        //if (timer >= breakRate)
+        //{
+        //    health -= damage;
+        //    timer = 0;
+        //}
 
-        if (timer >= breakRate)
-        {
-            health--;
-            timer = 0;
-        }
+        health -= damage;
+        Debug.Log("health " + health);
 
         if (health <= 0)
         {
@@ -54,8 +51,16 @@ public class ItemBreak : MonoBehaviour
             return;
         }
 
-        spriteRenderer.sprite = spritesBeforeBreak[health];
-        Debug.Log("sprite " + spriteRenderer.sprite);
+        Debug.Log("health Modulus " + health % healthMultiplier);
+        //health = 150
+        if (health % healthMultiplier == startHealth)
+        {
+            spriteRenderer.sprite = spritesBeforeBreak[health];
+
+            healthMultiplier--;
+            Debug.Log("healthMultiplier " + healthMultiplier);
+        }
+
     }
 }
 

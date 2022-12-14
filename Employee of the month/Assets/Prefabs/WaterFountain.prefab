@@ -138,4 +138,4 @@ MonoBehaviour:
   spritesBeforeBreak: []
   animator: {fileID: 2422450711565499357}
   spriteRenderer: {fileID: 2422450711565499347}
-  damageThreshold: 5
+  health: 50
