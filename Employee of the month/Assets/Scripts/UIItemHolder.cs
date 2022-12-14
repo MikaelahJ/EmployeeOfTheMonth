@@ -44,29 +44,36 @@ public class UIItemHolder : MonoBehaviour
 
     public void RemoveItem(int index, NewItemScriptableObject item)
     {
+        RemoveItem(index, item, 0f);
+    }
+
+    public void RemoveItem(int index, NewItemScriptableObject item, float delaySeconds)
+    {
         if (item == null)
         {
             Debug.Log("UIItemHolder: can't remove item at index " + index + ", item not found");
             return;
         }
-        GameObject newItem = Instantiate(itemRemovedFromGun, items[index].transform.position, transform.rotation);
+
+        StartCoroutine(SpawnItemRemovedFromGun(index, item, delaySeconds));
 
         if (item.hasAnimations)
         {
             animators[index].SetBool(item.name, false);
             animators[index].enabled = false;
         }
+    }
 
+    private IEnumerator SpawnItemRemovedFromGun(int index, NewItemScriptableObject item, float delaySeconds)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+
+        GameObject newItem = Instantiate(itemRemovedFromGun, items[index].transform.position, transform.rotation);
 
         newItem.GetComponent<ItemRemovedFromGun>().moveDirection = transform.right.normalized;
         newItem.GetComponent<ItemRemovedFromGun>().sprite = item.itemIcon;
         newItem.GetComponent<ItemRemovedFromGun>().brokenSprite = item.itemBrokenOnGround;
         newItem.GetComponent<ItemRemovedFromGun>().sticksToWalls = item.brokenItemSticksToWall;
-        items[index].GetComponent<SpriteRenderer>().sprite = null;
-        
-
-        //var tempColor = itemImage.color;
-        //tempColor.a = 0f;
-        //itemImage.color = tempColor;
+        items[index].GetComponent<SpriteRenderer>().sprite = null; 
     }
 }

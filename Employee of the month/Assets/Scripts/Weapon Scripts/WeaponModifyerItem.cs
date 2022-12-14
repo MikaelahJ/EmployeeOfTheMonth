@@ -34,8 +34,10 @@ public class WeaponModifyerItem : MonoBehaviour
         
         if (collision.gameObject.transform.CompareTag("Player"))
         {
-            if (collision.gameObject.transform.parent.transform.GetComponentInChildren<WeaponController>().AddItem(itemType))
+            WeaponController weaponController = collision.gameObject.transform.parent.transform.GetComponentInChildren<WeaponController>();
+            if (weaponController.CanAddItem())
             {
+                weaponController.AddItem(itemType);
                 Disable();
                 Invoke(nameof(Enable), respawnTime);
             }
@@ -45,7 +47,7 @@ public class WeaponModifyerItem : MonoBehaviour
     private void Enable()
     {
         if(itemType.onRespawn != null)
-            AudioSource.PlayClipAtPoint(itemType.onRespawn, transform.position);
+            AudioSource.PlayClipAtPoint(itemType.onRespawn, transform.position, AudioManager.instance.audioClips.sfxVolume);
         GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<SpriteRenderer>().enabled = true;
     }

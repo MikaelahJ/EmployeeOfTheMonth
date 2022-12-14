@@ -28,7 +28,9 @@ public class ItemRemovedFromGun : MonoBehaviour
         startLocalScale = transform.localScale;
         //For Dynamic mode
         //Debug.Log("Distance: " + moveDirection * throwDistance);
-        rb2d.AddForce(moveDirection * throwDistance, ForceMode2D.Impulse);
+        float offset = 0.1f;
+        float randomDistance = throwDistance + throwDistance * Random.Range(-throwDistance * offset, throwDistance * offset);
+        rb2d.AddForce(moveDirection * randomDistance, ForceMode2D.Impulse);
     }
 
     void FixedUpdate()
