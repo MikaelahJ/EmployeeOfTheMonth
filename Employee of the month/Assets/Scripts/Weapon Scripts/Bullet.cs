@@ -221,13 +221,20 @@ public class Bullet : MonoBehaviour
         AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position);
 
         //Turn off tracking to calculate new trajectory
-        DisableTracking();
+
+        if (isHoming)
+        {
+            DisableTracking();
+        }
     }
 
 
     private void FixedUpdate()
     {
-        BulletPlayerTracking();
+        if (isHoming)
+        {
+            BulletPlayerTracking();
+        }
     }
 
 
