@@ -19,3 +19,6 @@ MonoBehaviour:
   impact_wood: {fileID: 8300000, guid: a79c5096d4157ca4fb4180a226684601, type: 3}
   impact_glass: {fileID: 8300000, guid: cfabc955080443e4ca1c3525e20996e2, type: 3}
   bulletBounce: {fileID: 8300000, guid: 9b1b573f6bb4a674db206047e5520e88, type: 3}
+  musicVolume: 0.20984606
+  sfxVolume: 0.8177959
+  characterVolume: 1

@@ -48,17 +48,17 @@ public class WeaponController : MonoBehaviour
         Debug.Log("Inventory full, can't add item: " + item.name);
     }
 
-    public bool CanAddItem()
+    public (bool, int) CanAddItem()
     {
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i] == null)
             {
-                return true;
+                return (true, i);
             }
         }
 
-        return false;
+        return (false, -1);
     }
 
     public void RemoveAllItems()

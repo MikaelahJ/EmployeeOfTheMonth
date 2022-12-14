@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WeaponModifyerItem : MonoBehaviour
 {
+    public GameObject ItemGoingToWeaponSlot;
+
     public NewItemScriptableObject itemType;
     [SerializeField] [Range(1, 30)] float respawnTime;
 
@@ -34,14 +36,39 @@ public class WeaponModifyerItem : MonoBehaviour
         
         if (collision.gameObject.transform.CompareTag("Player"))
         {
-            WeaponController weaponController = collision.gameObject.transform.parent.transform.GetComponentInChildren<WeaponController>();
-            if (weaponController.CanAddItem())
+            GameObject weapon = FindWeapon(collision.transform);
+            WeaponController weaponController = weapon.GetComponent<WeaponController>();
+            (bool, int) emptyWeaponSlot = weaponController.CanAddItem();
+            if (emptyWeaponSlot.Item1)
             {
-                weaponController.AddItem(itemType);
+                //weaponController.AddItem(itemType);
+                SpawnItemGoingToWeaponSlot(weapon, emptyWeaponSlot.Item2);
                 Disable();
                 Invoke(nameof(Enable), respawnTime);
             }
         }
+    }
+
+    public GameObject FindWeapon(Transform parent)
+    {
+        foreach(Transform child in parent)
+        {
+            if(child.gameObject.TryGetComponent<WeaponController>(out WeaponController weaponController))
+            {
+                Debug.Log("Found Weapon " + child.gameObject.name);
+                return child.gameObject;
+            }
+        }
+        Debug.Log("No weapon could be found!, this will create an error lol");
+        return null;
+    }
+
+    public void SpawnItemGoingToWeaponSlot(GameObject targetWeapon, int index)
+    {
+        GameObject newItem = Instantiate(ItemGoingToWeaponSlot, transform.position, transform.rotation);
+        newItem.GetComponent<ItemGoingToWeaponSlot>().itemIndex = index;
+        newItem.GetComponent<ItemGoingToWeaponSlot>().item = itemType;
+        newItem.GetComponent<ItemGoingToWeaponSlot>().targetWeapon = targetWeapon;
     }
 
     private void Enable()
