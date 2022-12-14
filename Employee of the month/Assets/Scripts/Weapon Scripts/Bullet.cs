@@ -38,6 +38,7 @@ public class Bullet : MonoBehaviour
     public List<Collider2D> targetsInRange;
     public LayerMask bulletMask;
     private Vector2[] aimAssistCollider;
+    [SerializeField] private float scanBounds;
 
     private bool canTakeDamage = false;
     private bool hasExploded = false;
@@ -52,14 +53,23 @@ public class Bullet : MonoBehaviour
         Invoke(nameof(CanTakeDamage), 0.05f);
         previousDirection = transform.up;
         range = 0;
-
+        aimAssistCollider = GetComponentInChildren<EdgeCollider2D>().points;
 
         if (!isHoming)
         {
-            aimAssistCollider = GetComponent<EdgeCollider2D>().points;
-            aimAssistCollider[2] = aimAssistRightBounds;
-            aimAssistCollider[3] = aimAssistLeftBounds;
-            GetComponent<EdgeCollider2D>().points = aimAssistCollider;
+            Debug.Log("Magnetic");
+            aimAssistCollider[2] = new Vector2(aimAssistRightBounds.x, aimAssistRightBounds.y -10);
+            aimAssistCollider[3] = aimAssistRightBounds;
+            aimAssistCollider[4] = aimAssistLeftBounds;
+            aimAssistCollider[5] = new Vector2(aimAssistLeftBounds.x, aimAssistLeftBounds.y - 10);
+            GetComponentInChildren<EdgeCollider2D>().points = aimAssistCollider;
+        }
+        else
+        {
+            Debug.Log("Homing");
+            aimAssistCollider[2] = new Vector2(aimAssistCollider[2].x, aimAssistCollider[2].y - scanBounds);
+            aimAssistCollider[5] = new Vector2(aimAssistCollider[5].x, aimAssistCollider[5].y - scanBounds);
+            GetComponentInChildren<EdgeCollider2D>().points = aimAssistCollider; 
         }
     }
 
@@ -84,6 +94,7 @@ public class Bullet : MonoBehaviour
         bulletImpactSound = weapon.bulletImpactSound;
         isHoming = weapon.isHoming;
         turnSpeed = weapon.turnSpeed;
+        scanBounds = weapon.scanBounds;
 
         if (isPenetrate)
         {

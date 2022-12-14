@@ -56,6 +56,7 @@ public class NewItemScriptableObject : ScriptableObject
     [Header("Homing")]
     public bool isHoming = false;
     public float turnSpeed = 0f;
+    public float scanBounds = 0f;
 
     [Header("Animations")]
     public bool hasAnimations = false;

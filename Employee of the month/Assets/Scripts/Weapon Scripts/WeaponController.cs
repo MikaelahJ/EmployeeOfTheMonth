@@ -156,6 +156,7 @@ public class WeaponController : MonoBehaviour
             newWeapon.knockbackModifier += item.knockbackModifier;
             newWeapon.isHoming = newWeapon.isHoming || item.isHoming;
             newWeapon.turnSpeed += item.turnSpeed;
+            newWeapon.scanBounds += item.scanBounds;
 
         }
 
