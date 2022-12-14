@@ -162,7 +162,12 @@ public class WeaponController : MonoBehaviour
         //Add ultimate effects
         if (checkIfUltimate)
         {
-            newWeapon.isSuperMicro = true;
+            Debug.Log("itemName" + items[0].name);
+            //if(items[0].name == "Microwave")
+            //{
+            //    newWeapon.isSuperMicro = true;
+
+            //}
             if (items[0].ultimateFire != null)
             {
                 newWeapon.fire = items[0].ultimateFire;

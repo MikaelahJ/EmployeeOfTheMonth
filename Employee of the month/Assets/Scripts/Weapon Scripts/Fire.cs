@@ -114,7 +114,7 @@ public class Fire : MonoBehaviour
 
     private void FireSuperMicro()
     {
-        LoseAmmo(1);
+        
 
         laser.SetActive(true);
         laserScript.FireLaser();
@@ -123,6 +123,7 @@ public class Fire : MonoBehaviour
     public void DeActivateLaser()
     {
         laser.SetActive(false);
+        LoseAmmo(1);
     }
 
     private void FireShotgun()
