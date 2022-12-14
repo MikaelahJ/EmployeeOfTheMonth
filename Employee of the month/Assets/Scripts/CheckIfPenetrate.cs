@@ -16,7 +16,7 @@ public class CheckIfPenetrate : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Untagged"))
         {
-            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position);
+            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position, AudioManager.instance.audioClips.sfxVolume);
         }
 
         if (collider.gameObject.CompareTag("Player"))
@@ -27,7 +27,7 @@ public class CheckIfPenetrate : MonoBehaviour
 
         if (collider.gameObject.CompareTag("SoftWall"))
         {
-            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
+            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position, AudioManager.instance.audioClips.sfxVolume);
             bulletScript.SendDamage(collider);
         }
     }

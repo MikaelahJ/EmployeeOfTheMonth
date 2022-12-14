@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class ItemBreak : MonoBehaviour
         maxHealth = spritesBeforeBreak.Count;
         health = maxHealth;
     }
+
     private void Update()
     {
         timer += Time.deltaTime;
@@ -48,7 +50,7 @@ public class ItemBreak : MonoBehaviour
         {
             animator.enabled = true;
             animator.SetTrigger("Break");
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            gameObject.GetComponent<Collider2D>().enabled = false;
             return;
         }
 

@@ -12,12 +12,22 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject optionsPauseMenu;
     [SerializeField] private GameObject optionsFirstSelectedButton;
 
-    [SerializeField] private GameObject volumeSlider;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+    [SerializeField] private Slider characterSlider;
+
+    private bool hasStarted = false;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        musicSlider.value = AudioManager.instance.audioClips.musicVolume;
+        sfxSlider.value = AudioManager.instance.audioClips.sfxVolume;
+        characterSlider.value = AudioManager.instance.audioClips.characterVolume;
+    }
+
     void Start()
     {
-        float currentvol = AudioManager.instance.GetComponent<AudioSource>().volume;
-        volumeSlider.GetComponent<Slider>().value = currentvol;
+        hasStarted = true;
     }
 
     // Update is called once per frame
@@ -48,10 +58,30 @@ public class PauseMenuController : MonoBehaviour
         eventSystem.SetSelectedGameObject(button, new BaseEventData(eventSystem));
     }
 
-    public void SetVolume()
+    public void SetMusicVolume()
     {
-        float volume = volumeSlider.GetComponent<Slider>().value;
-        AudioManager.instance.SetVolume(volume);
+        if (!hasStarted)
+            return;
+
+        float volume = musicSlider.value;
+        AudioManager.instance.setMusicVolume(volume);
+    }
+
+    public void SetsfxVolume()
+    {
+        if (!hasStarted)
+            return;
+
+        float volume = sfxSlider.value;
+        AudioManager.instance.setsfxVolume(volume);
+    }
+    public void SetCharacterVolume()
+    {
+        if (!hasStarted)
+            return;
+
+        float volume = characterSlider.value;
+        AudioManager.instance.setCharacterVolume(volume);
     }
 
 }

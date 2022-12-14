@@ -51,6 +51,7 @@ public class SpawnManager : MonoBehaviour
         if (alivePlayers <= 1)
         {
             Invoke(nameof(CheckRoundWinner), 2);
+            AudioManager.instance.activateFadeVolume();
         }
     }
 

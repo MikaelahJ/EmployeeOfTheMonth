@@ -124,22 +124,22 @@ public class Bullet : MonoBehaviour
 
         }
 
-        if (isPenetrate && !collision.gameObject.CompareTag("HardWall"))
-        {
-            Debug.Log("Penetrate through object: " + collision.gameObject.name);
-            if (collision.gameObject.CompareTag("SoftWall"))
-            {
-                AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
-            }
-            else
-            {
-                AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position);
-            }
-            //return;
-        }
+        //if (isPenetrate && !collision.gameObject.CompareTag("HardWall"))
+        //{
+        //    Debug.Log("Penetrate through object: " + collision.gameObject.name);
+        //    if (collision.gameObject.CompareTag("SoftWall"))
+        //    {
+        //        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
+        //    }
+        //    else
+        //    {
+        //        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position);
+        //    }
+        //    //return;
+        //}
 
         //Play bullet hit sound
-        AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position);
+        AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position, AudioManager.instance.audioClips.sfxVolume);
 
         if (isExplode)
         {
@@ -267,7 +267,7 @@ public class Bullet : MonoBehaviour
             //raycast to see if any of the players are in line of sight of bullet
             RaycastHit2D hit;
             hit = Physics2D.Raycast(startPos, deltaPos, Mathf.Infinity, bulletMask); //Raycast to check if player is in line of sight of the bullet
-            //Debug.Log("Träffade: " + hit.collider.name);
+            //Debug.Log("Trï¿½ffade: " + hit.collider.name);
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
             {
                 //Debug.Log("Homing Triggered");
