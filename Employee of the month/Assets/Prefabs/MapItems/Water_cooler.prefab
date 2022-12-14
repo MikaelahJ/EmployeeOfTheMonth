@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3397784352064831897}
   - component: {fileID: 3397784352064831894}
-  - component: {fileID: -265877081427977772}
-  - component: {fileID: 2948628019259221563}
   - component: {fileID: 3397784352064831896}
   m_Layer: 0
   m_Name: Water_cooler
@@ -27,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3397784352064831895}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 1, w: 0.00000016391276}
   m_LocalPosition: {x: 4.8784266, y: -1.1474684, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -87,42 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-265877081427977772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3397784352064831895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a25c479672f3ec044b7951de558a0cdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spritesBeforeBreak: []
-  animator: {fileID: 2948628019259221563}
-  spriteRenderer: {fileID: 0}
-  damageThreshold: 5
---- !u!95 &2948628019259221563
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3397784352064831895}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 33439c796eb8ac043a6ee5361919d8e3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!61 &3397784352064831896
 BoxCollider2D:
   m_ObjectHideFlags: 0

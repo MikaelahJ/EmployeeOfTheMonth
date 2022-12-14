@@ -105,7 +105,6 @@ MonoBehaviour:
   - {fileID: -1425895654, guid: 803564bbf963a374897e0b416e99892a, type: 3}
   animator: {fileID: 5271581782318828697}
   spriteRenderer: {fileID: 5271581782318828702}
-  damageThreshold: 5
 --- !u!61 &5271581782318828703
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -140,7 +139,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5271581782318828701}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ac573af3404f0c248878d46b2d5f8f02, type: 2}
   m_CullingMode: 0
