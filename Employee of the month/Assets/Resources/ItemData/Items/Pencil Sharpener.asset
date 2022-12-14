@@ -27,7 +27,8 @@ MonoBehaviour:
   ammo: 8
   weaponDamage: 15
   recoilModifier: 10
-  fireRate: 0.4
+  baseFireRate: 0
+  fireRatePercentage: -30
   accuracy: 100
   maxMissDegAngle: 0
   isShotgun: 0
@@ -39,6 +40,7 @@ MonoBehaviour:
   numOfBounces: 0
   isPenetrate: 1
   numOfPenetrations: 1
+  isSuperMicro: 0
   isExplosive: 0
   explosionRadius: 0
   explosionDamage: 0
@@ -46,4 +48,5 @@ MonoBehaviour:
   knockbackModifier: 0
   isHoming: 0
   turnSpeed: 0
+  scanBounds: 0
   hasAnimations: 0

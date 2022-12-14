@@ -129,8 +129,9 @@ public class WeaponController : MonoBehaviour
             }
 
             newWeapon.ammo += item.ammo;
+            newWeapon.ammoWeight *= item.ammoWeight;
             newWeapon.weaponDamage += item.weaponDamage;
-            newWeapon.fireRate += item.fireRate;
+            newWeapon.baseFireRate *= (1 + (item.fireRatePercentage / 100f));
             newWeapon.recoilModifier += item.recoilModifier;
             newWeapon.accuracy *= (item.accuracy / 100f);
             newWeapon.maxMissDegAngle += item.maxMissDegAngle;
@@ -178,7 +179,7 @@ public class WeaponController : MonoBehaviour
         UpdateFireStats();
     }
 
-    public void LoseItemAmmo(int shots)
+    public void LoseItemAmmo(float shots)
     {
         for (int i = 0; i < items.Length; i++)
         {
