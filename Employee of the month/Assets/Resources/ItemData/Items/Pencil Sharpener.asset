@@ -19,12 +19,13 @@ MonoBehaviour:
   onRespawn: {fileID: 0}
   onPickup: {fileID: 8300000, guid: af20d9bfd992733468f6e9cd16319e9e, type: 3}
   onDestroy: {fileID: 0}
-  ultimateFire: {fileID: 8300000, guid: 77bd709ae61db8f44aa4b1b45319c6fd, type: 3}
+  ultimateFire: {fileID: 8300000, guid: 811331b5083bc6f4fb39859b7cacbf6a, type: 3}
   fire: {fileID: 8300000, guid: 413ba4c464a4d1940b8d4e09ace5c070, type: 3}
   fireSoundPriority: 6
   bulletImpactSound: {fileID: 0}
   bulletImpactPriority: 0
   ammo: 8
+  ammoWeight: 1
   weaponDamage: 15
   recoilModifier: 10
   baseFireRate: 0
@@ -49,4 +50,5 @@ MonoBehaviour:
   isHoming: 0
   turnSpeed: 0
   scanBounds: 0
+  isStapler: 0
   hasAnimations: 0
