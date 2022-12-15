@@ -119,6 +119,7 @@ public class Bullet : MonoBehaviour
             Physics2D.IgnoreLayerCollision(3, 9, false);
             Physics2D.IgnoreLayerCollision(11, 9, false);
             Physics2D.IgnoreLayerCollision(0, 9, false);
+            Physics2D.IgnoreLayerCollision(15, 9, false);
         }
     }
 
@@ -127,7 +128,7 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         SendDamage(collision.collider, collision);
-        Debug.Log("Collided with " + collision.gameObject.name);
+        //Debug.Log("Collided with " + collision.gameObject.name);
         //Bounce
         if (isBouncy && bounces < maxBounce)
         {
@@ -234,8 +235,16 @@ public class Bullet : MonoBehaviour
     {
         Rigidbody2D playerRb = playerCollider.gameObject.GetComponentInParent<Rigidbody2D>();
         if (playerRb == null) { return; }
-        playerRb.AddForce(transform.up.normalized * knockBackModifier, ForceMode2D.Impulse);
-        Debug.Log("Applied " + rb2d.velocity.normalized * knockBackModifier + " Knockback to " + playerCollider.name);
+
+        float extraKnockback = 0;
+        Vector3 forceDirection = transform.up.normalized;
+        if (hasExploded)
+        {
+            forceDirection *= -1;
+            extraKnockback = explosionDamage;
+        }
+        playerRb.AddForce(forceDirection * (knockBackModifier + extraKnockback), ForceMode2D.Impulse);
+        Debug.Log("Applied " + rb2d.velocity.normalized * (knockBackModifier + extraKnockback) + " Knockback to " + playerCollider.name);
     }
 
     private void Bounce()

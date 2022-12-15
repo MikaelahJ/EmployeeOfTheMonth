@@ -51,7 +51,8 @@ public class PencilStuckInWall : MonoBehaviour
 
             //Vector2 getPositionFromWall = new Vector2(wall.transform.position.x * wallX, wall.transform.position.y * wallY);
             //Vector2 getPositionFromItem = new Vector2(transform.position.x * wallY, transform.position.y * wallX);
-            Vector2 offset = wallNormal / 8;
+            Vector2 offset = wallNormal / 10;
+            //Vector2 offset = Vector2.zero;
             //Debug.Log("Offset " + offset);
             //transform.position = getPositionFromWall + getPositionFromItem + offset;
             transform.position = conctactPoint - offset;

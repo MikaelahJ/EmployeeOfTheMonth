@@ -43,7 +43,7 @@ public class ItemBreak : MonoBehaviour
         damageDealt += damage;
 
         health -= damage;
-        Debug.Log("health " + health);
+        Debug.Log(gameObject.name + " has " + health + " health");
 
         if (health <= 0)
         {
