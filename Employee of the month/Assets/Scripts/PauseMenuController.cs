@@ -27,6 +27,7 @@ public class PauseMenuController : MonoBehaviour
 
     void Start()
     {
+        //The sliders call their OnValueChanged trigger on startup, this bool is to ignore that call
         hasStarted = true;
     }
 

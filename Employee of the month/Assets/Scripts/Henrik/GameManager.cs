@@ -127,6 +127,8 @@ public class GameManager : MonoBehaviour
         foreach (GameObject playerController in Instance.playerControllers)
         {
             Debug.Log("Found input " + playerController.name);
+            GameObject player = playerController.GetComponent<ControllerInput>().GetPlayerSprite();
+            player.GetComponent<AudioSource>().Pause();
             playerController.GetComponent<ControllerInput>().EnableAim(false);
             playerController.GetComponent<ControllerInput>().LoadCursors();
         }
@@ -144,6 +146,8 @@ public class GameManager : MonoBehaviour
         foreach (GameObject playerController in Instance.playerControllers)
         {
             Debug.Log("Found input " + playerController.name);
+            GameObject player = playerController.GetComponent<ControllerInput>().GetPlayerSprite();
+            player.GetComponent<AudioSource>().Play();
             playerController.GetComponent<ControllerInput>().EnableAim(true);
             playerController.GetComponent<ControllerInput>().DestroyCursor();
         }
