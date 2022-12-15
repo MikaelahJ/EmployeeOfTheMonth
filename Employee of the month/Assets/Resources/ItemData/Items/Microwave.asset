@@ -21,7 +21,7 @@ MonoBehaviour:
   onDestroy: {fileID: 0}
   ultimateFire: {fileID: 8300000, guid: e635bbc0cf8863a46bc4ff753cd781aa, type: 3}
   fire: {fileID: 8300000, guid: cedc5f12c70dac9458e178d69db2ee1f, type: 3}
-  fireSoundPriority: 0
+  fireSoundPriority: 8
   bulletImpactSound: {fileID: 8300000, guid: bc76ad31a689c924e9f957ce5fd24257, type: 3}
   bulletImpactPriority: 5
   ammo: 5
