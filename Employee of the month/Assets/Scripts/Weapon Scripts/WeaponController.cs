@@ -23,6 +23,7 @@ public class WeaponController : MonoBehaviour
         UpdateWeaponStats();
 
         sound = GetComponent<AudioSource>();
+        sound.volume = AudioManager.instance.audioClips.sfxVolume;
     }
 
     public void AddItem(NewItemScriptableObject item)

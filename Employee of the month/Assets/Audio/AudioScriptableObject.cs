@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "Audio", menuName = "ScriptableObjects/AudioScriptableObject")]
 
@@ -6,11 +7,16 @@ public class AudioScriptableObject : ScriptableObject
 {
     // Maybe individual sounds
     [Header("Player Sounds")]
-    public AudioClip death; 
+    public List<AudioClip> player1Deaths;
+    public List<AudioClip> player2Deaths;
+    public List<AudioClip> player3Deaths;
+    public List<AudioClip> player4Deaths;
+
     public AudioClip damaged;
 
     [Header("Weapon Sounds")]
     public AudioClip emptyMag;
+    public AudioClip laserCharge;
 
     [Header("Bullet Sounds")]
     public AudioClip impact_wall;
