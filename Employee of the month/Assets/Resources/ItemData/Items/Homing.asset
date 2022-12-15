@@ -35,7 +35,7 @@ MonoBehaviour:
   isShotgun: 0
   shotgunAmount: 0
   bulletSprite: {fileID: 21300000, guid: c1d6d1e3c860862488d1412ae9a23b3a, type: 3}
-  bulletSpritePriority: 25
+  bulletSpritePriority: 5
   bulletVelocity: 0
   isBouncy: 0
   numOfBounces: 0
