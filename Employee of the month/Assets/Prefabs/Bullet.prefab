@@ -277,6 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pencil: {fileID: 214079517262277402}
+  PencilStuckInWall: {fileID: 912021987818860790, guid: 9d42c03f97ff5a54085fdca7b722116a, type: 3}
   isBouncy: 0
   animSpeed:
     serializedVersion: 2

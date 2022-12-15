@@ -6,6 +6,9 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private GameObject pencil;
+    [SerializeField] private GameObject PencilStuckInWall;
+    private bool haveSpawnedPencil = false;
+
     private Rigidbody2D rb2d;
     private float bulletSpeed = 5;
     private Vector3 direction;
@@ -54,6 +57,11 @@ public class Bullet : MonoBehaviour
         previousDirection = transform.up;
         range = 0;
         aimAssistCollider = GetComponentInChildren<EdgeCollider2D>().points;
+
+        if (isBouncy)
+        {
+            rb2d.sharedMaterial.bounciness = 1;
+        }
 
         if (!isHoming)
         {
@@ -117,7 +125,6 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         SendDamage(collision.collider, collision);
-
         //Bounce
         if (isBouncy && bounces < maxBounce)
         {
@@ -135,20 +142,6 @@ public class Bullet : MonoBehaviour
 
         }
 
-        //if (isPenetrate && !collision.gameObject.CompareTag("HardWall"))
-        //{
-        //    Debug.Log("Penetrate through object: " + collision.gameObject.name);
-        //    if (collision.gameObject.CompareTag("SoftWall"))
-        //    {
-        //        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_glass, transform.position);
-        //    }
-        //    else
-        //    {
-        //        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position);
-        //    }
-        //    //return;
-        //}
-
         //Play bullet hit sound
         AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position, AudioManager.instance.audioClips.sfxVolume);
 
@@ -159,8 +152,21 @@ public class Bullet : MonoBehaviour
         }
         else
         {
+            if (isPenetrate)
+            {
+                SpawnPencilStuckInWall(collision);
+            }
             Destroy(gameObject);
         }
+    }
+
+    private void SpawnPencilStuckInWall(Collision2D collision)
+    {
+        if (haveSpawnedPencil) { return; }
+        GameObject pencilStuck = Instantiate(PencilStuckInWall, transform.position, Quaternion.identity);
+        pencilStuck.GetComponent<PencilStuckInWall>().SetPencilRotation(transform.rotation);
+        pencilStuck.GetComponent<PencilStuckInWall>().SetCrackTransform(collision);
+        haveSpawnedPencil = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -227,8 +233,7 @@ public class Bullet : MonoBehaviour
     private void Bounce()
     {
         bounces++;
-        rb2d.sharedMaterial.bounciness = 1;
-
+        //rb2d.sharedMaterial.bounciness = 1;
         AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position);
 
         //Turn off tracking to calculate new trajectory
