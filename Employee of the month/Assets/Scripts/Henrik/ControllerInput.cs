@@ -80,7 +80,7 @@ public class ControllerInput : MonoBehaviour
         {
             LoadCursors();
         }
-        else
+        else if (scene.name != "LoadingScene")
         {
             LoadGame();
         }

@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviour
     public bool showedControlls = false;
     private int countdown = 3;
 
-
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -58,9 +56,7 @@ public class GameManager : MonoBehaviour
     IEnumerator RoundStartPause()
     {
         Time.timeScale = 0;
-        int delay = 3;
         isPaused = true;
-
 
         while (countdown >= 0)
         {
@@ -79,9 +75,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         yield return new WaitForSecondsRealtime(1);
         SpawnManager.instance.gameOverText.text = "";
-
-
-
     }
 
     public void ReloadScene()
