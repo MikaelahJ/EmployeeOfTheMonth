@@ -327,4 +327,9 @@ public class ControllerInput : MonoBehaviour
             aim.enabled = enable;
         }
     }
+
+    public GameObject GetPlayerSprite()
+    {
+        return playerSprite;
+    }
 }
