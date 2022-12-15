@@ -31,6 +31,7 @@ public class Bullet : MonoBehaviour
 
     public float knockBackModifier = 10;
 
+    public bool isStapler;
     public bool isHoming = false;
     public float turnSpeed;
     public Vector2 aimAssistRightBounds;
@@ -56,7 +57,8 @@ public class Bullet : MonoBehaviour
         Invoke(nameof(CanTakeDamage), 0.05f);
         previousDirection = transform.up;
         range = 0;
-        aimAssistCollider = GetComponentInChildren<EdgeCollider2D>().points;
+        targetsInRange = new List<Collider2D>();
+        aimAssistCollider = GetComponentInChildren<PolygonCollider2D>().points;
 
         if (isBouncy)
         {
@@ -65,19 +67,19 @@ public class Bullet : MonoBehaviour
 
         if (!isHoming)
         {
-            Debug.Log("Magnetic");
-            aimAssistCollider[2] = new Vector2(aimAssistRightBounds.x, aimAssistRightBounds.y -10);
-            aimAssistCollider[3] = aimAssistRightBounds;
-            aimAssistCollider[4] = aimAssistLeftBounds;
-            aimAssistCollider[5] = new Vector2(aimAssistLeftBounds.x, aimAssistLeftBounds.y - 10);
-            GetComponentInChildren<EdgeCollider2D>().points = aimAssistCollider;
+            //Debug.Log("Magnetic");
+            aimAssistCollider[1] = new Vector2(aimAssistRightBounds.x, aimAssistRightBounds.y -10);
+            aimAssistCollider[2] = aimAssistRightBounds;
+            aimAssistCollider[3] = aimAssistLeftBounds;
+            aimAssistCollider[4] = new Vector2(aimAssistLeftBounds.x, aimAssistLeftBounds.y - 10);
+            GetComponentInChildren<PolygonCollider2D>().points = aimAssistCollider;
         }
         else
         {
-            Debug.Log("Homing");
-            aimAssistCollider[2] = new Vector2(aimAssistCollider[2].x, aimAssistCollider[2].y - scanBounds);
-            aimAssistCollider[5] = new Vector2(aimAssistCollider[5].x, aimAssistCollider[5].y - scanBounds);
-            GetComponentInChildren<EdgeCollider2D>().points = aimAssistCollider; 
+            //Debug.Log("Homing");
+            aimAssistCollider[1] = new Vector2(aimAssistCollider[1].x, aimAssistCollider[1].y - scanBounds);
+            aimAssistCollider[4] = new Vector2(aimAssistCollider[4].x, aimAssistCollider[4].y - scanBounds);
+            GetComponentInChildren<PolygonCollider2D>().points = aimAssistCollider;
         }
     }
 
@@ -103,6 +105,7 @@ public class Bullet : MonoBehaviour
         isHoming = weapon.isHoming;
         turnSpeed = weapon.turnSpeed;
         scanBounds = weapon.scanBounds;
+        isStapler = weapon.isStapler;
 
         if (isPenetrate)
         {
@@ -141,6 +144,11 @@ public class Bullet : MonoBehaviour
 
             return;
 
+        }
+
+        if(isStapler && collision.gameObject.CompareTag("Player"))
+        {
+            ApplyKnockBack(collision.collider);
         }
 
         //Play bullet hit sound
@@ -283,29 +291,27 @@ public class Bullet : MonoBehaviour
         //only runs when there are players inside collider
         if (targetsInRange.Count > 0)
         {
-            Debug.Log("Player in Collider");
+            Debug.Log("InCollider");
             FindClosest(); //Finds closest player
-            Vector2 startPos = new Vector2(transform.position.x, transform.position.y);
+            Vector2 startPos = transform.position;// new Vector2(transform.position.x, transform.position.y);
             Vector2 deltaPos = closest - transform.position;
 
             //raycast to see if any of the players are in line of sight of bullet
             RaycastHit2D hit;
-            hit = Physics2D.Raycast(startPos, deltaPos, Mathf.Infinity, bulletMask); //Raycast to check if player is in line of sight of the bullet
-            //Debug.Log("Tr�ffade: " + hit.collider.name);
+            hit = Physics2D.Raycast(startPos, deltaPos, Mathf.Infinity, bulletMask);
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
             {
-                //Debug.Log("Homing Triggered");
+
+                Debug.DrawRay(transform.position, hit.collider.transform.position - transform.position, Color.red, 5);
                 Vector3 newDirection = hit.collider.transform.position - transform.position;
                 newDirection.z = 0;
 
                 if (isHoming) //homing
                 {
-                    Debug.Log("Homing");
-                    transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime) / newDirection.magnitude);
+                    transform.up = Vector2.MoveTowards(previousDirection, newDirection, turnSpeed * Time.deltaTime);
                 }
                 else //Aim assist
                 {
-                    Debug.Log("Magnetism");
                     transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime));
                 }
 
@@ -322,7 +328,7 @@ public class Bullet : MonoBehaviour
         foreach (Collider2D col in targetsInRange)
         {
             float objectRange = (col.gameObject.transform.position - transform.position).magnitude;
-            //Debug.Log(col.name);
+            Debug.Log(col.name);
 
             if (range == 0)
             {
@@ -331,6 +337,7 @@ public class Bullet : MonoBehaviour
             }
             else if (objectRange < range)
             {
+                Debug.Log("Updates");
                 range = objectRange;
                 closest = col.gameObject.transform.position;
             }
@@ -344,7 +351,6 @@ public class Bullet : MonoBehaviour
         {
             if (!targetsInRange.Contains(collision))
             {
-                //Debug.Log(targetsInRange.Count);
                 targetsInRange.Add(collision);
             }
         }
@@ -358,10 +364,10 @@ public class Bullet : MonoBehaviour
         {
             if (targetsInRange.Contains(collision))
             {
-                //Debug.Log("Removed");
                 targetsInRange.Remove(collision);
             }
         }
     }
+
     #endregion; 
 }

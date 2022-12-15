@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40bb7cf003a8d7242881e46c28417936, type: 3}
   m_Name: Homing
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: d7094718bdac022428dd29244922d06b, type: 3}
+  itemIcon: {fileID: 21300000, guid: b38573590de9ab545a5330faa584bdcc, type: 3}
   itemBrokenOnGround: {fileID: 0}
   brokenItemSticksToWall: 0
-  sprite: {fileID: 21300000, guid: f82dfc5fc3c5a8f4080a3550427019c8, type: 3}
+  sprite: {fileID: 21300000, guid: b38573590de9ab545a5330faa584bdcc, type: 3}
   onRespawn: {fileID: 0}
   onPickup: {fileID: 0}
   onDestroy: {fileID: 0}
@@ -25,15 +25,17 @@ MonoBehaviour:
   bulletImpactSound: {fileID: 0}
   bulletImpactPriority: 0
   ammo: 15
+  ammoWeight: 1
   weaponDamage: 0
   recoilModifier: 0
-  fireRate: 0
+  baseFireRate: 0
+  fireRatePercentage: 0
   accuracy: 100
   maxMissDegAngle: 0
   isShotgun: 0
   shotgunAmount: 0
-  bulletSprite: {fileID: 0}
-  bulletSpritePriority: 0
+  bulletSprite: {fileID: 21300000, guid: c1d6d1e3c860862488d1412ae9a23b3a, type: 3}
+  bulletSpritePriority: 25
   bulletVelocity: 0
   isBouncy: 0
   numOfBounces: 0
@@ -46,6 +48,7 @@ MonoBehaviour:
   isKnockback: 0
   knockbackModifier: 0
   isHoming: 1
-  turnSpeed: 10
-  scanBounds: 25
+  turnSpeed: 2
+  scanBounds: 20
+  isStapler: 0
   hasAnimations: 0
