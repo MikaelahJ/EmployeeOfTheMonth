@@ -125,6 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6409818641545798717}
   - component: {fileID: 4640043495633665891}
+  - component: {fileID: 4642569840581286045}
   m_Layer: 13
   m_Name: HomingTrigger
   m_TagString: Untagged
@@ -154,7 +155,7 @@ EdgeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340515471163257257}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -165,15 +166,46 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.52, y: 0.52}
   - {x: 0.49999997, y: 0.52}
-  - {x: 40, y: 70}
-  - {x: 40, y: 80}
-  - {x: -40, y: 80}
-  - {x: -40, y: 70}
+  - {x: 30, y: 20}
+  - {x: 30, y: 30}
+  - {x: -30, y: 30}
+  - {x: -30, y: 20}
   - {x: -0.52, y: 0.52}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!60 &4642569840581286045
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340515471163257257}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.5, y: 0}
+      - {x: 30, y: 40}
+      - {x: 30, y: 50}
+      - {x: -30, y: 50}
+      - {x: -30, y: 40}
+      - {x: -0.5, y: 0}
 --- !u!1 &2297937692892492729
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pencil: {fileID: 214079517262277402}
+  PencilStuckInWall: {fileID: 912021987818860790, guid: 9d42c03f97ff5a54085fdca7b722116a, type: 3}
   isBouncy: 0
   animSpeed:
     serializedVersion: 2
@@ -306,6 +339,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 4296370996026009329, guid: e681ba27915daf9408bcea4081a84cfa, type: 3}
   isExplode: 0
   knockBackModifier: 10
+  isStapler: 0
   isHoming: 0
   turnSpeed: 0
   aimAssistRightBounds: {x: 10, y: 90}
@@ -315,7 +349,7 @@ MonoBehaviour:
   targetsInRange: []
   bulletMask:
     serializedVersion: 2
-    m_Bits: 40127
+    m_Bits: 105663
   scanBounds: 0
   bulletImpactSound: {fileID: 0}
 --- !u!50 &1624548292394652931
@@ -336,7 +370,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 82a6581face21894395bf4f41df6e5bd, type: 2}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &471386594015539393

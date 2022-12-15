@@ -72,6 +72,8 @@ public class NewItemScriptableObject : ScriptableObject
     public bool isHoming = false;
     public float turnSpeed = 0f;
     public float scanBounds = 0f;
+    [Header("Stapler")]
+    public bool isStapler = false;
 
     [Header("Animations")]
     public bool hasAnimations = false;
