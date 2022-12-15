@@ -63,6 +63,9 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(1);
 
             SpawnManager.instance.gameOverText.text = countdown.ToString();
+
+            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.ding, Camera.main.transform.position, AudioManager.instance.audioClips.sfxVolume);
+
             countdown--;
         }
         SpawnManager.instance.gameOverText.text = "GO!";
@@ -75,6 +78,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         yield return new WaitForSecondsRealtime(1);
         SpawnManager.instance.gameOverText.text = "";
+        isPaused = false;
     }
 
     public void ReloadScene()
