@@ -133,22 +133,7 @@ public class Bullet : MonoBehaviour
         if (isBouncy && bounces < maxBounce)
         {
             Bounce();
-
-            
-
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                Debug.Log("AppliedForce");
-                ApplyKnockBack(collision.collider);
-            }
-
             return;
-
-        }
-
-        if(isStapler && collision.gameObject.CompareTag("Player"))
-        {
-            ApplyKnockBack(collision.collider);
         }
 
         //Play bullet hit sound

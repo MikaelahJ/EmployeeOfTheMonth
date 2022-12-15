@@ -112,12 +112,18 @@ public class Fire : MonoBehaviour
 
     private void ChargeSuperMicro()
     {
+        sound.volume = AudioManager.instance.audioClips.sfxVolume;
+        sound.clip = AudioManager.instance.audioClips.laserCharge;
+        sound.Play();
+
         laserScript.PowerUpLaser();
     }
 
     private void FireSuperMicro()
     {
-        
+        sound.volume = AudioManager.instance.audioClips.sfxVolume;
+        sound.clip = weaponController.weapon.ultimateFire;
+        sound.Play();
 
         laser.SetActive(true);
         laserScript.FireLaser();
