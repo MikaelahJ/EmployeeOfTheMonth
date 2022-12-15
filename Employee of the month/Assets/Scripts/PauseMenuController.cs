@@ -31,12 +31,6 @@ public class PauseMenuController : MonoBehaviour
         hasStarted = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OpenMainPauseMenu()
     {
         mainPauseMenu.SetActive(true);
