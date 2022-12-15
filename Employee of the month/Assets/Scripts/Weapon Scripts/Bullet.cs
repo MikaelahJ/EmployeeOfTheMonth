@@ -28,8 +28,10 @@ public class Bullet : MonoBehaviour
 
     public float knockBackModifier = 10;
 
+    public bool isStapler;
     public bool isHoming = false;
     public float turnSpeed;
+    public float percentageTurned;
     public Vector2 aimAssistRightBounds;
     public Vector2 aimAssistLeftBounds;
     private Vector2 previousDirection;
@@ -53,23 +55,65 @@ public class Bullet : MonoBehaviour
         Invoke(nameof(CanTakeDamage), 0.05f);
         previousDirection = transform.up;
         range = 0;
+        targetsInRange = new List<Collider2D>();
         aimAssistCollider = GetComponentInChildren<EdgeCollider2D>().points;
+        List<EdgeCollider2D> results = new List<EdgeCollider2D>();
 
         if (!isHoming)
         {
-            Debug.Log("Magnetic");
+            //Debug.Log("Magnetic");
             aimAssistCollider[2] = new Vector2(aimAssistRightBounds.x, aimAssistRightBounds.y -10);
             aimAssistCollider[3] = aimAssistRightBounds;
             aimAssistCollider[4] = aimAssistLeftBounds;
             aimAssistCollider[5] = new Vector2(aimAssistLeftBounds.x, aimAssistLeftBounds.y - 10);
             GetComponentInChildren<EdgeCollider2D>().points = aimAssistCollider;
+
+
+            //ContactFilter2D filter = new ContactFilter2D();//.NoFilter();
+            //filter.SetLayerMask(bulletMask);
+            //int hits;
+            //hits = Physics2D.OverlapCollider(GetComponentInChildren<EdgeCollider2D>(), filter, targetsInRange);
+            //if(results != null)
+            //{
+            //    foreach (Collider2D col in results)
+            //    {
+            //        if(col.CompareTag("Player"))
+            //        {
+            //            if (!targetsInRange.Contains(col))
+            //            {
+            //                //Debug.Log(targetsInRange.Count);
+            //                targetsInRange.Add(col);
+            //            }
+            //        }
+            //    }
+            //}
         }
         else
         {
-            Debug.Log("Homing");
+            //Debug.Log("Homing");
             aimAssistCollider[2] = new Vector2(aimAssistCollider[2].x, aimAssistCollider[2].y - scanBounds);
             aimAssistCollider[5] = new Vector2(aimAssistCollider[5].x, aimAssistCollider[5].y - scanBounds);
-            GetComponentInChildren<EdgeCollider2D>().points = aimAssistCollider; 
+            GetComponentInChildren<EdgeCollider2D>().points = aimAssistCollider;
+
+            //ContactFilter2D filter = new ContactFilter2D();
+            //filter.SetLayerMask(bulletMask);
+            //int hits;
+            //hits = Physics2D.OverlapCollider(GetComponentInChildren<EdgeCollider2D>(), filter, targetsInRange);
+            //if (results != null)
+            //{
+            //    foreach (Collider2D col in results)
+            //    {
+            //        if (col.CompareTag("Player"))
+            //        {
+            //            Debug.Log(col.name);
+            //            if (!targetsInRange.Contains(col))
+            //            {
+            //                //Debug.Log(targetsInRange.Count);
+            //                targetsInRange.Add(col);
+            //            }
+            //        }
+            //    }
+            //}
         }
     }
 
@@ -95,6 +139,7 @@ public class Bullet : MonoBehaviour
         isHoming = weapon.isHoming;
         turnSpeed = weapon.turnSpeed;
         scanBounds = weapon.scanBounds;
+        isStapler = weapon.isStapler;
 
         if (isPenetrate)
         {
@@ -133,6 +178,11 @@ public class Bullet : MonoBehaviour
 
             return;
 
+        }
+
+        if(isStapler && collision.gameObject.CompareTag("Player"))
+        {
+            ApplyKnockBack(collision.collider);
         }
 
         //if (isPenetrate && !collision.gameObject.CompareTag("HardWall"))
@@ -275,38 +325,39 @@ public class Bullet : MonoBehaviour
     private void BulletPlayerTracking()
     {
         //only runs when there are players inside collider
-        if (targetsInRange.Count > 0)
-        {
-            Debug.Log("Player in Collider");
+        //if (targetsInRange.Count > 0)
+        //{
+            Debug.Log("InCollider");
             FindClosest(); //Finds closest player
             Vector2 startPos = new Vector2(transform.position.x, transform.position.y);
             Vector2 deltaPos = closest - transform.position;
 
             //raycast to see if any of the players are in line of sight of bullet
             RaycastHit2D hit;
-            hit = Physics2D.Raycast(startPos, deltaPos, Mathf.Infinity, bulletMask); //Raycast to check if player is in line of sight of the bullet
-            //Debug.Log("Tr�ffade: " + hit.collider.name);
+            hit = Physics2D.Raycast(startPos, deltaPos, Mathf.Infinity, bulletMask);
             if (hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
             {
-                //Debug.Log("Homing Triggered");
+
+                Debug.DrawRay(transform.position, hit.collider.transform.position - transform.position, Color.red, 5);;
                 Vector3 newDirection = hit.collider.transform.position - transform.position;
                 newDirection.z = 0;
 
                 if (isHoming) //homing
                 {
-                    Debug.Log("Homing");
-                    transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime) / newDirection.magnitude);
+                    //Debug.Log("Homing");
+                    
+                    transform.up = Vector2.MoveTowards(previousDirection, newDirection, turnSpeed * Time.deltaTime);
                 }
                 else //Aim assist
                 {
-                    Debug.Log("Magnetism");
+                    //Debug.Log("Magnetism");
                     transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime));
                 }
 
                 previousDirection = transform.up;
                 rb2d.velocity = transform.up * rb2d.velocity.magnitude;
             }
-        }
+        //}
     }
 
 
@@ -316,7 +367,7 @@ public class Bullet : MonoBehaviour
         foreach (Collider2D col in targetsInRange)
         {
             float objectRange = (col.gameObject.transform.position - transform.position).magnitude;
-            //Debug.Log(col.name);
+            Debug.Log(col.name);
 
             if (range == 0)
             {
@@ -325,21 +376,24 @@ public class Bullet : MonoBehaviour
             }
             else if (objectRange < range)
             {
+                Debug.Log("Updates");
                 range = objectRange;
                 closest = col.gameObject.transform.position;
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         //Add players that are in range of the bullet
         if (collision.gameObject.CompareTag("Player"))
         {
             if (!targetsInRange.Contains(collision))
             {
-                //Debug.Log(targetsInRange.Count);
+                Debug.Log("Added");
+                Debug.Log(targetsInRange.Count);
                 targetsInRange.Add(collision);
+                //Debug.Log(targetsInRange.Count);
             }
         }
     }
@@ -357,5 +411,6 @@ public class Bullet : MonoBehaviour
             }
         }
     }
+
     #endregion; 
 }

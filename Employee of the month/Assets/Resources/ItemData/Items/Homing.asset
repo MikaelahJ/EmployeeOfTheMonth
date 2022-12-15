@@ -46,6 +46,6 @@ MonoBehaviour:
   isKnockback: 0
   knockbackModifier: 0
   isHoming: 1
-  turnSpeed: 10
+  turnSpeed: 5
   scanBounds: 25
   hasAnimations: 0

@@ -165,10 +165,10 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.52, y: 0.52}
   - {x: 0.49999997, y: 0.52}
-  - {x: 40, y: 70}
-  - {x: 40, y: 80}
-  - {x: -40, y: 80}
-  - {x: -40, y: 70}
+  - {x: 30, y: 20}
+  - {x: 30, y: 30}
+  - {x: -30, y: 30}
+  - {x: -30, y: 20}
   - {x: -0.52, y: 0.52}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
@@ -308,6 +308,7 @@ MonoBehaviour:
   knockBackModifier: 10
   isHoming: 0
   turnSpeed: 0
+  percentageTurned: 0
   aimAssistRightBounds: {x: 10, y: 90}
   aimAssistLeftBounds: {x: -10, y: 90}
   closest: {x: 0, y: 0, z: 0}
@@ -315,7 +316,7 @@ MonoBehaviour:
   targetsInRange: []
   bulletMask:
     serializedVersion: 2
-    m_Bits: 40127
+    m_Bits: 105663
   scanBounds: 0
   bulletImpactSound: {fileID: 0}
 --- !u!50 &1624548292394652931

@@ -158,6 +158,7 @@ public class WeaponController : MonoBehaviour
             newWeapon.isHoming = newWeapon.isHoming || item.isHoming;
             newWeapon.turnSpeed += item.turnSpeed;
             newWeapon.scanBounds += item.scanBounds;
+            newWeapon.isStapler = newWeapon.isStapler;
 
         }
 
