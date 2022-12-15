@@ -77,7 +77,7 @@ public class Cursor : MonoBehaviour
                 }
                 else
                 {
-                   GameManager.Instance.LoadScene("TestScene");
+                   GameManager.Instance.LoadScene("LoadingScene");
                 }
             }
 
