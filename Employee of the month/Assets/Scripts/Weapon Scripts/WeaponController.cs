@@ -175,6 +175,7 @@ public class WeaponController : MonoBehaviour
             if (items[0].ultimateFire != null)
             {
                 newWeapon.fire = items[0].ultimateFire;
+                newWeapon.ultimateFire = items[0].ultimateFire;
             }
         }
         weapon = newWeapon;
