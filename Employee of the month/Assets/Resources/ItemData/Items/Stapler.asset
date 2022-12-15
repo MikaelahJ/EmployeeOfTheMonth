@@ -46,7 +46,7 @@ MonoBehaviour:
   explosionRadius: 0
   explosionDamage: 0
   isKnockback: 1
-  knockbackModifier: 20
+  knockbackModifier: 50
   isHoming: 0
   turnSpeed: 0
   scanBounds: 0
