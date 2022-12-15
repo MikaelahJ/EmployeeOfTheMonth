@@ -127,7 +127,7 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         SendDamage(collision.collider, collision);
-        Debug.Log("Collided with " + collision.gameObject.name);
+        //Debug.Log("Collided with " + collision.gameObject.name);
         //Bounce
         if (isBouncy && bounces < maxBounce)
         {
