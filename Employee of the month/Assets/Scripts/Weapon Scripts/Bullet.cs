@@ -113,6 +113,7 @@ public class Bullet : MonoBehaviour
             Physics2D.IgnoreLayerCollision(3, 9); //Ignore Player + Bullet
             Physics2D.IgnoreLayerCollision(11, 9); //Ignore Soft Wall + Bullet
             Physics2D.IgnoreLayerCollision(0, 9); //Ignore Default + Bullet
+            Physics2D.IgnoreLayerCollision(15, 9); //Ignore MapEffects + Bullet
         }
         else
         {
