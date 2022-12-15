@@ -14,6 +14,7 @@ public class ControllerInput : MonoBehaviour
     public GameObject cursorPrefab;
     public GameObject healthbarPrefab;
     public GameObject playerHighlightCircle;
+    public GameObject whichPlayerArrow;
 
     private GameObject player;
     private Movement playerMovement;
@@ -183,9 +184,14 @@ public class ControllerInput : MonoBehaviour
         playerMovement = player.GetComponent<Movement>();
         aim = player.GetComponent<Aim>();
 
-
         GameObject circle = Instantiate(playerHighlightCircle, player.transform);
         circle.GetComponent<SpriteRenderer>().color = pColors[playerInput.playerIndex];
+
+        GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
+        foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sprite.color = pColors[playerInput.playerIndex];
+        }
     }
 
     private void LoadHealthBar()
@@ -223,7 +229,7 @@ public class ControllerInput : MonoBehaviour
     }
     public void GetLeftStick(InputAction.CallbackContext input)
     {
-        if(playerMovement == null) { return; }
+        if (playerMovement == null) { return; }
         playerMovement.GetLeftStickInput(input.ReadValue<Vector2>());
     }
 
@@ -322,7 +328,7 @@ public class ControllerInput : MonoBehaviour
 
     public void EnableAim(bool enable)
     {
-        if(aim != null)
+        if (aim != null)
         {
             aim.enabled = enable;
         }

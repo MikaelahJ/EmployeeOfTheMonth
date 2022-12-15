@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
     public GameObject pauseMenu;
     private GameObject tempPauseMenu;
+
+    public bool showedControlls = false;
+    private int countdown = 3;
+
 
 
     private void Awake()
@@ -43,6 +48,40 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1;
         SceneManager.LoadScene(scene);
+
+        if (scene == "TestScene")
+        {
+            StartCoroutine(RoundStartPause());
+        }
+    }
+
+    IEnumerator RoundStartPause()
+    {
+        Time.timeScale = 0;
+        int delay = 3;
+        isPaused = true;
+
+
+        while (countdown >= 0)
+        {
+            yield return new WaitForSecondsRealtime(1);
+
+            SpawnManager.instance.gameOverText.text = countdown.ToString();
+            countdown--;
+        }
+        SpawnManager.instance.gameOverText.text = "GO!";
+
+        foreach(GameObject arrow in GameObject.FindGameObjectsWithTag("PlayerArrow"))
+        {
+            Destroy(arrow);
+        }
+
+        Time.timeScale = 1;
+        yield return new WaitForSecondsRealtime(1);
+        SpawnManager.instance.gameOverText.text = "";
+
+
+
     }
 
     public void ReloadScene()
@@ -96,10 +135,7 @@ public class GameManager : MonoBehaviour
     {
         int result = 0;
         List<int> winner = new List<int>(playersCount);
-        //foreach (KeyValuePair<string, int> kvp in playerPoints)
-        //{
-        //    Debug.LogFormat("playerPoints: {0} - {1}", kvp.Key, kvp.Value);
-        //}
+
         for (int i = 0; i < playerPoints.Count; i++)
         {
             if (playerPoints["P" + i.ToString()] > result)

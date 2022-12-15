@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3372683286359039590}
   - component: {fileID: 3372683286359039611}
   - component: {fileID: 8619123289353301082}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: PaperExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}

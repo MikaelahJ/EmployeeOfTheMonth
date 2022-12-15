@@ -76,7 +76,7 @@ public class Cursor : MonoBehaviour
                 }
                 else
                 {
-                    LoadScene("TestScene");
+                   GameManager.Instance.LoadScene("TestScene");
                 }
             }
 
@@ -107,11 +107,11 @@ public class Cursor : MonoBehaviour
 
             if (pressed && collision.gameObject.CompareTag("ResetButton"))
             {
-                LoadScene("TestScene");
+                GameManager.Instance.LoadScene("TestScene");
             }
             else if (pressed && collision.gameObject.CompareTag("MainMenuButton"))
             {
-                LoadScene("MainMenu");
+                GameManager.Instance.LoadScene("MainMenu");
             }
         }
 
@@ -177,10 +177,10 @@ public class Cursor : MonoBehaviour
         canSelect = false;
     }
 
-    private void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
+    //private void LoadScene(string sceneName)
+    //{
+    //    SceneManager.LoadScene(sceneName);
+    //}
 
     //private void SetSelectedBall(Collider2D collision)
     //{
