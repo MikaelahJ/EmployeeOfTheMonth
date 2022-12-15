@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class ControllerInput : MonoBehaviour
 {
+    [SerializeField] private List<Sprite> cursorSprites = new List<Sprite>();
     [SerializeField] private List<GameObject> characters = new List<GameObject>();
     [SerializeField] private List<GameObject> healthbars = new List<GameObject>();
     [SerializeField] private List<GameObject> playerHUDs = new List<GameObject>();
@@ -93,9 +94,10 @@ public class ControllerInput : MonoBehaviour
         cursorObject.name = "P" + playerInput.playerIndex.ToString();
         cursor = cursorObject.GetComponent<Cursor>();
 
-        //Set Cursor color
-        cursor.col = pColors[playerInput.playerIndex];
 
+        //Set Cursor color
+        //cursor.col = pColors[playerInput.playerIndex];
+        cursor.sprite = cursorSprites[playerInput.playerIndex];
         //Sets the index of the player
         cursor.playerIndex = playerInput.playerIndex;
     }
@@ -110,7 +112,7 @@ public class ControllerInput : MonoBehaviour
             cursorObject.name = "P" + playerInput.playerIndex.ToString();
             cursor = cursorObject.GetComponent<Cursor>();
 
-            cursor.col = pColors[playerInput.playerIndex];
+            cursor.sprite = cursorSprites[playerInput.playerIndex];
             cursor.playerIndex = playerInput.playerIndex;
         }
         else
@@ -190,7 +192,7 @@ public class ControllerInput : MonoBehaviour
         GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
         foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
         {
-            sprite.color = pColors[playerInput.playerIndex];
+            sprite.sprite = cursorSprites[playerInput.playerIndex];
         }
     }
 

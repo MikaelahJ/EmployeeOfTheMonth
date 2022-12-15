@@ -24,6 +24,7 @@ public class Cursor : MonoBehaviour
 
     public Color32 col;
     public int playerIndex;
+    public Sprite sprite;
 
     private void Awake()
     {
@@ -36,7 +37,7 @@ public class Cursor : MonoBehaviour
         spawnpoint.z = 0;
         transform.position = spawnpoint;
 
-        GetComponent<SpriteRenderer>().color = col;
+       sprite =  GetComponent<SpriteRenderer>().sprite = sprite;
         selectedCharacterBall.GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color;
     }
 
