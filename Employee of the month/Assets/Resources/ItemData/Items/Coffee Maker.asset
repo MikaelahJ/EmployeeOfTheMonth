@@ -16,12 +16,12 @@ MonoBehaviour:
   itemBrokenOnGround: {fileID: 21300000, guid: 09455d6dcb353b84a8b87a5b8ac3d66d, type: 3}
   brokenItemSticksToWall: 1
   sprite: {fileID: 21300000, guid: f1227769fe330734f9482d2ace1f8bdc, type: 3}
-  onRespawn: {fileID: 8300000, guid: 29b505c85f5593248a26fc1ad521959c, type: 3}
+  onRespawn: {fileID: 8300000, guid: 0591148e83082ab43b23eb0dde01dceb, type: 3}
   onPickup: {fileID: 8300000, guid: 0591148e83082ab43b23eb0dde01dceb, type: 3}
   onDestroy: {fileID: 0}
   ultimateFire: {fileID: 0}
-  fire: {fileID: 0}
-  fireSoundPriority: 0
+  fire: {fileID: 8300000, guid: 30cbb1fcc15463246a91cd3ed0ace10a, type: 3}
+  fireSoundPriority: 3
   bulletImpactSound: {fileID: 0}
   bulletImpactPriority: 0
   ammo: 30
@@ -50,4 +50,5 @@ MonoBehaviour:
   isHoming: 0
   turnSpeed: 0
   scanBounds: 0
+  isStapler: 0
   hasAnimations: 0

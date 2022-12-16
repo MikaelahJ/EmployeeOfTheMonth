@@ -23,6 +23,7 @@ public class WeaponController : MonoBehaviour
         UpdateWeaponStats();
 
         sound = GetComponent<AudioSource>();
+        sound.volume = AudioManager.instance.audioClips.sfxVolume;
     }
 
     public void AddItem(NewItemScriptableObject item)
@@ -175,6 +176,7 @@ public class WeaponController : MonoBehaviour
             if (items[0].ultimateFire != null)
             {
                 newWeapon.fire = items[0].ultimateFire;
+                newWeapon.ultimateFire = items[0].ultimateFire;
             }
         }
         weapon = newWeapon;

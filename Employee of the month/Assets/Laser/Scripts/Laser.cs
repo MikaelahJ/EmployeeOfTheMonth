@@ -25,6 +25,8 @@ public class Laser : MonoBehaviour
 
     private float defaultWalkSpeed;
 
+    [SerializeField] private LayerMask ignore;
+
     private Quaternion rotation;
     private List<ParticleSystem> particles = new List<ParticleSystem>();
 
@@ -95,7 +97,7 @@ public class Laser : MonoBehaviour
 
     public void UpdateLaser()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, firePoint.transform.up, 20, ~(1 << 8));//send raycast and ignore modifyers
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, firePoint.transform.up, 20, ~ignore) ;//send raycast and ignore modifyers
 
         if (hit)
         {

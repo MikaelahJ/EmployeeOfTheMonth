@@ -17,17 +17,19 @@ MonoBehaviour:
   brokenItemSticksToWall: 0
   sprite: {fileID: 21300000, guid: 92fc85553075ebb419086cf7038d42ac, type: 3}
   onRespawn: {fileID: 0}
-  onPickup: {fileID: 0}
+  onPickup: {fileID: 8300000, guid: 423ca9c0af3654c48b41d4495dd4e33f, type: 3}
   onDestroy: {fileID: 0}
   ultimateFire: {fileID: 0}
   fire: {fileID: 8300000, guid: 423ca9c0af3654c48b41d4495dd4e33f, type: 3}
-  fireSoundPriority: 3
+  fireSoundPriority: 4
   bulletImpactSound: {fileID: 8300000, guid: a30a02e848b4894458030c11967b15e3, type: 3}
   bulletImpactPriority: 4
   ammo: 15
+  ammoWeight: 1
   weaponDamage: 1
   recoilModifier: 0
-  fireRate: 0
+  baseFireRate: 0
+  fireRatePercentage: 0
   accuracy: 100
   maxMissDegAngle: 0
   isShotgun: 0
@@ -39,6 +41,7 @@ MonoBehaviour:
   numOfBounces: 4
   isPenetrate: 0
   numOfPenetrations: 0
+  isSuperMicro: 0
   isExplosive: 0
   explosionRadius: 0
   explosionDamage: 0
@@ -46,4 +49,6 @@ MonoBehaviour:
   knockbackModifier: 0
   isHoming: 0
   turnSpeed: 0
+  scanBounds: 0
+  isStapler: 0
   hasAnimations: 1
