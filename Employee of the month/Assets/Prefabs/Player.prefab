@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1940466002630421828}
   - component: {fileID: 672739431118636492}
   - component: {fileID: 1575183137811590513}
+  - component: {fileID: -2118001314938216953}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -107,6 +108,7 @@ MonoBehaviour:
   runSpeed: 6
   leftstickInput: {x: 0, y: 0}
   justTeleported: 0
+  isStunnable: 0
   walksound: {fileID: 0}
 --- !u!50 &5234566805939642084
 Rigidbody2D:
@@ -142,6 +144,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 30
+  mousePosition: {x: 0, y: 0, z: 0}
+  aimDirection: {x: 0, y: 0}
+  hasGamePad: 0
 --- !u!114 &672739431118636492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,3 +260,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-2118001314938216953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5234566805939642093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9971401d13d2a34e9e74cf29d2a34ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStunnable: 0
+  stunTime: 0
+  stunTimer: 0

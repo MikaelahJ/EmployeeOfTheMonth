@@ -28,6 +28,7 @@ public class Bullet : MonoBehaviour
     private float explosionDamage;
 
     public float knockBackModifier = 10;
+    public float stunTime;
 
     public bool isStapler;
     public bool isHoming = false;
@@ -104,6 +105,8 @@ public class Bullet : MonoBehaviour
         turnSpeed = weapon.turnSpeed;
         scanBounds = weapon.scanBounds;
         isStapler = weapon.isStapler;
+        stunTime = weapon.stunTime;
+
 
         if (isPenetrate)
         {
@@ -147,6 +150,8 @@ public class Bullet : MonoBehaviour
         if(isStapler && collision.gameObject.CompareTag("Player"))
         {
             ApplyKnockBack(collision.collider);
+            collision.gameObject.GetComponent<Stun>().WallStunChance(5, 5);
+            Debug.Log(collision.gameObject.name);
         }
 
         //Play bullet hit sound
@@ -254,10 +259,7 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isHoming)
-        {
-            BulletPlayerTracking();
-        }
+        BulletPlayerTracking();
     }
 
 
@@ -310,7 +312,8 @@ public class Bullet : MonoBehaviour
                 }
                 else //Aim assist
                 {
-                    transform.up = Vector2.Lerp(previousDirection, newDirection, (turnSpeed * Time.deltaTime));
+                    Debug.Log("Running Aimassist");
+                    transform.up = Vector2.MoveTowards(previousDirection, newDirection, turnSpeed * Time.deltaTime);
                 }
 
                 previousDirection = transform.up;
@@ -318,6 +321,7 @@ public class Bullet : MonoBehaviour
             }
         }
     }
+
 
 
     //Finds the player that are closest to the bullet
