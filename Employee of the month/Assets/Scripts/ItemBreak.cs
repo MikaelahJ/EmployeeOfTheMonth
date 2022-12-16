@@ -16,7 +16,7 @@ public class ItemBreak : MonoBehaviour
     private int startHealth;
 
     private float timer;
-    //private float breakRate = 0.5f;
+    private float breakRate = 0.5f;
     private int damageDealt = 0;
 
     private void Start()
@@ -43,7 +43,7 @@ public class ItemBreak : MonoBehaviour
         damageDealt += damage;
 
         health -= damage;
-        Debug.Log(gameObject.name + " has " + health + " health");
+        Debug.Log("health " + health);
 
         if (health <= 0)
         {
@@ -62,6 +62,7 @@ public class ItemBreak : MonoBehaviour
             damageDealt -= startHealth;
             Debug.Log("damageDealt " + damageDealt);
         }
+
     }
 
     //Added this because sometimes the collider disable before pencil stuck on wall script uses it

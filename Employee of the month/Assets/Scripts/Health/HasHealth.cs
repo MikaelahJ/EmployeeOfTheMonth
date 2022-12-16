@@ -102,34 +102,7 @@ public class HasHealth : MonoBehaviour
         else if (gameObject.CompareTag("Player"))
         {
             SpawnManager.instance.PlayerDied();
-
-            AudioClip death = null;
-            int randomSound;
-            switch (playerIndex)
-            {
-                case 0:
-                    randomSound = Random.Range(0, AudioManager.instance.audioClips.player1Deaths.Count);
-                    death = AudioManager.instance.audioClips.player1Deaths[randomSound];
-                    break;
-                case 1:
-                    randomSound = Random.Range(0, AudioManager.instance.audioClips.player2Deaths.Count);
-                    death = AudioManager.instance.audioClips.player2Deaths[randomSound];
-                    break;
-                case 2:
-                    randomSound = Random.Range(0, AudioManager.instance.audioClips.player3Deaths.Count);
-                    death = AudioManager.instance.audioClips.player3Deaths[randomSound];
-                    break;
-                case 3:
-                    randomSound = Random.Range(0, AudioManager.instance.audioClips.player4Deaths.Count);
-                    death = AudioManager.instance.audioClips.player4Deaths[randomSound];
-                    break;
-                default:
-                    Debug.Log("No Death sound could be found");
-                    break;
-
-            }
-
-            AudioSource.PlayClipAtPoint(death, transform.position, AudioManager.instance.audioClips.characterVolume);
+            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.death, transform.position, AudioManager.instance.audioClips.characterVolume);
 
             Camera.main.GetComponent<CameraController>().RemoveCameraTracking(gameObject);
 

@@ -45,6 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemRemovedFromGun: {fileID: 6470032077583709217, guid: d5fd7e3937d392f49aa8af85d914b21f, type: 3}
-  DustCloud: {fileID: 6178190107494109177, guid: 6537851ad43b2264d97a0539a1e87e51, type: 3}
-  items: []
   itemHolder: {fileID: 2040159093407135376, guid: 9e90b153618e3d64098e63a7dc7c4fcd, type: 3}

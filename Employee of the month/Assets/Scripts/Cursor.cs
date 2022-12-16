@@ -24,7 +24,6 @@ public class Cursor : MonoBehaviour
 
     public Color32 col;
     public int playerIndex;
-    public Sprite sprite;
 
     private void Awake()
     {
@@ -37,7 +36,7 @@ public class Cursor : MonoBehaviour
         spawnpoint.z = 0;
         transform.position = spawnpoint;
 
-       sprite =  GetComponent<SpriteRenderer>().sprite = sprite;
+        GetComponent<SpriteRenderer>().color = col;
         selectedCharacterBall.GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color;
     }
 
@@ -77,7 +76,7 @@ public class Cursor : MonoBehaviour
                 }
                 else
                 {
-                   GameManager.Instance.LoadScene("LoadingScene");
+                    LoadScene("TestScene");
                 }
             }
 
@@ -108,11 +107,11 @@ public class Cursor : MonoBehaviour
 
             if (pressed && collision.gameObject.CompareTag("ResetButton"))
             {
-                GameManager.Instance.LoadScene("TestScene");
+                LoadScene("TestScene");
             }
             else if (pressed && collision.gameObject.CompareTag("MainMenuButton"))
             {
-                GameManager.Instance.LoadScene("MainMenu");
+                LoadScene("MainMenu");
             }
         }
 
@@ -178,10 +177,10 @@ public class Cursor : MonoBehaviour
         canSelect = false;
     }
 
-    //private void LoadScene(string sceneName)
-    //{
-    //    SceneManager.LoadScene(sceneName);
-    //}
+    private void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 
     //private void SetSelectedBall(Collider2D collision)
     //{
