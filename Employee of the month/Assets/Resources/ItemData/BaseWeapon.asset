@@ -25,7 +25,6 @@ MonoBehaviour:
   bulletImpactSound: {fileID: 8300000, guid: 62d677f27f04a234cab7df98dd7c9308, type: 3}
   bulletImpactPriority: 0
   ammo: 0
-  ammoWeight: 1
   weaponDamage: 5
   recoilModifier: 25
   baseFireRate: 2
@@ -48,8 +47,6 @@ MonoBehaviour:
   isKnockback: 0
   knockbackModifier: 0
   isHoming: 0
-  turnSpeed: 0.5
+  turnSpeed: 2
   scanBounds: 0
-  isStapler: 0
-  stunTime: 0
   hasAnimations: 0

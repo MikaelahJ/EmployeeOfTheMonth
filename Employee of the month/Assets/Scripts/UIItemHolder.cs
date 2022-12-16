@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIItemHolder : MonoBehaviour
 {
     [SerializeField] private GameObject itemRemovedFromGun;
+    [SerializeField] private GameObject DustCloud;
 
     [SerializeField] private GameObject[] items;
 
@@ -69,6 +70,8 @@ public class UIItemHolder : MonoBehaviour
         yield return new WaitForSeconds(delaySeconds);
 
         GameObject newItem = Instantiate(itemRemovedFromGun, items[index].transform.position, transform.rotation);
+
+        Instantiate(DustCloud, items[index].transform);
 
         newItem.GetComponent<ItemRemovedFromGun>().moveDirection = transform.right.normalized;
         newItem.GetComponent<ItemRemovedFromGun>().sprite = item.itemIcon;

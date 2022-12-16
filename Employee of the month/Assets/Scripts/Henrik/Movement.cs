@@ -20,13 +20,10 @@ public class Movement : MonoBehaviour
     //Todo get Input script
     private Rigidbody2D rb;
     private Vector2 movementVector;
-    private float stunTimer;
-    private float stunTime;
+    public Vector2 leftstickInput;
     private float maxSpeed;
     private bool isRunning;
-    public Vector2 leftstickInput;
     public bool justTeleported;
-    public bool isStunnable;
 
     public AudioSource walksound;
     private Animator animator;
@@ -112,4 +109,6 @@ public class Movement : MonoBehaviour
     {
         isRunning = input;
     }
+
+
 }

@@ -11,6 +11,7 @@ TagManager:
   - MainMenuButton
   - Selected
   - Free
+  - PlayerArrow
   layers:
   - Default
   - TransparentFX
@@ -29,6 +30,8 @@ TagManager:
   - 
   - MapEffects
   - Laser
+  - 
+  - 
   - 
   - 
   - 

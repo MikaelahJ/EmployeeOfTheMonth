@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 5234566805939642086}
   - component: {fileID: 7815352911500529440}
   - component: {fileID: 5234566805939642083}
-  - component: {fileID: 5234566805939642084}
   - component: {fileID: 1940466002630421828}
   - component: {fileID: 672739431118636492}
+  - component: {fileID: 5234566805939642084}
   - component: {fileID: 1575183137811590513}
-  - component: {fileID: -2118001314938216953}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -108,29 +107,7 @@ MonoBehaviour:
   runSpeed: 6
   leftstickInput: {x: 0, y: 0}
   justTeleported: 0
-  isStunnable: 0
   walksound: {fileID: 0}
---- !u!50 &5234566805939642084
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5234566805939642093}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 5
-  m_LinearDrag: 10
-  m_AngularDrag: 5
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!114 &1940466002630421828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +141,27 @@ MonoBehaviour:
   playerIndex: 0
   maxHealth: 100
   health: 0
+--- !u!50 &5234566805939642084
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5234566805939642093}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 5
+  m_LinearDrag: 10
+  m_AngularDrag: 5
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!82 &1575183137811590513
 AudioSource:
   m_ObjectHideFlags: 0
@@ -260,18 +258,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-2118001314938216953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5234566805939642093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9971401d13d2a34e9e74cf29d2a34ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isStunnable: 0
-  stunTime: 0
-  stunTimer: 0
