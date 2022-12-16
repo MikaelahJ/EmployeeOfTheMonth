@@ -33,8 +33,6 @@ public class Vent : MonoBehaviour
     {
         playerToMove.gameObject.GetComponentInParent<Movement>().justTeleported = true;
 
-        // gameObject.GetComponent<SpriteRenderer>().sprite = openVent;
-
         //which vent to spawn player at
         spawnVentPos = ventManager.ventConnection[gameObject];
         char ventNumber = this.gameObject.name[name.Length - 1];
@@ -44,13 +42,12 @@ public class Vent : MonoBehaviour
             //{
             //    spawnPos = pos.Key.transform;
             //}
-            Debug.Log("ventnumber" + ventNumber);
-            Debug.Log("posvalue" + pos.Value.ToString());
-            Debug.Log("poskey" + pos.Key);
+            //Debug.Log("ventnumber" + ventNumber);
+            //Debug.Log("posvalue" + pos.Value.ToString());
+            //Debug.Log("poskey" + pos.Key);
             if (pos.Value.ToString() == ventNumber.ToString())
             {
                 spawnPos = pos.Key.transform;
-                Debug.Log("spawnpos" + spawnPos);
             }
         }
 
@@ -63,6 +60,5 @@ public class Vent : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         collision.gameObject.GetComponentInParent<Movement>().justTeleported = false;
-        //gameObject.GetComponent<SpriteRenderer>().sprite = closedSprite;
     }
 }
