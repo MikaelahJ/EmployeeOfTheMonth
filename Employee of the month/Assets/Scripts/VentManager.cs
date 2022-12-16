@@ -36,10 +36,7 @@ public class VentManager : MonoBehaviour
             //ventConnection.Add(vent, k);
 
             ventConnection.Add(ventPoints[i].gameObject, k);
-
-
             k--;
-
         }
         //foreach (KeyValuePair<GameObject, int> kvp in ventConnection)
         //{
