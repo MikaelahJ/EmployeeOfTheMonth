@@ -12,22 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2038086f94c708f43b328c8916d56e78, type: 3}
   m_Name: AudioClips
   m_EditorClassIdentifier: 
-  player1Deaths:
-  - {fileID: 8300000, guid: 347062b0e4cad7b4497a70c264448bb0, type: 3}
-  player2Deaths:
-  - {fileID: 8300000, guid: 347062b0e4cad7b4497a70c264448bb0, type: 3}
-  player3Deaths:
-  - {fileID: 8300000, guid: 347062b0e4cad7b4497a70c264448bb0, type: 3}
-  player4Deaths:
-  - {fileID: 8300000, guid: 347062b0e4cad7b4497a70c264448bb0, type: 3}
-  damaged: {fileID: 8300000, guid: cc94647dfe2c4a84ea4a3bd0ca23d63c, type: 3}
+  death: {fileID: 8300000, guid: 347062b0e4cad7b4497a70c264448bb0, type: 3}
+  damaged: {fileID: 8300000, guid: 62d677f27f04a234cab7df98dd7c9308, type: 3}
   emptyMag: {fileID: 8300000, guid: 2d65f15bd7d28d04886106b2bf345f2a, type: 3}
-  laserCharge: {fileID: 8300000, guid: 4c13da6ac3edc3149b7c189f041ff9e2, type: 3}
   impact_wall: {fileID: 8300000, guid: 62d677f27f04a234cab7df98dd7c9308, type: 3}
   impact_wood: {fileID: 8300000, guid: a79c5096d4157ca4fb4180a226684601, type: 3}
   impact_glass: {fileID: 8300000, guid: cfabc955080443e4ca1c3525e20996e2, type: 3}
-  bulletBounce: {fileID: 8300000, guid: a30a02e848b4894458030c11967b15e3, type: 3}
-  ding: {fileID: 8300000, guid: f8c23182455e31741b3af6c6cac60375, type: 3}
-  musicVolume: 0.65
-  sfxVolume: 1
+  bulletBounce: {fileID: 8300000, guid: 9b1b573f6bb4a674db206047e5520e88, type: 3}
+  musicVolume: 0.20984606
+  sfxVolume: 0.8177959
   characterVolume: 1

@@ -17,11 +17,11 @@ MonoBehaviour:
   brokenItemSticksToWall: 0
   sprite: {fileID: 21300000, guid: b38573590de9ab545a5330faa584bdcc, type: 3}
   onRespawn: {fileID: 0}
-  onPickup: {fileID: 8300000, guid: f48d3ccb9bd871a47844b1074e5b1852, type: 3}
+  onPickup: {fileID: 0}
   onDestroy: {fileID: 0}
   ultimateFire: {fileID: 0}
-  fire: {fileID: 8300000, guid: 98b29dde6203aee499540082b2447e83, type: 3}
-  fireSoundPriority: 6
+  fire: {fileID: 0}
+  fireSoundPriority: 0
   bulletImpactSound: {fileID: 0}
   bulletImpactPriority: 0
   ammo: 15

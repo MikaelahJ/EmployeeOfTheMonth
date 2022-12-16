@@ -74,6 +74,7 @@ public class NewItemScriptableObject : ScriptableObject
     public float scanBounds = 0f;
     [Header("Stapler")]
     public bool isStapler = false;
+    public float stunTime = 0f;
 
     [Header("Animations")]
     public bool hasAnimations = false;

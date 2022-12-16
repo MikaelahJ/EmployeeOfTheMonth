@@ -34,6 +34,8 @@ public class SpawnManager : MonoBehaviour
 
     private void AddToDictionary()
     {
+        Debug.Log(camController.players.Length);
+
         for (int i = 0; i < camController.players.Length; i++)
         {
             if (camController.players[i] != null)
