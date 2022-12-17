@@ -160,6 +160,7 @@ public class Bullet : MonoBehaviour
         GameObject pencilStuck = Instantiate(PencilStuckInWall, transform.position, Quaternion.identity);
         pencilStuck.GetComponent<PencilStuckInWall>().SetPencilRotation(transform.rotation);
         pencilStuck.GetComponent<PencilStuckInWall>().SetCrackTransform(collision);
+        pencilStuck.GetComponent<PencilStuckInWall>().SetPencilPosition(collision);
         haveSpawnedPencil = true;
     }
 
