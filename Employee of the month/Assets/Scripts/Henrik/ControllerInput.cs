@@ -158,19 +158,19 @@ public class ControllerInput : MonoBehaviour
         {
             case 1:
                 playerSprite = Instantiate(characters[0], player.transform);
-                playerSprite.name = "Player 1";
+                playerSprite.name = "Character 1";
                 break;
             case 2:
                 playerSprite = Instantiate(characters[1], player.transform);
-                playerSprite.name = "Player 2";
+                playerSprite.name = "Character 2";
                 break;
             case 3:
                 playerSprite = Instantiate(characters[2], player.transform);
-                playerSprite.name = "Player 3";
+                playerSprite.name = "Character 3";
                 break;
             case 4:
                 playerSprite = Instantiate(characters[3], player.transform);
-                playerSprite.name = "Player 4";
+                playerSprite.name = "Character 4";
                 break;
         }
         LoadPlayerChildScripts();
@@ -180,7 +180,7 @@ public class ControllerInput : MonoBehaviour
     {
         spriteIndex = 1;
         playerSprite = Instantiate(characters[0], player.transform);
-        playerSprite.name = "Player 1";
+        playerSprite.name = "Character 1";
         LoadPlayerChildScripts();
     }
     private void SetCursorTestScenes()
@@ -240,7 +240,7 @@ public class ControllerInput : MonoBehaviour
         //playerSprite.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
         //player.GetComponent<SortingGroup>().sortingLayerID = SortingLayer.NameToID("Player " + (spriteIndex));
         GameObject roomMask = Instantiate(roomSpriteMaskHolder);
-        roomMask.GetComponent<RoomMaskManager>().layerName = "Player " + (spriteIndex);
+        roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
     }
 
     public void OnClick()
