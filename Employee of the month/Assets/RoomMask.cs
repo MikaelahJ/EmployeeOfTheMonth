@@ -16,6 +16,7 @@ public class RoomMask : MonoBehaviour
         
         Debug.Log("Trigger Entered with " + collision.name);
         if(collision.name != playerSpriteName) { return; }
+        Debug.Log("Enabled mask: " + collision.name);
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<SpriteMask>().enabled = true;
     }
@@ -24,6 +25,7 @@ public class RoomMask : MonoBehaviour
     {
         Debug.Log("Trigger Left: " + collision.name);
         if (collision.name != playerSpriteName) { return; }
+        Debug.Log("Disabled mask: " + collision.name);
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<SpriteMask>().enabled = false;
     }

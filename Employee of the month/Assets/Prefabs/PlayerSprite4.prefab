@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 9043131763967725611}
   - component: {fileID: -2005178309391308105}
   - component: {fileID: 2368809907314511397}
+  - component: {fileID: 2952634257664299189}
   m_Layer: 3
   m_Name: PlayerSprite4
   m_TagString: Player
@@ -171,7 +172,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!58 &9043131763967725611
 CircleCollider2D:
@@ -305,6 +306,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &2952634257664299189
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194419871203171396}
+  m_Enabled: 1
+  m_SortingLayerID: -1253893063
+  m_SortingLayer: 5
+  m_SortingOrder: 4
 --- !u!1001 &5705058336169868772
 PrefabInstance:
   m_ObjectHideFlags: 0

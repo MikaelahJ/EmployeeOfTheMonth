@@ -14,6 +14,7 @@ public class RoomMaskManager : MonoBehaviour
         foreach (var spriteMask in rooms)
         {
             spriteMask.frontSortingLayerID = SortingLayer.NameToID(layerName);
+            spriteMask.backSortingLayerID = SortingLayer.NameToID(layerName);
             spriteMask.GetComponent<RoomMask>().playerSpriteName = layerName;
         }
     }

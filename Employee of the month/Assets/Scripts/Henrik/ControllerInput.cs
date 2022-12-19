@@ -135,7 +135,7 @@ public class ControllerInput : MonoBehaviour
         playerInput.SwitchCurrentActionMap("Player");
         SpawnPlayer();
         LoadHealthBar();
-        SpawnSpriteMask();
+        
 
         if (GameManager.Instance.playersChosen != 0)
         {
@@ -147,6 +147,7 @@ public class ControllerInput : MonoBehaviour
             SetCharacterTestScenes();
         }
 
+        SpawnSpriteMask();
         Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
     }
 
@@ -236,9 +237,9 @@ public class ControllerInput : MonoBehaviour
     public void SpawnSpriteMask()
     {
         //playerSprite.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
-        player.GetComponent<SortingGroup>().sortingLayerID = SortingLayer.NameToID("Player " + (playerInput.playerIndex + 1));
+        //player.GetComponent<SortingGroup>().sortingLayerID = SortingLayer.NameToID("Player " + (spriteIndex));
         GameObject roomMask = Instantiate(roomSpriteMaskHolder);
-        roomMask.GetComponent<RoomMaskManager>().layerName = "Player " + (playerInput.playerIndex + 1);
+        roomMask.GetComponent<RoomMaskManager>().layerName = "Player " + (spriteIndex);
     }
 
     public void OnClick()

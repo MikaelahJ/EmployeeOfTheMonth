@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 1233932650}
   - component: {fileID: 3915440918819083477}
   - component: {fileID: -3058923131449323703}
+  - component: {fileID: 3913647456569634927}
   m_Layer: 3
   m_Name: PlayerSprite2
   m_TagString: Player
@@ -171,7 +172,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!95 &1233932650
 Animator:
@@ -305,6 +306,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &3913647456569634927
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194419871203171396}
+  m_Enabled: 1
+  m_SortingLayerID: 1884363909
+  m_SortingLayer: 3
+  m_SortingOrder: 2
 --- !u!1001 &1803902699530990626
 PrefabInstance:
   m_ObjectHideFlags: 0
