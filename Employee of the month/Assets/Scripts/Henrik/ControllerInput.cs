@@ -178,6 +178,7 @@ public class ControllerInput : MonoBehaviour
 
     private void SetCharacterTestScenes()
     {
+        spriteIndex = 1;
         playerSprite = Instantiate(characters[0], player.transform);
         playerSprite.name = "Player 1";
         LoadPlayerChildScripts();
