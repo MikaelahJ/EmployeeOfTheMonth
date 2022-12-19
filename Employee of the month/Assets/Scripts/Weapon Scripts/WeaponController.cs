@@ -160,7 +160,7 @@ public class WeaponController : MonoBehaviour
             newWeapon.turnSpeed += item.turnSpeed;
             newWeapon.scanBounds += item.scanBounds;
             newWeapon.isStapler = newWeapon.isStapler || item.isStapler;
-            newWeapon.stunTime += newWeapon.stunTime;
+            newWeapon.stunTime += item.stunTime;
         }
 
         //Add ultimate effects

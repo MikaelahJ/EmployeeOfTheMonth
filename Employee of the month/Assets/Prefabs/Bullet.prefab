@@ -311,35 +311,13 @@ MonoBehaviour:
   pencil: {fileID: 214079517262277402}
   PencilStuckInWall: {fileID: 912021987818860790, guid: 9d42c03f97ff5a54085fdca7b722116a, type: 3}
   isBouncy: 0
-  animSpeed:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -0.091667175
-      value: -0.0023498535
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   isPenetrate: 0
   explosionPrefab: {fileID: 4296370996026009329, guid: e681ba27915daf9408bcea4081a84cfa, type: 3}
   isExplode: 0
   knockBackModifier: 10
   isStapler: 0
+  stunTime: 0
+  stunTimer: 1
   isHoming: 0
   turnSpeed: 0
   aimAssistRightBounds: {x: 10, y: 90}

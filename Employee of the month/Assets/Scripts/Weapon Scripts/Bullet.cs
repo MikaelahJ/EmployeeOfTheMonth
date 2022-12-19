@@ -28,9 +28,11 @@ public class Bullet : MonoBehaviour
     private float explosionDamage;
 
     public float knockBackModifier = 10;
-    public float stunTime;
 
     public bool isStapler;
+    public float stunTime;
+    public float stunTimer;
+
     public bool isHoming = false;
     public float turnSpeed;
     public Vector2 aimAssistRightBounds;
@@ -135,7 +137,6 @@ public class Bullet : MonoBehaviour
         if (isBouncy && bounces < maxBounce)
         {
             Bounce();
-
             if (collision.gameObject.CompareTag("Player"))
             {
                 Debug.Log("AppliedForce");
@@ -143,15 +144,17 @@ public class Bullet : MonoBehaviour
             }
             return;
         }
+
         if (isStapler && collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("isStapler triggered");
             ApplyKnockBack(collision.collider);
-            collision.gameObject.GetComponent<Stun>().WallStunChance(5, 5);
+            collision.gameObject.GetComponent<Stun>().WallStunChance(stunTimer, stunTime);
             Debug.Log(collision.gameObject.name);
         }
 
-        //Play bullet hit sound
-        AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position, AudioManager.instance.audioClips.sfxVolume);
+    //Play bullet hit sound
+    AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position, AudioManager.instance.audioClips.sfxVolume);
 
         if (isExplode)
         {
