@@ -18,7 +18,7 @@ public class AudioManager : MonoBehaviour
     public float fadeTime = 2;
     private bool isFade = false;
 
-    [SerializeField]private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -73,9 +73,9 @@ public class AudioManager : MonoBehaviour
         else
         {
             audioSource.clip = inGame;
-            
+
         }
-        Debug.Log("AudioManager: Playing song \"" + audioSource.clip.name + "\"");
+        //Debug.Log("AudioManager: Playing song \"" + audioSource.clip.name + "\"");
         isFade = false;
         audioSource.volume = audioClips.musicVolume;
         audioSource.Play();
@@ -113,14 +113,14 @@ public class AudioManager : MonoBehaviour
 
     private void fadeVolume()
     {
-        if(fadeTime == 0)
+        if (fadeTime == 0)
         {
             audioSource.volume = 0;
             return;
         }
         float fadeAmount = audioClips.musicVolume * (1 / fadeTime) * Time.deltaTime;
 
-        if(audioSource.volume - fadeAmount <= 0)
+        if (audioSource.volume - fadeAmount <= 0)
         {
             audioSource.volume = 0;
             isFade = false;

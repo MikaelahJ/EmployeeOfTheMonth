@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 672739431118636492}
   - component: {fileID: 5234566805939642084}
   - component: {fileID: 1575183137811590513}
+  - component: {fileID: 4548661454331899105}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -44,7 +45,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5234566805939642093}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -124,6 +125,9 @@ MonoBehaviour:
   mousePosition: {x: 0, y: 0, z: 0}
   aimDirection: {x: 0, y: 0}
   hasGamePad: 0
+  aimAssistLayer:
+    serializedVersion: 2
+    m_Bits: 114175
 --- !u!114 &672739431118636492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,3 +262,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4548661454331899105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5234566805939642093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9971401d13d2a34e9e74cf29d2a34ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStunnable: 0
+  isStunned: 0
+  stunTimer: 1

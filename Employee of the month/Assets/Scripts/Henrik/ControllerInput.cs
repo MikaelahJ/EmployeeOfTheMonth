@@ -273,19 +273,19 @@ public class ControllerInput : MonoBehaviour
         aim.GetMouseInput(input.ReadValue<Vector2>());
     }
 
-    public void OnRun(InputAction.CallbackContext input)
-    {
-        if (playerMovement == null) { return; }
-        if (input.started)
-        {
-            playerMovement.GetRunButtonInput(true);
-        }
+    //public void OnRun(InputAction.CallbackContext input)
+    //{
+    //    if (playerMovement == null) { return; }
+    //    if (input.started)
+    //    {
+    //        playerMovement.GetRunButtonInput(true);
+    //    }
 
-        if (input.canceled)
-        {
-            playerMovement.GetRunButtonInput(false);
-        }
-    }
+    //    if (input.canceled)
+    //    {
+    //        playerMovement.GetRunButtonInput(false);
+    //    }
+    //}
 
     public void OnShoot(InputAction.CallbackContext input)
     {
