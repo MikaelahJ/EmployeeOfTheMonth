@@ -70,27 +70,16 @@ public class Aim : MonoBehaviour
 
     public void AimAssist()
     {
-
+        //Runs if player inside collider on weapongpoint
         if (targetsInRange.Count > 0)
         {
-            float angle;
-            float aimAngle;
             FindClosest();
-            Debug.Log("Finding Closest");
-            RaycastHit2D forward = Physics2D.Raycast(transform.position, transform.up, Mathf.Infinity);
             Vector2 direction = closest.transform.position - transform.position;
             RaycastHit2D enemy = Physics2D.Raycast(transform.position, direction, direction.magnitude, aimAssistLayer);
 
             if (enemy.collider != null && enemy.collider.CompareTag("Player"))
             {
-                Debug.Log("Aiming At " + enemy.collider.gameObject.name);
                 aimAssistVector = direction.normalized;
-                angle = Vector3.Angle(transform.up, direction);
-                aimAngle = Vector3.Angle(previousDirection, aimDirection);
-
-                Debug.Log("enemy angle" + angle);
-                Debug.Log("aim angle" + aimAngle);
-
             }
         }
         else
@@ -99,12 +88,12 @@ public class Aim : MonoBehaviour
         }
     }
 
+    //finds the player closest to the aim
     private void FindClosest()
     {
         foreach (Collider2D col in targetsInRange)
         {
             float objectRange = (col.gameObject.transform.position - transform.position).magnitude;
-            Debug.Log(col.name);
 
             if (range == 0)
             {
@@ -113,7 +102,6 @@ public class Aim : MonoBehaviour
             }
             else if (objectRange < range)
             {
-                Debug.Log("Updates");
                 range = objectRange;
                 closest = col.gameObject;
             }
@@ -145,7 +133,7 @@ public class Aim : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Add players that are in range of the bullet
+        //Add players that are in range of the aim
         if (collision.gameObject.CompareTag("Player"))
         {
             if (!targetsInRange.Contains(collision))
@@ -157,7 +145,7 @@ public class Aim : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //Remove players that are not in range of the bullet
+        //Remove players that are not in range of the aim
         if (collision.CompareTag("Player"))
         {
             if (targetsInRange.Contains(collision))

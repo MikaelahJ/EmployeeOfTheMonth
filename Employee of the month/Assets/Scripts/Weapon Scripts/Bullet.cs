@@ -30,7 +30,6 @@ public class Bullet : MonoBehaviour
     private float explosionDamage;
 
     public float knockBackModifier = 10;
-    public float stunTime;
     public Collider2D bulletOwner;
 
     public bool isStapler;
