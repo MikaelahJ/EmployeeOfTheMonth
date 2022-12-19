@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
 
 public class ControllerInput : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ControllerInput : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject cursorPrefab;
     public GameObject healthbarPrefab;
+    public GameObject roomSpriteMaskHolder;
     public GameObject playerHighlightCircle;
     public GameObject whichPlayerArrow;
 
@@ -133,6 +135,7 @@ public class ControllerInput : MonoBehaviour
         playerInput.SwitchCurrentActionMap("Player");
         SpawnPlayer();
         LoadHealthBar();
+        SpawnSpriteMask();
 
         if (GameManager.Instance.playersChosen != 0)
         {
@@ -154,15 +157,19 @@ public class ControllerInput : MonoBehaviour
         {
             case 1:
                 playerSprite = Instantiate(characters[0], player.transform);
+                playerSprite.name = "Player 1";
                 break;
             case 2:
                 playerSprite = Instantiate(characters[1], player.transform);
+                playerSprite.name = "Player 2";
                 break;
             case 3:
                 playerSprite = Instantiate(characters[2], player.transform);
+                playerSprite.name = "Player 3";
                 break;
             case 4:
                 playerSprite = Instantiate(characters[3], player.transform);
+                playerSprite.name = "Player 4";
                 break;
         }
         LoadPlayerChildScripts();
@@ -171,6 +178,7 @@ public class ControllerInput : MonoBehaviour
     private void SetCharacterTestScenes()
     {
         playerSprite = Instantiate(characters[0], player.transform);
+        playerSprite.name = "Player 1";
         LoadPlayerChildScripts();
     }
     private void SetCursorTestScenes()
@@ -224,6 +232,15 @@ public class ControllerInput : MonoBehaviour
         //player.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponentInChildren<UIAmmoCounter>();
         //player.GetComponent<HasHealth>().healthbar = hud.GetComponentInChildren<UIHealthbar>();
     }
+
+    public void SpawnSpriteMask()
+    {
+        //playerSprite.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        player.GetComponent<SortingGroup>().sortingLayerID = SortingLayer.NameToID("Player " + (playerInput.playerIndex + 1));
+        GameObject roomMask = Instantiate(roomSpriteMaskHolder);
+        roomMask.GetComponent<RoomMaskManager>().layerName = "Player " + (playerInput.playerIndex + 1);
+    }
+
     public void OnClick()
     {
         if (cursor == null) { return; }
