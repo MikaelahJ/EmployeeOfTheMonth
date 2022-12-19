@@ -17,7 +17,7 @@ public class Aim : MonoBehaviour
     private Vector2 previousDirection;
     private Vector2 mouseInput;
     private float range;
-    private Vector3 closest;
+    private GameObject closest;
     private List<Collider2D> targetsInRange;
 
 
@@ -78,7 +78,7 @@ public class Aim : MonoBehaviour
             FindClosest();
             Debug.Log("Finding Closest");
             RaycastHit2D forward = Physics2D.Raycast(transform.position, transform.up, Mathf.Infinity);
-            Vector2 direction = closest - transform.position;
+            Vector2 direction = closest.transform.position - transform.position;
             RaycastHit2D enemy = Physics2D.Raycast(transform.position, direction, direction.magnitude, aimAssistLayer);
 
             if (enemy.collider != null && enemy.collider.CompareTag("Player"))
@@ -109,16 +109,39 @@ public class Aim : MonoBehaviour
             if (range == 0)
             {
                 range = objectRange;
-                closest = col.gameObject.transform.position;
+                closest = col.gameObject;
             }
             else if (objectRange < range)
             {
                 Debug.Log("Updates");
                 range = objectRange;
-                closest = col.gameObject.transform.position;
+                closest = col.gameObject;
             }
         }
     }
+
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    float angle;
+    //    float aimAngle;
+    //    FindClosest();
+    //    Debug.Log("Finding Closest");
+    //    RaycastHit2D forward = Physics2D.Raycast(transform.position, transform.up, Mathf.Infinity);
+    //    Vector2 direction = closest - transform.position;
+    //    RaycastHit2D enemy = Physics2D.Raycast(transform.position, direction, direction.magnitude, aimAssistLayer);
+
+    //    if (enemy.collider != null && enemy.collider.CompareTag("Player"))
+    //    {
+    //        Debug.Log("Aiming At " + enemy.collider.gameObject.name);
+    //        aimAssistVector = direction.normalized;
+    //        angle = Vector3.Angle(transform.up, direction);
+    //        aimAngle = Vector3.Angle(previousDirection, aimDirection);
+
+    //        Debug.Log("enemy angle" + angle);
+    //        Debug.Log("aim angle" + aimAngle);
+
+    //    }
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
