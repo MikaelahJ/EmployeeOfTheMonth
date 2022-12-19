@@ -13,7 +13,7 @@ public class Fire : MonoBehaviour
 
     private Animator fireAnimation;
     private WeaponController weaponController;
-    //public UIAmmoCounter ammoCounter;
+    private Collider2D ownerCollider;
 
     private float timer;
 
@@ -42,6 +42,8 @@ public class Fire : MonoBehaviour
     {
         fireAnimation = animationPoint.GetComponent<Animator>();
         weaponController = GetComponent<WeaponController>();
+        ownerCollider = GetComponentInParent<CircleCollider2D>();
+
         sound = GetComponent<AudioSource>();
         
         startFirePoint = firePoint.transform.localPosition;
@@ -98,7 +100,8 @@ public class Fire : MonoBehaviour
         //Fire bullet
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
         newBullet.GetComponent<Bullet>().UpdateBulletModifyers(weaponController.weapon);
-        
+        newBullet.GetComponent<Bullet>().bulletOwner = ownerCollider;
+
 
         //Bullet Spread
         float spread = maxMissDegAngle * (1 - accuracy / 100);
@@ -155,7 +158,7 @@ public class Fire : MonoBehaviour
         {
             GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
             newBullet.GetComponent<Bullet>().UpdateBulletModifyers(weaponController.weapon);
-
+            newBullet.GetComponent<Bullet>().bulletOwner = ownerCollider;
             newBullet.transform.Rotate(new Vector3(0, 0, -shotgunSpreadBetween + i * 5));
         }
 
