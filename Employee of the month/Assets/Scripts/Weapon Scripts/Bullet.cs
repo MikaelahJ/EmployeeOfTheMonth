@@ -282,8 +282,8 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        BulletPlayerTracking();
-       
+        if(isHoming)
+            BulletPlayerTracking();
     }
 
 
