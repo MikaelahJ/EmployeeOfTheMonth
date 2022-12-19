@@ -17,6 +17,8 @@ public class WeaponController : MonoBehaviour
     public UIItemHolder itemHolder;
 
     private AudioSource sound;
+
+    [SerializeField] private Laser laserScript;
     void Start()
     {
         items = new NewItemScriptableObject[itemSlots];
@@ -64,6 +66,8 @@ public class WeaponController : MonoBehaviour
 
     public void RemoveAllItems()
     {
+        laserScript.DiscardSuperSprite();
+
         for (int i = 0; i < items.Length; i++)
         {
             RemoveItem(i, false);

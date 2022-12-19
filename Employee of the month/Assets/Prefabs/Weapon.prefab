@@ -161,6 +161,7 @@ MonoBehaviour:
   baseWeapon: {fileID: 11400000, guid: 3aa017dc77f19cf49bbac598b3fa39b8, type: 2}
   items: []
   itemHolder: {fileID: 0}
+  laserScript: {fileID: 4105976213350441301}
 --- !u!61 &2885860497341314348
 BoxCollider2D:
   m_ObjectHideFlags: 0
