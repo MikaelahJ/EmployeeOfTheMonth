@@ -11575,10 +11575,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpriteMaskHolder
       objectReference: {fileID: 0}
-    - target: {fileID: 3133657402604952829, guid: ba00ca1873cdf6b41aa5c8fceb68b108, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3133657402604952830, guid: ba00ca1873cdf6b41aa5c8fceb68b108, type: 3}
       propertyPath: m_RootOrder
       value: 15
