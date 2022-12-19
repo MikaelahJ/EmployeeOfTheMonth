@@ -9526,7 +9526,7 @@ PrefabInstance:
     - target: {fileID: 6951606707269242293, guid: 1dd3aec1cf09a9f47a870c1bf62ae9d2, type: 3}
       propertyPath: itemType
       value: 
-      objectReference: {fileID: 11400000, guid: edaf85f56248c8440a4bc71bbbd84b8d, type: 2}
+      objectReference: {fileID: 11400000, guid: f2fd67f76452df742a111b4141700983, type: 2}
     - target: {fileID: 6951606707269242293, guid: 1dd3aec1cf09a9f47a870c1bf62ae9d2, type: 3}
       propertyPath: respawnTime
       value: 1
