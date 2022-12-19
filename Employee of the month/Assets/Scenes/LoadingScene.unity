@@ -365,6 +365,45 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
+--- !u!1 &245190577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2162434750821967314, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
+  m_PrefabInstance: {fileID: 2162434749879207691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &245190579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245190577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69cbd761fb4a939418b77fd05e35245c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 245190580}
+  tip: {fileID: 519775125}
+  tips:
+  - Drink coffee to shoot faster
+  - Erasers are bouncy
+  - Have you tried shooting the vents
+--- !u!95 &245190580 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2162434750821967313, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
+  m_PrefabInstance: {fileID: 2162434749879207691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &519775125 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2162434749555565571, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
+  m_PrefabInstance: {fileID: 2162434749879207691}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1300015814
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +686,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2162434750993169439, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
 --- !u!1 &1500745399
 GameObject:

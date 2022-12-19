@@ -168,19 +168,7 @@ MonoBehaviour:
     m_ActionId: 1cf51c5e-e165-4a29-b5c3-2bf0f621edf9
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 237240420590927659}
-        m_TargetAssemblyTypeName: ControllerInput, Assembly-CSharp
-        m_MethodName: OnRun
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: c579b1e5-401b-4b72-9582-592a45cab59e
     m_ActionName: Player/Run[/DualShock4GamepadHID/leftTrigger]
   - m_PersistentCalls:
