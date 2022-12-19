@@ -14,6 +14,16 @@ public class Loading : MonoBehaviour
         tip.text = tips[Random.Range(0, tips.Count)];
     }
 
+    private void Update()
+    {
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Loading"))
+        {
+            Debug.Log("hello");
+            GameManager.Instance.LoadScene("TestScene");
+        }
+    }
+
+
     public void NextScene()
     {
         GameManager.Instance.LoadScene("TestScene");

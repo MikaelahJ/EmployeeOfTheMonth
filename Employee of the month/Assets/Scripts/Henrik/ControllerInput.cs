@@ -189,11 +189,11 @@ public class ControllerInput : MonoBehaviour
         GameObject circle = Instantiate(playerHighlightCircle, player.transform);
         circle.GetComponent<SpriteRenderer>().color = pColors[playerInput.playerIndex];
 
-        GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
-        foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
-        {
-            sprite.sprite = cursorSprites[playerInput.playerIndex];
-        }
+        //GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
+        //foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
+        //{
+        //    sprite.sprite = cursorSprites[playerInput.playerIndex];
+        //}
     }
 
     private void LoadHealthBar()
