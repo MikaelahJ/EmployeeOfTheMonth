@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private GameObject PencilStuckInWall;
     private bool haveSpawnedPencil = false;
 
+    [SerializeField] private float selfDamageModifier = 0.5f;
+
     private Rigidbody2D rb2d;
     private float bulletSpeed = 5;
     private Vector3 direction;
@@ -28,6 +30,8 @@ public class Bullet : MonoBehaviour
     private float explosionDamage;
 
     public float knockBackModifier = 10;
+    public float stunTime;
+    public Collider2D bulletOwner;
 
     public bool isStapler;
     public float stunTime;
@@ -139,8 +143,9 @@ public class Bullet : MonoBehaviour
             Bounce();
             if (collision.gameObject.CompareTag("Player"))
             {
-                Debug.Log("AppliedForce");
-                ApplyKnockBack(collision.collider);
+                //Debug.Log("AppliedForce");
+                //Knockback l�ggs p� i SendDamage
+                //ApplyKnockBack(collision.collider);
             }
             return;
         }
@@ -188,12 +193,24 @@ public class Bullet : MonoBehaviour
 
     public void SendDamage(Collider2D collider, Collision2D collision = null)
     {
-        if (!canTakeDamage) { return; }
+        Debug.Log(collider.name + " collided with " + bulletOwner.name);
+        if (!canTakeDamage && collider.name == bulletOwner.name) {
+            
+            return; 
+        }
         SendDamage(damage, collider, collision);
     }
 
     public void SendDamage(float damage, Collider2D collider, Collision2D collision = null)
     {
+        bool selfDamage = collider.name == bulletOwner.name;
+
+        if (selfDamage)
+        {
+            damage *= selfDamageModifier;
+        }
+
+
         if (collider.gameObject.transform.CompareTag("Player"))
         {
             if (collider.transform.parent.transform.TryGetComponent<HasHealth>(out HasHealth health))

@@ -161,6 +161,7 @@ MonoBehaviour:
   baseWeapon: {fileID: 11400000, guid: 3aa017dc77f19cf49bbac598b3fa39b8, type: 2}
   items: []
   itemHolder: {fileID: 0}
+  laserScript: {fileID: 4105976213350441301}
 --- !u!61 &2885860497341314348
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -399,7 +400,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!95 &525359518251169599
 Animator:
@@ -512,7 +513,7 @@ MonoBehaviour:
   isShooting: 0
   ignore:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 131840
 --- !u!95 &164983538690636996
 Animator:
   serializedVersion: 4
