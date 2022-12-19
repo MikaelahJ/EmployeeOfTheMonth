@@ -7,39 +7,43 @@ public class Stun : MonoBehaviour
     public bool isStunnable;
     public bool isStunned;
     private float stunTime;
-    private float stunTimer;
+    public float stunTimer;
 
-    public float StunTime { get { return stunTime; } set { stunTime = value; } }
-    public float StunTimer { get { return stunTimer; } set { stunTimer = value; } }
+    private void Start()
+    {
+        isStunned = false;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall")) && isStunnable)
+        if ((collision.gameObject.CompareTag("HardWall")))
         {
             Debug.Log("WallCollide");
-            GetComponent<Movement>().enabled = false;
-            GetComponent<Aim>().enabled = false;
-            GetComponentInChildren<Fire>().enabled = false;
+           
 
-            if (!isStunned)
+            if (!isStunned && isStunnable)
             {
+                isStunned = true;
+                GetComponent<Movement>().enabled = false;
+                GetComponent<Aim>().enabled = false;
+                GetComponentInChildren<Fire>().enabled = false;
                 Debug.Log("Runs Stun");
-                StartCoroutine(Stunned(collision));
+                StartCoroutine(Stunned());
             }
         }
     }
 
     public void WallStunChance(float stunTimer, float stunTime)
     {
+        Debug.Log(stunTime);
         this.stunTime = stunTime;
         this.stunTimer = stunTimer;
         isStunnable = true;
         StartCoroutine(StunCountDown());
     }
 
-    private IEnumerator Stunned(Collision2D collision)
+    private IEnumerator Stunned()
     {
-        isStunned = true;
         yield return new WaitForSeconds(stunTime);
         GetComponent<Movement>().enabled = true;
         GetComponent<Aim>().enabled = true;

@@ -446,3 +446,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8148242819565589081, guid: bd78e19b4042f8e41a3f6471a02a2fbe, type: 3}
   m_PrefabInstance: {fileID: 3798631139235952365}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3201436562417649617 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3847611636834874355, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
+  m_PrefabInstance: {fileID: 1803902699530990626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &2339674392088570656
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3201436562417649617}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1, y: 0}
+      - {x: 1, y: 20}
+      - {x: -1, y: 20}
+      - {x: -1, y: 0}
