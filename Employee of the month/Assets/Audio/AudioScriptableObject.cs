@@ -24,7 +24,7 @@ public class AudioScriptableObject : ScriptableObject
     public AudioClip impact_glass;
     public AudioClip bulletBounce;
 
-    public AudioClip ding;
+    public AudioClip countdown;
 
     [Header("Volume (Controlled by AudioManager)")]
     [Range(0, 1)] public float musicVolume;

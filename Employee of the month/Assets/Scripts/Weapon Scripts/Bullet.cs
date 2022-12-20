@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private GameObject PencilStuckInWall;
     private bool haveSpawnedPencil = false;
 
+    [SerializeField] private float selfDamageModifier = 0.5f;
+
     private Rigidbody2D rb2d;
     private float bulletSpeed = 5;
     private Vector3 direction;
@@ -28,8 +30,12 @@ public class Bullet : MonoBehaviour
     private float explosionDamage;
 
     public float knockBackModifier = 10;
+    public Collider2D bulletOwner;
 
     public bool isStapler;
+    public float stunTime;
+    public float stunTimer;
+
     public bool isHoming = false;
     public float turnSpeed;
     public Vector2 aimAssistRightBounds;
@@ -66,7 +72,7 @@ public class Bullet : MonoBehaviour
         if (!isHoming)
         {
             //Debug.Log("Magnetic");
-            aimAssistCollider[1] = new Vector2(aimAssistRightBounds.x, aimAssistRightBounds.y -10);
+            aimAssistCollider[1] = new Vector2(aimAssistRightBounds.x, aimAssistRightBounds.y - 10);
             aimAssistCollider[2] = aimAssistRightBounds;
             aimAssistCollider[3] = aimAssistLeftBounds;
             aimAssistCollider[4] = new Vector2(aimAssistLeftBounds.x, aimAssistLeftBounds.y - 10);
@@ -104,6 +110,7 @@ public class Bullet : MonoBehaviour
         turnSpeed = weapon.turnSpeed;
         scanBounds = weapon.scanBounds;
         isStapler = weapon.isStapler;
+        stunTime = weapon.stunTime;
 
         if (isPenetrate)
         {
@@ -133,11 +140,25 @@ public class Bullet : MonoBehaviour
         if (isBouncy && bounces < maxBounce)
         {
             Bounce();
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                //Debug.Log("AppliedForce");
+                //Knockback l�ggs p� i SendDamage
+                //ApplyKnockBack(collision.collider);
+            }
             return;
         }
 
-        //Play bullet hit sound
-        AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position, AudioManager.instance.audioClips.sfxVolume);
+        if (isStapler && collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("isStapler triggered");
+            ApplyKnockBack(collision.collider);
+            collision.gameObject.GetComponent<Stun>().WallStunChance(stunTimer, stunTime);
+            Debug.Log(collision.gameObject.name);
+        }
+
+    //Play bullet hit sound
+    AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position, AudioManager.instance.audioClips.sfxVolume);
 
         if (isExplode)
         {
@@ -160,6 +181,7 @@ public class Bullet : MonoBehaviour
         GameObject pencilStuck = Instantiate(PencilStuckInWall, transform.position, Quaternion.identity);
         pencilStuck.GetComponent<PencilStuckInWall>().SetPencilRotation(transform.rotation);
         pencilStuck.GetComponent<PencilStuckInWall>().SetCrackTransform(collision);
+        pencilStuck.GetComponent<PencilStuckInWall>().SetPencilPosition(collision);
         haveSpawnedPencil = true;
     }
 
@@ -170,15 +192,27 @@ public class Bullet : MonoBehaviour
 
     public void SendDamage(Collider2D collider, Collision2D collision = null)
     {
-        if (!canTakeDamage) { return; }
+        Debug.Log(collider.name + " collided with " + bulletOwner.name);
+        if (!canTakeDamage && collider.name == bulletOwner.name) {
+            
+            return; 
+        }
         SendDamage(damage, collider, collision);
     }
 
     public void SendDamage(float damage, Collider2D collider, Collision2D collision = null)
     {
+        bool selfDamage = collider.name == bulletOwner.name;
+
+        if (selfDamage)
+        {
+            damage *= selfDamageModifier;
+        }
+
+
         if (collider.gameObject.transform.CompareTag("Player"))
         {
-            if(collider.transform.parent.transform.TryGetComponent<HasHealth>(out HasHealth health))
+            if (collider.transform.parent.transform.TryGetComponent<HasHealth>(out HasHealth health))
             {
                 health.LoseHealth(damage);
                 health.AddBlood(gameObject);
@@ -220,7 +254,8 @@ public class Bullet : MonoBehaviour
     {
         Rigidbody2D playerRb = playerCollider.gameObject.GetComponentInParent<Rigidbody2D>();
         if (playerRb == null) { return; }
-
+        playerRb.AddForce(transform.up.normalized * knockBackModifier, ForceMode2D.Impulse);
+        Debug.Log("Applied " + rb2d.velocity.normalized * knockBackModifier + " Knockback to " + playerCollider.name);
         float extraKnockback = 0;
         Vector3 forceDirection = transform.up.normalized;
         if (hasExploded)
@@ -249,10 +284,8 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isHoming)
-        {
+        if(isHoming)
             BulletPlayerTracking();
-        }
     }
 
 

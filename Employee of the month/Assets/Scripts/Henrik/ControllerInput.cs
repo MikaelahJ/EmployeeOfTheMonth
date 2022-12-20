@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
 
 public class ControllerInput : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ControllerInput : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject cursorPrefab;
     public GameObject healthbarPrefab;
+    public GameObject roomSpriteMaskHolder;
     public GameObject playerHighlightCircle;
     public GameObject whichPlayerArrow;
 
@@ -133,6 +135,7 @@ public class ControllerInput : MonoBehaviour
         playerInput.SwitchCurrentActionMap("Player");
         SpawnPlayer();
         LoadHealthBar();
+        
 
         if (GameManager.Instance.playersChosen != 0)
         {
@@ -144,6 +147,7 @@ public class ControllerInput : MonoBehaviour
             SetCharacterTestScenes();
         }
 
+        SpawnSpriteMask();
         Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
     }
 
@@ -154,15 +158,19 @@ public class ControllerInput : MonoBehaviour
         {
             case 1:
                 playerSprite = Instantiate(characters[0], player.transform);
+                playerSprite.name = "Character 1";
                 break;
             case 2:
                 playerSprite = Instantiate(characters[1], player.transform);
+                playerSprite.name = "Character 2";
                 break;
             case 3:
                 playerSprite = Instantiate(characters[2], player.transform);
+                playerSprite.name = "Character 3";
                 break;
             case 4:
                 playerSprite = Instantiate(characters[3], player.transform);
+                playerSprite.name = "Character 4";
                 break;
         }
         LoadPlayerChildScripts();
@@ -170,7 +178,9 @@ public class ControllerInput : MonoBehaviour
 
     private void SetCharacterTestScenes()
     {
+        spriteIndex = 1;
         playerSprite = Instantiate(characters[0], player.transform);
+        playerSprite.name = "Character 1";
         LoadPlayerChildScripts();
     }
     private void SetCursorTestScenes()
@@ -189,11 +199,11 @@ public class ControllerInput : MonoBehaviour
         GameObject circle = Instantiate(playerHighlightCircle, player.transform);
         circle.GetComponent<SpriteRenderer>().color = pColors[playerInput.playerIndex];
 
-        GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
-        foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
-        {
-            sprite.sprite = cursorSprites[playerInput.playerIndex];
-        }
+        //GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
+        //foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
+        //{
+        //    sprite.sprite = cursorSprites[playerInput.playerIndex];
+        //}
     }
 
     private void LoadHealthBar()
@@ -224,6 +234,15 @@ public class ControllerInput : MonoBehaviour
         //player.GetComponentInChildren<Fire>().ammoCounter = hud.GetComponentInChildren<UIAmmoCounter>();
         //player.GetComponent<HasHealth>().healthbar = hud.GetComponentInChildren<UIHealthbar>();
     }
+
+    public void SpawnSpriteMask()
+    {
+        //playerSprite.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        //player.GetComponent<SortingGroup>().sortingLayerID = SortingLayer.NameToID("Player " + (spriteIndex));
+        GameObject roomMask = Instantiate(roomSpriteMaskHolder);
+        roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
+    }
+
     public void OnClick()
     {
         if (cursor == null) { return; }
@@ -254,19 +273,19 @@ public class ControllerInput : MonoBehaviour
         aim.GetMouseInput(input.ReadValue<Vector2>());
     }
 
-    public void OnRun(InputAction.CallbackContext input)
-    {
-        if (playerMovement == null) { return; }
-        if (input.started)
-        {
-            playerMovement.GetRunButtonInput(true);
-        }
+    //public void OnRun(InputAction.CallbackContext input)
+    //{
+    //    if (playerMovement == null) { return; }
+    //    if (input.started)
+    //    {
+    //        playerMovement.GetRunButtonInput(true);
+    //    }
 
-        if (input.canceled)
-        {
-            playerMovement.GetRunButtonInput(false);
-        }
-    }
+    //    if (input.canceled)
+    //    {
+    //        playerMovement.GetRunButtonInput(false);
+    //    }
+    //}
 
     public void OnShoot(InputAction.CallbackContext input)
     {

@@ -15,7 +15,7 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 60324ad7ff0c264458032c7d9c60f2fa, type: 3}
   itemBrokenOnGround: {fileID: 21300000, guid: 703cb2148fec31948ab35ae7d76a1abc, type: 3}
   brokenItemSticksToWall: 0
-  sprite: {fileID: 21300000, guid: 3a4baf464b6fb44469c0286e662801cd, type: 3}
+  sprite: {fileID: 21300000, guid: 2292c5f214610f748894617dfd9d510b, type: 3}
   onRespawn: {fileID: 8300000, guid: 21fa880770bdd0a489a4b14e9bb9ffa8, type: 3}
   onPickup: {fileID: 8300000, guid: b78207f12cd2e1c4b905aee353264d85, type: 3}
   onDestroy: {fileID: 0}
@@ -50,5 +50,6 @@ MonoBehaviour:
   isHoming: 0
   turnSpeed: 0
   scanBounds: 0
-  isStapler: 0
+  isStapler: 1
+  stunTime: 1
   hasAnimations: 0

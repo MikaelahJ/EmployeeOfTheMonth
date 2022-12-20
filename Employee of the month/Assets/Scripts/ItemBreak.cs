@@ -9,6 +9,7 @@ public class ItemBreak : MonoBehaviour
     [SerializeField] private List<Sprite> spritesBeforeBreak = new List<Sprite>();
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject spriteMask;
 
     //public int damageThreshold = 5;
     private int healthMultiplier;
@@ -50,6 +51,9 @@ public class ItemBreak : MonoBehaviour
             animator.enabled = true;
             animator.SetTrigger("Break");
             Invoke(nameof(DisableCollider), 0.001f);
+            //Om en ny passage mellan rum öppnas så behövs det en transition mask
+            if (spriteMask != null)
+                spriteMask.SetActive(true);
             return;
         }
 

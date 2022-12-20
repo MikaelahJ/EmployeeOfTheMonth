@@ -104,11 +104,11 @@ public class Movement : MonoBehaviour
         leftstickInput = input;
     }
 
-    //Used in the controllerinput script
-    public void GetRunButtonInput(bool input)
-    {
-        isRunning = input;
-    }
+    ////Used in the controllerinput script
+    //public void GetRunButtonInput(bool input)
+    //{
+    //    isRunning = input;
+    //}
 
 
 }

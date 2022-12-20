@@ -50,6 +50,7 @@ MonoBehaviour:
   characterSelect: {fileID: 8300000, guid: c7b59593afa22bb488a0148036a840e6, type: 3}
   inGame: {fileID: 8300000, guid: d6206b6abf497b04a98d11df59f266d4, type: 3}
   fadeSound: {fileID: 8300000, guid: 3b7bfff89286660499268d1b1f7e6143, type: 3}
+  playFadeSoundDelay: 1
   fadeTime: 2
   audioSource: {fileID: -6413104329964521370}
 --- !u!82 &-6413104329964521370

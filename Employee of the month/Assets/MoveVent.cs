@@ -8,7 +8,7 @@ public class MoveVent : MonoBehaviour
 
     private void Start()
     {
-       animator = gameObject.GetComponent<Animator>();
+        animator = gameObject.GetComponent<Animator>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,6 +17,18 @@ public class MoveVent : MonoBehaviour
             animator.SetTrigger("Open");
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("CloseVent"))
+            {
+                animator.SetTrigger("Open");
+            }
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

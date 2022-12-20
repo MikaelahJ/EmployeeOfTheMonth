@@ -45,32 +45,41 @@ public class GameManager : MonoBehaviour
         Instance.isPaused = false;
         isPaused = false;
         Time.timeScale = 1;
-        SceneManager.LoadScene(scene);
-
         if (scene == "TestScene")
         {
             StartCoroutine(RoundStartPause());
         }
+        SceneManager.LoadScene(scene);
+
+
+    }
+    public void StartRoundPause()
+    {
+        //StartCoroutine(RoundStartPause());
     }
 
     IEnumerator RoundStartPause()
     {
+        bool startedclip = false;
         Time.timeScale = 0;
         isPaused = true;
-
         while (countdown >= 0)
         {
             yield return new WaitForSecondsRealtime(1);
 
-            SpawnManager.instance.gameOverText.text = countdown.ToString();
+            if (startedclip == false)
+            {
+                //PlayClip();
+            }
+            startedclip = true;
 
-            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.ding, Camera.main.transform.position, AudioManager.instance.audioClips.sfxVolume);
+            SpawnManager.instance.gameOverText.text = countdown.ToString();
 
             countdown--;
         }
         SpawnManager.instance.gameOverText.text = "GO!";
 
-        foreach(GameObject arrow in GameObject.FindGameObjectsWithTag("PlayerArrow"))
+        foreach (GameObject arrow in GameObject.FindGameObjectsWithTag("PlayerArrow"))
         {
             Destroy(arrow);
         }
@@ -81,8 +90,14 @@ public class GameManager : MonoBehaviour
         isPaused = false;
     }
 
+    private void PlayClip()
+    {
+        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.countdown, Camera.main.transform.position, AudioManager.instance.audioClips.sfxVolume);
+    }
+
     public void ReloadScene()
     {
+        StartCoroutine(RoundStartPause());
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

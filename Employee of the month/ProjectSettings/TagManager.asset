@@ -30,7 +30,7 @@ TagManager:
   - 
   - MapEffects
   - Laser
-  - 
+  - RoomMasks
   - 
   - 
   - 
@@ -48,4 +48,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3653612433
+    locked: 0
+  - name: Character 1
+    uniqueID: 2754069193
+    locked: 0
+  - name: Character 2
+    uniqueID: 1884363909
+    locked: 0
+  - name: Character 3
+    uniqueID: 895835255
+    locked: 0
+  - name: Character 4
+    uniqueID: 3041074233
+    locked: 0
+  - name: Foreground
+    uniqueID: 3241613173
     locked: 0

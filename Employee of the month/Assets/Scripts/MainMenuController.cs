@@ -8,15 +8,22 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField] private GameObject startButton;
+
+    [SerializeField] private GameObject middleButton;
+    private Image middleSprite;
+    [SerializeField] private List<Sprite> CarouselSprites = new List<Sprite>();
+    private int spriteIndex = 0;
+    [SerializeField] private GameObject buttonCarousel;
+    [SerializeField] private GameObject controlsPanel;
+    [SerializeField] private GameObject optionsPanel;
+    [SerializeField] private GameObject creditsPanel;
+
     private GameObject backButton;
 
-    [SerializeField] private GameObject optionsPanel;
-    [SerializeField] private GameObject HTP;//how to play
-    [SerializeField] private GameObject creditsPanel;
     private void Start()
     {
-        SetFirstSelectedButton(startButton);
+        SetFirstSelectedButton(middleButton);
+        middleSprite = middleButton.GetComponent<Image>();
     }
 
     private void SetFirstSelectedButton(GameObject button)
@@ -24,10 +31,58 @@ public class MainMenuController : MonoBehaviour
         var eventSystem = EventSystem.current;
         eventSystem.SetSelectedGameObject(button, new BaseEventData(eventSystem));
     }
-
-    public void OnButtonPress(string sceneName)
+    private void Update()
     {
-        SceneManager.LoadScene(sceneName);
+        if (buttonCarousel.activeInHierarchy)
+        {
+            if (EventSystem.current.currentSelectedGameObject.name != "MiddleButton")
+            {
+                Spin();
+            }
+        }
+
+    }
+
+    private void Spin()
+    {
+        string direction = EventSystem.current.currentSelectedGameObject.name;
+
+        spriteIndex += direction == "RightButton" ? 1 : -1;
+
+        if (spriteIndex >= CarouselSprites.Count) spriteIndex = 0;
+        if (spriteIndex < 0) spriteIndex = CarouselSprites.Count - 1;
+
+        middleSprite.sprite = CarouselSprites[spriteIndex];
+
+        EventSystem.current.SetSelectedGameObject(middleButton);
+    }
+
+    public void OnButtonPress()
+    {
+        string buttonName = middleSprite.sprite.name;
+
+        switch (buttonName)
+        {
+            case "PLAY":
+                SceneManager.LoadScene("CharacterSelect");
+                break;
+
+            case "CONTROLS":
+                OnControls();
+                break;
+
+            case "OPTIONS":
+                OnOptions();
+                break;
+
+            case "CREDITS":
+                OnCredits();
+                break;
+
+            case "EXIT":
+                OnExit();
+                break;
+        }
     }
 
     public void OnOptions()
@@ -35,27 +90,31 @@ public class MainMenuController : MonoBehaviour
         if (optionsPanel.activeInHierarchy)
         {
             optionsPanel.SetActive(false);
-            SetFirstSelectedButton(startButton);
+            buttonCarousel.SetActive(true);
+            SetFirstSelectedButton(middleButton);
         }
         else
         {
             optionsPanel.SetActive(true);
+            buttonCarousel.SetActive(false);
             backButton = optionsPanel.GetComponentInChildren<Button>().gameObject;
             SetFirstSelectedButton(backButton);
         }
     }
 
-    public void OnHowtoplay()
+    public void OnControls()
     {
-        if (HTP.activeInHierarchy)
+        if (controlsPanel.activeInHierarchy)
         {
-            HTP.SetActive(false);
-            SetFirstSelectedButton(startButton);
+            controlsPanel.SetActive(false);
+            buttonCarousel.SetActive(true);
+            SetFirstSelectedButton(middleButton);
         }
         else
         {
-            HTP.SetActive(true);
-            backButton = HTP.GetComponentInChildren<Button>().gameObject;
+            controlsPanel.SetActive(true);
+            buttonCarousel.SetActive(false);
+            backButton = controlsPanel.GetComponentInChildren<Button>().gameObject;
             SetFirstSelectedButton(backButton);
         }
     }
@@ -65,11 +124,13 @@ public class MainMenuController : MonoBehaviour
         if (creditsPanel.activeInHierarchy)
         {
             creditsPanel.SetActive(false);
-            SetFirstSelectedButton(startButton);
+            buttonCarousel.SetActive(true);
+            SetFirstSelectedButton(middleButton);
         }
         else
         {
             creditsPanel.SetActive(true);
+            buttonCarousel.SetActive(false);
             backButton = creditsPanel.GetComponentInChildren<Button>().gameObject;
             SetFirstSelectedButton(backButton);
         }

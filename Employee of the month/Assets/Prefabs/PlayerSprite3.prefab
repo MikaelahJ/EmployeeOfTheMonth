@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 9043131763967725611}
   - component: {fileID: 3374547052959039942}
   - component: {fileID: 740578834032619591}
+  - component: {fileID: 8489754580775624740}
   m_Layer: 3
   m_Name: PlayerSprite3
   m_TagString: Player
@@ -171,7 +172,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!58 &9043131763967725611
 CircleCollider2D:
@@ -221,7 +222,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 36390dd6b16d2b24bbf4a4eb26fc18f7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -305,6 +306,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &8489754580775624740
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194419871203171396}
+  m_Enabled: 1
+  m_SortingLayerID: 895835255
+  m_SortingLayer: 4
+  m_SortingOrder: 3
 --- !u!1001 &6571013324460634296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -362,6 +374,40 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
+--- !u!1 &7950431863685120843 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3847611636834874355, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
+  m_PrefabInstance: {fileID: 6571013324460634296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &6089197696897743625
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7950431863685120843}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1, y: 0}
+      - {x: 0.5, y: 10}
+      - {x: -0.5, y: 10}
+      - {x: -1, y: 0}
 --- !u!4 &7950431864066846388 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3847611636956470796, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}

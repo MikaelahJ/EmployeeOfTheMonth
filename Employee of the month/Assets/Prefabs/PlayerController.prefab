@@ -168,19 +168,7 @@ MonoBehaviour:
     m_ActionId: 1cf51c5e-e165-4a29-b5c3-2bf0f621edf9
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 237240420590927659}
-        m_TargetAssemblyTypeName: ControllerInput, Assembly-CSharp
-        m_MethodName: OnRun
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: c579b1e5-401b-4b72-9582-592a45cab59e
     m_ActionName: Player/Run[/DualShock4GamepadHID/leftTrigger]
   - m_PersistentCalls:
@@ -303,6 +291,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 5234566805939642093, guid: d8d21ce790ce3a141b6c7af09131b189, type: 3}
   cursorPrefab: {fileID: 7267468052432219236, guid: 624f31e2bfded4640a15fb109334a68a, type: 3}
   healthbarPrefab: {fileID: 0}
+  roomSpriteMaskHolder: {fileID: 3133657402604952829, guid: ba00ca1873cdf6b41aa5c8fceb68b108, type: 3}
   playerHighlightCircle: {fileID: 2503362734398707608, guid: 4bcdec645315e0f48b1df196c442d9c3, type: 3}
   whichPlayerArrow: {fileID: 3735861215471766086, guid: d36e77971aa3752478ae6ae23132dcdf, type: 3}
   playerInput: {fileID: 0}

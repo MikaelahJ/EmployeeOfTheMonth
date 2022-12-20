@@ -22,6 +22,7 @@ public class Laser : MonoBehaviour
     public bool isCharged = false;
     public bool isCharging = false;
     public bool isShooting = false;
+    private bool hasStarted = false;
 
     private float defaultWalkSpeed;
 
@@ -33,6 +34,7 @@ public class Laser : MonoBehaviour
 
     void Start()
     {
+        hasStarted = true;
         aim = GetComponentInParent<Aim>();
         movement = GetComponentInParent<Movement>();
         fire = GetComponentInParent<Fire>();
@@ -83,7 +85,6 @@ public class Laser : MonoBehaviour
     {
         lineRenderer.enabled = true;
 
-
         if (movement == null)
             movement = GetComponentInParent<Movement>();
 
@@ -97,11 +98,11 @@ public class Laser : MonoBehaviour
 
     public void UpdateLaser()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, firePoint.transform.up, 20, ~ignore) ;//send raycast and ignore modifyers
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, firePoint.transform.up, 20, ~ignore);//send raycast and ignore modifyers
 
         if (hit)
         {
-            SendDamage(hit.collider, damage * Time.deltaTime);
+            SendDamage(hit.collider, damage * Time.deltaTime * 2);
             lineRenderer.SetPosition(1, hit.point);
         }
 
@@ -137,18 +138,24 @@ public class Laser : MonoBehaviour
 
         superMicroPos.GetChild(0).GetComponent<Animator>().SetTrigger("Fired");
 
+        ResetLaser();
+
+        fire.DeActivateLaser();
+    }
+
+    private void ResetLaser()
+    {
         isShooting = false;
         isCharged = false;
+        isCharging = false;
         lineRenderer.enabled = false;
-        //movement.enabled = true;
         aim.rotationSpeed = 30;
         movement.walkSpeed = defaultWalkSpeed;
 
+        fire.DeActivateLaser();
 
         for (int i = 0; i < particles.Count; i++)
             particles[i].Stop();
-
-        fire.DeActivateLaser();
     }
 
     void RotateToAim()
@@ -167,6 +174,7 @@ public class Laser : MonoBehaviour
         rotation.eulerAngles = new Vector3(0, 0, angle);
         transform.rotation = rotation;
     }
+
     void FillLists()
     {
         for (int i = 0; i < startVFX.transform.childCount; i++)
@@ -182,5 +190,21 @@ public class Laser : MonoBehaviour
             if (ps != null)
                 particles.Add(ps);
         }
+    }
+
+    public void DiscardSuperSprite()
+    {
+        Debug.Log("hej");
+        if (!hasStarted) 
+        {
+            Debug.Log("Can't discard supersprite");
+            return;
+        }
+
+        ResetLaser();
+
+        superMicroPos.GetChild(0).GetComponent<Animator>().Play("LaserDefault");
+        superMicroPos.GetChild(1).GetComponent<Animator>().Play("LaserDefaultPull");
+
     }
 }
