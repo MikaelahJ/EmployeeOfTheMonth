@@ -31,6 +31,9 @@ public class Vent : MonoBehaviour
 
     public void WhereToGo(Collider2D playerToMove)
     {
+       TrailRenderer trail =  playerToMove.GetComponentInChildren<TrailRenderer>();
+
+        trail.emitting = true;
         playerToMove.gameObject.GetComponentInParent<Movement>().justTeleported = true;
 
         //which vent to spawn player at
@@ -53,12 +56,15 @@ public class Vent : MonoBehaviour
 
         playerToMove.gameObject.GetComponentInParent<Rigidbody2D>().position = spawnPos.position;
 
-        StartCoroutine(CloseVent(playerToMove));
+        StartCoroutine(JustTeleported(playerToMove));
     }
 
-    IEnumerator CloseVent(Collider2D collision)
+    IEnumerator JustTeleported(Collider2D playerToMove)
     {
         yield return new WaitForSeconds(0.3f);
-        collision.gameObject.GetComponentInParent<Movement>().justTeleported = false;
+        TrailRenderer trail = playerToMove.GetComponentInChildren<TrailRenderer>();
+        trail.emitting = false;
+
+        playerToMove.gameObject.GetComponentInParent<Movement>().justTeleported = false;
     }
 }
