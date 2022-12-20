@@ -33,7 +33,7 @@ public class ControllerInput : MonoBehaviour
     private GameObject cursorObject;
     private WeaponController weaponController;
     private Cursor cursor;
-    private List<Color32> pColors = new List<Color32>();
+    public List<Color32> pColors = new List<Color32>();
 
     public List<string> players;
 
