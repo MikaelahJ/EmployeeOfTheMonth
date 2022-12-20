@@ -22,6 +22,7 @@ public class Laser : MonoBehaviour
     public bool isCharged = false;
     public bool isCharging = false;
     public bool isShooting = false;
+    private bool hasStarted = false;
 
     private float defaultWalkSpeed;
 
@@ -33,6 +34,7 @@ public class Laser : MonoBehaviour
 
     void Start()
     {
+        hasStarted = true;
         aim = GetComponentInParent<Aim>();
         movement = GetComponentInParent<Movement>();
         fire = GetComponentInParent<Fire>();
@@ -193,6 +195,12 @@ public class Laser : MonoBehaviour
     public void DiscardSuperSprite()
     {
         Debug.Log("hej");
+        if (!hasStarted) 
+        {
+            Debug.Log("Can't discard supersprite");
+            return;
+        }
+
         ResetLaser();
 
         superMicroPos.GetChild(0).GetComponent<Animator>().Play("LaserDefault");
