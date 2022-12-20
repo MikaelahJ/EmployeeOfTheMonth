@@ -7,6 +7,8 @@ public class Vent : MonoBehaviour
     //[SerializeField] private Sprite openVent;
     //private Sprite closedSprite;
     //private Sprite sprite;
+    private TrailRenderer ventTrail;
+    [SerializeField] private Animator animator;
 
     private VentManager ventManager;
     private int spawnVentPos;
@@ -16,6 +18,8 @@ public class Vent : MonoBehaviour
     {
         //closedSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         ventManager = GameObject.Find("VentManager").GetComponent<VentManager>();
+        ventTrail = GetComponentInChildren<TrailRenderer>();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,9 +35,26 @@ public class Vent : MonoBehaviour
 
     public void WhereToGo(Collider2D playerToMove)
     {
-       TrailRenderer trail =  playerToMove.GetComponentInChildren<TrailRenderer>();
+        animator.SetTrigger("Vent");
 
-        trail.emitting = true;
+        
+        var player = playerToMove.gameObject.GetComponentInParent<Transform>().parent.gameObject;//get player prefab
+
+        foreach (Transform child in player.transform)//get circleHighlight
+        {
+            Debug.Log(child.name);
+            if (child.name == "PlayerCircleHighlight(Clone)")
+            {
+                ventTrail.startColor = child.GetComponent<SpriteRenderer>().color;//set trail to player colour
+                ventTrail.endColor = child.GetComponent<SpriteRenderer>().color;//set trail to player colour
+
+                Debug.Log("startcolour" + ventTrail.GetComponent<TrailRenderer>().startColor);
+
+            }
+        }
+
+
+
         playerToMove.gameObject.GetComponentInParent<Movement>().justTeleported = true;
 
         //which vent to spawn player at
@@ -55,16 +76,12 @@ public class Vent : MonoBehaviour
         }
 
         playerToMove.gameObject.GetComponentInParent<Rigidbody2D>().position = spawnPos.position;
-
         StartCoroutine(JustTeleported(playerToMove));
     }
 
     IEnumerator JustTeleported(Collider2D playerToMove)
     {
         yield return new WaitForSeconds(0.3f);
-        TrailRenderer trail = playerToMove.GetComponentInChildren<TrailRenderer>();
-        trail.emitting = false;
-
         playerToMove.gameObject.GetComponentInParent<Movement>().justTeleported = false;
     }
 }
