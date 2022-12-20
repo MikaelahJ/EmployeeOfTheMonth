@@ -379,7 +379,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3847611636834874355, guid: 8ed1a2693eb6c6f4ba1785dd10305cdf, type: 3}
   m_PrefabInstance: {fileID: 6571013324460634296}
   m_PrefabAsset: {fileID: 0}
---- !u!60 &3570119233139821742
+--- !u!60 &6089197696897743625
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -405,8 +405,8 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 1, y: 0}
-      - {x: 1, y: 20}
-      - {x: -1, y: 20}
+      - {x: 0.5, y: 10}
+      - {x: -0.5, y: 10}
       - {x: -1, y: 0}
 --- !u!4 &7950431864066846388 stripped
 Transform:
