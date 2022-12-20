@@ -64,7 +64,20 @@ public class Aim : MonoBehaviour
         //}
 
         //For slower turning speed if needed
-        transform.up = Vector2.Lerp(previousDirection, aimDirection + aimAssistVector, rotationSpeed * Time.deltaTime);
+
+        Vector3 rotate = Vector2.Lerp(previousDirection, aimDirection + aimAssistVector, rotationSpeed * Time.deltaTime);
+        rotate.z = 0;
+        transform.up = rotate;
+
+        //Fix, preventing character from flipping on x and z axis at z 180 or -180
+        if (transform.eulerAngles.x != 0 || transform.eulerAngles.y != 0)
+        {
+            Vector3 flip = transform.eulerAngles;
+            flip.x = 0;
+            flip.y = 0;
+            transform.eulerAngles = flip;
+        }
+
         previousDirection = transform.up;
     }
 
@@ -138,6 +151,7 @@ public class Aim : MonoBehaviour
         {
             if (!targetsInRange.Contains(collision))
             {
+                //Debug.Log("added");
                 targetsInRange.Add(collision);
             }
         }
@@ -150,6 +164,7 @@ public class Aim : MonoBehaviour
         {
             if (targetsInRange.Contains(collision))
             {
+                //Debug.Log("removed");
                 targetsInRange.Remove(collision);
             }
         }
