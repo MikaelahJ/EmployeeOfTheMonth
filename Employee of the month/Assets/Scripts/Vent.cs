@@ -36,7 +36,6 @@ public class Vent : MonoBehaviour
     public void WhereToGo(Collider2D playerToMove)
     {
         animator.SetTrigger("Vent");
-
         
         var player = playerToMove.gameObject.GetComponentInParent<Transform>().parent.gameObject;//get player prefab
 
