@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: AudioClips
   m_EditorClassIdentifier: 
   player1Deaths:
-  - {fileID: 8300000, guid: 347062b0e4cad7b4497a70c264448bb0, type: 3}
+  - {fileID: 8300000, guid: 2d7e5b35377ed234b9e754460ba48496, type: 3}
   player2Deaths:
-  - {fileID: 8300000, guid: 347062b0e4cad7b4497a70c264448bb0, type: 3}
+  - {fileID: 8300000, guid: 937a041e166a82a4298bd7f9220fa868, type: 3}
   player3Deaths:
-  - {fileID: 8300000, guid: 347062b0e4cad7b4497a70c264448bb0, type: 3}
+  - {fileID: 8300000, guid: 13c05f0c8894bc24296593e3ef45371d, type: 3}
   player4Deaths:
-  - {fileID: 8300000, guid: 347062b0e4cad7b4497a70c264448bb0, type: 3}
+  - {fileID: 8300000, guid: 3b2b34a345da88a488b2b68f82e06903, type: 3}
   damaged: {fileID: 8300000, guid: cc94647dfe2c4a84ea4a3bd0ca23d63c, type: 3}
   emptyMag: {fileID: 8300000, guid: 2d65f15bd7d28d04886106b2bf345f2a, type: 3}
   laserCharge: {fileID: 8300000, guid: 4c13da6ac3edc3149b7c189f041ff9e2, type: 3}

@@ -33,7 +33,7 @@ public class ControllerInput : MonoBehaviour
     private GameObject cursorObject;
     private WeaponController weaponController;
     private Cursor cursor;
-    private List<Color32> pColors = new List<Color32>();
+    public List<Color32> pColors = new List<Color32>();
 
     public List<string> players;
 
@@ -192,9 +192,13 @@ public class ControllerInput : MonoBehaviour
     {
         player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
         player.name = "P" + (playerInput.playerIndex + 1).ToString() + " Player";
-        player.GetComponent<HasHealth>().playerIndex = playerInput.playerIndex;
         playerMovement = player.GetComponent<Movement>();
         aim = player.GetComponent<Aim>();
+
+        player.GetComponent<Movement>().animator = player.GetComponent<Animator>();
+
+        player.GetComponent<HasHealth>().playerIndex = playerInput.playerIndex;
+        player.GetComponent<HasHealth>().animator = player.GetComponent<Animator>();
 
         GameObject circle = Instantiate(playerHighlightCircle, player.transform);
         circle.GetComponent<SpriteRenderer>().color = pColors[playerInput.playerIndex];
@@ -211,6 +215,8 @@ public class ControllerInput : MonoBehaviour
         healthbar = Instantiate(healthbars[playerInput.playerIndex], player.transform);
         healthbar.transform.SetParent(player.transform);
         healthbar.transform.position = player.transform.position;
+
+        player.GetComponent<HasHealth>().healthbarAnimator = healthbar.GetComponent<Animator>();
     }
 
     private void LoadPlayerChildScripts()
@@ -218,6 +224,8 @@ public class ControllerInput : MonoBehaviour
         player.GetComponentInChildren<WeaponController>().itemHolder = player.GetComponentInChildren<UIItemHolder>();
         fire = playerSprite.GetComponentInChildren<Fire>();
         weaponController = player.GetComponentInChildren<WeaponController>();
+        player.GetComponent<HasHealth>().animator = playerSprite.GetComponent<Animator>();
+        player.GetComponent<Movement>().animator = playerSprite.GetComponent<Animator>();
     }
 
     private void SpawnPlayerHUD(GameObject player)

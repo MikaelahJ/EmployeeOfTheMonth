@@ -71,7 +71,12 @@ public class ItemBreak : MonoBehaviour
     //Added this because sometimes the collider disable before pencil stuck on wall script uses it
     private void DisableCollider()
     {
-        gameObject.GetComponent<Collider2D>().enabled = false;
+        var colliders = gameObject.GetComponents<Collider2D>();
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            colliders[i].enabled = false;
+        }
     }
 }
 
