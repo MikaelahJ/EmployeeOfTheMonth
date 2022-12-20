@@ -422,8 +422,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.094758034
+        time: 0.004245758
+        value: 0.033532143
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -437,7 +437,7 @@ LineRenderer:
       serializedVersion: 2
       key0: {r: 1, g: 0, b: 0, a: 0.78431374}
       key1: {r: 1, g: 0, b: 0, a: 0.78431374}
-      key2: {r: 0, g: 0, b: 0, a: 0.02058822}
+      key2: {r: 0, g: 0, b: 0, a: 0.78431374}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -453,7 +453,7 @@ LineRenderer:
       ctime7: 0
       atime0: 0
       atime1: 32382
-      atime2: 62258
+      atime2: 51464
       atime3: 65535
       atime4: 65535
       atime5: 0

@@ -184,6 +184,7 @@ public class WeaponController : MonoBehaviour
         }
         weapon = newWeapon;
         UpdateFireStats();
+        UpdateAimLine();
     }
 
     public void LoseItemAmmo(float shots)
@@ -206,6 +207,14 @@ public class WeaponController : MonoBehaviour
         if (GetComponent<Fire>() != null)
         {
             GetComponent<Fire>().UpdateFireModifiers();
+        }
+    }
+
+    void UpdateAimLine()
+    {
+        if (GetComponentInChildren<AimLine>() != null)
+        {
+            GetComponentInChildren<AimLine>().laserMaxLength = 3*(weapon.bulletVelocity/baseWeapon.bulletVelocity);
         }
     }
 
