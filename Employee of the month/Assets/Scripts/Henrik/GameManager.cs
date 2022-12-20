@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         if (scene == "TestScene")
         {
-            StartCoroutine(RoundStartPause());
+           // StartCoroutine(RoundStartPause());
         }
         SceneManager.LoadScene(scene);
 
@@ -55,12 +55,13 @@ public class GameManager : MonoBehaviour
     }
     public void StartRoundPause()
     {
-        //StartCoroutine(RoundStartPause());
+        StartCoroutine(RoundStartPause());
     }
 
     IEnumerator RoundStartPause()
     {
         bool startedclip = false;
+        Debug.Log("pause");
         Time.timeScale = 0;
         isPaused = true;
         while (countdown >= 0)
@@ -88,6 +89,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
         SpawnManager.instance.gameOverText.text = "";
         isPaused = false;
+        countdown = 3;
     }
 
     private void PlayClip()
@@ -97,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     public void ReloadScene()
     {
-        StartCoroutine(RoundStartPause());
+        //StartCoroutine(RoundStartPause());
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

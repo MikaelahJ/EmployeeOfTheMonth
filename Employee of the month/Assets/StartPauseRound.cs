@@ -8,5 +8,4 @@ public class StartPauseRound : MonoBehaviour
     {
         GameManager.Instance.StartRoundPause();
     }
-
 }
