@@ -26,14 +26,14 @@ public class Movement : MonoBehaviour
     public bool justTeleported;
 
     public AudioSource walksound;
-    private Animator animator;
+    public Animator animator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         maxSpeed = walkSpeed;
 
-        animator = GetComponentInChildren<Animator>();
+        //animator = GetComponentInChildren<Animator>();
 
         //Get Audio source in PlayerSprite
         AudioSource[] audiosources = GetComponentsInChildren<AudioSource>();

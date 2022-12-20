@@ -7,11 +7,13 @@ public class HasHealth : MonoBehaviour
     private HudHealthBar hudHealthbar;
     public GameObject bloodPool;
     public GameObject BloodAnimation;
-    private Animator animator;
+    public Animator animator;
+    public Animator healthbarAnimator;
 
     public int playerIndex;
     public int maxHealth = 100;
     public float health;
+    public float healthFlashThreshold = 0.25f;
 
     private bool isDead = false;
 
@@ -19,7 +21,7 @@ public class HasHealth : MonoBehaviour
     {
         hudHealthbar = GetComponentInChildren<HudHealthBar>();
         health = maxHealth;
-        animator = transform.GetComponentInChildren<Animator>();
+
         if (gameObject.CompareTag("Player"))
         {
             SpawnManager.instance.alivePlayers += 1;
@@ -52,6 +54,20 @@ public class HasHealth : MonoBehaviour
             ChangeHealth(-damage);
             Debug.Log(gameObject.name + " lost " + damage + "HP.");
 
+            CheckHealth();
+
+        }
+    }
+
+    public void CheckHealth()
+    {
+        if(health / maxHealth <= 0.5)
+        {
+            healthbarAnimator.SetBool("HasLowHealth", true);
+        }
+        else
+        {
+            healthbarAnimator.SetBool("HasLowHealth", false); 
         }
     }
 
