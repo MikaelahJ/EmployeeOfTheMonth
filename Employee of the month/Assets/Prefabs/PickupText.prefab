@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offsetY: 1
+  killTextTime: 2
 --- !u!95 &1897767777
 Animator:
   serializedVersion: 4

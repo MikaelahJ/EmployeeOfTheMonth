@@ -6,6 +6,7 @@ using TMPro;
 public class PickupText : MonoBehaviour
 {
     public float offsetY = 5f;
+    public float killTextTime = 2f;
 
     private TextMeshPro pickupText;
     private Animator textAnimation;
@@ -40,7 +41,7 @@ public class PickupText : MonoBehaviour
 
     private IEnumerator KillText()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(killTextTime);
         Destroy(this.gameObject);
     }
 }
