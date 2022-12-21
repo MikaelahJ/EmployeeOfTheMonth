@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
             if (startedclip == false)
             {
-                //PlayClip();
+                PlayClip();
             }
             startedclip = true;
 
