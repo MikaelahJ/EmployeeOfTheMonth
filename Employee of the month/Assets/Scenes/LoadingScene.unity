@@ -603,6 +603,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2162434749555565580, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -287
+      objectReference: {fileID: 0}
     - target: {fileID: 2162434750637739632, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -694,6 +698,22 @@ PrefabInstance:
     - target: {fileID: 2162434750993169432, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162434750993169439, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
+      propertyPath: tips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162434750993169439, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
+      propertyPath: tips.Array.data[1]
+      value: Erasers make your shots bounce
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162434750993169439, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
+      propertyPath: tips.Array.data[2]
+      value: Have you tried the vents
+      objectReference: {fileID: 0}
+    - target: {fileID: 2162434750993169439, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
+      propertyPath: tips.Array.data[3]
+      value: Have you tried shooting the vents
       objectReference: {fileID: 0}
     - target: {fileID: 2162434751272253555, guid: 278b8e24762be7645915a4c2e7988a30, type: 3}
       propertyPath: m_AnchorMax.y
