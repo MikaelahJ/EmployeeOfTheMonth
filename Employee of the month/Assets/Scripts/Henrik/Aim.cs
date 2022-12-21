@@ -63,7 +63,6 @@ public class Aim : MonoBehaviour
         //    transform.up = aimDirection;
         //}
 
-        //For slower turning speed if needed
 
         Vector3 rotate = Vector2.Lerp(previousDirection, aimDirection + aimAssistVector, rotationSpeed * Time.deltaTime);
         rotate.z = 0;
@@ -83,7 +82,7 @@ public class Aim : MonoBehaviour
 
     public void AimAssist()
     {
-        //Runs if player inside collider on weapongpoint
+        //Runs if player inside collider on weaponpoint
         if (targetsInRange.Count > 0)
         {
             FindClosest();
