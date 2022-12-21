@@ -44,6 +44,7 @@ public class Vent : MonoBehaviour
             Debug.Log(child.name);
             if (child.name == "PlayerCircleHighlight(Clone)")
             {
+                Debug.Log(child.name);
                 ventTrail.startColor = child.GetComponent<SpriteRenderer>().color;//set trail to player colour
                 ventTrail.endColor = child.GetComponent<SpriteRenderer>().color;//set trail to player colour
 
