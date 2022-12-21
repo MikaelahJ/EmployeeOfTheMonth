@@ -7,6 +7,8 @@ public class HasHealth : MonoBehaviour
     private HudHealthBar hudHealthbar;
     public GameObject bloodPool;
     public GameObject BloodAnimation;
+
+    //These 2 are set in ControllerInput
     public Animator animator;
     public Animator healthbarAnimator;
 
