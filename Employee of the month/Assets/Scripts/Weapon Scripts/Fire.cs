@@ -36,6 +36,7 @@ public class Fire : MonoBehaviour
     //private bool isInWall = false;
 
     private AudioSource sound;
+    private AudioSource laserSound;
     private Vector3 startFirePoint;
 
     void Start()
@@ -83,8 +84,16 @@ public class Fire : MonoBehaviour
         }
 
         ApplyRecoil();
-        sound.clip = weaponController.weapon.fire;
-        sound.Play();
+        
+        if(weaponController.weapon.isPenetrate && !weaponController.weapon.isExplosive)
+        {
+            sound.clip = weaponController.weapon.fire;
+            sound.Play();
+        }
+        else
+        {
+            sound.PlayOneShot(weaponController.weapon.fire);
+        }
 
         if (isShotgun)
             FireShotgun();
@@ -115,18 +124,20 @@ public class Fire : MonoBehaviour
 
     private void ChargeSuperMicro()
     {
-        sound.volume = AudioManager.instance.audioClips.sfxVolume;
-        sound.clip = AudioManager.instance.audioClips.laserCharge;
-        sound.Play();
+        if(laserSound == null)
+            laserSound = gameObject.AddComponent<AudioSource>();
+        laserSound.volume = AudioManager.instance.audioClips.sfxVolume;
+        laserSound.clip = AudioManager.instance.audioClips.laserCharge;
+        laserSound.Play();
 
         laserScript.PowerUpLaser();
     }
 
     private void FireSuperMicro()
     {
-        sound.volume = AudioManager.instance.audioClips.sfxVolume;
-        sound.clip = weaponController.weapon.ultimateFire;
-        sound.Play();
+        laserSound.volume = AudioManager.instance.audioClips.sfxVolume;
+        laserSound.clip = weaponController.weapon.ultimateFire;
+        laserSound.Play();
 
         laser.SetActive(true);
         laserScript.FireLaser();
@@ -218,5 +229,21 @@ public class Fire : MonoBehaviour
         firePoint.transform.localPosition = startFirePoint;
         GetComponentInChildren<AimLine>().isBlocked = false;
         //isInWall = false;
+    }
+
+    public void FadeLaserSound()
+    {
+        StartCoroutine(FadeLaser());
+    }
+    private IEnumerator FadeLaser()
+    {
+        float startVolume = laserSound.volume;
+        
+        while(laserSound.volume != 0)
+        {
+            laserSound.volume -= startVolume * Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+        Debug.Log("Sound Stopped!");
     }
 }

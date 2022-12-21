@@ -195,16 +195,12 @@ public class Laser : MonoBehaviour
     public void DiscardSuperSprite()
     {
         Debug.Log("hej");
-        if (!hasStarted) 
-        {
-            Debug.Log("Can't discard supersprite");
-            return;
-        }
-
-        ResetLaser();
-
         superMicroPos.GetChild(0).GetComponent<Animator>().Play("LaserDefault");
         superMicroPos.GetChild(1).GetComponent<Animator>().Play("LaserDefaultPull");
-
+        GetComponentInParent<Fire>().FadeLaserSound();
+        if (hasStarted) 
+        {
+            ResetLaser();
+        }
     }
 }
