@@ -198,7 +198,7 @@ public class Bullet : MonoBehaviour
 
     public void SendDamage(Collider2D collider, Collision2D collision = null)
     {
-        Debug.Log(collider.name + " collided with " + bulletOwner.name);
+        //Debug.Log(collider.name + " collided with " + bulletOwner.name);
         if (!canTakeDamage && collider.name == bulletOwner.name) {
             
             return; 

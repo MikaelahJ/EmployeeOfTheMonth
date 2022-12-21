@@ -219,7 +219,7 @@ public class WeaponController : MonoBehaviour
         if (GetComponentInChildren<AimLine>() != null)
         {
             AimLine aimLine = GetComponentInChildren<AimLine>();
-            if(weapon == null)
+            if(CanAddItem().Item2 == 0)
             {
                 aimLine.laserMaxLength = 0;
             }
