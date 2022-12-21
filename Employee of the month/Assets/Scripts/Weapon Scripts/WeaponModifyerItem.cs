@@ -80,6 +80,7 @@ public class WeaponModifyerItem : MonoBehaviour
     }
     private void Disable()
     {
+
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
     }
