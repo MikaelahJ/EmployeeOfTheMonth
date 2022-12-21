@@ -277,7 +277,7 @@ public class Bullet : MonoBehaviour
     {
         bounces++;
         //rb2d.sharedMaterial.bounciness = 1;
-        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position);
+        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position, AudioManager.instance.audioClips.sfxVolume);
 
         //Turn off tracking to calculate new trajectory
 

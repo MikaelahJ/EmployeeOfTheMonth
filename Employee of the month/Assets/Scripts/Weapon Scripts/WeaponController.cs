@@ -41,6 +41,7 @@ public class WeaponController : MonoBehaviour
                 }
                 Debug.Log("Added item: " + item.name);
                 //Play pickup sound
+                sound.volume = AudioManager.instance.audioClips.sfxVolume;
                 sound.PlayOneShot(item.onPickup);
 
                 UpdateWeaponStats();
@@ -85,7 +86,10 @@ public class WeaponController : MonoBehaviour
 
         //Play item removed sound
         if (playSound)
+        {
+            sound.volume = AudioManager.instance.audioClips.sfxVolume;
             sound.PlayOneShot(items[index].onDestroy);
+        }
 
         //Remove item sprite from weapon
         if (itemHolder != null)
