@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private GameObject pencil;
     [SerializeField] private GameObject PencilStuckInWall;
+    [SerializeField] private GameObject particles;
+    [SerializeField] private GameObject trail;
     private bool haveSpawnedPencil = false;
 
     [SerializeField] private float selfDamageModifier = 0.5f;
@@ -53,6 +55,7 @@ public class Bullet : MonoBehaviour
 
     public AudioClip bulletImpactSound;
 
+
     void Start()
     {
         direction = transform.up;
@@ -64,10 +67,15 @@ public class Bullet : MonoBehaviour
         targetsInRange = new List<Collider2D>();
         aimAssistCollider = GetComponentInChildren<PolygonCollider2D>().points;
 
-        if (isBouncy)
-        {
-            rb2d.sharedMaterial.bounciness = 1;
-        }
+        rb2d = GetComponent<Rigidbody2D>();
+
+        var physicsMat = new PhysicsMaterial2D();
+
+        // ? operator is a fancy way to do if/else
+        physicsMat.bounciness = isBouncy ? 1 : 0;
+        physicsMat.friction = isBouncy ? 0 : 1000;
+
+        rb2d.sharedMaterial = physicsMat;
 
         if (!isHoming)
         {
@@ -132,7 +140,17 @@ public class Bullet : MonoBehaviour
         if (isExplode)
         {
             //Activate laser bullets if its exploding
+            pencil.transform.localScale += Vector3.one * (explodeRadius - 1f);
             GetComponent<Animator>().enabled = true;
+        }
+
+        if (!isExplode && isPenetrate)
+        {
+            particles.SetActive(true);
+            trail.SetActive(true);
+            var emission = particles.GetComponent<ParticleSystem>().emission;
+            float startVal = emission.rateOverTime.constant;
+            emission.rateOverTime = startVal * bulletSpeed;
         }
     }
 
@@ -184,11 +202,19 @@ public class Bullet : MonoBehaviour
     private void SpawnPencilStuckInWall(Collision2D collision)
     {
         if (haveSpawnedPencil) { return; }
+        haveSpawnedPencil = true;
         GameObject pencilStuck = Instantiate(PencilStuckInWall, transform.position, Quaternion.identity);
         pencilStuck.GetComponent<PencilStuckInWall>().SetPencilRotation(transform.rotation);
         pencilStuck.GetComponent<PencilStuckInWall>().SetCrackTransform(collision);
         pencilStuck.GetComponent<PencilStuckInWall>().SetPencilPosition(collision);
-        haveSpawnedPencil = true;
+
+        Destroy(particles, 5);
+        Destroy(trail, 5);
+        particles.GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        particles.transform.SetParent(null);
+        particles.transform.localScale = Vector3.one;
+        trail.transform.SetParent(null);
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -276,7 +302,7 @@ public class Bullet : MonoBehaviour
     private void Bounce()
     {
         bounces++;
-        //rb2d.sharedMaterial.bounciness = 1;
+
         AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position, AudioManager.instance.audioClips.sfxVolume);
 
         //Turn off tracking to calculate new trajectory
