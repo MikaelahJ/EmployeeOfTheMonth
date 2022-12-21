@@ -15,6 +15,7 @@ public class ControllerInput : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject cursorPrefab;
     public GameObject healthbarPrefab;
+    public GameObject pickupTextPrefab;
     public GameObject roomSpriteMaskHolder;
     public GameObject playerHighlightCircle;
     public GameObject whichPlayerArrow;
@@ -24,6 +25,7 @@ public class ControllerInput : MonoBehaviour
     private Aim aim;
     private Fire fire;
     private GameObject healthbar;
+    private GameObject pickUpText;
 
     public PlayerInput playerInput;
     public Sprite sprite;
@@ -135,6 +137,7 @@ public class ControllerInput : MonoBehaviour
         playerInput.SwitchCurrentActionMap("Player");
         SpawnPlayer();
         LoadHealthBar();
+        LoadPickUpText();
         
 
         if (GameManager.Instance.playersChosen != 0)
@@ -210,6 +213,10 @@ public class ControllerInput : MonoBehaviour
         //}
     }
 
+    private void LoadPickUpText()
+    {
+        pickUpText = Instantiate(pickupTextPrefab, player.transform);
+    }
     private void LoadHealthBar()
     {
         healthbar = Instantiate(healthbars[playerInput.playerIndex], player.transform);

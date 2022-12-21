@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WeaponModifyerItem : MonoBehaviour
 {
     public GameObject ItemGoingToWeaponSlot;
+
 
     public NewItemScriptableObject itemType;
     [SerializeField] [Range(1, 30)] float respawnTime;
@@ -18,6 +20,7 @@ public class WeaponModifyerItem : MonoBehaviour
     private void Start()
     {
         GetComponent<SpriteRenderer>().sprite = itemType.sprite;
+        Debug.Log(itemType.name);
         startScale = transform.localScale;
 
         timer = Random.Range(0, 360f);
@@ -42,6 +45,9 @@ public class WeaponModifyerItem : MonoBehaviour
             if (emptyWeaponSlot.Item1)
             {
                 //weaponController.AddItem(itemType);
+
+                //Adds pickuptext over player
+                collision.transform.parent.GetComponentInChildren<PickupText>().ActivateText(itemType.name);
                 SpawnItemGoingToWeaponSlot(weapon, emptyWeaponSlot.Item2);
                 Disable();
                 Invoke(nameof(Enable), respawnTime);
@@ -80,7 +86,6 @@ public class WeaponModifyerItem : MonoBehaviour
     }
     private void Disable()
     {
-
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
     }
