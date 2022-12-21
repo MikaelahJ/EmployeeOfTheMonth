@@ -128,6 +128,12 @@ public class Bullet : MonoBehaviour
             Physics2D.IgnoreLayerCollision(0, 9, false);
             Physics2D.IgnoreLayerCollision(15, 9, false);
         }
+
+        if (isExplode)
+        {
+            //Activate laser bullets if its exploding
+            GetComponent<Animator>().enabled = true;
+        }
     }
 
 
@@ -230,7 +236,7 @@ public class Bullet : MonoBehaviour
             collider.gameObject.GetComponent<ItemBreak>().TakeDamage(damage);
         }
     }
-
+    
     private void Explode(Vector2 collisionPoint, Collision2D collision)
     {
         //Sometimes the player gets hit multiple times by same explosion
@@ -240,7 +246,7 @@ public class Bullet : MonoBehaviour
         Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll(collisionPoint, explodeRadius);
         var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
         explosion.transform.localScale = new Vector3(explodeRadius, explodeRadius, explodeRadius);
-        Destroy(explosion, 1f);
+        Destroy(explosion, 1.5f);
         //Debug.Log("Explosion Happened!");
 
         foreach (var target in targetsInRadius)
