@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//Instantiated in WeaponModifyerItem
 public class PickupText : MonoBehaviour
 {
     public float offsetY = 5f;
-    public float killTextTime = 2f;
+    private float killTextTime = 2f; //Should not be changed unless animation is also changed
 
     private TextMeshPro pickupText;
     private Animator textAnimation;
@@ -14,7 +15,7 @@ public class PickupText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = transform.parent.position + Vector3.up * offsetY; //Make sure the bar is over player
+        transform.position = transform.parent.position + Vector3.up * offsetY; //Set text over player
         transform.LookAt(transform.position + Camera.main.transform.forward);
 
         //pickupText = GetComponent<TextMeshPro>();
@@ -24,7 +25,7 @@ public class PickupText : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = transform.parent.position + Vector3.up * offsetY; //Make sure the bar is over player
+        transform.position = transform.parent.position + Vector3.up * offsetY; //Set text over player
         transform.LookAt(transform.position + Camera.main.transform.forward);
     }
 
