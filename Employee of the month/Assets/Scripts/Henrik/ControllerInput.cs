@@ -137,7 +137,7 @@ public class ControllerInput : MonoBehaviour
         playerInput.SwitchCurrentActionMap("Player");
         SpawnPlayer();
         LoadHealthBar();
-        LoadPickUpText();
+        //LoadPickUpText();
         
 
         if (GameManager.Instance.playersChosen != 0)
@@ -213,10 +213,10 @@ public class ControllerInput : MonoBehaviour
         //}
     }
 
-    private void LoadPickUpText()
-    {
-        pickUpText = Instantiate(pickupTextPrefab, player.transform);
-    }
+    //private void LoadPickUpText()
+    //{
+    //    pickUpText = Instantiate(pickupTextPrefab, player.transform);
+    //}
     private void LoadHealthBar()
     {
         healthbar = Instantiate(healthbars[playerInput.playerIndex], player.transform);

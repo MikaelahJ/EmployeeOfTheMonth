@@ -1461,6 +1461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemGoingToWeaponSlot: {fileID: 4005284148242595302, guid: e9e84288b480e3f4ebaf31580c78fbf2, type: 3}
+  pickupTextPrefab: {fileID: 4043871007461397535, guid: dd2cf810220460349a8d3faa9a5a11c2, type: 3}
   itemType: {fileID: 11400000, guid: 4e0e1fe34eef15140b72d0fd798e215d, type: 2}
   respawnTime: 15
   scaleOccilation: 0.1

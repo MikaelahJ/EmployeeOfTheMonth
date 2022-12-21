@@ -16,9 +16,9 @@ public class PickupText : MonoBehaviour
         transform.position = transform.parent.position + Vector3.up * offsetY; //Make sure the bar is over player
         transform.LookAt(transform.position + Camera.main.transform.forward);
 
-        pickupText = GetComponent<TextMeshPro>();
-        textAnimation = GetComponent<Animator>();
-        pickupText.enabled = false;
+        //pickupText = GetComponent<TextMeshPro>();
+        //textAnimation = GetComponent<Animator>();
+        //pickupText.enabled = false;
     }
 
     private void LateUpdate()
@@ -29,17 +29,18 @@ public class PickupText : MonoBehaviour
 
     public void ActivateText(string pickupType)
     {
-        pickupText.enabled = true;
+        pickupText = GetComponent<TextMeshPro>();
+        textAnimation = GetComponent<Animator>();
+        Debug.Log(pickupType);
         pickupText.text = pickupType;
         textAnimation.SetTrigger("Start");
 
-        StartCoroutine(ToogleText());
+        StartCoroutine(KillText());
     }
 
-    private IEnumerator ToogleText()
+    private IEnumerator KillText()
     {
         yield return new WaitForSeconds(2);
-        pickupText.enabled = false;
-        //Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 }

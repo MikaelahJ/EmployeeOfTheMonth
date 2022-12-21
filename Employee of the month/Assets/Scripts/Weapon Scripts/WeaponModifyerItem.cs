@@ -7,6 +7,9 @@ public class WeaponModifyerItem : MonoBehaviour
 {
     public GameObject ItemGoingToWeaponSlot;
 
+    public GameObject pickupTextPrefab;
+
+    private GameObject pickupTextObject;
 
     public NewItemScriptableObject itemType;
     [SerializeField] [Range(1, 30)] float respawnTime;
@@ -47,13 +50,16 @@ public class WeaponModifyerItem : MonoBehaviour
                 //weaponController.AddItem(itemType);
 
                 //Adds pickuptext over player
-                collision.transform.parent.GetComponentInChildren<PickupText>().ActivateText(itemType.name);
+                pickupTextObject = Instantiate(pickupTextPrefab, collision.transform.parent.transform);
+                pickupTextObject.GetComponent<PickupText>().ActivateText(itemType.name);
+
                 SpawnItemGoingToWeaponSlot(weapon, emptyWeaponSlot.Item2);
                 Disable();
                 Invoke(nameof(Enable), respawnTime);
             }
         }
     }
+
 
     public GameObject FindWeapon(Transform parent)
     {
