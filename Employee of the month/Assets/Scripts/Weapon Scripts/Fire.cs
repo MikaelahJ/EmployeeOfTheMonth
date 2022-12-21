@@ -83,8 +83,16 @@ public class Fire : MonoBehaviour
         }
 
         ApplyRecoil();
-        sound.clip = weaponController.weapon.fire;
-        sound.Play();
+        
+        if(weaponController.weapon.isPenetrate && !weaponController.weapon.isExplosive)
+        {
+            sound.clip = weaponController.weapon.fire;
+            sound.Play();
+        }
+        else
+        {
+            sound.PlayOneShot(weaponController.weapon.fire);
+        }
 
         if (isShotgun)
             FireShotgun();
