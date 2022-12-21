@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TestScene.unity
     guid: d37014a4848625e40b119a0ce39e1089
   - enabled: 1
+    path: Assets/Scenes/Intermission.unity
+    guid: d6f3fdea899d33c48a9a7f94ee5d3862
+  - enabled: 1
     path: Assets/Scenes/EndGame.unity
     guid: 368906c6920b6164685b05e26ccc54ae
   - enabled: 0

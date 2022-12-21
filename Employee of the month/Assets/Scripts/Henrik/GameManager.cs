@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public int playersChosen;
 
     public int roundsPlayed;
-    public int roundsInMatch = 5;
+    public int roundsInMatch = 10;
     public Dictionary<string, int> playerPoints = new Dictionary<string, int>();
 
     public List<GameObject> playerControllers;
@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
     IEnumerator RoundStartPause()
     {
         bool startedclip = false;
-        Debug.Log("pause");
         Time.timeScale = 0;
         isPaused = true;
         while (countdown >= 0)

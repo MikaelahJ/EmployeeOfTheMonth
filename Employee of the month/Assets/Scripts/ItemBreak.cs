@@ -44,7 +44,7 @@ public class ItemBreak : MonoBehaviour
         damageDealt += damage;
 
         health -= damage;
-        Debug.Log(gameObject.name + " has " + health + " health");
+        //Debug.Log(gameObject.name + " has " + health + " health");
 
         if (health <= 0)
         {
@@ -64,7 +64,7 @@ public class ItemBreak : MonoBehaviour
             spriteRenderer.sprite = spritesBeforeBreak[healthMultiplier];
 
             damageDealt -= startHealth;
-            Debug.Log("damageDealt " + damageDealt);
+            //Debug.Log("damageDealt " + damageDealt);
         }
     }
 
