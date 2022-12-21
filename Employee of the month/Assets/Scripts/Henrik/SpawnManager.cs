@@ -78,6 +78,11 @@ public class SpawnManager : MonoBehaviour
 
             gameOverText.text = "PLAYER " + (player += 1) + " WON";
         }
+        if(GameManager.Instance.roundsPlayed == 5)
+        {
+            GameManager.Instance.LoadScene("Intermission");
+            return;
+        }
 
         if (GameManager.Instance.roundsPlayed < GameManager.Instance.roundsInMatch)
         {

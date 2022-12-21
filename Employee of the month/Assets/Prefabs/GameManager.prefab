@@ -47,5 +47,8 @@ MonoBehaviour:
   playersCount: 0
   playersChosen: 0
   roundsPlayed: 0
-  roundsInMatch: 5
+  roundsInMatch: 10
+  playerControllers: []
+  isPaused: 0
   pauseMenu: {fileID: 6266728657173171613, guid: debb18ada1ecc0e41b70f53b073f3e54, type: 3}
+  showedControlls: 0

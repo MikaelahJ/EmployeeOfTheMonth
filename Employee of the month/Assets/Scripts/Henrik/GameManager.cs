@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public int playersChosen;
 
     public int roundsPlayed;
-    public int roundsInMatch = 5;
+    public int roundsInMatch = 10;
     public Dictionary<string, int> playerPoints = new Dictionary<string, int>();
 
     public List<GameObject> playerControllers;
