@@ -208,6 +208,7 @@ public class Fire : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall"))
         {
+            GetComponentInChildren<AimLine>().isBlocked = true;
             firePoint.transform.localPosition = new Vector3(0, -startFirePoint.y, 0);
             //isInWall = true;
         }
@@ -215,6 +216,7 @@ public class Fire : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         firePoint.transform.localPosition = startFirePoint;
+        GetComponentInChildren<AimLine>().isBlocked = false;
         //isInWall = false;
     }
 }

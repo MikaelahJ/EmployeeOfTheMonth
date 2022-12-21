@@ -13,12 +13,12 @@ public class ItemBreak : MonoBehaviour
 
     //public int damageThreshold = 5;
     private int healthMultiplier;
-    public int health;
-    private int startHealth;
+    public float health;
+    private float startHealth;
 
     private float timer;
     //private float breakRate = 0.5f;
-    private int damageDealt = 0;
+    private float damageDealt = 0;
 
     private void Start()
     {
@@ -34,7 +34,7 @@ public class ItemBreak : MonoBehaviour
     {
         timer += Time.deltaTime;
     }
-    public void TakeDamage(int damage)//damage ska skickas in som int
+    public void TakeDamage(float damage)//damage ska skickas in som int
     {
         //if (timer >= breakRate)
         //{

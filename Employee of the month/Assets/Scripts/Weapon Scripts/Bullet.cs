@@ -227,7 +227,7 @@ public class Bullet : MonoBehaviour
         }
         if (collider.gameObject.GetComponent<ItemBreak>() != null)
         {
-            collider.gameObject.GetComponent<ItemBreak>().TakeDamage((int)damage);
+            collider.gameObject.GetComponent<ItemBreak>().TakeDamage(damage);
         }
     }
 
