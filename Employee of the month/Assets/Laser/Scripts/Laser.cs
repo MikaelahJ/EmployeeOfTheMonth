@@ -23,6 +23,7 @@ public class Laser : MonoBehaviour
     public bool isCharging = false;
     public bool isShooting = false;
     private bool hasStarted = false;
+    private bool isDiscarded = false;
 
     private float defaultWalkSpeed;
 
@@ -50,6 +51,7 @@ public class Laser : MonoBehaviour
 
     public void PowerUpLaser()
     {
+        isDiscarded = false;
         isCharging = true;
         if (superMicroPos.childCount == 0)
         {
@@ -64,8 +66,10 @@ public class Laser : MonoBehaviour
 
     private void SetCharged()
     {
-        isCharged = true;
         isCharging = false;
+        if (!isDiscarded) {
+            isCharged = true;
+        }
     }
 
     public void FireLaser()
@@ -135,12 +139,14 @@ public class Laser : MonoBehaviour
     IEnumerator DisableLaser()
     {
         yield return new WaitForSeconds(3);
+        if (!isDiscarded)
+        {
+            superMicroPos.GetChild(0).GetComponent<Animator>().SetTrigger("Fired");
 
-        superMicroPos.GetChild(0).GetComponent<Animator>().SetTrigger("Fired");
+            ResetLaser();
 
-        ResetLaser();
-
-        fire.DeActivateLaser();
+            fire.DeActivateLaser();
+        }
     }
 
     private void ResetLaser()
@@ -194,12 +200,20 @@ public class Laser : MonoBehaviour
 
     public void DiscardSuperSprite()
     {
-        Debug.Log("hej");
+        isDiscarded = true;
+
+        if (superMicroPos.childCount == 0)
+        {
+            Debug.Log("Discarded SuperMicro, no animation reset");
+            return;
+        }
+        Debug.Log("Discarded SuperMicro");
         superMicroPos.GetChild(0).GetComponent<Animator>().Play("LaserDefault");
         superMicroPos.GetChild(1).GetComponent<Animator>().Play("LaserDefaultPull");
         GetComponentInParent<Fire>().FadeLaserSound();
         if (hasStarted) 
         {
+            Debug.Log("Reset Laser");
             ResetLaser();
         }
     }

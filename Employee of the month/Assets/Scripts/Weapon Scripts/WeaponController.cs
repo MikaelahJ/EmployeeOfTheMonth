@@ -218,7 +218,15 @@ public class WeaponController : MonoBehaviour
     {
         if (GetComponentInChildren<AimLine>() != null)
         {
-            GetComponentInChildren<AimLine>().laserMaxLength = 3*(weapon.bulletVelocity/baseWeapon.bulletVelocity);
+            AimLine aimLine = GetComponentInChildren<AimLine>();
+            if(weapon == null)
+            {
+                aimLine.laserMaxLength = 0;
+            }
+            else
+            {
+                aimLine.laserMaxLength = 3 * (weapon.bulletVelocity / baseWeapon.bulletVelocity);
+            }
         }
     }
 
