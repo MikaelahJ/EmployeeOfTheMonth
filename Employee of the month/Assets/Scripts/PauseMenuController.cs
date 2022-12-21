@@ -12,6 +12,9 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject optionsPauseMenu;
     [SerializeField] private GameObject optionsFirstSelectedButton;
 
+    [SerializeField] private GameObject controlsPauseMenu;
+    [SerializeField] private GameObject controlsFirstSelectedButton;
+
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private Slider characterSlider;
@@ -45,6 +48,13 @@ public class PauseMenuController : MonoBehaviour
         optionsPauseMenu.SetActive(true);
 
         SetFirstSelectedButton(optionsFirstSelectedButton);
+    }
+    public void OpenControlsPauseMenu()
+    {
+        mainPauseMenu.SetActive(false);
+        controlsPauseMenu.SetActive(true);
+
+        SetFirstSelectedButton(controlsFirstSelectedButton);
     }
 
     private void SetFirstSelectedButton(GameObject button)

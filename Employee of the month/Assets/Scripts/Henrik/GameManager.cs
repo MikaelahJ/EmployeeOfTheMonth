@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
     IEnumerator RoundStartPause()
     {
         bool startedclip = false;
-        Debug.Log("pause");
         Time.timeScale = 0;
         isPaused = true;
         while (countdown >= 0)

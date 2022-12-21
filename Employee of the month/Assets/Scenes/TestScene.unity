@@ -6399,7 +6399,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 12dee7ebcf542654ab0f960930f81eeb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -11779,14 +11779,26 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: f531772985f84414882c77660a4d0ab3, type: 3}
+    - target: {fileID: 1827087824291670910, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1827087824810505281, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 8aaf395be5e9db94aac5862130946f73, type: 3}
+    - target: {fileID: 1827087824810505281, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1827087825563646868, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: aeb7140dacafb6248b60d6b6b70c69a9, type: 3}
+    - target: {fileID: 1827087825563646868, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1980826028747008400, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: animator
       value: 
@@ -11819,13 +11831,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vent
       objectReference: {fileID: 0}
+    - target: {fileID: 3678311225280707952, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
+      propertyPath: m_TagString
+      value: HardWall
+      objectReference: {fileID: 0}
     - target: {fileID: 3678311225800647247, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Name
       value: Vent
       objectReference: {fileID: 0}
+    - target: {fileID: 3678311225800647247, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
+      propertyPath: m_TagString
+      value: HardWall
+      objectReference: {fileID: 0}
     - target: {fileID: 3678311226556935578, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Name
       value: Vent
+      objectReference: {fileID: 0}
+    - target: {fileID: 3678311226556935578, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
+      propertyPath: m_TagString
+      value: HardWall
       objectReference: {fileID: 0}
     - target: {fileID: 4125806057374542776, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Controller
@@ -11938,6 +11962,10 @@ PrefabInstance:
     - target: {fileID: 6844387665647402823, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6865722541829695876, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
+      propertyPath: m_TagString
+      value: HardWall
       objectReference: {fileID: 0}
     - target: {fileID: 6929531522473472431, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Name
@@ -12086,6 +12114,10 @@ PrefabInstance:
     - target: {fileID: 7981439501820276699, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437230459595669386, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8588716417023917412, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: animator
