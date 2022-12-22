@@ -18,13 +18,13 @@ public class Aim : MonoBehaviour
     private Vector2 mouseInput;
     private float range;
     private GameObject closest;
-    private List<Collider2D> targetsInRange;
+    private List<GameObject> targetsInRange;
 
 
     private void Start()
     {
         range = 0;
-        targetsInRange = new List<Collider2D>();
+        targetsInRange = new List<GameObject>();
     }
 
     private void Update()
@@ -103,19 +103,19 @@ public class Aim : MonoBehaviour
     //finds the player closest to the aim
     private void FindClosest()
     {
-        foreach (Collider2D col in targetsInRange)
+        foreach (GameObject enemy in targetsInRange)
         {
-            float objectRange = (col.gameObject.transform.position - transform.position).magnitude;
+            float objectRange = (enemy.transform.position - transform.position).magnitude;
 
             if (range == 0)
             {
                 range = objectRange;
-                closest = col.gameObject;
+                closest = enemy;
             }
             else if (objectRange < range)
             {
                 range = objectRange;
-                closest = col.gameObject;
+                closest = enemy;
             }
         }
     }
@@ -148,10 +148,10 @@ public class Aim : MonoBehaviour
         //Add players that are in range of the aim
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (!targetsInRange.Contains(collision))
+            if (!targetsInRange.Contains(collision.gameObject))
             {
                 //Debug.Log("added");
-                targetsInRange.Add(collision);
+                targetsInRange.Add(collision.gameObject);
             }
         }
     }
@@ -161,10 +161,10 @@ public class Aim : MonoBehaviour
         //Remove players that are not in range of the aim
         if (collision.CompareTag("Player"))
         {
-            if (targetsInRange.Contains(collision))
+            if (targetsInRange.Contains(collision.gameObject))
             {
                 //Debug.Log("removed");
-                targetsInRange.Remove(collision);
+                targetsInRange.Remove(collision.gameObject);
             }
         }
     }
