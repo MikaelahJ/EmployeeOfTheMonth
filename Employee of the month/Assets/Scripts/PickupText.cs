@@ -7,7 +7,7 @@ using TMPro;
 public class PickupText : MonoBehaviour
 {
     public float offsetY = 5f;
-    private float killTextTime = 1.5f; //Should not be changed unless animation is also changed
+    //public float killTextTime; //Should not be changed unless animation is also changed
 
     private TextMeshPro pickupText;
     private Animator textAnimation;
@@ -37,7 +37,7 @@ public class PickupText : MonoBehaviour
         pickupText.text = pickupType;
         textAnimation.SetTrigger("Start");
 
-        StartCoroutine(KillText());
+        //StartCoroutine(KillText());
     }
 
     private IEnumerator KillText()
@@ -45,4 +45,10 @@ public class PickupText : MonoBehaviour
         yield return new WaitForSeconds(killTextTime);
         Destroy(this.gameObject);
     }
+
+    public void TriggerKillText()
+    {
+        Destroy(gameObject);
+    }
+
 }
