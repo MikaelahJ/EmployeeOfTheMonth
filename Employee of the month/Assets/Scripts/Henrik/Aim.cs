@@ -30,7 +30,7 @@ public class Aim : MonoBehaviour
     private void Update()
     {
 
-        AimAssist();
+        //AimAssist();
 
         //Set controls for aim
         if (hasGamePad)
@@ -150,7 +150,7 @@ public class Aim : MonoBehaviour
         {
             if (!targetsInRange.Contains(collision.gameObject))
             {
-                //Debug.Log("added");
+                Debug.Log("added");
                 targetsInRange.Add(collision.gameObject);
             }
         }
@@ -163,7 +163,7 @@ public class Aim : MonoBehaviour
         {
             if (targetsInRange.Contains(collision.gameObject))
             {
-                //Debug.Log("removed");
+                Debug.Log("removed");
                 targetsInRange.Remove(collision.gameObject);
             }
         }

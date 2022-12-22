@@ -9,7 +9,7 @@ public class RoomMask : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke(nameof(DisableAllMasks), 0.001f);
+        Invoke(nameof(DisableAllMasks), 0.1f);
     }
 
     void DisableAllMasks()

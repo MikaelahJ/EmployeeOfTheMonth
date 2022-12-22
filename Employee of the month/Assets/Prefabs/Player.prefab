@@ -145,10 +145,13 @@ MonoBehaviour:
   BloodAnimation: {fileID: 7052536714701912028, guid: 7eb6c1d37a408b24496c904021190a3f, type: 3}
   animator: {fileID: 0}
   healthbarAnimator: {fileID: 0}
+  movement: {fileID: 5234566805939642083}
+  aim: {fileID: 1940466002630421828}
   playerIndex: 0
   maxHealth: 100
   health: 0
   healthFlashThreshold: 0.25
+  isDead: 0
 --- !u!50 &5234566805939642084
 Rigidbody2D:
   serializedVersion: 4
