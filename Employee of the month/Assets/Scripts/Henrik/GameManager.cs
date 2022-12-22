@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
 
-    [SerializeField] public List<Scene> playScenes = new List<Scene>();
+    [SerializeField] public List<string> playScenes = new List<string>();
+    public int sceneThisMatch;
 
     public Dictionary<string, int> players = new Dictionary<string, int>();
     public int playersCount;
@@ -47,7 +48,16 @@ public class GameManager : MonoBehaviour
         Instance.isPaused = false;
         isPaused = false;
         Time.timeScale = 1;
-        SceneManager.LoadScene(scene);
+        if(scene == "RandomiseMap")
+        {
+            Debug.Log(playScenes[UnityEngine.Random.Range(0, playScenes.Count)]);
+            SceneManager.LoadScene(playScenes[UnityEngine.Random.Range(0, playScenes.Count)]);
+        }
+        else
+        {
+            SceneManager.LoadScene(scene);
+        }
+        
     }
 
     public void StartRoundPause()

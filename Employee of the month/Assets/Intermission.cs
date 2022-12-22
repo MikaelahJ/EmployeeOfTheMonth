@@ -39,8 +39,8 @@ public class Intermission : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
 
-        GameManager.Instance.LoadScene("TestScene");
+        GameManager.Instance.LoadScene("RandomiseMap");
     }
 }

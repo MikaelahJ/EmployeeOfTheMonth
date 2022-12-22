@@ -96,7 +96,7 @@ public class SpawnManager : MonoBehaviour
 
     public void RestartMatch()
     {
-        GameManager.Instance.LoadScene("TestScene");
+        GameManager.Instance.LoadScene("RandomiseMap");
     }
 
     private void EndMatch()
