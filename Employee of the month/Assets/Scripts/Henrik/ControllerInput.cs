@@ -16,7 +16,7 @@ public class ControllerInput : MonoBehaviour
     public GameObject cursorPrefab;
     public GameObject healthbarPrefab;
     public GameObject pickupTextPrefab;
-    public GameObject roomSpriteMaskHolder;
+    public List<GameObject> roomSpriteMaskHolder;
     public GameObject playerHighlightCircle;
     public GameObject whichPlayerArrow;
 
@@ -252,10 +252,24 @@ public class ControllerInput : MonoBehaviour
 
     public void SpawnSpriteMask()
     {
-        //playerSprite.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
-        //player.GetComponent<SortingGroup>().sortingLayerID = SortingLayer.NameToID("Player " + (spriteIndex));
-        GameObject roomMask = Instantiate(roomSpriteMaskHolder);
-        roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
+        string map = GameManager.Instance.sceneThisMatch;
+        GameObject roomMask;
+        switch (map)
+        {
+            case "TestScene":
+                roomMask = Instantiate(roomSpriteMaskHolder[0]);
+                roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
+                break;
+
+            case "Map2":
+                roomMask = Instantiate(roomSpriteMaskHolder[1]);
+                roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
+                break;
+
+            default:
+                Debug.Log("Couldn't spawn sprite mask for map:" + map);
+                break;
+        }
     }
 
     public void OnClick()
