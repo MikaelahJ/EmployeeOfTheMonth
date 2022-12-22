@@ -59,6 +59,7 @@ public class ControllerInput : MonoBehaviour
         {
             LoadCharacterSelect();
         }
+
         else
         {
             LoadGame();
