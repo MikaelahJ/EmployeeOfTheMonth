@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
 
+    [SerializeField] public List<Scene> playScenes = new List<Scene>();
+
     public Dictionary<string, int> players = new Dictionary<string, int>();
     public int playersCount;
     public int playersChosen;
@@ -45,14 +47,9 @@ public class GameManager : MonoBehaviour
         Instance.isPaused = false;
         isPaused = false;
         Time.timeScale = 1;
-        if (scene == "TestScene")
-        {
-           // StartCoroutine(RoundStartPause());
-        }
         SceneManager.LoadScene(scene);
-
-
     }
+
     public void StartRoundPause()
     {
         StartCoroutine(RoundStartPause());
