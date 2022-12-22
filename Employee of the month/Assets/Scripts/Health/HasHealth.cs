@@ -12,6 +12,9 @@ public class HasHealth : MonoBehaviour
     public Animator animator;
     public Animator healthbarAnimator;
 
+    [SerializeField] private Movement movement;
+    [SerializeField] private Aim aim;
+
     public int playerIndex;
     public int maxHealth = 100;
     public float health;
@@ -153,10 +156,16 @@ public class HasHealth : MonoBehaviour
 
 
             GetComponentInChildren<WeaponController>().RemoveAllItems();
+            
             GetComponentInChildren<CircleCollider2D>().enabled = false;
-            GetComponent<Movement>().walksound.Stop();
-            GetComponent<Movement>().enabled = false;
-            GetComponent<Aim>().enabled = false;
+
+            movement.walksound.Stop();
+            movement.enabled = false;
+            aim.enabled = false;
+            
+            //GetComponent<Movement>().walksound.Stop();
+            //GetComponent<Movement>().enabled = false;
+            //GetComponent<Aim>().enabled = false;
             GetComponentInChildren<Fire>().enabled = false;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
