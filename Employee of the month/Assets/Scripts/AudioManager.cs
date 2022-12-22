@@ -70,7 +70,7 @@ public class AudioManager : MonoBehaviour
         {
             audioSource.clip = characterSelect;
         }
-        else
+        else if(scene.name != "LoadingScene")
         {
             audioSource.clip = inGame;
 
