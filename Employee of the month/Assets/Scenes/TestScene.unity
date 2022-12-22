@@ -1109,11 +1109,11 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103651662}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 55f86ca678c20fc4987028cb11a005ed, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -11960,7 +11960,7 @@ PrefabInstance:
     - target: {fileID: 4125806057374542776, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 70a8dde659b747d41b29b7f3484307f4, type: 2}
+      objectReference: {fileID: 9100000, guid: 0825149b9ab861f44b7b54941d14e44c, type: 2}
     - target: {fileID: 5308082433484476224, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -12016,15 +12016,15 @@ PrefabInstance:
     - target: {fileID: 6128766233942798246, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: e1bc081244a1b74469d0b1c7d6f528e7, type: 2}
+      objectReference: {fileID: 9100000, guid: 9d90a8fac9aa68446ae6d61c734d6452, type: 2}
     - target: {fileID: 6128766234771955827, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: c40a0d20b2991a44594d9a0e62832d25, type: 2}
+      objectReference: {fileID: 9100000, guid: 1eca78863691dcc4b890c77be4adf943, type: 2}
     - target: {fileID: 6128766235223031628, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 53e5856176803c34082e51fe714f1f34, type: 2}
+      objectReference: {fileID: 9100000, guid: b7636b73e86fa02458e9cff96ba749e3, type: 2}
     - target: {fileID: 6844387665647402823, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_RootOrder
       value: 4

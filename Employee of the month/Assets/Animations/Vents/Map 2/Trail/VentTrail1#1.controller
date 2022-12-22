@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 88624a551932cd4448990c5d1ee6338b, type: 2}
+  m_Motion: {fileID: 7400000, guid: ecdf2ae2ba2b44940a2ea9bb1d3bdbf1, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -83,7 +83,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: VentTrail1
+  m_Name: VentTrail1#1
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Vent
@@ -91,7 +91,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -173,7 +173,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b289111bb667e0842aedc10cac6f9cc2, type: 2}
+  m_Motion: {fileID: 7400000, guid: 1a95f11af0245f54a86300e39859c2c2, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
