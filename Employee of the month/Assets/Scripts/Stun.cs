@@ -19,9 +19,7 @@ public class Stun : MonoBehaviour
     {
         if ((collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall")))
         {
-            Debug.Log("WallCollide");
-           
-
+            //Debug.Log("WallCollide");
             if (!isStunned && isStunnable)
             {
                 isStunned = true;
