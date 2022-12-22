@@ -109,6 +109,7 @@ MonoBehaviour:
   leftstickInput: {x: 0, y: 0}
   justTeleported: 0
   walksound: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &1940466002630421828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,9 +143,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bloodPool: {fileID: 300826701084828303, guid: d5fc92b4b61abb54ab82593a9f1dcd57, type: 3}
   BloodAnimation: {fileID: 7052536714701912028, guid: 7eb6c1d37a408b24496c904021190a3f, type: 3}
+  animator: {fileID: 0}
+  healthbarAnimator: {fileID: 0}
   playerIndex: 0
   maxHealth: 100
   health: 0
+  healthFlashThreshold: 0.25
 --- !u!50 &5234566805939642084
 Rigidbody2D:
   serializedVersion: 4
@@ -277,3 +281,4 @@ MonoBehaviour:
   isStunnable: 0
   isStunned: 0
   stunTimer: 1
+  stunAnimation: {fileID: 8519451325906883027, guid: c1a48aa488f7cd947a00fbfbdca38abc, type: 3}

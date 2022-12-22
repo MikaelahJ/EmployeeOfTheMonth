@@ -8,6 +8,7 @@ public class Stun : MonoBehaviour
     public bool isStunned;
     private float stunTime;
     public float stunTimer;
+    [SerializeField] private GameObject stunAnimation;
 
     private void Start()
     {
@@ -24,6 +25,8 @@ public class Stun : MonoBehaviour
             if (!isStunned && isStunnable)
             {
                 isStunned = true;
+                GameObject stun = Instantiate(stunAnimation, transform.position, Quaternion.identity);
+                Destroy(stun, stunTime);
                 GetComponent<Movement>().enabled = false;
                 GetComponent<Aim>().enabled = false;
                 GetComponentInChildren<Fire>().enabled = false;

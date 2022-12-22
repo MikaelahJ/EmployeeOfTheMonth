@@ -17,7 +17,7 @@ public class HasHealth : MonoBehaviour
     public float health;
     public float healthFlashThreshold = 0.25f;
 
-    private bool isDead = false;
+    public bool isDead = false;
 
     void Start()
     {

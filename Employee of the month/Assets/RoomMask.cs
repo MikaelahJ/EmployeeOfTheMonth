@@ -32,6 +32,16 @@ public class RoomMask : MonoBehaviour
     {
         Debug.Log("Trigger Left: " + collision.name);
         if (collision.name != playerSpriteName) { return; }
+
+        if (collision.transform.parent.TryGetComponent<HasHealth>(out HasHealth health))
+        {
+            if (health.isDead)
+            {
+                Debug.Log("RoomMask: Player died");
+                return;
+            }
+        }
+
         Debug.Log("Disabled mask: " + collision.name);
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<SpriteMask>().enabled = false;
