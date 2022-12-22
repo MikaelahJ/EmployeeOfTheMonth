@@ -195,9 +195,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1.5166667
-    functionName: 
+    functionName: TriggerKillText
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 4043871007461397535, guid: dd2cf810220460349a8d3faa9a5a11c2, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
