@@ -108,7 +108,7 @@ public class Cursor : MonoBehaviour
 
             if (pressed && collision.gameObject.CompareTag("ResetButton"))
             {
-                GameManager.Instance.LoadScene("TestScene");
+                GameManager.Instance.LoadScene("RandomiseMap");
             }
             else if (pressed && collision.gameObject.CompareTag("MainMenuButton"))
             {

@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance = null;
 
+    [SerializeField] public List<string> playScenes = new List<string>();
+    public string sceneThisMatch;
+
     public Dictionary<string, int> players = new Dictionary<string, int>();
     public int playersCount;
     public int playersChosen;
@@ -45,14 +48,18 @@ public class GameManager : MonoBehaviour
         Instance.isPaused = false;
         isPaused = false;
         Time.timeScale = 1;
-        if (scene == "TestScene")
+        if(scene == "RandomiseMap")
         {
-           // StartCoroutine(RoundStartPause());
+            sceneThisMatch = playScenes[UnityEngine.Random.Range(0, playScenes.Count)];
+            SceneManager.LoadScene(sceneThisMatch);
         }
-        SceneManager.LoadScene(scene);
-
-
+        else
+        {
+            SceneManager.LoadScene(scene);
+        }
+        
     }
+
     public void StartRoundPause()
     {
         StartCoroutine(RoundStartPause());
@@ -93,7 +100,7 @@ public class GameManager : MonoBehaviour
 
     private void PlayClip()
     {
-        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.countdown, Camera.main.transform.position, AudioManager.instance.audioClips.sfxVolume);
+        Camera.main.GetComponent<AudioSource>().Play();
     }
 
     public void ReloadScene()
