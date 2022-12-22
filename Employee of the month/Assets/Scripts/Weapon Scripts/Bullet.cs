@@ -162,6 +162,14 @@ public class Bullet : MonoBehaviour
     {
         SendDamage(collision.collider, collision);
         //Debug.Log("Collided with " + collision.gameObject.name);
+        if (isStapler && collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("isStapler triggered");
+            //ApplyKnockBack(collision.collider);
+            collision.gameObject.GetComponent<Stun>().WallStunChance(stunTimer, stunTime);
+            Debug.Log(collision.gameObject.name);
+        }
+
         //Bounce
         if (isBouncy && bounces < maxBounce)
         {
@@ -175,13 +183,6 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        if (isStapler && collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("isStapler triggered");
-            ApplyKnockBack(collision.collider);
-            collision.gameObject.GetComponent<Stun>().WallStunChance(stunTimer, stunTime);
-            Debug.Log(collision.gameObject.name);
-        }
 
     //Play bullet hit sound
     AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position, AudioManager.instance.audioClips.sfxVolume);

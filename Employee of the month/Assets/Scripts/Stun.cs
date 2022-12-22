@@ -15,9 +15,9 @@ public class Stun : MonoBehaviour
         isStunned = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if ((collision.gameObject.CompareTag("HardWall")))
+        if ((collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall")))
         {
             Debug.Log("WallCollide");
            
@@ -25,7 +25,7 @@ public class Stun : MonoBehaviour
             if (!isStunned && isStunnable)
             {
                 isStunned = true;
-                GameObject stun = Instantiate(stunAnimation, transform.position, Quaternion.identity);
+                GameObject stun = Instantiate(stunAnimation, transform.position, Quaternion.identity, transform);
                 Destroy(stun, stunTime);
                 GetComponent<Movement>().enabled = false;
                 GetComponent<Aim>().enabled = false;
@@ -56,7 +56,7 @@ public class Stun : MonoBehaviour
 
     private IEnumerator StunCountDown()
     {
-        yield return new WaitForSeconds(stunTimer);
+        yield return new WaitForSeconds(stunTimer + 1f);
         isStunnable = false;
     }
 }
