@@ -7,7 +7,7 @@ using TMPro;
 public class PickupText : MonoBehaviour
 {
     public float offsetY = 5f;
-    private float killTextTime = 2f; //Should not be changed unless animation is also changed
+    private float killTextTime = 1.5f; //Should not be changed unless animation is also changed
 
     private TextMeshPro pickupText;
     private Animator textAnimation;
