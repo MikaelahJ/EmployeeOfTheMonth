@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
 
     private void PlayClip()
     {
-        AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.countdown, Camera.main.transform.position, AudioManager.instance.audioClips.sfxVolume);
+        Camera.main.GetComponent<AudioSource>().Play();
     }
 
     public void ReloadScene()
