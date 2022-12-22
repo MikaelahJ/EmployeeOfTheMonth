@@ -147,10 +147,12 @@ public class Bullet : MonoBehaviour
         if (!isExplode && isPenetrate)
         {
             particles.SetActive(true);
-            trail.SetActive(true);
             var emission = particles.GetComponent<ParticleSystem>().emission;
             float startVal = emission.rateOverTime.constant;
             emission.rateOverTime = startVal * bulletSpeed;
+
+            trail.SetActive(true);
+            trail.GetComponent<TrailRenderer>().time = bulletSpeed / 30f;
         }
     }
 

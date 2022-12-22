@@ -5,15 +5,22 @@ using UnityEngine;
 public class RoomMask : MonoBehaviour
 {
     public string playerSpriteName;
+    bool startCollision;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Invoke(nameof(DisableAllMasks), 0.001f);
+    }
+
+    void DisableAllMasks()
+    {
+        if(!startCollision)
+        GetComponent<SpriteMask>().enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        startCollision = true;
         Debug.Log("Trigger Entered with " + collision.name);
         if(collision.name != playerSpriteName) { return; }
         Debug.Log("Enabled mask: " + collision.name);
