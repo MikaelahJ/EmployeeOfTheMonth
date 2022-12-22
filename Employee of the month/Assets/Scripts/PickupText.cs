@@ -40,11 +40,11 @@ public class PickupText : MonoBehaviour
         //StartCoroutine(KillText());
     }
 
-    private IEnumerator KillText()
-    {
-        yield return new WaitForSeconds(killTextTime);
-        Destroy(this.gameObject);
-    }
+    //private IEnumerator KillText()
+    //{
+    //    yield return new WaitForSeconds(killTextTime);
+    //    Destroy(this.gameObject);
+    //}
 
     public void TriggerKillText()
     {
