@@ -20,6 +20,7 @@ public class Intermission : MonoBehaviour
     {
         for (int i = 0; i < GameManager.Instance.playersCount; i++)
         {
+            Debug.Log("countpoints " + i);
             var pointSlider = Instantiate(pointSliderPrefab, sliderHolder);
             pointSlider.value = 0;
             pointSlider.handleRect.GetComponentInChildren<Image>().sprite = heads[GameManager.Instance.players["P" + i] - 1];
@@ -38,7 +39,7 @@ public class Intermission : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
 
         GameManager.Instance.LoadScene("TestScene");
     }
