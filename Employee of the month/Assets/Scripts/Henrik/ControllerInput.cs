@@ -84,7 +84,7 @@ public class ControllerInput : MonoBehaviour
         {
             LoadCursors();
         }
-        else if (scene.name != "LoadingScene")
+        else if (scene.name != "LoadingScene" && scene.name != "Intermission")
         {
             LoadGame();
         }
