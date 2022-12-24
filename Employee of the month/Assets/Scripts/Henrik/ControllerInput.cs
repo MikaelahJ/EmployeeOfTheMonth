@@ -140,7 +140,6 @@ public class ControllerInput : MonoBehaviour
         player.GetComponent<HasHealth>().healthbarAnimator = healthbar.GetComponent<Animator>();
     }
 
-
     private void LoadCharacterSelect()
     {
         playerInput.SwitchCurrentActionMap("UI");

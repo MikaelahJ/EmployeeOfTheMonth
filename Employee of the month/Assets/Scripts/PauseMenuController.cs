@@ -38,6 +38,7 @@ public class PauseMenuController : MonoBehaviour
     {
         mainPauseMenu.SetActive(true);
         optionsPauseMenu.SetActive(false);
+        controlsPauseMenu.SetActive(false);
 
         SetFirstSelectedButton(mainFirstSelectedButton);
     }
