@@ -41,15 +41,10 @@ public class Vent : MonoBehaviour
 
         foreach (Transform child in player.transform)//get circleHighlight
         {
-            Debug.Log(child.name);
             if (child.name == "PlayerCircleHighlight(Clone)")
             {
-                Debug.Log(child.name);
                 ventTrail.startColor = child.GetComponent<SpriteRenderer>().color;//set trail to player colour
                 ventTrail.endColor = child.GetComponent<SpriteRenderer>().color;//set trail to player colour
-
-                Debug.Log("startcolour" + ventTrail.GetComponent<TrailRenderer>().startColor);
-
             }
         }
 

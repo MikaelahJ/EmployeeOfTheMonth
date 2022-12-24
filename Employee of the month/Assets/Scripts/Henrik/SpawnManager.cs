@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
         {
             if (GameManager.Instance.tiebreaker)
             {
-                CheckRoundWinner();
+                Invoke(nameof(CheckRoundWinner), 0.1f);
             }
             else
             {
@@ -82,11 +82,12 @@ public class SpawnManager : MonoBehaviour
             }
             GameManager.Instance.AddPointsToPlayer("P" + player.ToString(), 1);
 
-            gameOverText.text = "PLAYER " + (player += 1) + " WON";
+            int playerNumber = player + 1;
+            gameOverText.text = "PLAYER " + playerNumber + " WON";
 
             if (GameManager.Instance.tiebreaker)
             {
-                GameManager.Instance.actualWinner = player -= 1;
+                GameManager.Instance.actualWinner = player;
                 Invoke(nameof(EndMatch), 3);
                 return;
             }
@@ -120,6 +121,7 @@ public class SpawnManager : MonoBehaviour
 
     private void EndMatch()
     {
+        GameManager.Instance.tiebreaker = false;
         GameManager.Instance.LoadScene("EndGame");
     }
 
