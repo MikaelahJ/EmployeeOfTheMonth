@@ -6,6 +6,11 @@ public class StartPauseRound : MonoBehaviour
 {
     void Start()
     {
-        GameManager.Instance.StartRoundPause();
+        if (GameManager.Instance.tiebreaker)
+            GameManager.Instance.StartTiebreaker();
+   
+        else
+            GameManager.Instance.StartRoundPause();
+
     }
 }

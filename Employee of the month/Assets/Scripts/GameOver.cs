@@ -20,21 +20,10 @@ public class GameOver : MonoBehaviour
 
     private void Start()
     {
-        CheckWinner();
-    }
+        //CheckWinner();
 
-    public void CheckWinner()
-    {
-        List<int> winner = GameManager.Instance.GetWinner();
-        if (winner.Count == 1)
-        {
-            int winnerSprite = GameManager.Instance.GetWinnerSprite(winner[0]);
-            SetWinnerUI(winner[0], winnerSprite);
-        }
-        else
-        {
-            SetTieUI(winner);
-        }
+        int winnerSprite = GameManager.Instance.GetWinnerSprite(GameManager.Instance.actualWinner);
+        SetWinnerUI(GameManager.Instance.actualWinner, winnerSprite);
     }
 
     public void SetWinnerUI(int playerIndex, int playerSprite)
@@ -62,21 +51,30 @@ public class GameOver : MonoBehaviour
                 break;
         }
     }
-    private void SetTieUI(List<int> winners)
+    private void SetTieBreaker(List<int> winners)
     {
-        winnerText.text = "TIE";
-
-        foreach (int winner in winners)
+        GameManager.Instance.tiebreaker = true;
+        foreach(int winner in winners)
         {
-            if (GameManager.Instance.players.ContainsKey("P" + winner))
-            {
-                var name = Instantiate(TieNameText, TieNames);
-                name.text += (winner + 1);
-
-                int playerSprite = GameManager.Instance.players["P" + winner];
-                SetSpriteImages(playerSprite);
-            }
+            GameManager.Instance.tiebreakers.Add(winner);
         }
+
+        GameManager.Instance.LoadScene(GameManager.Instance.sceneThisMatch);
+
+        
+        //winnerText.text = "TIE";
+
+        //foreach (int winner in winners)
+        //{
+        //    if (GameManager.Instance.players.ContainsKey("P" + winner))
+        //    {
+        //        var name = Instantiate(TieNameText, TieNames);
+        //        name.text += (winner + 1);
+
+        //        int playerSprite = GameManager.Instance.players["P" + winner];
+        //        SetSpriteImages(playerSprite);
+        //    }
+        //}
     }
 
     private void SetSpriteImages(int playerSprite)

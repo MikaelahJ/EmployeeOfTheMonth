@@ -49,7 +49,15 @@ public class SpawnManager : MonoBehaviour
         alivePlayers -= 1;
         if (alivePlayers == 1)
         {
-            Invoke(nameof(CheckRoundWinner), 2);
+            if (GameManager.Instance.tiebreaker)
+            {
+                Invoke(nameof(CheckRoundWinner), 0.1f);
+            }
+            else
+            {
+                Invoke(nameof(CheckRoundWinner), 2);
+            }
+
             AudioManager.instance.activateFadeVolume();
         }
     }
@@ -72,13 +80,20 @@ public class SpawnManager : MonoBehaviour
                     player = camController.players[i].gameObject.GetComponent<HasHealth>().playerIndex;
                 }
             }
-
-            //Debug.Log("P" + player.ToString());
             GameManager.Instance.AddPointsToPlayer("P" + player.ToString(), 1);
 
-            gameOverText.text = "PLAYER " + (player += 1) + " WON";
+            int playerNumber = player + 1;
+            gameOverText.text = "PLAYER " + playerNumber + " WON";
+
+            if (GameManager.Instance.tiebreaker)
+            {
+                GameManager.Instance.actualWinner = player;
+                Invoke(nameof(EndMatch), 3);
+                return;
+            }
         }
-        if(GameManager.Instance.roundsPlayed == 5)
+
+        if (GameManager.Instance.roundsPlayed == 5)
         {
             GameManager.Instance.LoadScene("Intermission");
             return;
@@ -90,7 +105,7 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            Invoke(nameof(EndMatch), 3);
+            Invoke(nameof(CheckWinner), 3);
         }
     }
 
@@ -99,8 +114,14 @@ public class SpawnManager : MonoBehaviour
         GameManager.Instance.LoadScene(GameManager.Instance.sceneThisMatch);
     }
 
+    public void CheckWinner()
+    {
+        GameManager.Instance.CheckWinner();
+    }
+
     private void EndMatch()
     {
+        GameManager.Instance.tiebreaker = false;
         GameManager.Instance.LoadScene("EndGame");
     }
 
