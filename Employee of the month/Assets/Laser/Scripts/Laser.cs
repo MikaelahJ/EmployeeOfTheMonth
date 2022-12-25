@@ -106,7 +106,7 @@ public class Laser : MonoBehaviour
 
         if (hit)
         {
-            SendDamage(hit.collider, damage * Time.deltaTime * 2);
+            SendDamage(hit.collider, damage * Time.deltaTime * 2.5f);
             lineRenderer.SetPosition(1, hit.point);
         }
 

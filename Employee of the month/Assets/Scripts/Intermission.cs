@@ -45,6 +45,7 @@ public class Intermission : MonoBehaviour
         while (countdown >= 0)
         {
             yield return new WaitForSecondsRealtime(1);
+
             NextRoundText.alignment = TextAlignmentOptions.TopLeft;
             NextRoundText.text = "Next round in " + countdown.ToString();
 
