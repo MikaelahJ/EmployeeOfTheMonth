@@ -5380,6 +5380,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -360
       objectReference: {fileID: 0}
+    - target: {fileID: 2422450711565499347, guid: af498420356b7824eadc54f49272581b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af498420356b7824eadc54f49272581b, type: 3}
 --- !u!1001 &922860884
@@ -12549,19 +12553,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 103254157453990775, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Size.x
-      value: 1.2837033
+      value: 1.4901814
       objectReference: {fileID: 0}
     - target: {fileID: 103254157453990775, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Size.y
-      value: 0.8527286
+      value: 0.92499566
       objectReference: {fileID: 0}
     - target: {fileID: 103254157453990775, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Offset.x
-      value: 0.13198209
+      value: 0.028743029
       objectReference: {fileID: 0}
     - target: {fileID: 103254157453990775, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_Offset.y
-      value: 0.25137985
+      value: 0.28751338
       objectReference: {fileID: 0}
     - target: {fileID: 103254157453990775, guid: b2d2a6e37511d794b967c4b99cc74a9c, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
