@@ -20,16 +20,21 @@ public class GameOver : MonoBehaviour
 
     private void Start()
     {
-        //CheckWinner();
-
         int winnerSprite = GameManager.Instance.GetWinnerSprite(GameManager.Instance.actualWinner);
         SetWinnerUI(GameManager.Instance.actualWinner, winnerSprite);
+
+
+        //for testing:
+        //int winnerSprite = 4;
+        //SetWinnerUI(1, winnerSprite);
     }
 
     public void SetWinnerUI(int playerIndex, int playerSprite)
     {
         playerIndex += 1;
         winnerText.text = "Player " + playerIndex;
+
+       
 
         switch (playerSprite)
         {
@@ -51,6 +56,7 @@ public class GameOver : MonoBehaviour
                 break;
         }
     }
+
     private void SetTieBreaker(List<int> winners)
     {
         GameManager.Instance.tiebreaker = true;
@@ -77,6 +83,8 @@ public class GameOver : MonoBehaviour
         //}
     }
 
+
+    //was for ties but we have no ties winners anymore
     private void SetSpriteImages(int playerSprite)
     {
         switch (playerSprite)
