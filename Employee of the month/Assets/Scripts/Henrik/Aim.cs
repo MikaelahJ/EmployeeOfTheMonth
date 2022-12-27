@@ -29,12 +29,10 @@ public class Aim : MonoBehaviour
 
     private void Update()
     {
-
-        AimAssist();
-
         //Set controls for aim
         if (hasGamePad)
         {
+            AimAssist();
             StickAim();
         }
         else
@@ -121,13 +119,13 @@ public class Aim : MonoBehaviour
 
             if (range == 0)
             {
-                Debug.Log("0-range" + range);
+                //Debug.Log("0-range" + range);
                 range = objectRange;
                 closest = enemy;
             }
             else if (objectRange < range)
             {
-                Debug.Log("Update-range" + range);
+                //Debug.Log("Update-range" + range);
                 range = objectRange;
                 closest = enemy;
                 Debug.Log(closest.name);
