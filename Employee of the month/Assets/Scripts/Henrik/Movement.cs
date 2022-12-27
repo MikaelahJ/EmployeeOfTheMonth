@@ -79,6 +79,7 @@ public class Movement : MonoBehaviour
         else
         {
             animator.SetBool("isWalking", true);
+            animator.speed = leftstickInput.magnitude * 2;
         }
 
         if (movementVector.magnitude > maxSpeed) // limit movement speed to the maximum speed set from UpdateSpeed();
