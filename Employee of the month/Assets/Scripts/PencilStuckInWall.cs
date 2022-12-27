@@ -7,17 +7,6 @@ public class PencilStuckInWall : MonoBehaviour
     public GameObject pencil;
     public GameObject crack;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void SetPencilPosition(Collision2D wall)
     {
         Vector2 conctactPoint = wall.GetContact(0).point;
@@ -31,7 +20,7 @@ public class PencilStuckInWall : MonoBehaviour
 
         //puts the pen 1/4th of the wall up from contact point
         Vector2 offset = wallNormal * 0.5f * distanceBetweenPenCollisionAndMiddlePointOfWallCollider;
-        Debug.Log("Offset " + offset);
+        //Debug.Log("Offset " + offset);
         transform.position = conctactPoint - offset;
     }
 
@@ -55,9 +44,9 @@ public class PencilStuckInWall : MonoBehaviour
         float itemDistanceFromCenter = Mathf.Abs(Vector2.Dot((transform.position - wallGraphicsCenterPoint), wallNormal));
         float wallDistanceFromCenter = Mathf.Abs(Vector2.Dot((wall.transform.position - wallGraphicsCenterPoint), wallNormal));
 
-        Debug.Log("WallNormal: " + wallNormal);
-        Debug.Log("Wall: " + wallDistanceFromCenter);
-        Debug.Log("Item: " + itemDistanceFromCenter);
+        //Debug.Log("WallNormal: " + wallNormal);
+        //Debug.Log("Wall: " + wallDistanceFromCenter);
+        //Debug.Log("Item: " + itemDistanceFromCenter);
 
         if (wallDistanceFromCenter < itemDistanceFromCenter)
         {
@@ -68,7 +57,7 @@ public class PencilStuckInWall : MonoBehaviour
         }
         else
         {
-            Debug.Log("Put item on wall");
+            //Debug.Log("Put item on wall");
             //Set the items angle to 70deg relative to the walls face
             crack.transform.localEulerAngles = new Vector3(wallDirection.x * -70, wallDirection.y * 70, transform.localEulerAngles.z);
             crack.GetComponent<SpriteRenderer>().sortingOrder = 1;
