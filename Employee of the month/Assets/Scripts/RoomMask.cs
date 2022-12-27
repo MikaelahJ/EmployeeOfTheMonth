@@ -21,7 +21,7 @@ public class RoomMask : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         startCollision = true;
-        Debug.Log("Trigger Entered with " + collision.name);
+        //Debug.Log("Trigger Entered with " + collision.name);
         if(collision.name != playerSpriteName) { return; }
         Debug.Log("Enabled mask: " + collision.name);
         GetComponent<SpriteRenderer>().enabled = false;
@@ -30,7 +30,7 @@ public class RoomMask : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("Trigger Left: " + collision.name);
+        //Debug.Log("Trigger Left: " + collision.name);
         if (collision.name != playerSpriteName) { return; }
 
         if (collision.transform.parent.TryGetComponent<HasHealth>(out HasHealth health))

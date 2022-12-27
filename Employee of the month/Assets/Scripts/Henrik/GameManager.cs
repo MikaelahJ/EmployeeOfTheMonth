@@ -246,7 +246,9 @@ public class GameManager : MonoBehaviour
             GameObject player = playerController.GetComponent<ControllerInput>().GetPlayerSprite();
             player.GetComponent<AudioSource>().Pause();
             playerController.GetComponent<ControllerInput>().EnableAim(false);
-            playerController.GetComponent<ControllerInput>().LoadCursors();
+
+            if(!player.GetComponentInParent<Aim>().hasGamePad)
+                playerController.GetComponent<ControllerInput>().LoadCursors();
         }
         Instance.LoadPauseMenu();
     }

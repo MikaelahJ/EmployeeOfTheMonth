@@ -419,6 +419,8 @@ public class ControllerInput : MonoBehaviour
     {
         if (!input.performed) { return; }
 
+        if (player.GetComponent<HasHealth>().isDead) { return; }
+
         if (GameManager.Instance.isPaused)
         {
             GameManager.Instance.UnpauseGame();
@@ -431,6 +433,8 @@ public class ControllerInput : MonoBehaviour
 
     public void EnableAim(bool enable)
     {
+        if (player.GetComponent<HasHealth>().isDead) { return; }
+
         if (aim != null)
         {
             aim.enabled = enable;

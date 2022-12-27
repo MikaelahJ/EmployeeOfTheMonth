@@ -163,9 +163,6 @@ public class HasHealth : MonoBehaviour
             movement.enabled = false;
             aim.enabled = false;
             
-            //GetComponent<Movement>().walksound.Stop();
-            //GetComponent<Movement>().enabled = false;
-            //GetComponent<Aim>().enabled = false;
             GetComponentInChildren<Fire>().enabled = false;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
