@@ -207,9 +207,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.07859389, y: 0.06426457}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.295166
 --- !u!82 &-8105158988766851767
 AudioSource:
   m_ObjectHideFlags: 0
@@ -409,7 +409,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1, y: 0}
-      - {x: 0.5, y: 10}
-      - {x: -0.5, y: 10}
-      - {x: -1, y: 0}
+    - - {x: 0.35, y: -0.6}
+      - {x: 0.1, y: 10}
+      - {x: -0.1, y: 10}
+      - {x: -0.35, y: -0.6}

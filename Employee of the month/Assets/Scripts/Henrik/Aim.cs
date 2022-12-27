@@ -53,6 +53,16 @@ public class Aim : MonoBehaviour
         transform.up = Vector2.Lerp(previousMousePosition, (Vector2)mousePosition + aimAssistVector, rotationSpeed);
 
         transform.up = mousePosition;
+
+        //Fix, preventing character from flipping on x and z axis at z 180 or -180
+        if (transform.eulerAngles.x != 0 || transform.eulerAngles.y != 0)
+        {
+            Vector3 flip = transform.eulerAngles;
+            flip.x = 0;
+            flip.y = 0;
+            transform.eulerAngles = flip;
+        }
+
         previousMousePosition = mousePosition;
     }
 
