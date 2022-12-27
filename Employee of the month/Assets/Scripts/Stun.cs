@@ -46,15 +46,20 @@ public class Stun : MonoBehaviour
     private IEnumerator Stunned()
     {
         yield return new WaitForSeconds(stunTime);
-        GetComponent<Movement>().enabled = true;
-        GetComponent<Aim>().enabled = true;
-        GetComponentInChildren<Fire>().enabled = true;
-        isStunned = false;
+
+        if (!GetComponent<HasHealth>().isDead)
+        {
+            GetComponent<Movement>().enabled = true;
+            GetComponent<Aim>().enabled = true;
+            GetComponentInChildren<Fire>().enabled = true;
+            isStunned = false;
+        }
+
     }
 
     private IEnumerator StunCountDown()
     {
-        yield return new WaitForSeconds(stunTimer + 1f);
+        yield return new WaitForSeconds(stunTime + stunTimer);
         isStunnable = false;
     }
 }

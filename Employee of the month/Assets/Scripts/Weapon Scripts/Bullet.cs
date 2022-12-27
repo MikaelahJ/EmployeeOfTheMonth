@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private GameObject trail;
     private bool haveSpawnedPencil = false;
 
-    [SerializeField] private float selfDamageModifier = 0.5f;
+    public float selfDamageModifier = 0.5f;
 
     private Rigidbody2D rb2d;
     private float bulletSpeed = 5;
@@ -207,6 +207,7 @@ public class Bullet : MonoBehaviour
         if (haveSpawnedPencil) { return; }
         haveSpawnedPencil = true;
         GameObject pencilStuck = Instantiate(PencilStuckInWall, transform.position, Quaternion.identity);
+        pencilStuck.transform.localScale = transform.lossyScale;
         pencilStuck.GetComponent<PencilStuckInWall>().SetPencilRotation(transform.rotation);
         pencilStuck.GetComponent<PencilStuckInWall>().SetCrackTransform(collision);
         pencilStuck.GetComponent<PencilStuckInWall>().SetPencilPosition(collision);
@@ -247,13 +248,15 @@ public class Bullet : MonoBehaviour
 
         if (collider.gameObject.transform.CompareTag("Player"))
         {
+            ApplyKnockBack(collider);
+            
+            if(damage == 0) { return; }
             if (collider.transform.parent.transform.TryGetComponent<HasHealth>(out HasHealth health))
             {
                 health.LoseHealth(damage);
                 health.AddBlood(gameObject);
             }
 
-            ApplyKnockBack(collider);
         }
 
         if (collider.transform.GetComponent<HasHealth>() != null)
@@ -305,7 +308,7 @@ public class Bullet : MonoBehaviour
     private void Bounce()
     {
         bounces++;
-
+        rb2d.velocity *= 1.02f;
         AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position, AudioManager.instance.audioClips.sfxVolume);
 
         //Turn off tracking to calculate new trajectory

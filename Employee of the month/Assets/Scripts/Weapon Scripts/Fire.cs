@@ -23,6 +23,7 @@ public class Fire : MonoBehaviour
     private float fireRate = 0.5f;
     private bool hasFired;
     public float recoil;
+    public float bulletSizeMultiplier = 1f;
 
     private float accuracy = 1f;
     private float maxMissDegAngle = 0f;
@@ -32,6 +33,7 @@ public class Fire : MonoBehaviour
     private float shotgunSpreadBetween = 5;
 
     public bool isSuperMicro = false;
+    public bool isUltimateRubber = false;
 
 
     //private bool isInWall = false;
@@ -114,6 +116,15 @@ public class Fire : MonoBehaviour
         newBullet.GetComponent<Bullet>().UpdateBulletModifyers(weaponController.weapon);
         newBullet.GetComponent<Bullet>().bulletOwner = ownerCollider;
 
+        if(bulletSizeMultiplier != 0)
+        {
+            newBullet.transform.localScale *= bulletSizeMultiplier;
+        }
+
+        if (isUltimateRubber)
+        {
+            newBullet.GetComponent<Bullet>().selfDamageModifier = 0f;
+        }
 
         //Bullet Spread
         float spread = maxMissDegAngle * (1 - accuracy / 100);
@@ -156,24 +167,27 @@ public class Fire : MonoBehaviour
     {
         
         //3,5,9 skott
-        switch (shotgunAmount)
-        {
-            case 3:
-                shotgunSpreadBetween = 5;
-                break;
-            case 6:
-                shotgunSpreadBetween = 7;
-                break;
-            case 9:
-                shotgunSpreadBetween = 9;
-                break;
-        }
+        //switch (shotgunAmount)
+        //{
+        //    case 3:
+        //        shotgunSpreadBetween = 5;
+        //        break;
+        //    case 6:
+        //        shotgunSpreadBetween = 7;
+        //        break;
+        //    case 9:
+        //        shotgunSpreadBetween = 9;
+        //        break;
+        //}
+
+        float startOffset = shotgunAmount / 2 * shotgunSpreadBetween;
+
         for (int i = 0; i < shotgunAmount; i++)
         {
             GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
             newBullet.GetComponent<Bullet>().UpdateBulletModifyers(weaponController.weapon);
             newBullet.GetComponent<Bullet>().bulletOwner = ownerCollider;
-            newBullet.transform.Rotate(new Vector3(0, 0, -shotgunSpreadBetween + i * 5));
+            newBullet.transform.Rotate(new Vector3(0, 0, -startOffset + i * 5));
         }
 
         //Play shotgun fire animation

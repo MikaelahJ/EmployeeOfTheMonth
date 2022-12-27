@@ -18,6 +18,8 @@ public class WeaponController : MonoBehaviour
 
     private AudioSource sound;
 
+    public bool isDead = false;
+
     [SerializeField] private Laser laserScript;
     void Start()
     {
@@ -30,6 +32,12 @@ public class WeaponController : MonoBehaviour
 
     public void AddItem(NewItemScriptableObject item)
     {
+        if (isDead)
+        {
+            Debug.Log("Can't add item: Player is dead!");
+            return;
+        }
+
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i] == null)
@@ -64,6 +72,7 @@ public class WeaponController : MonoBehaviour
 
         return (false, -1);
     }
+
 
     public void RemoveAllItems()
     {
@@ -171,20 +180,47 @@ public class WeaponController : MonoBehaviour
             newWeapon.stunTime += item.stunTime;
         }
 
+
         //Add ultimate effects
         if (checkIfUltimate)
         {
-            Debug.Log("itemName" + items[0].name);
+            Debug.Log("Equipped ultimate: itemName" + items[0].name);
             if (items[0].name == "Microwave(Clone)")
             {
                 newWeapon.isSuperMicro = true;
-
             }
+
+            if (items[0].name == "Pencil Sharpener(Clone)")
+            {
+                GetComponent<Fire>().bulletSizeMultiplier = 2f;
+            }
+
+            if (items[0].name == "Rubber(Clone)")
+            {
+                GetComponent<Fire>().isUltimateRubber = true;
+                newWeapon.numOfBounces = 50;
+            }
+
+            if (items[0].name == "Shredder(Clone)")
+            {
+                newWeapon.shotgunAmount = 30;
+            }
+
+            if (items[0].name == "Stapler(Clone)")
+            {
+                newWeapon.stunTime = 5;
+            }
+
             if (items[0].ultimateFire != null)
             {
                 newWeapon.fire = items[0].ultimateFire;
                 newWeapon.ultimateFire = items[0].ultimateFire;
             }
+        }
+        else
+        {
+            GetComponent<Fire>().bulletSizeMultiplier = 1f;
+            GetComponent<Fire>().isUltimateRubber = false;
         }
         weapon = newWeapon;
         UpdateFireStats();

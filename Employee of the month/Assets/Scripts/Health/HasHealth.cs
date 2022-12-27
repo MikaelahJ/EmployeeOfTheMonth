@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class HasHealth : MonoBehaviour
 {
+    public GameObject playerSprite;
     private HudHealthBar hudHealthbar;
     public GameObject bloodPool;
     public GameObject BloodAnimation;
@@ -156,13 +158,18 @@ public class HasHealth : MonoBehaviour
 
 
             GetComponentInChildren<WeaponController>().RemoveAllItems();
-            
+            //To prevent the player from picking up new items while dead.
+            GetComponentInChildren<WeaponController>().isDead = true;
+
             GetComponentInChildren<CircleCollider2D>().enabled = false;
 
             movement.walksound.Stop();
             movement.enabled = false;
             aim.enabled = false;
-            
+
+            playerSprite.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
+            playerSprite.GetComponent<SortingGroup>().sortingLayerID = 0;
+
             GetComponentInChildren<Fire>().enabled = false;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;

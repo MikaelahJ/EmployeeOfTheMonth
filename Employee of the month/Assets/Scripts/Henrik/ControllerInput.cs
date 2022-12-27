@@ -235,7 +235,6 @@ public class ControllerInput : MonoBehaviour
         playerSprite = Instantiate(characters[0], player.transform);
         playerSprite.name = "Character 1";
         LoadPlayerChildScripts();
-        SpawnSpriteMask();
     }
     private void SetCursorTestScenes()
     {
@@ -284,6 +283,7 @@ public class ControllerInput : MonoBehaviour
         weaponController = player.GetComponentInChildren<WeaponController>();
         player.GetComponent<HasHealth>().animator = playerSprite.GetComponent<Animator>();
         player.GetComponent<Movement>().animator = playerSprite.GetComponent<Animator>();
+        player.GetComponent<HasHealth>().playerSprite = playerSprite;
     }
 
     private void SpawnPlayerHUD(GameObject player)
