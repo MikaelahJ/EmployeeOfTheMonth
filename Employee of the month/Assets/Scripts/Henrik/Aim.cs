@@ -30,7 +30,7 @@ public class Aim : MonoBehaviour
     private void Update()
     {
 
-        //AimAssist();
+        AimAssist();
 
         //Set controls for aim
         if (hasGamePad)
@@ -97,6 +97,8 @@ public class Aim : MonoBehaviour
         else
         {
             aimAssistVector = Vector2.zero;
+            range = 0;
+            closest = null;
         }
     }
 
@@ -109,13 +111,20 @@ public class Aim : MonoBehaviour
 
             if (range == 0)
             {
+                Debug.Log("0-range" + range);
                 range = objectRange;
                 closest = enemy;
             }
             else if (objectRange < range)
             {
+                Debug.Log("Update-range" + range);
                 range = objectRange;
                 closest = enemy;
+                Debug.Log(closest.name);
+            }
+            else
+            {
+                range = (closest.transform.position - transform.position).magnitude;
             }
         }
     }
