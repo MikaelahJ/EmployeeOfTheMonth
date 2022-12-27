@@ -18,6 +18,8 @@ public class WeaponController : MonoBehaviour
 
     private AudioSource sound;
 
+    public bool isDead = false;
+
     [SerializeField] private Laser laserScript;
     void Start()
     {
@@ -30,6 +32,12 @@ public class WeaponController : MonoBehaviour
 
     public void AddItem(NewItemScriptableObject item)
     {
+        if (isDead)
+        {
+            Debug.Log("Can't add item: Player is dead!");
+            return;
+        }
+
         for (int i = 0; i < items.Length; i++)
         {
             if (items[i] == null)
@@ -64,6 +72,7 @@ public class WeaponController : MonoBehaviour
 
         return (false, -1);
     }
+
 
     public void RemoveAllItems()
     {

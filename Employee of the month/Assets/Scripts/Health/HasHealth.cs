@@ -158,7 +158,9 @@ public class HasHealth : MonoBehaviour
 
 
             GetComponentInChildren<WeaponController>().RemoveAllItems();
-            
+            //To prevent the player from picking up new items while dead.
+            GetComponentInChildren<WeaponController>().isDead = true;
+
             GetComponentInChildren<CircleCollider2D>().enabled = false;
 
             movement.walksound.Stop();
