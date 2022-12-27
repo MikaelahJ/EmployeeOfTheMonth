@@ -56,26 +56,36 @@ public class AudioManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        audioSource.Stop();
         if (scene.name == "MainMenu")
         {
-            audioSource.clip = mainMenu;
+            if (audioSource.clip == characterSelect) { return; }
+
+            audioSource.clip = characterSelect;
         }
 
         else if (scene.name == "CharacterSelect")
         {
+            if (audioSource.clip == characterSelect) { return; }
+
             audioSource.clip = characterSelect;
         }
         else if (scene.name == "EndGame")
         {
+            if(audioSource.clip == characterSelect) { return; }
+
             audioSource.clip = characterSelect;
         }
-        else if(scene.name != "LoadingScene")
+        else if(scene.name == "LoadingScene")
+        {
+            audioSource.Stop();
+            return;
+        }
+        else
         {
             audioSource.clip = inGame;
-
         }
-        //Debug.Log("AudioManager: Playing song \"" + audioSource.clip.name + "\"");
+
+        Debug.Log("AudioManager: Playing song \"" + audioSource.clip.name + "\"");
         isFade = false;
         audioSource.volume = audioClips.musicVolume;
         audioSource.Play();
