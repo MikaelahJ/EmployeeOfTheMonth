@@ -180,7 +180,7 @@ public class WeaponController : MonoBehaviour
             newWeapon.stunTime += item.stunTime;
         }
 
-        GetComponent<Fire>().bulletSizeMultiplier = 1f;
+
         //Add ultimate effects
         if (checkIfUltimate)
         {
@@ -197,6 +197,7 @@ public class WeaponController : MonoBehaviour
 
             if (items[0].name == "Rubber(Clone)")
             {
+                GetComponent<Fire>().isUltimateRubber = true;
                 newWeapon.numOfBounces = 50;
             }
 
@@ -215,6 +216,11 @@ public class WeaponController : MonoBehaviour
                 newWeapon.fire = items[0].ultimateFire;
                 newWeapon.ultimateFire = items[0].ultimateFire;
             }
+        }
+        else
+        {
+            GetComponent<Fire>().bulletSizeMultiplier = 1f;
+            GetComponent<Fire>().isUltimateRubber = false;
         }
         weapon = newWeapon;
         UpdateFireStats();

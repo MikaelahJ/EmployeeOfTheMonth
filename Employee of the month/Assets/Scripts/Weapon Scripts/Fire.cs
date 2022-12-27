@@ -33,6 +33,7 @@ public class Fire : MonoBehaviour
     private float shotgunSpreadBetween = 5;
 
     public bool isSuperMicro = false;
+    public bool isUltimateRubber = false;
 
 
     //private bool isInWall = false;
@@ -118,6 +119,11 @@ public class Fire : MonoBehaviour
         if(bulletSizeMultiplier != 0)
         {
             newBullet.transform.localScale *= bulletSizeMultiplier;
+        }
+
+        if (isUltimateRubber)
+        {
+            newBullet.GetComponent<Bullet>().selfDamageModifier = 0f;
         }
 
         //Bullet Spread

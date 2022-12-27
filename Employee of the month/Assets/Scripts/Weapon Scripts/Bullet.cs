@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private GameObject trail;
     private bool haveSpawnedPencil = false;
 
-    [SerializeField] private float selfDamageModifier = 0.5f;
+    public float selfDamageModifier = 0.5f;
 
     private Rigidbody2D rb2d;
     private float bulletSpeed = 5;
@@ -248,13 +248,15 @@ public class Bullet : MonoBehaviour
 
         if (collider.gameObject.transform.CompareTag("Player"))
         {
+            ApplyKnockBack(collider);
+            
+            if(damage == 0) { return; }
             if (collider.transform.parent.transform.TryGetComponent<HasHealth>(out HasHealth health))
             {
                 health.LoseHealth(damage);
                 health.AddBlood(gameObject);
             }
 
-            ApplyKnockBack(collider);
         }
 
         if (collider.transform.GetComponent<HasHealth>() != null)
