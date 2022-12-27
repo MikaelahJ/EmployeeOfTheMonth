@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-
-
+using TMPro;
 
 public class Cursor : MonoBehaviour
 {
@@ -73,6 +72,9 @@ public class Cursor : MonoBehaviour
             {
                 if (GameManager.Instance.playersCount != GameManager.Instance.playersChosen)
                 {
+                    GameObject mustChoose = GameObject.Find("StartGameText");
+                    mustChoose.GetComponent<TextMeshProUGUI>().text = "Everyone must choose a character";
+                    Invoke(nameof(ResetStartText), 1);
                     Debug.Log("Everyone must select a character");
                 }
                 else
@@ -118,6 +120,11 @@ public class Cursor : MonoBehaviour
 
         pressed = false;
     }
+    private void ResetStartText()
+    {
+        GameObject mustChoose = GameObject.Find("StartGameText");
+        mustChoose.GetComponent<TextMeshProUGUI>().text = "Start Game";
+    }
 
     //public void OnTriggerStay2D(Collider2D collision)
     //{
@@ -145,7 +152,7 @@ public class Cursor : MonoBehaviour
     //                {
     //                    hitta den man valt innan och ändra tag på den
     //                    GameObject.Find(GameManager.Instance.players[this.name].ToString()).tag = "Free";
-                        
+
     //                }
     //            }
 

@@ -687,7 +687,11 @@ MonoBehaviour:
   tips:
   - Drink coffee to shoot faster
   - Erasers make your shots bounce
-  - Have you tried the vents
+  - Have you tried using the vents
+  - Three of an item is more powerfull than two
+  - GLHF
+  - Pickup items to modify your weapon
+  - The pencil sharpener makes your shots do more damage
 --- !u!223 &2162434750993169433
 Canvas:
   m_ObjectHideFlags: 0

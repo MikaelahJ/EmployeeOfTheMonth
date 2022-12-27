@@ -10,6 +10,7 @@ public class Fire : MonoBehaviour
     [SerializeField] private ControllerInput controllerInput;
     [SerializeField] private GameObject laser;
     [SerializeField] private Laser laserScript;
+    [SerializeField] private GameObject noAmmoIcon;
 
     private Animator fireAnimation;
     private WeaponController weaponController;
@@ -79,6 +80,8 @@ public class Fire : MonoBehaviour
         {
             //Out Of ammo sound
             sound.PlayOneShot(AudioManager.instance.audioClips.emptyMag);
+            var noAmmo = Instantiate(noAmmoIcon, firePoint);
+            Destroy(noAmmo, 0.5f);
             timer = 0;
             return;
         }

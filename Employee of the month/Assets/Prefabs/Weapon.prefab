@@ -143,6 +143,7 @@ MonoBehaviour:
   controllerInput: {fileID: 0}
   laser: {fileID: 8191673269864455880}
   laserScript: {fileID: 4105976213350441301}
+  noAmmoIcon: {fileID: 2884675126054547358, guid: 158f27d1953af90418612b03adfd8b75, type: 3}
   recoil: 0
   isSuperMicro: 0
 --- !u!114 &-6732671962525501779
@@ -417,13 +418,13 @@ LineRenderer:
   - {x: 0, y: 5, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.004245758
-        value: 0.033532143
+        time: 0.03206217
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0

@@ -73,7 +73,11 @@ public class ControllerInput : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "MainMenu")
+        if (GameManager.Instance.tiebreaker)
+        {
+            SpawnTieBreakPlayers();
+        }
+        else if (scene.name == "MainMenu")
         {
 
         }
@@ -85,10 +89,55 @@ public class ControllerInput : MonoBehaviour
         {
             LoadCursors();
         }
+
         else if (scene.name != "LoadingScene" && scene.name != "Intermission")
         {
             LoadGame();
         }
+    }
+
+    private void SpawnTieBreakPlayers()
+    {
+        foreach (int winner in GameManager.Instance.tiebreakers)
+        {
+            if (playerInput.playerIndex == winner)
+            {
+                playerInput = GetComponent<PlayerInput>();
+                playerInput.SwitchCurrentActionMap("Player");
+                SpawnTiePlayer(playerInput.playerIndex);
+                LoadTieHealthBar(playerInput.playerIndex);
+
+                spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
+                SetCharacter();
+
+                SpawnSpriteMask();
+                Camera.main.GetComponent<CameraController>().AddCameraTracking(player);
+            }
+        }
+    }
+
+    private void SpawnTiePlayer(int playerIndex)
+    {
+        player = Instantiate(playerPrefab, SpawnManager.instance.GetRandomSpawnPoint(), transform.rotation);
+        player.name = "P" + (playerIndex + 1).ToString() + " Player";
+        playerMovement = player.GetComponent<Movement>();
+        aim = player.GetComponent<Aim>();
+
+        player.GetComponent<Movement>().animator = player.GetComponent<Animator>();
+
+        player.GetComponent<HasHealth>().playerIndex = playerIndex;
+        player.GetComponent<HasHealth>().animator = player.GetComponent<Animator>();
+
+        GameObject circle = Instantiate(playerHighlightCircle, player.transform);
+        circle.GetComponent<SpriteRenderer>().color = pColors[playerIndex];
+    }
+    private void LoadTieHealthBar(int playerIndex)
+    {
+        healthbar = Instantiate(healthbars[playerIndex], player.transform);
+        healthbar.transform.SetParent(player.transform);
+        healthbar.transform.position = player.transform.position;
+
+        player.GetComponent<HasHealth>().healthbarAnimator = healthbar.GetComponent<Animator>();
     }
 
     private void LoadCharacterSelect()
@@ -139,7 +188,7 @@ public class ControllerInput : MonoBehaviour
         SpawnPlayer();
         LoadHealthBar();
         //LoadPickUpText();
-        
+
 
         if (GameManager.Instance.playersChosen != 0)
         {
@@ -186,6 +235,7 @@ public class ControllerInput : MonoBehaviour
         playerSprite = Instantiate(characters[0], player.transform);
         playerSprite.name = "Character 1";
         LoadPlayerChildScripts();
+        SpawnSpriteMask();
     }
     private void SetCursorTestScenes()
     {
@@ -268,7 +318,9 @@ public class ControllerInput : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("Couldn't spawn sprite mask for map:" + map);
+                Debug.LogWarning("Couldn't spawn sprite mask for map with name:" + map);
+                roomMask = Instantiate(roomSpriteMaskHolder[0]);
+                roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
                 break;
         }
     }
