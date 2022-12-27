@@ -235,6 +235,7 @@ public class ControllerInput : MonoBehaviour
         playerSprite = Instantiate(characters[0], player.transform);
         playerSprite.name = "Character 1";
         LoadPlayerChildScripts();
+        SpawnSpriteMask();
     }
     private void SetCursorTestScenes()
     {
@@ -317,7 +318,9 @@ public class ControllerInput : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("Couldn't spawn sprite mask for map:" + map);
+                Debug.LogWarning("Couldn't spawn sprite mask for map with name:" + map);
+                roomMask = Instantiate(roomSpriteMaskHolder[0]);
+                roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
                 break;
         }
     }

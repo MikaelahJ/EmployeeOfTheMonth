@@ -168,6 +168,7 @@ public class HasHealth : MonoBehaviour
             //GetComponent<Aim>().enabled = false;
             GetComponentInChildren<Fire>().enabled = false;
             GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         }
     }
 
