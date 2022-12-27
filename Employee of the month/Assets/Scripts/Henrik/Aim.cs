@@ -29,12 +29,10 @@ public class Aim : MonoBehaviour
 
     private void Update()
     {
-
-        //AimAssist();
-
         //Set controls for aim
         if (hasGamePad)
         {
+            AimAssist();
             StickAim();
         }
         else
@@ -53,6 +51,16 @@ public class Aim : MonoBehaviour
         transform.up = Vector2.Lerp(previousMousePosition, (Vector2)mousePosition + aimAssistVector, rotationSpeed);
 
         transform.up = mousePosition;
+
+        //Fix, preventing character from flipping on x and z axis at z 180 or -180
+        if (transform.eulerAngles.x != 0 || transform.eulerAngles.y != 0)
+        {
+            Vector3 flip = transform.eulerAngles;
+            flip.x = 0;
+            flip.y = 0;
+            transform.eulerAngles = flip;
+        }
+
         previousMousePosition = mousePosition;
     }
 
@@ -97,6 +105,8 @@ public class Aim : MonoBehaviour
         else
         {
             aimAssistVector = Vector2.zero;
+            range = 0;
+            closest = null;
         }
     }
 
@@ -109,13 +119,20 @@ public class Aim : MonoBehaviour
 
             if (range == 0)
             {
+                //Debug.Log("0-range" + range);
                 range = objectRange;
                 closest = enemy;
             }
             else if (objectRange < range)
             {
+                //Debug.Log("Update-range" + range);
                 range = objectRange;
                 closest = enemy;
+                Debug.Log(closest.name);
+            }
+            else
+            {
+                range = (closest.transform.position - transform.position).magnitude;
             }
         }
     }
@@ -150,7 +167,7 @@ public class Aim : MonoBehaviour
         {
             if (!targetsInRange.Contains(collision.gameObject))
             {
-                Debug.Log("added");
+                //Debug.Log("added");
                 targetsInRange.Add(collision.gameObject);
             }
         }
@@ -163,7 +180,7 @@ public class Aim : MonoBehaviour
         {
             if (targetsInRange.Contains(collision.gameObject))
             {
-                Debug.Log("removed");
+                //Debug.Log("removed");
                 targetsInRange.Remove(collision.gameObject);
             }
         }
