@@ -180,15 +180,36 @@ public class WeaponController : MonoBehaviour
             newWeapon.stunTime += item.stunTime;
         }
 
+        GetComponent<Fire>().bulletSizeMultiplier = 1f;
         //Add ultimate effects
         if (checkIfUltimate)
         {
-            Debug.Log("itemName" + items[0].name);
+            Debug.Log("Equipped ultimate: itemName" + items[0].name);
             if (items[0].name == "Microwave(Clone)")
             {
                 newWeapon.isSuperMicro = true;
-
             }
+
+            if (items[0].name == "Pencil Sharpener(Clone)")
+            {
+                GetComponent<Fire>().bulletSizeMultiplier = 2f;
+            }
+
+            if (items[0].name == "Rubber(Clone)")
+            {
+                newWeapon.numOfBounces = 50;
+            }
+
+            if (items[0].name == "Shredder(Clone)")
+            {
+                newWeapon.shotgunAmount = 30;
+            }
+
+            if (items[0].name == "Stapler(Clone)")
+            {
+                newWeapon.stunTime = 5;
+            }
+
             if (items[0].ultimateFire != null)
             {
                 newWeapon.fire = items[0].ultimateFire;

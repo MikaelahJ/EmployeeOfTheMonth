@@ -207,6 +207,7 @@ public class Bullet : MonoBehaviour
         if (haveSpawnedPencil) { return; }
         haveSpawnedPencil = true;
         GameObject pencilStuck = Instantiate(PencilStuckInWall, transform.position, Quaternion.identity);
+        pencilStuck.transform.localScale = transform.lossyScale;
         pencilStuck.GetComponent<PencilStuckInWall>().SetPencilRotation(transform.rotation);
         pencilStuck.GetComponent<PencilStuckInWall>().SetCrackTransform(collision);
         pencilStuck.GetComponent<PencilStuckInWall>().SetPencilPosition(collision);
@@ -305,7 +306,7 @@ public class Bullet : MonoBehaviour
     private void Bounce()
     {
         bounces++;
-
+        rb2d.velocity *= 1.02f;
         AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.bulletBounce, transform.position, AudioManager.instance.audioClips.sfxVolume);
 
         //Turn off tracking to calculate new trajectory
