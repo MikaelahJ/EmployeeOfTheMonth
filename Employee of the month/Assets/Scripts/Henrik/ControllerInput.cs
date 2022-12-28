@@ -406,6 +406,11 @@ public class ControllerInput : MonoBehaviour
     {
         if (input.performed)
         {
+            int characterIndex = spriteIndex;
+            Debug.Log("Character " + characterIndex);
+            GameObject.Find("Character " + characterIndex).GetComponent<Animator>().SetTrigger("Eject");
+            Debug.Log("Character " + characterIndex);
+
             weaponController.RemoveAllItems();
         }
     }
