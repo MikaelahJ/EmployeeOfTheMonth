@@ -74,6 +74,10 @@ public class GameManager : MonoBehaviour
         isPaused = true;
         bool startedclip = false;
 
+        int rounds = roundsPlayed + 1;
+        SpawnManager.instance.gameOverText.text = "ROUND " + rounds;
+        yield return new WaitForSecondsRealtime(1);
+
         while (countdown >= 0)
         {
             yield return new WaitForSecondsRealtime(1);
