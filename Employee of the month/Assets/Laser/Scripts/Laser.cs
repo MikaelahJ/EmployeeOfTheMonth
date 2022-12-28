@@ -88,6 +88,7 @@ public class Laser : MonoBehaviour
     public void EnableLaser()
     {
         lineRenderer.enabled = true;
+        Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(3, 0.07f);
 
         if (movement == null)
             movement = GetComponentInParent<Movement>();
