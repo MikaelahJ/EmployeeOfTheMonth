@@ -90,10 +90,10 @@ public class GameManager : MonoBehaviour
         }
         SpawnManager.instance.gameOverText.text = "GO!";
 
-        foreach (GameObject arrow in GameObject.FindGameObjectsWithTag("PlayerArrow"))
-        {
-            Destroy(arrow);
-        }
+        //foreach (GameObject arrow in GameObject.FindGameObjectsWithTag("PlayerArrow"))
+        //{
+        //    Destroy(arrow);
+        //}
 
         Time.timeScale = 1;
         yield return new WaitForSecondsRealtime(1);

@@ -262,11 +262,13 @@ public class ControllerInput : MonoBehaviour
         GameObject circle = Instantiate(playerHighlightCircle, player.transform);
         circle.GetComponent<SpriteRenderer>().color = pColors[playerInput.playerIndex];
 
-        //GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
-        //foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
-        //{
-        //    sprite.sprite = cursorSprites[playerInput.playerIndex];
-        //}
+        //Show who is who at start of round
+        GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
+        foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sprite.sprite = cursorSprites[playerInput.playerIndex];
+            Destroy(whichPlayer, 0.5f);
+        }
     }
 
     //private void LoadPickUpText()
