@@ -52,6 +52,11 @@ public class Intermission : MonoBehaviour
             countdown--;
         }
 
-        GameManager.Instance.LoadScene("RandomiseMap");
+        if (GameManager.Instance.sceneThisMatch == "TestScene")
+            GameManager.Instance.LoadScene("Map2");
+        else
+            GameManager.Instance.LoadScene("TestScene");
+
+
     }
 }

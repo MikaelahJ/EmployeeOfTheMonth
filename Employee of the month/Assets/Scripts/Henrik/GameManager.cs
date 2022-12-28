@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public int playersChosen;
 
     public int roundsPlayed;
-    public int roundsInMatch = 10;
+    public int roundsInMatch = 6;
     public Dictionary<string, int> playerPoints = new Dictionary<string, int>();
     public int actualWinner;
 

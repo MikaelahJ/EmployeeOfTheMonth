@@ -93,7 +93,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
-        if (GameManager.Instance.roundsPlayed == 5)
+        if (GameManager.Instance.roundsPlayed == 3)
         {
             GameManager.Instance.LoadScene("Intermission");
             return;
