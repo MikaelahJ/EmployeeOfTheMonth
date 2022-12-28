@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Fire : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Fire : MonoBehaviour
     private Animator fireAnimation;
     private WeaponController weaponController;
     private Collider2D ownerCollider;
+    private Gamepads playerController;
 
     private float timer;
 
@@ -47,9 +49,10 @@ public class Fire : MonoBehaviour
         fireAnimation = animationPoint.GetComponent<Animator>();
         weaponController = GetComponent<WeaponController>();
         ownerCollider = GetComponentInParent<CircleCollider2D>();
+        playerController = GetComponentInParent<Gamepads>();
 
         sound = GetComponent<AudioSource>();
-        
+
         startFirePoint = firePoint.transform.localPosition;
         laser.SetActive(false);
     }
@@ -107,6 +110,14 @@ public class Fire : MonoBehaviour
             FireGun();
 
         timer = 0;
+
+        if (GetComponentInParent<Gamepads>() != null)
+        {
+            Debug.Log("Finds gamepad");
+            StartCoroutine(playerController.Rumble());
+        }
+
+        Debug.Log(Gamepad.current.deviceId);
     }
 
     void FireGun()

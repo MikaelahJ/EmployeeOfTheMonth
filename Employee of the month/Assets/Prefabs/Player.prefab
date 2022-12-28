@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d9aa7cb5bd53a4ab54a2b5e356cc48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSprite: {fileID: 0}
   bloodPool: {fileID: 300826701084828303, guid: d5fc92b4b61abb54ab82593a9f1dcd57, type: 3}
   BloodAnimation: {fileID: 7052536714701912028, guid: 7eb6c1d37a408b24496c904021190a3f, type: 3}
   animator: {fileID: 0}

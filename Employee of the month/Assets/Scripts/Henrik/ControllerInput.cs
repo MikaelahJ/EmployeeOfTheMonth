@@ -12,6 +12,7 @@ public class ControllerInput : MonoBehaviour
     [SerializeField] private List<GameObject> characters = new List<GameObject>();
     [SerializeField] private List<GameObject> healthbars = new List<GameObject>();
     [SerializeField] private List<GameObject> playerHUDs = new List<GameObject>();
+
     public GameObject playerPrefab;
     public GameObject cursorPrefab;
     public GameObject healthbarPrefab;
@@ -19,12 +20,14 @@ public class ControllerInput : MonoBehaviour
     public List<GameObject> roomSpriteMaskHolder;
     public GameObject playerHighlightCircle;
     public GameObject whichPlayerArrow;
+    public Gamepads playerGamepads; //To keep track of the gamepads
 
     private GameObject player;
     private Movement playerMovement;
     private Aim aim;
     private Fire fire;
     private GameObject healthbar;
+
     private GameObject pickUpText;
 
     public PlayerInput playerInput;
@@ -248,6 +251,9 @@ public class ControllerInput : MonoBehaviour
         playerMovement = player.GetComponent<Movement>();
         aim = player.GetComponent<Aim>();
 
+        //Rumble, only with usb :(
+        AddRumble();
+        
         player.GetComponent<Movement>().animator = player.GetComponent<Animator>();
 
         player.GetComponent<HasHealth>().playerIndex = playerInput.playerIndex;
@@ -325,6 +331,17 @@ public class ControllerInput : MonoBehaviour
         }
     }
 
+    //Rumble, only with usb :(
+    public void AddRumble()
+    {
+        if (playerInput.currentControlScheme == "Gamepad")
+        {
+            player.AddComponent<Gamepads>();
+            player.GetComponent<Gamepads>().hasGamepad = true;
+            player.GetComponent<Gamepads>().device = playerInput.devices[0];
+        }
+    }
+
     public void OnClick()
     {
         if (cursor == null) { return; }
@@ -375,10 +392,13 @@ public class ControllerInput : MonoBehaviour
         if (input.started)
         {
             fire.GetFireButtonInput(true);
+            //Gamepad.current.SetMotorSpeeds(0.5f, 0.5f);
+            //Debug.Log(Gamepad.current.name);
         }
         if (input.canceled)
         {
             fire.GetFireButtonInput(false);
+            //Gamepad.current.ResetHaptics();
         }
     }
 

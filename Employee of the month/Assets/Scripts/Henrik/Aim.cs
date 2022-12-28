@@ -128,7 +128,7 @@ public class Aim : MonoBehaviour
                 //Debug.Log("Update-range" + range);
                 range = objectRange;
                 closest = enemy;
-                Debug.Log(closest.name);
+                //Debug.Log(closest.name);
             }
             else
             {
