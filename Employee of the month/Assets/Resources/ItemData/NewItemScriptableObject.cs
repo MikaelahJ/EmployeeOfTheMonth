@@ -75,6 +75,7 @@ public class NewItemScriptableObject : ScriptableObject
     [Header("Stapler")]
     public bool isStapler = false;
     public float stunTime = 0f;
+    public float speedSlowdown = 0;
     [Header("Animations")]
     public bool hasAnimations = false;
 }

@@ -116,8 +116,6 @@ public class Fire : MonoBehaviour
             Debug.Log("Finds gamepad");
             StartCoroutine(playerController.Rumble());
         }
-
-        Debug.Log(Gamepad.current.deviceId);
     }
 
     void FireGun()

@@ -6,13 +6,17 @@ public class Stun : MonoBehaviour
 {
     public bool isStunnable;
     public bool isStunned;
-    private float stunTime;
     public float stunTimer;
+    public float slowdownTimer = 2.0f;
+    
+    private float stunTime;
+    private bool isSlowed;
     [SerializeField] private GameObject stunAnimation;
 
     private void Start()
     {
         isStunned = false;
+        isSlowed = false;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -43,6 +47,11 @@ public class Stun : MonoBehaviour
         StartCoroutine(StunCountDown());
     }
 
+    public void OnSlowed(float speedSlowdown)
+    {
+        StartCoroutine(Slowdown(speedSlowdown));
+    }
+
     private IEnumerator Stunned()
     {
         yield return new WaitForSeconds(stunTime);
@@ -61,5 +70,19 @@ public class Stun : MonoBehaviour
     {
         yield return new WaitForSeconds(stunTime + stunTimer);
         isStunnable = false;
+    }
+
+    private IEnumerator Slowdown(float speedSlowdown)
+    {
+        if (!isSlowed)
+        {
+            isSlowed = true;
+            GetComponent<Movement>().walkSpeed -= speedSlowdown;
+            
+            yield return new WaitForSeconds(slowdownTimer);
+
+            isSlowed = false;
+            GetComponent<Movement>().walkSpeed += speedSlowdown;
+        }
     }
 }

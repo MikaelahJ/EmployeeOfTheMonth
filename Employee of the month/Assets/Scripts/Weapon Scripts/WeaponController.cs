@@ -178,6 +178,7 @@ public class WeaponController : MonoBehaviour
             newWeapon.scanBounds += item.scanBounds;
             newWeapon.isStapler = newWeapon.isStapler || item.isStapler;
             newWeapon.stunTime += item.stunTime;
+            newWeapon.speedSlowdown += item.speedSlowdown;
         }
 
 
@@ -208,7 +209,7 @@ public class WeaponController : MonoBehaviour
 
             if (items[0].name == "Stapler(Clone)")
             {
-                newWeapon.stunTime = 5;
+                newWeapon.stunTime = 3;
             }
 
             if (items[0].ultimateFire != null)

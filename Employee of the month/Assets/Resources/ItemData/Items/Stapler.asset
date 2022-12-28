@@ -51,5 +51,6 @@ MonoBehaviour:
   turnSpeed: 0
   scanBounds: 0
   isStapler: 1
-  stunTime: 1
+  stunTime: 0
+  speedSlowdown: 1
   hasAnimations: 0

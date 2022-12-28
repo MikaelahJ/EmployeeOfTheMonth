@@ -37,6 +37,7 @@ public class Bullet : MonoBehaviour
     public bool isStapler;
     public float stunTime;
     public float stunTimer;
+    public float speedSlowdown;
 
     public bool isHoming = false;
     public float turnSpeed;
@@ -119,6 +120,7 @@ public class Bullet : MonoBehaviour
         scanBounds = weapon.scanBounds;
         isStapler = weapon.isStapler;
         stunTime = weapon.stunTime;
+        speedSlowdown = weapon.speedSlowdown;
 
         if (isPenetrate)
         {
@@ -165,9 +167,10 @@ public class Bullet : MonoBehaviour
         if (isStapler && collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("isStapler triggered");
-            //ApplyKnockBack(collision.collider);
+            ApplyKnockBack(collision.collider);
+            collision.gameObject.GetComponent<Stun>().OnSlowed(speedSlowdown);
             collision.gameObject.GetComponent<Stun>().WallStunChance(stunTimer, stunTime);
-            Debug.Log(collision.gameObject.name);
+            //Debug.Log(collision.gameObject.name);
         }
 
         //Bounce
