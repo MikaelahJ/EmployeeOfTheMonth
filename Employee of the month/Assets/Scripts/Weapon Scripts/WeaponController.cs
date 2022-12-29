@@ -201,8 +201,6 @@ public class WeaponController : MonoBehaviour
 
             if (items[0].name == "Rubber(Clone)")
             {
-                fireScript.shakeDuration = 0.1f;
-                fireScript.shakeMagnitude = 0.05f;
                 GetComponent<Fire>().isUltimateRubber = true;
                 newWeapon.numOfBounces = 50;
             }
@@ -216,8 +214,6 @@ public class WeaponController : MonoBehaviour
 
             if (items[0].name == "Stapler(Clone)")
             {
-                fireScript.shakeDuration = 0.2f;
-                fireScript.shakeMagnitude = 0.1f;
                 newWeapon.stunTime = 3;
             }
 

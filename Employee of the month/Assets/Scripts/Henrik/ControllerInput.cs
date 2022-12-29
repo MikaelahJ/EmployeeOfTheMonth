@@ -275,7 +275,6 @@ public class ControllerInput : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Map1 Dark" || SceneManager.GetActiveScene().name == "Map2 Dark" || SceneManager.GetActiveScene().name == "Map3 Dark")
         {
-            Debug.Log("hej");
             player.GetComponent<Light2D>().enabled = true;
         }
         else

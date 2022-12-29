@@ -52,4 +52,11 @@ public class ItemSpawner : MonoBehaviour
             modifyer.GetComponent<WeaponModifyerItem>().itemType = randomItem;
         }
     }
+
+    public NewItemScriptableObject RespawnItem()
+    {
+        var randomItem = allItems[UnityEngine.Random.Range(0, allItems.Count)];
+
+        return randomItem;
+    }
 }

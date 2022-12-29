@@ -23,7 +23,7 @@ public class RoomMask : MonoBehaviour
         startCollision = true;
         //Debug.Log("Trigger Entered with " + collision.name);
         if(collision.name != playerSpriteName) { return; }
-        Debug.Log("Enabled mask: " + collision.name);
+        //Debug.Log("Enabled mask: " + collision.name);
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<SpriteMask>().enabled = true;
     }

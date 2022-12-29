@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using TMPro;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -54,10 +55,11 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1;
 
+        Debug.Log(sceneThisMatch);
         if (scene == "RandomiseMap")
         {
             sceneThisMatch = playScenes[UnityEngine.Random.Range(0, playScenes.Count)];
-            
+
             while (sceneThisMatch == lastSceneThisMatch)
             {
                 sceneThisMatch = playScenes[UnityEngine.Random.Range(0, playScenes.Count)];
@@ -83,8 +85,12 @@ public class GameManager : MonoBehaviour
         isPaused = true;
         bool startedclip = false;
 
-        int rounds = roundsPlayed + 1;
-        SpawnManager.instance.gameOverText.text = "ROUND " + rounds;
+        if (!tiebreaker)
+        {
+            int rounds = roundsPlayed + 1;
+            SpawnManager.instance.gameOverText.text = "ROUND " + rounds;
+        }
+
         yield return new WaitForSecondsRealtime(1);
 
         while (countdown >= 0)
@@ -102,11 +108,6 @@ public class GameManager : MonoBehaviour
             countdown--;
         }
         SpawnManager.instance.gameOverText.text = "GO!";
-
-        //foreach (GameObject arrow in GameObject.FindGameObjectsWithTag("PlayerArrow"))
-        //{
-        //    Destroy(arrow);
-        //}
 
         Time.timeScale = 1;
         yield return new WaitForSecondsRealtime(1);
@@ -305,6 +306,14 @@ public class GameManager : MonoBehaviour
             return false;
 
         return true;
+    }
+
+    public void ResetValues()
+    {
+        playerPoints.Clear();
+        roundsPlayed = 0;
+        tiebreaker = false;
+        tiebreakers.Clear();
     }
 
 }

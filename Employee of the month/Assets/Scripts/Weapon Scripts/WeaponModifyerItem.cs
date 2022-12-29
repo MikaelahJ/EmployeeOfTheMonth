@@ -20,17 +20,19 @@ public class WeaponModifyerItem : MonoBehaviour
 
     private float timer = 0f;
 
+    private Transform parentPos;
+
     private void Start()
     {
         GetComponent<SpriteRenderer>().sprite = itemType.sprite;
         startScale = transform.localScale;
 
         timer = Random.Range(0, 360f);
-}
+    }
 
     private void Update()
     {
-        transform.localScale = startScale + scaleOccilation * startScale * Mathf.Sin(timer* speedOccilation);
+        transform.localScale = startScale + scaleOccilation * startScale * Mathf.Sin(timer * speedOccilation);
 
         timer += Time.deltaTime;
         timer %= 360f;
@@ -38,7 +40,6 @@ public class WeaponModifyerItem : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        
         if (collision.gameObject.transform.CompareTag("Player"))
         {
             GameObject weapon = FindWeapon(collision.transform);
@@ -53,18 +54,28 @@ public class WeaponModifyerItem : MonoBehaviour
                 pickupTextObject.GetComponent<PickupText>().ActivateText(itemType.name);
 
                 SpawnItemGoingToWeaponSlot(weapon, emptyWeaponSlot.Item2);
+                //Disable();
+                //Invoke(nameof(Enable), respawnTime);
+
                 Disable();
-                Invoke(nameof(Enable), respawnTime);
+                Invoke(nameof(RespawnItem), respawnTime);
+
             }
         }
     }
 
+    private void RespawnItem()
+    {
+        itemType = GetComponentInParent<ItemSpawner>().RespawnItem();
+        Start();
+        Enable();
+    }
 
     public GameObject FindWeapon(Transform parent)
     {
-        foreach(Transform child in parent)
+        foreach (Transform child in parent)
         {
-            if(child.gameObject.TryGetComponent<WeaponController>(out WeaponController weaponController))
+            if (child.gameObject.TryGetComponent<WeaponController>(out WeaponController weaponController))
             {
                 Debug.Log("Found Weapon " + child.gameObject.name);
                 return child.gameObject;
@@ -84,8 +95,9 @@ public class WeaponModifyerItem : MonoBehaviour
 
     private void Enable()
     {
-        if(itemType.onRespawn != null)
+        if (itemType.onRespawn != null)
             AudioSource.PlayClipAtPoint(itemType.onRespawn, transform.position, AudioManager.instance.audioClips.sfxVolume);
+
         GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<SpriteRenderer>().enabled = true;
     }

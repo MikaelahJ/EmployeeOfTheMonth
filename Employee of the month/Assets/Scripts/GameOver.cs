@@ -23,7 +23,6 @@ public class GameOver : MonoBehaviour
         int winnerSprite = GameManager.Instance.GetWinnerSprite(GameManager.Instance.actualWinner);
         SetWinnerUI(GameManager.Instance.actualWinner, winnerSprite);
 
-
         //for testing:
         //int winnerSprite = 4;
         //SetWinnerUI(1, winnerSprite);
@@ -32,9 +31,7 @@ public class GameOver : MonoBehaviour
     public void SetWinnerUI(int playerIndex, int playerSprite)
     {
         playerIndex += 1;
-        winnerText.text = "Player " + playerIndex;
-
-       
+        winnerText.text = "Player " + playerIndex;       
 
         switch (playerSprite)
         {
@@ -42,14 +39,17 @@ public class GameOver : MonoBehaviour
                 var image = Instantiate(winnerImage, winnerSpritePosition);
                 image.sprite = winnerSprites[0];
                 break;
+
             case 2:
                 var image2 = Instantiate(winnerImage, winnerSpritePosition);
                 image2.sprite = winnerSprites[1];
                 break;
+
             case 3:
                 var image3 = Instantiate(winnerImage, winnerSpritePosition);
                 image3.sprite = winnerSprites[2];
                 break;
+
             case 4:
                 var image4 = Instantiate(winnerImage, winnerSpritePosition);
                 image4.sprite = winnerSprites[3];
