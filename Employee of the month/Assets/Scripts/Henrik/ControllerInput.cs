@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class ControllerInput : MonoBehaviour
 {
@@ -79,10 +80,6 @@ public class ControllerInput : MonoBehaviour
         if (GameManager.Instance.tiebreaker)
         {
             SpawnTieBreakPlayers();
-        }
-        else if (scene.name == "MainMenu")
-        {
-
         }
         else if (scene.name == "CharacterSelect")
         {
@@ -192,7 +189,6 @@ public class ControllerInput : MonoBehaviour
         LoadHealthBar();
         //LoadPickUpText();
 
-
         if (GameManager.Instance.playersChosen != 0)
         {
             spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
@@ -251,6 +247,15 @@ public class ControllerInput : MonoBehaviour
         playerMovement = player.GetComponent<Movement>();
         aim = player.GetComponent<Aim>();
 
+        if (SceneManager.GetActiveScene().name == "Map1 Dark")
+        {
+            Debug.Log("hej");
+            player.GetComponent<Light2D>().enabled = true;
+        }
+        else
+        {
+            player.GetComponent<Light2D>().enabled = false;
+        }
         //Rumble, only with usb :(
         AddRumble();
         

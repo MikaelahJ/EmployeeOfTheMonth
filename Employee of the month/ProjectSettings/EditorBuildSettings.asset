@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TestScene.unity
     guid: d37014a4848625e40b119a0ce39e1089
   - enabled: 1
+    path: Assets/Scenes/Map1 Dark.unity
+    guid: 74f7ddc9dee6ea24bb243afcbc8c8a4e
+  - enabled: 1
     path: Assets/Scenes/Map2.unity
     guid: fdbc2fd28f3f2a44cac727a069fbf565
   - enabled: 1

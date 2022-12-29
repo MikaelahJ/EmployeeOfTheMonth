@@ -145,7 +145,11 @@ MonoBehaviour:
   laserScript: {fileID: 4105976213350441301}
   noAmmoIcon: {fileID: 2884675126054547358, guid: 158f27d1953af90418612b03adfd8b75, type: 3}
   recoil: 0
+  bulletSizeMultiplier: 1
   isSuperMicro: 0
+  isUltimateRubber: 0
+  shakeDuration: 0
+  shakeMagnitude: 0
 --- !u!114 &-6732671962525501779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,7 +167,9 @@ MonoBehaviour:
   baseWeapon: {fileID: 11400000, guid: 3aa017dc77f19cf49bbac598b3fa39b8, type: 2}
   items: []
   itemHolder: {fileID: 0}
+  isDead: 0
   laserScript: {fileID: 4105976213350441301}
+  fireScript: {fileID: 3847611636956470797}
 --- !u!61 &2885860497341314348
 BoxCollider2D:
   m_ObjectHideFlags: 0

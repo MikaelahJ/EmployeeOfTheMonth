@@ -46,12 +46,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playScenes:
   - TestScene
+  - Map1 Dark
   - Map2
+  sceneThisMatch: 
+  lastSceneThisMatch: 
   playersCount: 0
   playersChosen: 0
   roundsPlayed: 0
   roundsInMatch: 10
+  actualWinner: 0
   playerControllers: []
   isPaused: 0
   pauseMenu: {fileID: 6266728657173171613, guid: debb18ada1ecc0e41b70f53b073f3e54, type: 3}
   showedControlls: 0
+  tiebreaker: 0
+  tiebreakers: 

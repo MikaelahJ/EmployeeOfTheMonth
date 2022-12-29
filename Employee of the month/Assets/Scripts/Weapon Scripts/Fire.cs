@@ -37,6 +37,8 @@ public class Fire : MonoBehaviour
     public bool isSuperMicro = false;
     public bool isUltimateRubber = false;
 
+    public float shakeDuration, shakeMagnitude;
+
 
     //private bool isInWall = false;
 
@@ -110,6 +112,10 @@ public class Fire : MonoBehaviour
             FireGun();
 
         timer = 0;
+        if (shakeDuration != 0 || shakeMagnitude != 0)
+        {
+            Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(shakeDuration, shakeMagnitude);
+        }
 
         if (GetComponentInParent<Gamepads>() != null)
         {
