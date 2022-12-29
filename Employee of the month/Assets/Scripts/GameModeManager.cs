@@ -40,6 +40,11 @@ public class GameModeManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
+            if(SceneManager.GetActiveScene().name == "CharacterSelect")
+            {
+                Instance.teamSelectButtons = teamSelectButtons;
+                Instance.gamemodeText = gamemodeText;
+            }
             Destroy(this);
         }
         else
