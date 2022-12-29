@@ -131,10 +131,16 @@ public class Cursor : MonoBehaviour
 
             if (pressed && collision.gameObject.CompareTag("ResetButton"))
             {
+                GameManager.Instance.ResetValues();
                 GameManager.Instance.LoadScene("RandomiseMap");
             }
             else if (pressed && collision.gameObject.CompareTag("MainMenuButton"))
             {
+                GameManager.Instance.ResetValues();
+                GameManager.Instance.playersChosen = 0;
+                GameManager.Instance.playersCount = 0;
+                GameManager.Instance.players.Clear();
+
                 GameManager.Instance.LoadScene("MainMenu");
             }
         }

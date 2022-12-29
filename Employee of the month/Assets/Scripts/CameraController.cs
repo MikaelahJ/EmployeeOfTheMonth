@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour
                 yMin = xMin / cam.aspect;
                 yMax = xMax / cam.aspect;
 
-                Debug.Log("Camera limited by Width");
+                //Debug.Log("Camera limited by Width");
             }
             else
             {
@@ -50,7 +50,7 @@ public class CameraController : MonoBehaviour
 
                 xMin = yMin * cam.aspect;
                 xMax = yMax * cam.aspect;
-                Debug.Log("Camera limited by height");
+                //Debug.Log("Camera limited by height");
             }
 
 

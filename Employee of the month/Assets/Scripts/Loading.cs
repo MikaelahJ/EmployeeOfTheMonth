@@ -30,7 +30,7 @@ public class Loading : MonoBehaviour
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Loading"))
         {
             Debug.Log("hello");
-            GameManager.Instance.LoadScene("TestScene");
+            GameManager.Instance.LoadScene("RandomiseMap");
         }
     }
 
