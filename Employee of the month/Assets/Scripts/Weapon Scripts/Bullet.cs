@@ -41,10 +41,17 @@ public class Bullet : MonoBehaviour
 
     public bool isShotgun;
 
+    [Header("Homing parameters")]
     public bool isHoming = false;
     public float turnSpeed;
     public Vector2 aimAssistRightBounds;
     public Vector2 aimAssistLeftBounds;
+    public Vector2 homingShotgunRightBoundsFar;
+    public Vector2 homingShotgunLeftBoundsFar;
+    public Vector2 homingShotgunRightBoundsClose;
+    public Vector2 homingShotgunLeftBoundsClose;
+    public Vector2 homingTrackingRightBounds;
+    public Vector2 homingTrackingLeftBounds;
     private Vector2 previousDirection;
     public Vector3 closest; //The position of the closest Player
     public float range; //Current range to closest Player
@@ -91,10 +98,22 @@ public class Bullet : MonoBehaviour
         }
         else
         {
-            //Debug.Log("Homing");
-            aimAssistCollider[1] = new Vector2(aimAssistCollider[1].x, aimAssistCollider[1].y - scanBounds);
-            aimAssistCollider[4] = new Vector2(aimAssistCollider[4].x, aimAssistCollider[4].y - scanBounds);
-            GetComponentInChildren<PolygonCollider2D>().points = aimAssistCollider;
+            if (isShotgun)
+            {
+                Debug.Log("HomingShotgunTriggered");
+                aimAssistCollider[1] = new Vector2(homingShotgunRightBoundsClose.x, homingShotgunRightBoundsClose.y - scanBounds);
+                aimAssistCollider[2] = homingShotgunRightBoundsFar;
+                aimAssistCollider[3] = homingShotgunLeftBoundsFar;
+                aimAssistCollider[4] = new Vector2(homingShotgunLeftBoundsClose.x, homingShotgunLeftBoundsClose.y - scanBounds);
+                GetComponentInChildren<PolygonCollider2D>().points = aimAssistCollider;
+            }
+            else
+            {
+                //Debug.Log("Homing");
+                aimAssistCollider[1] = new Vector2(aimAssistCollider[1].x, aimAssistCollider[1].y - scanBounds);
+                aimAssistCollider[4] = new Vector2(aimAssistCollider[4].x, aimAssistCollider[4].y - scanBounds);
+                GetComponentInChildren<PolygonCollider2D>().points = aimAssistCollider;
+            }
         }
     }
 
