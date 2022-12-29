@@ -119,6 +119,9 @@ public class HasHealth : MonoBehaviour
     private void OnDeath()
     {
         isDead = true;
+
+        //send raycast to check for wall to play wall death animation
+
         animator.SetTrigger("OnDeath");
         if (GetComponent<Spawner>() != null)
         {
