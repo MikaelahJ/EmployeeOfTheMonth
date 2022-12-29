@@ -124,7 +124,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6409818641545798717}
-  - component: {fileID: 4640043495633665891}
   - component: {fileID: 4642569840581286045}
   m_Layer: 13
   m_Name: HomingTrigger
@@ -148,33 +147,6 @@ Transform:
   m_Father: {fileID: 2589492931177751264}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &4640043495633665891
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340515471163257257}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.52, y: 0.52}
-  - {x: 0.49999997, y: 0.52}
-  - {x: 30, y: 20}
-  - {x: 30, y: 30}
-  - {x: -30, y: 30}
-  - {x: -30, y: 20}
-  - {x: -0.52, y: 0.52}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
 --- !u!60 &4642569840581286045
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -201,10 +173,10 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.5, y: 0}
-      - {x: 30, y: 40}
-      - {x: 30, y: 50}
-      - {x: -30, y: 50}
-      - {x: -30, y: 40}
+      - {x: 5, y: 40}
+      - {x: 5, y: 50}
+      - {x: -5, y: 50}
+      - {x: -5, y: 40}
       - {x: -0.5, y: 0}
 --- !u!1 &2297937692892492729
 GameObject:
@@ -380,7 +352,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1.5}
+  m_Size: {x: 1.0674886, y: 1.5}
   m_Direction: 0
 --- !u!82 &564052110150576421
 AudioSource:

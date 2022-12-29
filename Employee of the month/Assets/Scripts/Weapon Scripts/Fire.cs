@@ -120,7 +120,7 @@ public class Fire : MonoBehaviour
         if (GetComponentInParent<Gamepads>() != null)
         {
             Debug.Log("Finds gamepad");
-            StartCoroutine(playerController.Rumble());
+            playerController.TriggerRumble();
         }
     }
 
