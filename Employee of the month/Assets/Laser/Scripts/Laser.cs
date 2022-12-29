@@ -78,7 +78,7 @@ public class Laser : MonoBehaviour
 
         if (aim == null)
             aim = GetComponentInParent<Aim>();
-        aim.rotationSpeed = 0.7f;
+        aim.rotationSpeed = 0.9f;
 
         EnableLaser();
         UpdateLaser();
