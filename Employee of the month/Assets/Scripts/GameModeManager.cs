@@ -83,7 +83,7 @@ public class GameModeManager : MonoBehaviour
 
         if (scene.name == "TestScene" || scene.name == "Map2")
         {
-            Invoke(nameof(AddPlayersToTeams), 0.01f);
+            //Invoke(nameof(AddPlayersToTeams), 0.01f);
             
         }
     }
@@ -98,12 +98,26 @@ public class GameModeManager : MonoBehaviour
             int selectedCharacter = GameManager.Instance.players["P" + playerIndex.ToString()];
             Debug.Log("Selected Character: " + selectedCharacter);
             Teams selectedTeam = teamSelectButtons[selectedCharacter - 1].GetComponent<TeamSelectButton>().selectedTeam;
+            controller.playerTeam = selectedTeam;
             Debug.Log("Selected team: " + selectedTeam);
             Team team = new Team(selectedTeam);
 
             if (!teams.Contains(team))
             {
                 AddTeam(team);
+            }
+        }
+    }
+
+    public void AddPlayerToTeam(ControllerInput controllerInput)
+    {
+        foreach (var team in teams)
+        {
+            Debug.Log("Compare team: " + team.GetTeam() + " to team: " + controllerInput.playerTeam);
+            if (team.GetTeam() == controllerInput.playerTeam)
+            {
+                int index = teams.IndexOf(team);
+                teams[index].AddPlayer(controllerInput.GetPlayer());
             }
         }
     }
@@ -211,19 +225,20 @@ public class GameModeManager : MonoBehaviour
             hasEnabledTeamsButton = true;
     }
 
-    public void ActivateTeamSelectButton(int index, bool enabled, string name)
+    public void ActivateTeamSelectButton(int index, bool enabled, string name, GameObject controllerInput)
     {
         if (SceneManager.GetActiveScene().name != "CharacterSelect"){ return; }
 
         if (enabled)
         {
             teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, true, name);
-            characterSelectedTeams[index] = teamSelectButtons[index].GetComponent<TeamSelectButton>().selectedTeam;
+            Debug.Log(teamSelectButtons[index].GetComponent<TeamSelectButton>().selectedTeam);
+            Debug.Log(controllerInput.name);
+            controllerInput.GetComponent<ControllerInput>().playerTeam = teamSelectButtons[index].GetComponent<TeamSelectButton>().selectedTeam;
         }
         else
         {
             teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, false, name);
-            //characterSelectedTeams[index] = global::Teams.NoTeam;
         }
     }
 

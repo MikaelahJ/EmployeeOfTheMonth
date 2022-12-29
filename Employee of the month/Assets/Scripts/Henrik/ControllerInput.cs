@@ -45,6 +45,8 @@ public class ControllerInput : MonoBehaviour
 
     [SerializeField] private GameObject vent;
 
+    public Teams playerTeam = Teams.NoTeam;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -146,16 +148,18 @@ public class ControllerInput : MonoBehaviour
     {
         playerInput.SwitchCurrentActionMap("UI");
         GameManager.Instance.playersChosen = 0;
-        cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
-        cursorObject.name = "P" + playerInput.playerIndex.ToString();
-        cursor = cursorObject.GetComponent<Cursor>();
+
+        LoadCursors();
+        //cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
+        //cursorObject.name = "P" + playerInput.playerIndex.ToString();
+        //cursor = cursorObject.GetComponent<Cursor>();
 
 
-        //Set Cursor color
-        //cursor.col = pColors[playerInput.playerIndex];
-        cursor.sprite = cursorSprites[playerInput.playerIndex];
-        //Sets the index of the player
-        cursor.playerIndex = playerInput.playerIndex;
+        ////Set Cursor color
+        ////cursor.col = pColors[playerInput.playerIndex];
+        //cursor.sprite = cursorSprites[playerInput.playerIndex];
+        ////Sets the index of the player
+        //cursor.playerIndex = playerInput.playerIndex;
     }
 
     public void LoadCursors()
@@ -167,12 +171,15 @@ public class ControllerInput : MonoBehaviour
             cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
             cursorObject.name = "P" + playerInput.playerIndex.ToString();
             cursor = cursorObject.GetComponent<Cursor>();
-            cursor.controller = this;
+            Debug.Log("Add " + gameObject + " to cursor");
+            cursor.controller = gameObject;
             cursor.sprite = cursorSprites[playerInput.playerIndex];
+            //Sets the index of the player
             cursor.playerIndex = playerInput.playerIndex;
         }
         else
         {
+            Debug.Log("loaded cursor test scene");
             SetCursorTestScenes();
         }
     }
@@ -269,6 +276,8 @@ public class ControllerInput : MonoBehaviour
             sprite.sprite = cursorSprites[playerInput.playerIndex];
             Destroy(whichPlayer, 0.5f);
         }
+
+        GameModeManager.Instance.AddPlayerToTeam(this);
     }
 
     private void SetFlashlightsOnOff()
