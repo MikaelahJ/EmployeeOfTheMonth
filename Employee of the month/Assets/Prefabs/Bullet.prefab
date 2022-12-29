@@ -325,10 +325,18 @@ MonoBehaviour:
   isStapler: 0
   stunTime: 0
   stunTimer: 1
+  speedSlowdown: 0
+  isShotgun: 0
   isHoming: 0
   turnSpeed: 0
   aimAssistRightBounds: {x: 10, y: 90}
   aimAssistLeftBounds: {x: -10, y: 90}
+  homingShotgunRightBoundsFar: {x: 5, y: 50}
+  homingShotgunLeftBoundsFar: {x: -5, y: 50}
+  homingShotgunRightBoundsClose: {x: 5, y: 40}
+  homingShotgunLeftBoundsClose: {x: -5, y: 40}
+  homingTrackingRightBounds: {x: 0, y: 0}
+  homingTrackingLeftBounds: {x: 0, y: 0}
   closest: {x: 0, y: 0, z: 0}
   range: 0
   targetsInRange: []
