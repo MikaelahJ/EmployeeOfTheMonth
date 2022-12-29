@@ -22,6 +22,10 @@ public class CameraController : MonoBehaviour
     void Awake()
     {
         players = new GameObject[4];
+        if(TryGetComponent(out AudioSource audio))
+        {
+            audio.volume = AudioManager.instance.audioClips.characterVolume;
+        }
     }
     // Start is called before the first frame update
     void Start()
