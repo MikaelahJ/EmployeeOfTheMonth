@@ -94,10 +94,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1527501751560705317}
   - component: {fileID: 94908409594777343}
-  - component: {fileID: 9043131763967725611}
   - component: {fileID: 3374547052959039942}
   - component: {fileID: 740578834032619591}
   - component: {fileID: 8489754580775624740}
+  - component: {fileID: 5246271958881193968}
   m_Layer: 3
   m_Name: PlayerSprite3
   m_TagString: Player
@@ -317,6 +317,22 @@ SortingGroup:
   m_SortingLayerID: 895835255
   m_SortingLayer: 4
   m_SortingOrder: 3
+--- !u!58 &5246271958881193968
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194419871203171396}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.05, y: -0.02}
+  serializedVersion: 2
+  m_Radius: 0.22501007
 --- !u!1001 &6571013324460634296
 PrefabInstance:
   m_ObjectHideFlags: 0
