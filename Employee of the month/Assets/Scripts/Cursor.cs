@@ -20,10 +20,12 @@ public class Cursor : MonoBehaviour
     private GameObject selectedFrame;
     private Collider2D collidedObject;
     private bool canSelect;
+    private int selectIndex;
 
     public Color32 col;
     public int playerIndex;
     public Sprite sprite;
+    public ControllerInput controller;
 
     private void Awake()
     {
@@ -36,7 +38,7 @@ public class Cursor : MonoBehaviour
         spawnpoint.z = 0;
         transform.position = spawnpoint;
 
-       sprite =  GetComponent<SpriteRenderer>().sprite = sprite;
+        sprite =  GetComponent<SpriteRenderer>().sprite = sprite;
         selectedCharacterBall.GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color;
     }
 
@@ -68,7 +70,9 @@ public class Cursor : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
-            if (pressed && collision.gameObject.CompareTag("StartButton"))
+            if (!pressed) { return; }
+
+            if (collision.gameObject.CompareTag("StartButton"))
             {
                 if (GameManager.Instance.playersCount != GameManager.Instance.playersChosen)
                 {
@@ -79,11 +83,12 @@ public class Cursor : MonoBehaviour
                 }
                 else
                 {
-                   GameManager.Instance.LoadScene("LoadingScene");
+                    GameModeManager.Instance.CreateTeams();
+                    GameManager.Instance.LoadScene("LoadingScene");
                 }
             }
 
-            if (pressed && collision.gameObject.CompareTag("Free"))
+            if (collision.gameObject.CompareTag("Free"))
             {
                 //är denna spelare kopplad till en karaktär
                 if (GameManager.Instance.players.ContainsKey(this.name))
@@ -96,11 +101,27 @@ public class Cursor : MonoBehaviour
 
                     }
                 }
-
+                //Deactivate previous button
+                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, false);
+                selectIndex = Convert.ToInt32(collision.gameObject.name) - 1;
+                //Activate new selected
+                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, true);
+                
+                
                 collision.tag = "Selected";
                 //SetSelectedBall(collision);
                 SetFrameColor(collision);
                 GameManager.Instance.ConnectCharacterToPlayer(this.name, collision.gameObject.name);
+            }
+
+            if (collision.gameObject.CompareTag("ChangeGameMode"))
+            {
+                GameModeManager.Instance.NextGamemode();
+            }
+
+            if(collision.gameObject.TryGetComponent(out TeamSelectButton teamSelectButton))
+            {
+                teamSelectButton.ChangeTeam();
             }
         }
 

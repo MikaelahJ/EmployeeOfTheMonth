@@ -197,6 +197,8 @@ public class Bullet : MonoBehaviour
         {
             Explode(transform.position, collision);
             Destroy(gameObject);
+
+            Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(0.1f, 0.07f);
         }
         else
         {

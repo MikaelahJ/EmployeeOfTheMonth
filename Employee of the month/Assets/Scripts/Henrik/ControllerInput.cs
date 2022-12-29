@@ -168,7 +168,7 @@ public class ControllerInput : MonoBehaviour
             cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
             cursorObject.name = "P" + playerInput.playerIndex.ToString();
             cursor = cursorObject.GetComponent<Cursor>();
-
+            cursor.controller = this;
             cursor.sprite = cursorSprites[playerInput.playerIndex];
             cursor.playerIndex = playerInput.playerIndex;
         }
@@ -262,11 +262,13 @@ public class ControllerInput : MonoBehaviour
         GameObject circle = Instantiate(playerHighlightCircle, player.transform);
         circle.GetComponent<SpriteRenderer>().color = pColors[playerInput.playerIndex];
 
-        //GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
-        //foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
-        //{
-        //    sprite.sprite = cursorSprites[playerInput.playerIndex];
-        //}
+        //Show who is who at start of round
+        GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
+        foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sprite.sprite = cursorSprites[playerInput.playerIndex];
+            Destroy(whichPlayer, 0.5f);
+        }
     }
 
     //private void LoadPickUpText()
@@ -406,6 +408,11 @@ public class ControllerInput : MonoBehaviour
     {
         if (input.performed)
         {
+            int characterIndex = spriteIndex;
+            Debug.Log("Character " + characterIndex);
+            GameObject.Find("Character " + characterIndex).GetComponent<Animator>().SetTrigger("Eject");
+            Debug.Log("Character " + characterIndex);
+
             weaponController.RemoveAllItems();
         }
     }
@@ -464,5 +471,10 @@ public class ControllerInput : MonoBehaviour
     public GameObject GetPlayerSprite()
     {
         return playerSprite;
+    }
+
+    public GameObject GetPlayer()
+    {
+        return player;
     }
 }

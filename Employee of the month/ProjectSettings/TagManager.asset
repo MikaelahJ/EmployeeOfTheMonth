@@ -12,6 +12,7 @@ TagManager:
   - Selected
   - Free
   - PlayerArrow
+  - ChangeGameMode
   layers:
   - Default
   - TransparentFX

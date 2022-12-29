@@ -24,6 +24,8 @@ public class HasHealth : MonoBehaviour
 
     public bool isDead = false;
 
+    private int sortingLayerID;
+
     void Start()
     {
         hudHealthbar = GetComponentInChildren<HudHealthBar>();
@@ -156,30 +158,53 @@ public class HasHealth : MonoBehaviour
 
             Camera.main.GetComponent<CameraController>().RemoveCameraTracking(gameObject);
 
-
-            GetComponentInChildren<WeaponController>().RemoveAllItems();
-            //To prevent the player from picking up new items while dead.
-            GetComponentInChildren<WeaponController>().isDead = true;
-
-            GetComponentInChildren<CircleCollider2D>().enabled = false;
-
-            movement.walksound.Stop();
-            movement.enabled = false;
-            aim.enabled = false;
-
-            playerSprite.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
-            playerSprite.GetComponent<SortingGroup>().sortingLayerID = 0;
-
-            GetComponentInChildren<Fire>().enabled = false;
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            DisablePlayer();
         }
+    }
+
+    void DisablePlayer()
+    {
+        GetComponentInChildren<WeaponController>().RemoveAllItems();
+        //To prevent the player from picking up new items while dead.
+        GetComponentInChildren<WeaponController>().isDead = true;
+
+        GetComponentInChildren<CircleCollider2D>().enabled = false;
+
+        movement.walksound.Stop();
+        movement.enabled = false;
+        aim.enabled = false;
+
+        playerSprite.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
+        playerSprite.GetComponent<SortingGroup>().sortingLayerID = sortingLayerID;
+        playerSprite.GetComponent<SortingGroup>().sortingLayerID = 0;
+
+        GetComponentInChildren<Fire>().enabled = false;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+    }
+
+    void EnablePlayer()
+    {
+        GetComponentInChildren<WeaponController>().isDead = false;
+        GetComponentInChildren<CircleCollider2D>().enabled = true;
+
+        movement.walksound.Play();
+        movement.enabled = true;
+        aim.enabled = true;
+
+        playerSprite.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+        playerSprite.GetComponent<SortingGroup>().sortingLayerID = sortingLayerID;
+
+        GetComponentInChildren<Fire>().enabled = true;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
     }
 
     public void OnRespawn()
     {
         health = maxHealth;
         isDead = false;
+        EnablePlayer();
     }
 
     public void HealthRegen(int health, float timeBetweenRegen, float duration)

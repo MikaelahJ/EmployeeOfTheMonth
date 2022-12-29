@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public int playersChosen;
 
     public int roundsPlayed;
-    public int roundsInMatch = 10;
+    public int roundsInMatch = 6;
     public Dictionary<string, int> playerPoints = new Dictionary<string, int>();
     public int actualWinner;
 
@@ -74,6 +74,10 @@ public class GameManager : MonoBehaviour
         isPaused = true;
         bool startedclip = false;
 
+        int rounds = roundsPlayed + 1;
+        SpawnManager.instance.gameOverText.text = "ROUND " + rounds;
+        yield return new WaitForSecondsRealtime(1);
+
         while (countdown >= 0)
         {
             yield return new WaitForSecondsRealtime(1);
@@ -90,10 +94,10 @@ public class GameManager : MonoBehaviour
         }
         SpawnManager.instance.gameOverText.text = "GO!";
 
-        foreach (GameObject arrow in GameObject.FindGameObjectsWithTag("PlayerArrow"))
-        {
-            Destroy(arrow);
-        }
+        //foreach (GameObject arrow in GameObject.FindGameObjectsWithTag("PlayerArrow"))
+        //{
+        //    Destroy(arrow);
+        //}
 
         Time.timeScale = 1;
         yield return new WaitForSecondsRealtime(1);
