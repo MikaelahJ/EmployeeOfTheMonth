@@ -49,7 +49,11 @@ MonoBehaviour:
   - TestScene
   - Map1 Dark
   - Map2
+  - Map2 Dark
+  - Map3
+  - Map3 Dark
   sceneThisMatch: 
+  lastSceneThisMatch: 
   playersCount: 0
   playersChosen: 0
   roundsPlayed: 0
@@ -74,6 +78,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentMode: 0
+  teamSelectButtons: []
+  gamemodeText: {fileID: 0}
   kingOfTheHillArea: {fileID: 0}
   captureTheFlagHolder: {fileID: 0}
   numOfStocks: 0
+  hasEnabledTeamsButton: 0
