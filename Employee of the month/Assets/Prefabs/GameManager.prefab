@@ -57,7 +57,7 @@ MonoBehaviour:
   playersCount: 0
   playersChosen: 0
   roundsPlayed: 0
-  roundsInMatch: 10
+  roundsInMatch: 6
   actualWinner: 0
   playerControllers: []
   isPaused: 0

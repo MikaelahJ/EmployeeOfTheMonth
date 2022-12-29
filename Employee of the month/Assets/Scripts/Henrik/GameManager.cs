@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         if (scene == "RandomiseMap")
         {
             sceneThisMatch = playScenes[UnityEngine.Random.Range(0, playScenes.Count)];
-            
+
             while (sceneThisMatch == lastSceneThisMatch)
             {
                 sceneThisMatch = playScenes[UnityEngine.Random.Range(0, playScenes.Count)];
@@ -85,8 +85,11 @@ public class GameManager : MonoBehaviour
         isPaused = true;
         bool startedclip = false;
 
-        int rounds = roundsPlayed + 1;
-        SpawnManager.instance.gameOverText.text = "ROUND " + rounds;
+        if (!tiebreaker)
+        {
+            int rounds = roundsPlayed + 1;
+            SpawnManager.instance.gameOverText.text = "ROUND " + rounds;
+        }
 
         yield return new WaitForSecondsRealtime(1);
 
