@@ -168,7 +168,7 @@ public class ControllerInput : MonoBehaviour
             cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
             cursorObject.name = "P" + playerInput.playerIndex.ToString();
             cursor = cursorObject.GetComponent<Cursor>();
-
+            cursor.controller = this;
             cursor.sprite = cursorSprites[playerInput.playerIndex];
             cursor.playerIndex = playerInput.playerIndex;
         }
@@ -471,5 +471,10 @@ public class ControllerInput : MonoBehaviour
     public GameObject GetPlayerSprite()
     {
         return playerSprite;
+    }
+
+    public GameObject GetPlayer()
+    {
+        return player;
     }
 }

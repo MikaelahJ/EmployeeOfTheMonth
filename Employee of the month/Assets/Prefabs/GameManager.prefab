@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3811213828604573828}
   - component: {fileID: 3811213828604573831}
+  - component: {fileID: 1219743819920462201}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -47,11 +48,31 @@ MonoBehaviour:
   playScenes:
   - TestScene
   - Map2
+  sceneThisMatch: 
   playersCount: 0
   playersChosen: 0
   roundsPlayed: 0
   roundsInMatch: 10
+  actualWinner: 0
   playerControllers: []
   isPaused: 0
   pauseMenu: {fileID: 6266728657173171613, guid: debb18ada1ecc0e41b70f53b073f3e54, type: 3}
   showedControlls: 0
+  tiebreaker: 0
+  tiebreakers: 
+--- !u!114 &1219743819920462201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3811213828604573830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97415a15fe599d94fb5cc08f645f4a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMode: 0
+  kingOfTheHillArea: {fileID: 0}
+  captureTheFlagHolder: {fileID: 0}
+  numOfStocks: 0
