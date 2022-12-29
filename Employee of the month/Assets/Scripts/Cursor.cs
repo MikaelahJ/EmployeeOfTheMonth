@@ -102,10 +102,10 @@ public class Cursor : MonoBehaviour
                     }
                 }
                 //Deactivate previous button
-                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, false);
+                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, false, null);
                 selectIndex = Convert.ToInt32(collision.gameObject.name) - 1;
                 //Activate new selected
-                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, true);
+                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, true, this.name);
                 
                 
                 collision.tag = "Selected";
