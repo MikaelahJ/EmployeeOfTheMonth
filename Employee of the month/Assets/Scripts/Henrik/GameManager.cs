@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] public List<string> playScenes = new List<string>();
     public string sceneThisMatch;
+    public string lastSceneThisMatch;
 
     public Dictionary<string, int> players = new Dictionary<string, int>();
     public int playersCount;
@@ -52,9 +53,17 @@ public class GameManager : MonoBehaviour
         Instance.isPaused = false;
         isPaused = false;
         Time.timeScale = 1;
+
         if (scene == "RandomiseMap")
         {
             sceneThisMatch = playScenes[UnityEngine.Random.Range(0, playScenes.Count)];
+            
+            while (sceneThisMatch == lastSceneThisMatch)
+            {
+                sceneThisMatch = playScenes[UnityEngine.Random.Range(0, playScenes.Count)];
+            }
+
+            lastSceneThisMatch = sceneThisMatch;
             SceneManager.LoadScene(sceneThisMatch);
         }
         else
@@ -251,7 +260,7 @@ public class GameManager : MonoBehaviour
             player.GetComponent<AudioSource>().Pause();
             playerController.GetComponent<ControllerInput>().EnableAim(false);
 
-            if(!player.GetComponentInParent<Aim>().hasGamePad)
+            if (!player.GetComponentInParent<Aim>().hasGamePad)
                 playerController.GetComponent<ControllerInput>().LoadCursors();
         }
         Instance.LoadPauseMenu();

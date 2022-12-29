@@ -31,7 +31,7 @@ public class GameModeManager : MonoBehaviour
     [Header("Gamemode settings")]
     [SerializeField] private int numOfStocks;
 
-    private Team[] characterSelectedTeams; 
+    private Teams[] characterSelectedTeams; 
 
     public bool hasEnabledTeamsButton = false;
     private bool hasLoadedCharacterSelect = false;
@@ -52,7 +52,7 @@ public class GameModeManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
             hasEnabledTeamsButton = false;
-            characterSelectedTeams = new Team[4];
+            characterSelectedTeams = new Teams[4];
             //EnableTeamSelectButtons();
         }
     }
@@ -90,13 +90,17 @@ public class GameModeManager : MonoBehaviour
 
     public void CreateTeams()
     {
-        foreach(var player in GameManager.Instance.playerControllers)
+        foreach(var playerController in GameManager.Instance.playerControllers)
         {
-            ControllerInput controller = player.GetComponent<ControllerInput>();
-            int selectedCharacter = controller.spriteIndex;
-            Teams selectedTeam = teamSelectButtons[selectedCharacter].GetComponent<TeamSelectButton>().selectedTeam;
+            ControllerInput controller = playerController.GetComponent<ControllerInput>();
+            int playerIndex = controller.playerInput.playerIndex;
+            Debug.Log("playerIndex: " + playerIndex);
+            int selectedCharacter = GameManager.Instance.players["P" + playerIndex.ToString()];
+            Debug.Log("Selected Character: " + selectedCharacter);
+            Teams selectedTeam = teamSelectButtons[selectedCharacter - 1].GetComponent<TeamSelectButton>().selectedTeam;
+            Debug.Log("Selected team: " + selectedTeam);
             Team team = new Team(selectedTeam);
-            characterSelectedTeams[controller.playerInput.playerIndex] = team;
+
             if (!teams.Contains(team))
             {
                 AddTeam(team);
@@ -110,8 +114,21 @@ public class GameModeManager : MonoBehaviour
         {
             ControllerInput controller = playerController.GetComponent<ControllerInput>();
             GameObject player = controller.GetPlayer();
-            int index = teams.IndexOf(characterSelectedTeams[controller.playerInput.playerIndex]);
-            teams[index].AddPlayer(player);
+
+            foreach(var team in teams)
+            {
+                int playerIndex = controller.playerInput.playerIndex;
+                Debug.Log("playerIndex: " + playerIndex);
+                int selectedCharacter = GameManager.Instance.players["P" + playerIndex.ToString()];
+                Debug.Log("Selected Character: " + selectedCharacter);
+
+                Debug.Log("Compare team: " + team.GetTeam() + " to team: " + characterSelectedTeams[selectedCharacter - 1]);
+                if (team.GetTeam() == characterSelectedTeams[selectedCharacter - 1])
+                {
+                    int index = teams.IndexOf(team);
+                    teams[index].AddPlayer(player);
+                }
+            }
         }
 
         LoadGamemode(currentMode);
@@ -194,18 +211,18 @@ public class GameModeManager : MonoBehaviour
             hasEnabledTeamsButton = true;
     }
 
-    public void ActivateTeamSelectButton(int index, bool enabled)
+    public void ActivateTeamSelectButton(int index, bool enabled, string name)
     {
         if (SceneManager.GetActiveScene().name != "CharacterSelect"){ return; }
 
         if (enabled)
         {
-            teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, true);
-            //characterSelectedTeams[index] = teamSelectButtons[index].GetComponent<TeamSelectButton>().selectedTeam;
+            teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, true, name);
+            characterSelectedTeams[index] = teamSelectButtons[index].GetComponent<TeamSelectButton>().selectedTeam;
         }
         else
         {
-            teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, false);
+            teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, false, name);
             //characterSelectedTeams[index] = global::Teams.NoTeam;
         }
     }
@@ -300,7 +317,7 @@ public enum Teams
 
 public class Team
 {
-    Teams team;
+    private Teams team;
     private List<GameObject> members;
     private int points;
 
@@ -335,5 +352,10 @@ public class Team
     public List<GameObject> GetPlayers()
     {
         return members;
+    }
+
+    public Teams GetTeam()
+    {
+        return team;
     }
 }

@@ -21,6 +21,8 @@ public class WeaponController : MonoBehaviour
     public bool isDead = false;
 
     [SerializeField] private Laser laserScript;
+    [SerializeField] private Fire fireScript;
+
     void Start()
     {
         items = new NewItemScriptableObject[itemSlots];
@@ -181,7 +183,6 @@ public class WeaponController : MonoBehaviour
             newWeapon.speedSlowdown += item.speedSlowdown;
         }
 
-
         //Add ultimate effects
         if (checkIfUltimate)
         {
@@ -193,22 +194,30 @@ public class WeaponController : MonoBehaviour
 
             if (items[0].name == "Pencil Sharpener(Clone)")
             {
+                fireScript.shakeDuration = 0.4f;
+                fireScript.shakeMagnitude = 0.5f;
                 GetComponent<Fire>().bulletSizeMultiplier = 2f;
             }
 
             if (items[0].name == "Rubber(Clone)")
             {
+                fireScript.shakeDuration = 0.1f;
+                fireScript.shakeMagnitude = 0.05f;
                 GetComponent<Fire>().isUltimateRubber = true;
                 newWeapon.numOfBounces = 50;
             }
 
             if (items[0].name == "Shredder(Clone)")
             {
+                fireScript.shakeDuration = 0.4f;
+                fireScript.shakeMagnitude = 0.2f;
                 newWeapon.shotgunAmount = 30;
             }
 
             if (items[0].name == "Stapler(Clone)")
             {
+                fireScript.shakeDuration = 0.2f;
+                fireScript.shakeMagnitude = 0.1f;
                 newWeapon.stunTime = 3;
             }
 
@@ -220,6 +229,8 @@ public class WeaponController : MonoBehaviour
         }
         else
         {
+            fireScript.shakeDuration = 0f;
+            fireScript.shakeMagnitude = 0f;
             GetComponent<Fire>().bulletSizeMultiplier = 1f;
             GetComponent<Fire>().isUltimateRubber = false;
         }

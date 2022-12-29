@@ -23,7 +23,6 @@ public class WeaponModifyerItem : MonoBehaviour
     private void Start()
     {
         GetComponent<SpriteRenderer>().sprite = itemType.sprite;
-        Debug.Log(itemType.name);
         startScale = transform.localScale;
 
         timer = Random.Range(0, 360f);

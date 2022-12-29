@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class ControllerInput : MonoBehaviour
 {
@@ -80,10 +81,6 @@ public class ControllerInput : MonoBehaviour
         {
             SpawnTieBreakPlayers();
         }
-        else if (scene.name == "MainMenu")
-        {
-
-        }
         else if (scene.name == "CharacterSelect")
         {
             LoadCharacterSelect();
@@ -125,6 +122,8 @@ public class ControllerInput : MonoBehaviour
         player.name = "P" + (playerIndex + 1).ToString() + " Player";
         playerMovement = player.GetComponent<Movement>();
         aim = player.GetComponent<Aim>();
+
+        SetFlashlightsOnOff();
 
         player.GetComponent<Movement>().animator = player.GetComponent<Animator>();
 
@@ -192,7 +191,6 @@ public class ControllerInput : MonoBehaviour
         LoadHealthBar();
         //LoadPickUpText();
 
-
         if (GameManager.Instance.playersChosen != 0)
         {
             spriteIndex = GameManager.Instance.players["P" + (playerInput.playerIndex).ToString()];
@@ -251,9 +249,11 @@ public class ControllerInput : MonoBehaviour
         playerMovement = player.GetComponent<Movement>();
         aim = player.GetComponent<Aim>();
 
+        SetFlashlightsOnOff();
+
         //Rumble, only with usb :(
         AddRumble();
-        
+
         player.GetComponent<Movement>().animator = player.GetComponent<Animator>();
 
         player.GetComponent<HasHealth>().playerIndex = playerInput.playerIndex;
@@ -268,6 +268,19 @@ public class ControllerInput : MonoBehaviour
         {
             sprite.sprite = cursorSprites[playerInput.playerIndex];
             Destroy(whichPlayer, 0.5f);
+        }
+    }
+
+    private void SetFlashlightsOnOff()
+    {
+        if (SceneManager.GetActiveScene().name == "Map1 Dark" || SceneManager.GetActiveScene().name == "Map2 Dark" || SceneManager.GetActiveScene().name == "Map3 Dark")
+        {
+            Debug.Log("hej");
+            player.GetComponent<Light2D>().enabled = true;
+        }
+        else
+        {
+            player.GetComponent<Light2D>().enabled = false;
         }
     }
 
@@ -320,8 +333,30 @@ public class ControllerInput : MonoBehaviour
                 roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
                 break;
 
+            case "Map1 Dark":
+                roomMask = Instantiate(roomSpriteMaskHolder[0]);
+                roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
+                break;
+
             case "Map2":
                 roomMask = Instantiate(roomSpriteMaskHolder[1]);
+                roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
+                break;
+
+            case "Map2 Dark":
+                roomMask = Instantiate(roomSpriteMaskHolder[1]);
+                roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
+                break;
+
+            case "Map3":
+                roomMask = Instantiate(roomSpriteMaskHolder[1]);
+                roomMask.GetComponent<Transform>().Rotate(0, 0, 180);
+                roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
+                break;
+
+            case "Map3 Dark":
+                roomMask = Instantiate(roomSpriteMaskHolder[1]);
+                roomMask.GetComponent<Transform>().Rotate(0, 0, 180);
                 roomMask.GetComponent<RoomMaskManager>().layerName = "Character " + (spriteIndex);
                 break;
 
@@ -429,12 +464,6 @@ public class ControllerInput : MonoBehaviour
             cursor.SetMouseAim(input.ReadValue<Vector2>());
         }
     }
-
-    public void Vent()
-    {
-        //   vent.GetComponent<Vent>().WhereToGo(player);
-    }
-
 
     //for testing
     public void KillSelf()
