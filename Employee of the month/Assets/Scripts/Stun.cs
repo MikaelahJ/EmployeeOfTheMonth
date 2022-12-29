@@ -19,7 +19,7 @@ public class Stun : MonoBehaviour
         isSlowed = false;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if ((collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall")))
         {

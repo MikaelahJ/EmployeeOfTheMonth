@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40bb7cf003a8d7242881e46c28417936, type: 3}
   m_Name: Magnet
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: dbf7291e25d88db4abb0eb68f5ab8bcb, type: 3}
-  itemBrokenOnGround: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 2fcb90f93f56c05439025dbf9b63a702, type: 3}
+  itemBrokenOnGround: {fileID: 21300000, guid: 7cd9d68d1c4fc5e41be9f4d652f39efb, type: 3}
   brokenItemSticksToWall: 0
   sprite: {fileID: 21300000, guid: b38573590de9ab545a5330faa584bdcc, type: 3}
   onRespawn: {fileID: 0}
@@ -52,4 +52,5 @@ MonoBehaviour:
   scanBounds: 20
   isStapler: 0
   stunTime: 0
+  speedSlowdown: 0
   hasAnimations: 0

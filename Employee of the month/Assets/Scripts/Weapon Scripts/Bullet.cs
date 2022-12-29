@@ -39,6 +39,8 @@ public class Bullet : MonoBehaviour
     public float stunTimer;
     public float speedSlowdown;
 
+    public bool isShotgun;
+
     public bool isHoming = false;
     public float turnSpeed;
     public Vector2 aimAssistRightBounds;
@@ -115,6 +117,7 @@ public class Bullet : MonoBehaviour
         explosionDamage = weapon.explosionDamage;
         knockBackModifier = weapon.knockbackModifier;
         bulletImpactSound = weapon.bulletImpactSound;
+        isShotgun = weapon.isShotgun;
         isHoming = weapon.isHoming;
         turnSpeed = weapon.turnSpeed;
         scanBounds = weapon.scanBounds;
