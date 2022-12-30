@@ -199,7 +199,7 @@ public class HasHealth : MonoBehaviour
         aim.enabled = false;
 
         playerSprite.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
-        playerSprite.GetComponent<SortingGroup>().sortingLayerID = sortingLayerID;
+        sortingLayerID = playerSprite.GetComponent<SortingGroup>().sortingLayerID;
         playerSprite.GetComponent<SortingGroup>().sortingLayerID = 0;
 
         GetComponentInChildren<Fire>().enabled = false;
@@ -209,8 +209,11 @@ public class HasHealth : MonoBehaviour
 
     void EnablePlayer()
     {
+        Debug.Log("HasHealth: EnablePlayer");
         GetComponentInChildren<WeaponController>().isDead = false;
         GetComponentInChildren<CircleCollider2D>().enabled = true;
+
+        animator.Play("Idle");
 
         movement.walksound.Play();
         movement.enabled = true;
@@ -226,6 +229,7 @@ public class HasHealth : MonoBehaviour
 
     public void OnRespawn()
     {
+        Debug.Log("HasHealth: OnRespawn");
         health = maxHealth;
         isDead = false;
         EnablePlayer();

@@ -625,7 +625,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a35c2247102ad41b04bdd2507b4aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: 
   selectedTeam: 0
   isActive: 0
 --- !u!114 &203273827
@@ -1030,7 +1029,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a35c2247102ad41b04bdd2507b4aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: 
   selectedTeam: 0
   isActive: 0
 --- !u!114 &306692817
@@ -1725,7 +1723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a35c2247102ad41b04bdd2507b4aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: 
   selectedTeam: 0
   isActive: 0
 --- !u!114 &719838863
@@ -2226,6 +2223,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1219743819920462201, guid: fb605439ac6808e43851610c096011b3, type: 3}
+      propertyPath: winPoints
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1219743819920462201, guid: fb605439ac6808e43851610c096011b3, type: 3}
+      propertyPath: numOfStocks
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1219743819920462201, guid: fb605439ac6808e43851610c096011b3, type: 3}
       propertyPath: gamemodeText
       value: 
       objectReference: {fileID: 1857765329}
@@ -2489,7 +2494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7a35c2247102ad41b04bdd2507b4aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: 
   selectedTeam: 0
   isActive: 0
 --- !u!114 &1447121966

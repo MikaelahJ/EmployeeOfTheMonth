@@ -30,7 +30,7 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private GameObject captureTheFlagHolder;
     [Header("Gamemode settings")]
     [SerializeField] private int winPoints = 30;
-    [SerializeField] private int numOfStocks;
+    [SerializeField] private int numOfStocks = 3;
 
     private Teams[] characterSelectedTeams; 
 
@@ -128,47 +128,6 @@ public class GameModeManager : MonoBehaviour
             controller.playerTeam = team;
         }
     }
-
-    //public Team AddPlayerToTeam(ControllerInput controllerInput)
-    //{
-    //    foreach (var team in teams)
-    //    {
-    //        Debug.Log("Compare team: " + team.GetTeamName() + " to team: " + controllerInput.playerTeam);
-    //        if (team.GetTeamName() == controllerInput.playerTeam)
-    //        {
-    //            int index = teams.IndexOf(team);
-    //            teams[index].AddPlayer(controllerInput.GetPlayer());
-    //            return team;
-    //        }
-    //    }
-    //    return null;
-    //}
-
-    //public void AddPlayersToTeams()
-    //{
-    //    foreach (var playerController in GameManager.Instance.playerControllers)
-    //    {
-    //        ControllerInput controller = playerController.GetComponent<ControllerInput>();
-    //        GameObject player = controller.GetPlayer();
-
-    //        foreach(var team in teams)
-    //        {
-    //            int playerIndex = controller.playerInput.playerIndex;
-    //            Debug.Log("playerIndex: " + playerIndex);
-    //            int selectedCharacter = GameManager.Instance.players["P" + playerIndex.ToString()];
-    //            Debug.Log("Selected Character: " + selectedCharacter);
-
-    //            Debug.Log("Compare team: " + team.GetTeamName() + " to team: " + characterSelectedTeams[selectedCharacter - 1]);
-    //            if (team.GetTeamName() == characterSelectedTeams[selectedCharacter - 1])
-    //            {
-    //                int index = teams.IndexOf(team);
-    //                teams[index].AddPlayer(player);
-    //            }
-    //        }
-    //    }
-
-    //    LoadGamemode(currentMode);
-    //}
 
     void AddTeam(Team team)
     {
@@ -352,7 +311,7 @@ public class GameModeManager : MonoBehaviour
         {
             foreach (var player in team.GetPlayers())
             {
-                Debug.Log("Added spawner to: " + player.name);
+                Debug.Log("Added spawner to: " + player.name + ", stocks set to " + stocks);
                 player.AddComponent<Spawner>();
                 if(stocks > 0)
                 {
@@ -430,3 +389,46 @@ public class Team
         return team;
     }
 }
+
+
+
+//public Team AddPlayerToTeam(ControllerInput controllerInput)
+//{
+//    foreach (var team in teams)
+//    {
+//        Debug.Log("Compare team: " + team.GetTeamName() + " to team: " + controllerInput.playerTeam);
+//        if (team.GetTeamName() == controllerInput.playerTeam)
+//        {
+//            int index = teams.IndexOf(team);
+//            teams[index].AddPlayer(controllerInput.GetPlayer());
+//            return team;
+//        }
+//    }
+//    return null;
+//}
+
+//public void AddPlayersToTeams()
+//{
+//    foreach (var playerController in GameManager.Instance.playerControllers)
+//    {
+//        ControllerInput controller = playerController.GetComponent<ControllerInput>();
+//        GameObject player = controller.GetPlayer();
+
+//        foreach(var team in teams)
+//        {
+//            int playerIndex = controller.playerInput.playerIndex;
+//            Debug.Log("playerIndex: " + playerIndex);
+//            int selectedCharacter = GameManager.Instance.players["P" + playerIndex.ToString()];
+//            Debug.Log("Selected Character: " + selectedCharacter);
+
+//            Debug.Log("Compare team: " + team.GetTeamName() + " to team: " + characterSelectedTeams[selectedCharacter - 1]);
+//            if (team.GetTeamName() == characterSelectedTeams[selectedCharacter - 1])
+//            {
+//                int index = teams.IndexOf(team);
+//                teams[index].AddPlayer(player);
+//            }
+//        }
+//    }
+
+//    LoadGamemode(currentMode);
+//}

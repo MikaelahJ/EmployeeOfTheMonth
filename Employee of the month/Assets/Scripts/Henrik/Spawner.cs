@@ -5,8 +5,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     private Vector2 spawnPosition;
-    public bool isTriggered;
-    private int stocks = 9999;
+    public bool isRespawning = false;
+    [SerializeField] private int stocks = 9999;
 
     // Start is called before the first frame update
     void Start()
@@ -16,34 +16,32 @@ public class Spawner : MonoBehaviour
 
     public void TriggerRespawn(float delay)
     {
-        isTriggered = true;
-        if (!isTriggered)
+        if (!isRespawning)
         {
+            isRespawning = true;
             StartCoroutine(DelayedRespawn(delay));
-            isTriggered = false;
         }
     }
 
     IEnumerator DelayedRespawn(float delay)
     {
         yield return new WaitForSeconds(delay);
-        if (!Respawn())
-        {
-            Debug.Log("player ran out of stocks");
-        }
+        Respawn();
     }
 
-    public bool Respawn()
+    public void Respawn()
     {
-        if(stocks <= 0)
-        {
-            return false;
-        }
+        Debug.Log("Spawner: Respawning");
         GetComponent<HasHealth>().OnRespawn();
         transform.position = SpawnManager.instance.GetRandomSpawnPoint();
+        isRespawning = false;
 
         LoseStock();
-        return true;
+        if(stocks <= 1)
+        {
+            Debug.Log("Removing spawner");
+            Destroy(this);
+        }
     }
 
     public void SetStocks(int lives)
