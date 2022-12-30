@@ -152,6 +152,13 @@ public class HasHealth : MonoBehaviour
         {
             SpawnManager.instance.PlayerDied();
 
+            if(GameModeManager.Instance.currentMode == Gamemodes.DeathMatch)
+            {
+                Team team = bullet.GetComponent<Bullet>().bulletOwner.gameObject.GetComponentInParent<HasHealth>().team;
+                if(team != null)
+                    team.AddPoints(1);
+            }
+
             AudioClip death = null;
             int randomSound;
             switch (playerIndex)
