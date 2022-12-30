@@ -18,11 +18,14 @@ public class HasHealth : MonoBehaviour
     [SerializeField] private Movement movement;
     [SerializeField] private Aim aim;
 
+    public Team team;
+
     public int playerIndex;
     public int maxHealth = 100;
     public float health;
     public float healthFlashThreshold = 0.25f;
 
+    public float respawnTime = 3f;
     public bool isDead = false;
 
     private int sortingLayerID;
@@ -141,9 +144,19 @@ public class HasHealth : MonoBehaviour
             animator.SetTrigger("OnDeath");
         }
 
+        if (GameModeManager.Instance.currentMode == Gamemodes.DeathMatch)
+        {
+            Debug.Log("is Deathmatch");
+            Debug.Log(bullet.GetComponent<Bullet>().bulletOwner.gameObject.transform.parent);
+            Team team = bullet.GetComponent<Bullet>().bulletOwner.gameObject.GetComponentInParent<HasHealth>().team;
+            if (team != null)
+                team.AddPoints(1);
+        }
+
         if (GetComponent<Spawner>() != null)
         {
-            GetComponent<Spawner>().TriggerRespawn(5f);
+            DisablePlayer();
+            GetComponent<Spawner>().TriggerRespawn(respawnTime);
         }
         else if (gameObject.CompareTag("Player"))
         {
@@ -196,18 +209,21 @@ public class HasHealth : MonoBehaviour
         aim.enabled = false;
 
         playerSprite.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
-        playerSprite.GetComponent<SortingGroup>().sortingLayerID = sortingLayerID;
+        sortingLayerID = playerSprite.GetComponent<SortingGroup>().sortingLayerID;
         playerSprite.GetComponent<SortingGroup>().sortingLayerID = 0;
 
         GetComponentInChildren<Fire>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
 
     void EnablePlayer()
     {
+        Debug.Log("HasHealth: EnablePlayer");
         GetComponentInChildren<WeaponController>().isDead = false;
         GetComponentInChildren<CircleCollider2D>().enabled = true;
+
+        animator.Play("Idle");
 
         movement.walksound.Play();
         movement.enabled = true;
@@ -218,11 +234,12 @@ public class HasHealth : MonoBehaviour
 
         GetComponentInChildren<Fire>().enabled = true;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
     }
 
     public void OnRespawn()
     {
+        Debug.Log("HasHealth: OnRespawn");
         health = maxHealth;
         isDead = false;
         EnablePlayer();

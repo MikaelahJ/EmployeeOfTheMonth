@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class PauseMenuController : MonoBehaviour
 {
+    public AudioClip onSwitch;
+    public AudioClip onClick;
+
     [SerializeField] private GameObject mainPauseMenu;
     [SerializeField] private GameObject mainFirstSelectedButton;
 
@@ -19,10 +22,14 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
     [SerializeField] private Slider characterSlider;
 
+    private AudioSource inGameMenuSound;
+
     private bool hasStarted = false;
     // Start is called before the first frame update
     private void Awake()
     {
+        inGameMenuSound = GetComponent<AudioSource>();
+        inGameMenuSound.volume = AudioManager.instance.audioClips.sfxVolume;
         musicSlider.value = AudioManager.instance.audioClips.musicVolume;
         sfxSlider.value = AudioManager.instance.audioClips.sfxVolume;
         characterSlider.value = AudioManager.instance.audioClips.characterVolume;
@@ -88,6 +95,16 @@ public class PauseMenuController : MonoBehaviour
 
         float volume = characterSlider.value;
         AudioManager.instance.setCharacterVolume(volume);
+    }
+
+    public void ChangeSelectionSound()
+    {
+        inGameMenuSound.PlayOneShot(onSwitch);
+    }
+
+    public void OnConfirmedSound()
+    {
+        inGameMenuSound.PlayOneShot(onClick);
     }
 
 }

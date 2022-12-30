@@ -82,7 +82,7 @@ MonoBehaviour:
   currentMode: 0
   teamSelectButtons: []
   gamemodeText: {fileID: 0}
-  kingOfTheHillArea: {fileID: 0}
+  kingOfTheHillArea: {fileID: 5059035556786995075, guid: 421167deaaa703b4fb78365b3e6aa7ab, type: 3}
   captureTheFlagHolder: {fileID: 0}
   numOfStocks: 0
   hasEnabledTeamsButton: 0

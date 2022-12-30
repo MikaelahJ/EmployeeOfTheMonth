@@ -8,7 +8,10 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
+    public AudioClip onRotate;
+    public AudioClip onClick;
 
+    private AudioSource menuSound;
     [SerializeField] private GameObject middleButton;
     private Image middleSprite;
     [SerializeField] private List<Sprite> CarouselSprites = new List<Sprite>();
@@ -24,6 +27,9 @@ public class MainMenuController : MonoBehaviour
     {
         SetFirstSelectedButton(middleButton);
         middleSprite = middleButton.GetComponent<Image>();
+
+        menuSound = GetComponent<AudioSource>();
+        menuSound.volume = AudioManager.instance.audioClips.sfxVolume;
     }
 
     private void SetFirstSelectedButton(GameObject button)
@@ -55,11 +61,13 @@ public class MainMenuController : MonoBehaviour
         middleSprite.sprite = CarouselSprites[spriteIndex];
 
         EventSystem.current.SetSelectedGameObject(middleButton);
+        menuSound.PlayOneShot(onRotate);
     }
 
     public void OnButtonPress()
     {
         string buttonName = middleSprite.sprite.name;
+        menuSound.PlayOneShot(onClick);
 
         switch (buttonName)
         {

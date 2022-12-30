@@ -335,7 +335,7 @@
                 {
                     "name": "",
                     "id": "9a9f3256-5572-443f-b567-bf012c1a8dff",
-                    "path": "<Gamepad>/dpad/up",
+                    "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad;Joystick",

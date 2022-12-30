@@ -6,7 +6,6 @@ using System.Text.RegularExpressions;
 
 public class TeamSelectButton : MonoBehaviour
 {
-    public string cursor;
     public Teams selectedTeam = Teams.NoTeam;
     private TextMeshProUGUI text;
     private List<Color32> pColors = new List<Color32>();
