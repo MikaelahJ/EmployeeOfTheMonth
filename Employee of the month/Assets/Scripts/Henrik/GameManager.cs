@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     public string sceneThisMatch;
     public string lastSceneThisMatch;
 
+    public RectTransform playSceneText;
+    public Canvas gameoverCanvas;
+
+
     public Dictionary<string, int> players = new Dictionary<string, int>();
     public int playersCount;
     public int playersChosen;
@@ -38,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        
+
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -76,6 +82,9 @@ public class GameManager : MonoBehaviour
 
     public void StartRoundPause()
     {
+        if (GameObject.FindGameObjectWithTag("GameOverCanvas") != null)
+            gameoverCanvas = GameObject.FindGameObjectWithTag("GameOverCanvas").GetComponent<Canvas>();
+
         StartCoroutine(RoundStartPause());
     }
 
@@ -88,29 +97,41 @@ public class GameManager : MonoBehaviour
         if (!tiebreaker)
         {
             int rounds = roundsPlayed + 1;
-            SpawnManager.instance.gameOverText.text = "ROUND " + rounds;
+            //SpawnManager.instance.gameOverText.text = "ROUND " + rounds;
         }
 
         yield return new WaitForSecondsRealtime(1);
 
-        while (countdown >= 0)
-        {
-            yield return new WaitForSecondsRealtime(1);
 
-            if (startedclip == false)
-            {
-                PlayClip();
-            }
-            startedclip = true;
+        PlayClip();
+        Instantiate(playSceneText, gameoverCanvas.transform);
 
-            SpawnManager.instance.gameOverText.text = countdown.ToString();
 
-            countdown--;
-        }
-        SpawnManager.instance.gameOverText.text = "GO!";
+        yield return new WaitForSecondsRealtime(3);
+
+        Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(0.25f, 0.02f);
+
+        yield return new WaitForSecondsRealtime(1);
+
+
+
+        //while (countdown >= 0)
+        //{
+        //    yield return new WaitForSecondsRealtime(1);
+
+        //    if (startedclip == false)
+        //    {
+        //        PlayClip();
+        //    }
+        //    startedclip = true;
+
+        //    SpawnManager.instance.gameOverText.text = countdown.ToString();
+
+        //    countdown--;
+        //}
+        //SpawnManager.instance.gameOverText.text = "GO!";
 
         Time.timeScale = 1;
-        yield return new WaitForSecondsRealtime(1);
         SpawnManager.instance.gameOverText.text = "";
         isPaused = false;
         countdown = 3;

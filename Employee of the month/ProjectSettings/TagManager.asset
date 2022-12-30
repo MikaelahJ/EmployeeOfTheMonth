@@ -13,6 +13,7 @@ TagManager:
   - Free
   - PlayerArrow
   - ChangeGameMode
+  - GameOverCanvas
   layers:
   - Default
   - TransparentFX

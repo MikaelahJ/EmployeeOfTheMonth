@@ -10,6 +10,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private CameraController camController;
 
     public TextMeshProUGUI gameOverText;
+
     public List<GameObject> spawnPositions;
     private List<int> assigned;
     public int alivePlayers = 0;
