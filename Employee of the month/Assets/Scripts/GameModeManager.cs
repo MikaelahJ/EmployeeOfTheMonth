@@ -21,7 +21,7 @@ public class GameModeManager : MonoBehaviour
     public Gamemodes currentMode = Gamemodes.FreeForAll;
 
     List<Team> teams = new List<Team>();
-    int winPoints = 1;
+
     [Header("Character Select")]
     [SerializeField] private List<GameObject> teamSelectButtons;
     [SerializeField] private TextMeshProUGUI gamemodeText;
@@ -29,6 +29,7 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private GameObject kingOfTheHillArea;
     [SerializeField] private GameObject captureTheFlagHolder;
     [Header("Gamemode settings")]
+    [SerializeField] private int winPoints = 1;
     [SerializeField] private int numOfStocks;
 
     private Teams[] characterSelectedTeams; 
@@ -99,6 +100,11 @@ public class GameModeManager : MonoBehaviour
 
     public void CreateTeams()
     {
+        if (currentMode == Gamemodes.FreeForAll)
+        {
+            return;
+        }
+
         foreach(var playerController in GameManager.Instance.playerControllers)
         {
             ControllerInput controller = playerController.GetComponent<ControllerInput>();

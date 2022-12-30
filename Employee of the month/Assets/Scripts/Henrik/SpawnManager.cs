@@ -48,7 +48,7 @@ public class SpawnManager : MonoBehaviour
     public void PlayerDied()
     {
         alivePlayers -= 1;
-        if (alivePlayers == 1)
+        if (alivePlayers <= 1)
         {
             if (GameManager.Instance.tiebreaker)
             {

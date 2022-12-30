@@ -149,6 +149,7 @@ public class ControllerInput : MonoBehaviour
         playerInput.SwitchCurrentActionMap("UI");
         GameManager.Instance.playersChosen = 0;
 
+        playerTeam = null;
         LoadCursors();
         //cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
         //cursorObject.name = "P" + playerInput.playerIndex.ToString();
@@ -195,7 +196,15 @@ public class ControllerInput : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerInput.SwitchCurrentActionMap("Player");
         SpawnPlayer();
-        LoadHealthBar();
+        if (playerTeam == null)
+        {
+            LoadHealthBar();
+        }
+        else
+        {
+            LoadHealthBar((int)playerTeam.GetTeamName() - 1);
+        }
+        
         //LoadPickUpText();
 
         if (GameManager.Instance.playersChosen != 0)
@@ -277,6 +286,10 @@ public class ControllerInput : MonoBehaviour
             Destroy(whichPlayer, 0.5f);
         }
 
+        if(playerTeam != null)
+        {
+            circle.GetComponent<SpriteRenderer>().color = pColors[(int)playerTeam.GetTeamName() - 1];
+        }
         //Team team = GameModeManager.Instance.AddPlayerToTeam(this);
         player.GetComponent<HasHealth>().team = playerTeam;
     }
@@ -300,7 +313,11 @@ public class ControllerInput : MonoBehaviour
     //}
     private void LoadHealthBar()
     {
-        healthbar = Instantiate(healthbars[playerInput.playerIndex], player.transform);
+        LoadHealthBar(playerInput.playerIndex);
+    }
+    private void LoadHealthBar(int index)
+    {
+        healthbar = Instantiate(healthbars[index], player.transform);
         healthbar.transform.SetParent(player.transform);
         healthbar.transform.position = player.transform.position;
 
