@@ -45,7 +45,7 @@ public class ControllerInput : MonoBehaviour
 
     [SerializeField] private GameObject vent;
 
-    public Teams playerTeam = Teams.NoTeam;
+    public Team playerTeam;
 
     private void Awake()
     {
@@ -92,7 +92,7 @@ public class ControllerInput : MonoBehaviour
             LoadCursors();
         }
 
-        else if (scene.name != "LoadingScene" && scene.name != "Intermission")
+        else if (scene.name != "LoadingScene" && scene.name != "Intermission" && scene.name != "MainMenu")
         {
             LoadGame();
         }
@@ -277,7 +277,8 @@ public class ControllerInput : MonoBehaviour
             Destroy(whichPlayer, 0.5f);
         }
 
-        GameModeManager.Instance.AddPlayerToTeam(this);
+        //Team team = GameModeManager.Instance.AddPlayerToTeam(this);
+        player.GetComponent<HasHealth>().team = playerTeam;
     }
 
     private void SetFlashlightsOnOff()

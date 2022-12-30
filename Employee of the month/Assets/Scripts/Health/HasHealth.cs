@@ -17,6 +17,8 @@ public class HasHealth : MonoBehaviour
     [SerializeField] private Movement movement;
     [SerializeField] private Aim aim;
 
+    public Team team;
+
     public int playerIndex;
     public int maxHealth = 100;
     public float health;
@@ -122,7 +124,8 @@ public class HasHealth : MonoBehaviour
         animator.SetTrigger("OnDeath");
         if (GetComponent<Spawner>() != null)
         {
-            GetComponent<Spawner>().TriggerRespawn(5f);
+            DisablePlayer();
+            GetComponent<Spawner>().TriggerRespawn(3f);
         }
         else if (gameObject.CompareTag("Player"))
         {
