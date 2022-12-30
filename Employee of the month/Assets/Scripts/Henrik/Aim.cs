@@ -97,7 +97,7 @@ public class Aim : MonoBehaviour
             Vector2 direction = closest.transform.position - transform.position;
             RaycastHit2D enemy = Physics2D.Raycast(transform.position, direction, direction.magnitude, aimAssistLayer);
 
-            if (enemy.collider != null && enemy.collider.CompareTag("Player"))
+            if (enemy.collider != null && enemy.collider.CompareTag("Player") && aimDirection != Vector2.zero)
             {
                 aimAssistVector = direction.normalized;
             }
