@@ -145,6 +145,8 @@ public class HasHealth : MonoBehaviour
 
         if (GameModeManager.Instance.currentMode == Gamemodes.DeathMatch)
         {
+            Debug.Log("is Deathmatch");
+            Debug.Log(bullet.GetComponent<Bullet>().bulletOwner.gameObject.transform.parent);
             Team team = bullet.GetComponent<Bullet>().bulletOwner.gameObject.GetComponentInParent<HasHealth>().team;
             if (team != null)
                 team.AddPoints(1);
