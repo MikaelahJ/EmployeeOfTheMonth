@@ -164,13 +164,20 @@ public class SpawnManager : MonoBehaviour
     {
         int spawnPosition = Random.Range(0, 4);
 
-        while (assigned.Contains(spawnPosition))
+        while (assigned.Contains(spawnPosition) && assigned.Count < 4)
         {
             spawnPosition = Random.Range(0, 4);
         }
 
         assigned.Add(spawnPosition);
+        StartCoroutine(ClearAssignedSpawn(spawnPosition));
 
         return spawnPositions[spawnPosition].transform.position;
+    }
+
+    private IEnumerator ClearAssignedSpawn(int spawnPosition)
+    {
+        yield return new WaitForSeconds(5f);
+        assigned.Remove(spawnPosition);
     }
 }

@@ -25,6 +25,7 @@ public class HasHealth : MonoBehaviour
     public float health;
     public float healthFlashThreshold = 0.25f;
 
+    public float respawnTime = 3f;
     public bool isDead = false;
 
     private int sortingLayerID;
@@ -155,7 +156,7 @@ public class HasHealth : MonoBehaviour
         if (GetComponent<Spawner>() != null)
         {
             DisablePlayer();
-            GetComponent<Spawner>().TriggerRespawn(3f);
+            GetComponent<Spawner>().TriggerRespawn(respawnTime);
         }
         else if (gameObject.CompareTag("Player"))
         {
@@ -213,7 +214,7 @@ public class HasHealth : MonoBehaviour
 
         GetComponentInChildren<Fire>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
 
     void EnablePlayer()
@@ -233,7 +234,7 @@ public class HasHealth : MonoBehaviour
 
         GetComponentInChildren<Fire>().enabled = true;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
     }
 
     public void OnRespawn()

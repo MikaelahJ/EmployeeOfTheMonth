@@ -16,6 +16,7 @@ public class Spawner : MonoBehaviour
 
     public void TriggerRespawn(float delay)
     {
+        Debug.Log("Trigger respawn");
         if (!isRespawning)
         {
             isRespawning = true;
@@ -25,7 +26,9 @@ public class Spawner : MonoBehaviour
 
     IEnumerator DelayedRespawn(float delay)
     {
+        Debug.Log("Init delayed respawn");
         yield return new WaitForSeconds(delay);
+        Debug.Log("Init Respawn");
         Respawn();
     }
 
