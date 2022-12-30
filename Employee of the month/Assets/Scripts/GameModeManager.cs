@@ -29,7 +29,7 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private GameObject kingOfTheHillArea;
     [SerializeField] private GameObject captureTheFlagHolder;
     [Header("Gamemode settings")]
-    [SerializeField] private int winPoints = 1;
+    [SerializeField] private int winPoints = 30;
     [SerializeField] private int numOfStocks;
 
     private Teams[] characterSelectedTeams; 
