@@ -222,6 +222,7 @@ public class GameModeManager : MonoBehaviour
     public void ActivateTeamSelectButton(int index, bool enabled, string name, GameObject controllerInput)
     {
         if (SceneManager.GetActiveScene().name != "CharacterSelect"){ return; }
+        if(index == -1) { return; }
 
         if (enabled)
         {

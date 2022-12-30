@@ -20,7 +20,7 @@ public class Cursor : MonoBehaviour
     private GameObject selectedFrame;
     private Collider2D collidedObject;
     private bool canSelect;
-    private int selectIndex;
+    private int selectIndex = -1;
 
     public Color32 col;
     public int playerIndex;
