@@ -21,7 +21,7 @@ public class GameModeManager : MonoBehaviour
     public Gamemodes currentMode = Gamemodes.FreeForAll;
 
     List<Team> teams = new List<Team>();
-    int winPoints;
+
     [Header("Character Select")]
     [SerializeField] private List<GameObject> teamSelectButtons;
     [SerializeField] private TextMeshProUGUI gamemodeText;
@@ -29,12 +29,14 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private GameObject kingOfTheHillArea;
     [SerializeField] private GameObject captureTheFlagHolder;
     [Header("Gamemode settings")]
+    [SerializeField] private int winPoints = 1;
     [SerializeField] private int numOfStocks;
 
     private Teams[] characterSelectedTeams; 
 
     public bool hasEnabledTeamsButton = false;
     private bool hasLoadedCharacterSelect = false;
+    private bool teamWon = false;
 
     private void Awake()
     {
@@ -69,11 +71,17 @@ public class GameModeManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        teamWon = false;
+        ResetPoints();
         if (scene.name == "CharacterSelect")
         {
+            teams = new List<Team>();
             hasLoadedCharacterSelect = true;
             EnableTeamSelectButtons();
-            hasEnabledTeamsButton = false;
+            //hasEnabledTeamsButton = false;
+            string AddSpaceBeforeCapitalLetter = string.Join(" ", Regex.Split(currentMode.ToString(), @"(?<!^)(?=[A-Z])"));
+            gamemodeText.text = AddSpaceBeforeCapitalLetter;
+            return;
         }
 
         if (!hasLoadedCharacterSelect)
@@ -81,15 +89,22 @@ public class GameModeManager : MonoBehaviour
             return;
         }
 
-        if (scene.name == "TestScene" || scene.name == "Map2")
+        bool isInGame = (scene.name != "LoadingScene" && scene.name != "Intermission" && scene.name != "EndGame" && scene.name != "MainMenu");
+
+        if(isInGame)
         {
-            Invoke(nameof(AddPlayersToTeams), 0.01f);
-            
+            Invoke(nameof(LoadGamemode), 0.001f);
+
         }
     }
 
     public void CreateTeams()
     {
+        if (currentMode == Gamemodes.FreeForAll)
+        {
+            return;
+        }
+
         foreach(var playerController in GameManager.Instance.playerControllers)
         {
             ControllerInput controller = playerController.GetComponent<ControllerInput>();
@@ -103,36 +118,57 @@ public class GameModeManager : MonoBehaviour
 
             if (!teams.Contains(team))
             {
+                team.AddPlayer(playerController);
                 AddTeam(team);
             }
-        }
-    }
-
-    public void AddPlayersToTeams()
-    {
-        foreach (var playerController in GameManager.Instance.playerControllers)
-        {
-            ControllerInput controller = playerController.GetComponent<ControllerInput>();
-            GameObject player = controller.GetPlayer();
-
-            foreach(var team in teams)
+            else
             {
-                int playerIndex = controller.playerInput.playerIndex;
-                Debug.Log("playerIndex: " + playerIndex);
-                int selectedCharacter = GameManager.Instance.players["P" + playerIndex.ToString()];
-                Debug.Log("Selected Character: " + selectedCharacter);
-
-                Debug.Log("Compare team: " + team.GetTeam() + " to team: " + characterSelectedTeams[selectedCharacter - 1]);
-                if (team.GetTeam() == characterSelectedTeams[selectedCharacter - 1])
-                {
-                    int index = teams.IndexOf(team);
-                    teams[index].AddPlayer(player);
-                }
+                teams[teams.IndexOf(team)].AddPlayer(playerController);
             }
+            controller.playerTeam = team;
         }
-
-        LoadGamemode(currentMode);
     }
+
+    //public Team AddPlayerToTeam(ControllerInput controllerInput)
+    //{
+    //    foreach (var team in teams)
+    //    {
+    //        Debug.Log("Compare team: " + team.GetTeamName() + " to team: " + controllerInput.playerTeam);
+    //        if (team.GetTeamName() == controllerInput.playerTeam)
+    //        {
+    //            int index = teams.IndexOf(team);
+    //            teams[index].AddPlayer(controllerInput.GetPlayer());
+    //            return team;
+    //        }
+    //    }
+    //    return null;
+    //}
+
+    //public void AddPlayersToTeams()
+    //{
+    //    foreach (var playerController in GameManager.Instance.playerControllers)
+    //    {
+    //        ControllerInput controller = playerController.GetComponent<ControllerInput>();
+    //        GameObject player = controller.GetPlayer();
+
+    //        foreach(var team in teams)
+    //        {
+    //            int playerIndex = controller.playerInput.playerIndex;
+    //            Debug.Log("playerIndex: " + playerIndex);
+    //            int selectedCharacter = GameManager.Instance.players["P" + playerIndex.ToString()];
+    //            Debug.Log("Selected Character: " + selectedCharacter);
+
+    //            Debug.Log("Compare team: " + team.GetTeamName() + " to team: " + characterSelectedTeams[selectedCharacter - 1]);
+    //            if (team.GetTeamName() == characterSelectedTeams[selectedCharacter - 1])
+    //            {
+    //                int index = teams.IndexOf(team);
+    //                teams[index].AddPlayer(player);
+    //            }
+    //        }
+    //    }
+
+    //    LoadGamemode(currentMode);
+    //}
 
     void AddTeam(Team team)
     {
@@ -151,9 +187,20 @@ public class GameModeManager : MonoBehaviour
 
     public void CheckIfTeamWon(Team team)
     {
+        if (teamWon) { return; }
+
         if(team.GetPoints() >= winPoints)
         {
+            teamWon = true;
+            SpawnManager.instance.TeamWon(team);
+        }
+    }
 
+    public void ResetPoints()
+    {
+        foreach(var team in teams)
+        {
+            team.ResetPoints();
         }
     }
 
@@ -177,6 +224,8 @@ public class GameModeManager : MonoBehaviour
     public void EnableTeamSelectButtons()
     {
         bool enabled = true;
+        Debug.Log("Current mode: " + currentMode);
+
         if (currentMode.Equals(Gamemodes.FreeForAll))
         {
             enabled = false;
@@ -211,24 +260,31 @@ public class GameModeManager : MonoBehaviour
             hasEnabledTeamsButton = true;
     }
 
-    public void ActivateTeamSelectButton(int index, bool enabled, string name)
+    public void ActivateTeamSelectButton(int index, bool enabled, string name, GameObject controllerInput)
     {
         if (SceneManager.GetActiveScene().name != "CharacterSelect"){ return; }
 
         if (enabled)
         {
             teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, true, name);
-            characterSelectedTeams[index] = teamSelectButtons[index].GetComponent<TeamSelectButton>().selectedTeam;
+            Debug.Log(teamSelectButtons[index].GetComponent<TeamSelectButton>().selectedTeam);
+            Debug.Log(controllerInput.name);
+            //controllerInput.GetComponent<ControllerInput>().playerTeam = teamSelectButtons[index].GetComponent<TeamSelectButton>().selectedTeam;
         }
         else
         {
             teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, false, name);
-            //characterSelectedTeams[index] = global::Teams.NoTeam;
         }
+    }
+
+    public void LoadGamemode()
+    {
+        LoadGamemode(currentMode);
     }
 
     public void LoadGamemode(Gamemodes gamemode)
     {
+        Debug.Log("Setting gamemode to " + gamemode.ToString());
         switch(gamemode)
         {
             case Gamemodes.FreeForAll:
@@ -296,6 +352,7 @@ public class GameModeManager : MonoBehaviour
         {
             foreach (var player in team.GetPlayers())
             {
+                Debug.Log("Added spawner to: " + player.name);
                 player.AddComponent<Spawner>();
                 if(stocks > 0)
                 {
@@ -319,7 +376,7 @@ public class Team
 {
     private Teams team;
     private List<GameObject> members;
-    private int points;
+    private float points;
 
     public Team(Teams team)
     {
@@ -339,22 +396,36 @@ public class Team
         members.Remove(player);
     }
 
-    public void AddPoints(int points)
+    public void AddPoints(float points)
     {
+        Debug.Log("Added points to " + team);
         this.points += points;
+        GameModeManager.Instance.CheckIfTeamWon(this);
     }
 
-    public int GetPoints()
+    public float GetPoints()
     {
         return points;
     }
 
-    public List<GameObject> GetPlayers()
+    public void ResetPoints()
     {
-        return members;
+        points = 0;
     }
 
-    public Teams GetTeam()
+    public List<GameObject> GetPlayers()
+    {
+        List<GameObject> players = new List<GameObject>(members);
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i] = players[i].GetComponent<ControllerInput>().GetPlayer();
+        }
+
+        return players;
+    }
+
+    public Teams GetTeamName()
     {
         return team;
     }

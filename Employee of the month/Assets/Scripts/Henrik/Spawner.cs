@@ -19,13 +19,19 @@ public class Spawner : MonoBehaviour
         isTriggered = true;
         if (!isTriggered)
         {
-            GetComponent<Rigidbody2D>().drag = 10;
-            GetComponent<Rigidbody2D>().freezeRotation = true;
-            Invoke("Respawn", delay);
+            StartCoroutine(DelayedRespawn(delay));
             isTriggered = false;
         }
     }
 
+    IEnumerator DelayedRespawn(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (!Respawn())
+        {
+            Debug.Log("player ran out of stocks");
+        }
+    }
 
     public bool Respawn()
     {
