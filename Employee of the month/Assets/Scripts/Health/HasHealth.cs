@@ -143,6 +143,13 @@ public class HasHealth : MonoBehaviour
             animator.SetTrigger("OnDeath");
         }
 
+        if (GameModeManager.Instance.currentMode == Gamemodes.DeathMatch)
+        {
+            Team team = bullet.GetComponent<Bullet>().bulletOwner.gameObject.GetComponentInParent<HasHealth>().team;
+            if (team != null)
+                team.AddPoints(1);
+        }
+
         if (GetComponent<Spawner>() != null)
         {
             DisablePlayer();
@@ -151,13 +158,6 @@ public class HasHealth : MonoBehaviour
         else if (gameObject.CompareTag("Player"))
         {
             SpawnManager.instance.PlayerDied();
-
-            if(GameModeManager.Instance.currentMode == Gamemodes.DeathMatch)
-            {
-                Team team = bullet.GetComponent<Bullet>().bulletOwner.gameObject.GetComponentInParent<HasHealth>().team;
-                if(team != null)
-                    team.AddPoints(1);
-            }
 
             AudioClip death = null;
             int randomSound;
