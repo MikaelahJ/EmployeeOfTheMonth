@@ -32,7 +32,7 @@ public class Stun : MonoBehaviour
                 GetComponent<Movement>().enabled = false;
                 GetComponent<Aim>().enabled = false;
                 GetComponentInChildren<Fire>().enabled = false;
-                Debug.Log("Runs Stun");
+                //Debug.Log("Runs Stun");
                 StartCoroutine(Stunned());
             }
         }
@@ -40,7 +40,7 @@ public class Stun : MonoBehaviour
 
     public void WallStunChance(float stunTimer, float stunTime)
     {
-        Debug.Log(stunTime);
+        //Debug.Log(stunTime);
         this.stunTime = stunTime;
         this.stunTimer = stunTimer;
         isStunnable = true;

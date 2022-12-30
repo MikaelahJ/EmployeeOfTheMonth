@@ -28,6 +28,7 @@ public class Gamepads : MonoBehaviour
         StartCoroutine(Rumble());
     }
 
+
     public IEnumerator Rumble()
     {        
         playerGameController.SetMotorSpeeds(lowFrequency, highFrequency);

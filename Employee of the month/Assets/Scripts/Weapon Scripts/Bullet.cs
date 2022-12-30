@@ -188,7 +188,7 @@ public class Bullet : MonoBehaviour
         //Debug.Log("Collided with " + collision.gameObject.name);
         if (isStapler && collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("isStapler triggered");
+            //Debug.Log("isStapler triggered");
             ApplyKnockBack(collision.collider);
             collision.gameObject.GetComponent<Stun>().OnSlowed(speedSlowdown);
             collision.gameObject.GetComponent<Stun>().WallStunChance(stunTimer, stunTime);
@@ -320,7 +320,7 @@ public class Bullet : MonoBehaviour
         Rigidbody2D playerRb = playerCollider.gameObject.GetComponentInParent<Rigidbody2D>();
         if (playerRb == null) { return; }
         playerRb.AddForce(transform.up.normalized * knockBackModifier, ForceMode2D.Impulse);
-        Debug.Log("Applied " + rb2d.velocity.normalized * knockBackModifier + " Knockback to " + playerCollider.name);
+        //Debug.Log("Applied " + rb2d.velocity.normalized * knockBackModifier + " Knockback to " + playerCollider.name);
         float extraKnockback = 0;
         Vector3 forceDirection = transform.up.normalized;
         if (hasExploded)
@@ -382,7 +382,7 @@ public class Bullet : MonoBehaviour
         //only runs when there are players inside collider
         if (targetsInRange.Count > 0)
         {
-            Debug.Log("InCollider");
+            //Debug.Log("InCollider");
             FindClosest(); //Finds closest player
             Vector2 startPos = transform.position;// new Vector2(transform.position.x, transform.position.y);
             Vector2 deltaPos = closest - transform.position;
@@ -419,7 +419,7 @@ public class Bullet : MonoBehaviour
         foreach (Collider2D col in targetsInRange)
         {
             float objectRange = (col.gameObject.transform.position - transform.position).magnitude;
-            Debug.Log(col.name);
+            //Debug.Log(col.name);
 
             if (range == 0)
             {
@@ -428,7 +428,7 @@ public class Bullet : MonoBehaviour
             }
             else if (objectRange < range)
             {
-                Debug.Log("Updates");
+                //Debug.Log("Updates");
                 range = objectRange;
                 closest = col.gameObject.transform.position;
             }

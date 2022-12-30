@@ -77,6 +77,15 @@ public class ControllerInput : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        //Reset gamepad motorspeeds if for some reason not reset
+        if(playerInput!=null && playerInput.currentControlScheme == "Gamepad")
+        {
+            Debug.Log("Resetted motorSpeed");
+            Gamepad gamepad;
+            gamepad = (Gamepad)playerInput.devices[0];
+            gamepad.SetMotorSpeeds(0.0f, 0.0f);
+        }
+
         if (GameManager.Instance.tiebreaker)
         {
             SpawnTieBreakPlayers();
