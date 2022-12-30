@@ -8,6 +8,7 @@ public class HasHealth : MonoBehaviour
     public GameObject playerSprite;
     private HudHealthBar hudHealthbar;
     public GameObject bloodPool;
+    public List<Sprite> bloodPoolSprites = new List<Sprite>();
     public GameObject BloodAnimation;
 
     //These 2 are set in ControllerInput
@@ -108,7 +109,9 @@ public class HasHealth : MonoBehaviour
 
     public void AddBlood(GameObject bullet)
     {
-        Instantiate(bloodPool, transform.position, bullet.transform.rotation);
+        var blood = Instantiate(bloodPool, transform.position, bullet.transform.rotation);
+        blood.GetComponent<SpriteRenderer>().sprite = bloodPoolSprites[Random.Range(0, bloodPoolSprites.Count)];
+
         if (BloodAnimation != null)
         {
             GameObject bloodAnim = Instantiate(BloodAnimation, transform);
