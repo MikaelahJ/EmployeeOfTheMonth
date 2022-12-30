@@ -20,12 +20,12 @@ public class GameOver : MonoBehaviour
 
     private void Start()
     {
-        int winnerSprite = GameManager.Instance.GetWinnerSprite(GameManager.Instance.actualWinner);
-        SetWinnerUI(GameManager.Instance.actualWinner, winnerSprite);
+        //int winnerSprite = GameManager.Instance.GetWinnerSprite(GameManager.Instance.actualWinner);
+        //SetWinnerUI(GameManager.Instance.actualWinner, winnerSprite);
 
         //for testing:
-        //int winnerSprite = 4;
-        //SetWinnerUI(1, winnerSprite);
+        int winnerSprite = 4;
+        SetWinnerUI(1, winnerSprite);
     }
 
     public void SetWinnerUI(int playerIndex, int playerSprite)

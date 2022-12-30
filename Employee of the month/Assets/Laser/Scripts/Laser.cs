@@ -32,7 +32,6 @@ public class Laser : MonoBehaviour
     private Quaternion rotation;
     private List<ParticleSystem> particles = new List<ParticleSystem>();
 
-
     void Start()
     {
         hasStarted = true;
@@ -40,7 +39,7 @@ public class Laser : MonoBehaviour
         movement = GetComponentInParent<Movement>();
         fire = GetComponentInParent<Fire>();
         FillLists();
-        DisableLaser();
+        StartCoroutine(DisableLaser());
     }
 
     void Update()

@@ -25,6 +25,7 @@ public class HasHealth : MonoBehaviour
     public bool isDead = false;
 
     private int sortingLayerID;
+    [SerializeField] private LayerMask ignore;
 
     void Start()
     {
@@ -70,13 +71,13 @@ public class HasHealth : MonoBehaviour
 
     public void CheckHealth()
     {
-        if(health / maxHealth <= 0.5)
+        if (health / maxHealth <= 0.5)
         {
             healthbarAnimator.SetBool("HasLowHealth", true);
         }
         else
         {
-            healthbarAnimator.SetBool("HasLowHealth", false); 
+            healthbarAnimator.SetBool("HasLowHealth", false);
         }
     }
 
@@ -119,7 +120,25 @@ public class HasHealth : MonoBehaviour
     private void OnDeath()
     {
         isDead = true;
-        animator.SetTrigger("OnDeath");
+
+        //send raycast to check for wall to play wall death animation
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 2, ~ignore);
+        Debug.DrawRay(transform.position, -transform.up, Color.green, 10f);
+
+        if (hit)
+        {
+            gameObject.transform.position = hit.point;
+
+            transform.rotation = Quaternion.FromToRotation(transform.position, hit.normal);
+
+            //animator.SetTrigger("WallDeath");
+
+        }
+        else
+        {
+            animator.SetTrigger("OnDeath");
+        }
+
         if (GetComponent<Spawner>() != null)
         {
             GetComponent<Spawner>().TriggerRespawn(5f);
