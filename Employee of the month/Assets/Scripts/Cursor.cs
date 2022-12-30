@@ -20,12 +20,12 @@ public class Cursor : MonoBehaviour
     private GameObject selectedFrame;
     private Collider2D collidedObject;
     private bool canSelect;
-    private int selectIndex;
+    private int selectIndex = -1;
 
     public Color32 col;
     public int playerIndex;
     public Sprite sprite;
-    public ControllerInput controller;
+    public GameObject controller;
 
     private void Awake()
     {
@@ -102,10 +102,10 @@ public class Cursor : MonoBehaviour
                     }
                 }
                 //Deactivate previous button
-                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, false, null);
+                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, false, null, controller);
                 selectIndex = Convert.ToInt32(collision.gameObject.name) - 1;
                 //Activate new selected
-                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, true, this.name);
+                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, true, this.name, controller);
                 
                 
                 collision.tag = "Selected";

@@ -8,6 +8,7 @@ public class HasHealth : MonoBehaviour
     public GameObject playerSprite;
     private HudHealthBar hudHealthbar;
     public GameObject bloodPool;
+    public List<Sprite> bloodPoolSprites = new List<Sprite>();
     public GameObject BloodAnimation;
 
     //These 2 are set in ControllerInput
@@ -17,11 +18,14 @@ public class HasHealth : MonoBehaviour
     [SerializeField] private Movement movement;
     [SerializeField] private Aim aim;
 
+    public Team team;
+
     public int playerIndex;
     public int maxHealth = 100;
     public float health;
     public float healthFlashThreshold = 0.25f;
 
+    public float respawnTime = 3f;
     public bool isDead = false;
 
     private int sortingLayerID;
@@ -48,7 +52,7 @@ public class HasHealth : MonoBehaviour
         Debug.Log(gameObject.name + " healed " + heal + "HP.");
     }
 
-    public void LoseHealth(float damage)
+    public void LoseHealth(float damage, GameObject bullet = null)
     {
         if (gameObject.CompareTag("Player"))
         {
@@ -61,7 +65,7 @@ public class HasHealth : MonoBehaviour
             {
                 Debug.LogWarning("Used LoseHealth to add Negative damage, use GainHealth instead");
             }
-            ChangeHealth(-damage);
+            ChangeHealth(-damage, bullet);
             Debug.Log(gameObject.name + " lost " + damage + "HP.");
 
             CheckHealth();
@@ -81,7 +85,7 @@ public class HasHealth : MonoBehaviour
         }
     }
 
-    private void ChangeHealth(float healthChange)
+    private void ChangeHealth(float healthChange, GameObject bullet = null)
     {
         if (isDead)
         {
@@ -98,7 +102,7 @@ public class HasHealth : MonoBehaviour
 
         if (health <= 0)
         {
-            OnDeath();
+            OnDeath(bullet);
             health = 0;
             Debug.Log(gameObject.name + " reached 0 health!");
         }
@@ -108,7 +112,9 @@ public class HasHealth : MonoBehaviour
 
     public void AddBlood(GameObject bullet)
     {
-        Instantiate(bloodPool, transform.position, bullet.transform.rotation);
+        var blood = Instantiate(bloodPool, transform.position, bullet.transform.rotation);
+        blood.GetComponent<SpriteRenderer>().sprite = bloodPoolSprites[Random.Range(0, bloodPoolSprites.Count)];
+
         if (BloodAnimation != null)
         {
             GameObject bloodAnim = Instantiate(BloodAnimation, transform);
@@ -117,31 +123,40 @@ public class HasHealth : MonoBehaviour
         }
     }
 
-    private void OnDeath()
+    private void OnDeath(GameObject bullet)
     {
         isDead = true;
 
         //send raycast to check for wall to play wall death animation
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 2, ~ignore);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, bullet.transform.up, 1, ~ignore);
         Debug.DrawRay(transform.position, -transform.up, Color.green, 10f);
 
         if (hit)
         {
             gameObject.transform.position = hit.point;
 
-            transform.rotation = Quaternion.FromToRotation(transform.position, hit.normal);
+            transform.up = -hit.normal;
 
-            //animator.SetTrigger("WallDeath");
-
+            animator.SetTrigger("WallDeath");
         }
         else
         {
             animator.SetTrigger("OnDeath");
         }
 
+        if (GameModeManager.Instance.currentMode == Gamemodes.DeathMatch)
+        {
+            Debug.Log("is Deathmatch");
+            Debug.Log(bullet.GetComponent<Bullet>().bulletOwner.gameObject.transform.parent);
+            Team team = bullet.GetComponent<Bullet>().bulletOwner.gameObject.GetComponentInParent<HasHealth>().team;
+            if (team != null)
+                team.AddPoints(1);
+        }
+
         if (GetComponent<Spawner>() != null)
         {
-            GetComponent<Spawner>().TriggerRespawn(5f);
+            DisablePlayer();
+            GetComponent<Spawner>().TriggerRespawn(respawnTime);
         }
         else if (gameObject.CompareTag("Player"))
         {
@@ -194,18 +209,21 @@ public class HasHealth : MonoBehaviour
         aim.enabled = false;
 
         playerSprite.GetComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.None;
-        playerSprite.GetComponent<SortingGroup>().sortingLayerID = sortingLayerID;
+        sortingLayerID = playerSprite.GetComponent<SortingGroup>().sortingLayerID;
         playerSprite.GetComponent<SortingGroup>().sortingLayerID = 0;
 
         GetComponentInChildren<Fire>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
 
     void EnablePlayer()
     {
+        Debug.Log("HasHealth: EnablePlayer");
         GetComponentInChildren<WeaponController>().isDead = false;
         GetComponentInChildren<CircleCollider2D>().enabled = true;
+
+        animator.Play("Idle");
 
         movement.walksound.Play();
         movement.enabled = true;
@@ -216,11 +234,12 @@ public class HasHealth : MonoBehaviour
 
         GetComponentInChildren<Fire>().enabled = true;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
     }
 
     public void OnRespawn()
     {
+        Debug.Log("HasHealth: OnRespawn");
         health = maxHealth;
         isDead = false;
         EnablePlayer();

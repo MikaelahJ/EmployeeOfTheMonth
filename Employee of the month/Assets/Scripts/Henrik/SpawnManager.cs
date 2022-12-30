@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Text.RegularExpressions;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -47,7 +48,7 @@ public class SpawnManager : MonoBehaviour
     public void PlayerDied()
     {
         alivePlayers -= 1;
-        if (alivePlayers == 1)
+        if (alivePlayers <= 1)
         {
             if (GameManager.Instance.tiebreaker)
             {
@@ -109,6 +110,40 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    public void TeamWon(Team team)
+    {
+        GameManager.Instance.roundsPlayed++;
+
+        foreach(var player in team.GetPlayers())
+        {
+            int playerIndex = player.gameObject.GetComponent<HasHealth>().playerIndex;
+            GameManager.Instance.AddPointsToPlayer("P" + playerIndex.ToString(), 1);
+        }
+
+        string AddSpaceBeforeNumbers = string.Join(" ", Regex.Split(team.GetTeamName().ToString(), @"(?<!^)(?=[0-9])"));
+        gameOverText.text = AddSpaceBeforeNumbers + " WON";
+
+        if (GameManager.Instance.roundsPlayed == 3)
+        {
+            Invoke(nameof(LoadIntermission), 3);
+            return;
+        }
+
+        if (GameManager.Instance.roundsPlayed < GameManager.Instance.roundsInMatch)
+        {
+            Invoke(nameof(RestartMatch), 3);
+        }
+        else
+        {
+            Invoke(nameof(CheckWinner), 3);
+        }
+    }
+
+    public void LoadIntermission()
+    {
+        GameManager.Instance.LoadScene("Intermission");
+    }
+
     public void RestartMatch()
     {
         GameManager.Instance.LoadScene(GameManager.Instance.sceneThisMatch);
@@ -129,13 +164,20 @@ public class SpawnManager : MonoBehaviour
     {
         int spawnPosition = Random.Range(0, 4);
 
-        while (assigned.Contains(spawnPosition))
+        while (assigned.Contains(spawnPosition) && assigned.Count < 4)
         {
             spawnPosition = Random.Range(0, 4);
         }
 
         assigned.Add(spawnPosition);
+        StartCoroutine(ClearAssignedSpawn(spawnPosition));
 
         return spawnPositions[spawnPosition].transform.position;
+    }
+
+    private IEnumerator ClearAssignedSpawn(int spawnPosition)
+    {
+        yield return new WaitForSeconds(5f);
+        assigned.Remove(spawnPosition);
     }
 }

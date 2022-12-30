@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1233932650}
   - component: {fileID: -3058923131449323703}
   - component: {fileID: 3913647456569634927}
-  - component: {fileID: 8247400795722780781}
+  - component: {fileID: 3915440918819083477}
   m_Layer: 3
   m_Name: PlayerSprite2
   m_TagString: Player
@@ -194,22 +194,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &3915440918819083477
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9194419871203171396}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.24
 --- !u!82 &-3058923131449323703
 AudioSource:
   m_ObjectHideFlags: 0
@@ -317,7 +301,7 @@ SortingGroup:
   m_SortingLayerID: 1884363909
   m_SortingLayer: 3
   m_SortingOrder: 2
---- !u!58 &8247400795722780781
+--- !u!58 &3915440918819083477
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -330,9 +314,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03472781, y: 0.03999999}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.21312594
+  m_Radius: 0.24
 --- !u!1001 &1803902699530990626
 PrefabInstance:
   m_ObjectHideFlags: 0

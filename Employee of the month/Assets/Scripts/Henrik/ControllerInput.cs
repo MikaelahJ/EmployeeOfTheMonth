@@ -45,6 +45,8 @@ public class ControllerInput : MonoBehaviour
 
     [SerializeField] private GameObject vent;
 
+    public Team playerTeam;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -99,7 +101,7 @@ public class ControllerInput : MonoBehaviour
             LoadCursors();
         }
 
-        else if (scene.name != "LoadingScene" && scene.name != "Intermission")
+        else if (scene.name != "LoadingScene" && scene.name != "Intermission" && scene.name != "MainMenu")
         {
             LoadGame();
         }
@@ -155,16 +157,19 @@ public class ControllerInput : MonoBehaviour
     {
         playerInput.SwitchCurrentActionMap("UI");
         GameManager.Instance.playersChosen = 0;
-        cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
-        cursorObject.name = "P" + playerInput.playerIndex.ToString();
-        cursor = cursorObject.GetComponent<Cursor>();
+
+        playerTeam = null;
+        LoadCursors();
+        //cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
+        //cursorObject.name = "P" + playerInput.playerIndex.ToString();
+        //cursor = cursorObject.GetComponent<Cursor>();
 
 
-        //Set Cursor color
-        //cursor.col = pColors[playerInput.playerIndex];
-        cursor.sprite = cursorSprites[playerInput.playerIndex];
-        //Sets the index of the player
-        cursor.playerIndex = playerInput.playerIndex;
+        ////Set Cursor color
+        ////cursor.col = pColors[playerInput.playerIndex];
+        //cursor.sprite = cursorSprites[playerInput.playerIndex];
+        ////Sets the index of the player
+        //cursor.playerIndex = playerInput.playerIndex;
     }
 
     public void LoadCursors()
@@ -176,12 +181,15 @@ public class ControllerInput : MonoBehaviour
             cursorObject = Instantiate(cursorPrefab, Vector3.zero, cursorPrefab.transform.rotation);
             cursorObject.name = "P" + playerInput.playerIndex.ToString();
             cursor = cursorObject.GetComponent<Cursor>();
-            cursor.controller = this;
+            Debug.Log("Add " + gameObject + " to cursor");
+            cursor.controller = gameObject;
             cursor.sprite = cursorSprites[playerInput.playerIndex];
+            //Sets the index of the player
             cursor.playerIndex = playerInput.playerIndex;
         }
         else
         {
+            Debug.Log("loaded cursor test scene");
             SetCursorTestScenes();
         }
     }
@@ -197,7 +205,15 @@ public class ControllerInput : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         playerInput.SwitchCurrentActionMap("Player");
         SpawnPlayer();
-        LoadHealthBar();
+        if (playerTeam == null)
+        {
+            LoadHealthBar();
+        }
+        else
+        {
+            LoadHealthBar((int)playerTeam.GetTeamName() - 1);
+        }
+        
         //LoadPickUpText();
 
         if (GameManager.Instance.playersChosen != 0)
@@ -278,6 +294,13 @@ public class ControllerInput : MonoBehaviour
             sprite.sprite = cursorSprites[playerInput.playerIndex];
             Destroy(whichPlayer, 0.5f);
         }
+
+        if(playerTeam != null)
+        {
+            circle.GetComponent<SpriteRenderer>().color = pColors[(int)playerTeam.GetTeamName() - 1];
+        }
+        //Team team = GameModeManager.Instance.AddPlayerToTeam(this);
+        player.GetComponent<HasHealth>().team = playerTeam;
     }
 
     private void SetFlashlightsOnOff()
@@ -298,7 +321,11 @@ public class ControllerInput : MonoBehaviour
     //}
     private void LoadHealthBar()
     {
-        healthbar = Instantiate(healthbars[playerInput.playerIndex], player.transform);
+        LoadHealthBar(playerInput.playerIndex);
+    }
+    private void LoadHealthBar(int index)
+    {
+        healthbar = Instantiate(healthbars[index], player.transform);
         healthbar.transform.SetParent(player.transform);
         healthbar.transform.position = player.transform.position;
 

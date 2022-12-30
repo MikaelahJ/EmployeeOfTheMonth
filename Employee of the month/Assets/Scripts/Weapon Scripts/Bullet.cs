@@ -280,7 +280,7 @@ public class Bullet : MonoBehaviour
             if(damage == 0) { return; }
             if (collider.transform.parent.transform.TryGetComponent<HasHealth>(out HasHealth health))
             {
-                health.LoseHealth(damage);
+                health.LoseHealth(damage, gameObject);
                 health.AddBlood(gameObject);
             }
 
