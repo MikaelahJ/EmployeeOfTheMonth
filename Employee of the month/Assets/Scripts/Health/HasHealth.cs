@@ -48,7 +48,7 @@ public class HasHealth : MonoBehaviour
         Debug.Log(gameObject.name + " healed " + heal + "HP.");
     }
 
-    public void LoseHealth(float damage)
+    public void LoseHealth(float damage, GameObject bullet = null)
     {
         if (gameObject.CompareTag("Player"))
         {
@@ -61,7 +61,7 @@ public class HasHealth : MonoBehaviour
             {
                 Debug.LogWarning("Used LoseHealth to add Negative damage, use GainHealth instead");
             }
-            ChangeHealth(-damage);
+            ChangeHealth(-damage, bullet);
             Debug.Log(gameObject.name + " lost " + damage + "HP.");
 
             CheckHealth();
@@ -81,7 +81,7 @@ public class HasHealth : MonoBehaviour
         }
     }
 
-    private void ChangeHealth(float healthChange)
+    private void ChangeHealth(float healthChange, GameObject bullet = null)
     {
         if (isDead)
         {
@@ -98,7 +98,7 @@ public class HasHealth : MonoBehaviour
 
         if (health <= 0)
         {
-            OnDeath();
+            OnDeath(bullet);
             health = 0;
             Debug.Log(gameObject.name + " reached 0 health!");
         }
@@ -117,22 +117,21 @@ public class HasHealth : MonoBehaviour
         }
     }
 
-    private void OnDeath()
+    private void OnDeath(GameObject bullet)
     {
         isDead = true;
 
         //send raycast to check for wall to play wall death animation
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up, 2, ~ignore);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, bullet.transform.up, 1, ~ignore);
         Debug.DrawRay(transform.position, -transform.up, Color.green, 10f);
 
         if (hit)
         {
             gameObject.transform.position = hit.point;
 
-            transform.rotation = Quaternion.FromToRotation(transform.position, hit.normal);
+            transform.up = -hit.normal;
 
-            //animator.SetTrigger("WallDeath");
-
+            animator.SetTrigger("WallDeath");
         }
         else
         {
