@@ -22,7 +22,6 @@ public class ControllerInput : MonoBehaviour
     public GameObject playerHighlightCircle;
     public GameObject whichPlayerArrow;
     public GameObject leaderMugPrefab;
-    public float mugOffsetY;
 
     private GameObject player;
     private Movement playerMovement;
@@ -290,21 +289,20 @@ public class ControllerInput : MonoBehaviour
 
         //Show who is who at start of round
         GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
-        //Instantiate(leaderMugPrefab, new Vector2(player.transform.position.x, player.transform.position.y + mugOffsetY), Quaternion.identity);
-        //List<int> pointsList = GameManager.Instance.CountPoints();
+        
 
-        //foreach(int point in pointsList)
-        //{
-        //    Debug.Log(point);
-        //}
+        //Keep track of leader each round by spawning mug over head
+        List<int> playersInlead = GameManager.Instance.CountPoints();
 
-
-        //foreach (KeyValuePair<string, int> player in GameManager.Instance.playerPoints)
-        //{
-        //    Debug.Log(player.Key);
-        //    Debug.Log(player.Value);
-        //    Debug.Log("Runs scorelist");
-        //}
+        foreach (int index in playersInlead)
+        {
+            int playerNumber = index + 1;
+            if (player.name == "P" + playerNumber + " Player")
+            {
+                GameObject leadermug = Instantiate(leaderMugPrefab, new Vector2(player.transform.position.x, player.transform.position.y), Quaternion.identity);
+                leadermug.transform.SetParent(player.transform);
+            }
+        }
 
         foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
         {
@@ -420,7 +418,7 @@ public class ControllerInput : MonoBehaviour
         }
     }
 
-    //Rumble, only with usb :(
+    //Rumble
     public void AddRumble()
     {
         if (playerInput.currentControlScheme == "Gamepad")
