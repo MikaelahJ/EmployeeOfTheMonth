@@ -25,12 +25,15 @@ public class GameModeManager : MonoBehaviour
     [Header("Character Select")]
     [SerializeField] private List<GameObject> teamSelectButtons;
     [SerializeField] private TextMeshProUGUI gamemodeText;
+    [SerializeField] private TextMeshProUGUI gamemodeOptionsText;
+    [SerializeField] private GameObject optionsButtons;
     [Header("Gamemode prefabs")]
     [SerializeField] private GameObject kingOfTheHillArea;
     [SerializeField] private GameObject captureTheFlagHolder;
     [Header("Gamemode settings")]
-    [SerializeField] private int winPoints = 30;
-    [SerializeField] private int numOfStocks = 3;
+    [SerializeField] private int chosenNumber = 30; // used for Win Points or Stocks
+    [SerializeField] private int[] chooseNumberOptions;
+    private int chosenNumberIndex;
 
     private Teams[] characterSelectedTeams; 
 
@@ -46,6 +49,8 @@ public class GameModeManager : MonoBehaviour
             {
                 Instance.teamSelectButtons = teamSelectButtons;
                 Instance.gamemodeText = gamemodeText;
+                Instance.gamemodeOptionsText = gamemodeOptionsText;
+                Instance.optionsButtons = optionsButtons;
             }
             Destroy(this);
         }
@@ -62,6 +67,7 @@ public class GameModeManager : MonoBehaviour
     private void Start()
     {
         EnableTeamSelectButtons();
+        EnableGamemodeOptions();
     }
 
     private void OnEnable()
@@ -148,7 +154,7 @@ public class GameModeManager : MonoBehaviour
     {
         if (teamWon) { return; }
 
-        if(team.GetPoints() >= winPoints)
+        if(team.GetPoints() >= chosenNumber)
         {
             teamWon = true;
             SpawnManager.instance.TeamWon(team);
@@ -172,6 +178,7 @@ public class GameModeManager : MonoBehaviour
         }
 
         EnableTeamSelectButtons();
+        EnableGamemodeOptions();
 
         if (gamemodeText != null)
         {
@@ -235,6 +242,75 @@ public class GameModeManager : MonoBehaviour
         {
             teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, false, name);
         }
+    }
+
+    public void EnableGamemodeOptions()
+    {
+        switch (currentMode)
+        {
+            case Gamemodes.FreeForAll:
+                {
+                    ActivateOptions(false);
+                    break;
+                }
+            case Gamemodes.Teams:
+                {
+                    ActivateOptions(false);
+                    break;
+                }
+            case Gamemodes.KingOfTheHill:
+                {
+                    chooseNumberOptions = new int[] {5, 10, 15, 20, 25, 30, 40, 50, 60, 99 };
+                    chosenNumberIndex = 5;
+                    SetChosenNumber();
+                    ActivateOptions(true);
+                    break;
+                }
+            case Gamemodes.DeathMatch:
+                {
+                    chooseNumberOptions = new int[] {1, 2, 3, 4, 5, 10, 15, 20, 25, 30};
+                    chosenNumberIndex = 5;
+                    SetChosenNumber();
+                    ActivateOptions(true);
+                    break;
+                }
+            case Gamemodes.Stocks:
+                {
+                    chooseNumberOptions = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+                    chosenNumberIndex = 2;
+                    SetChosenNumber();
+                    ActivateOptions(true);
+                    break;
+                }
+        }
+    }
+
+    private void ActivateOptions(bool enabled)
+    {
+        optionsButtons.SetActive(enabled);
+        gamemodeOptionsText.enabled = enabled;
+    }
+
+    public void NextOption()
+    {
+        chosenNumberIndex++;
+        if (chosenNumberIndex >= chooseNumberOptions.Length)
+            chosenNumberIndex = 0;
+        SetChosenNumber();
+    }
+
+    public void PreviousOption()
+    {
+        chosenNumberIndex--;
+        if (chosenNumberIndex < 0)
+            chosenNumberIndex = chooseNumberOptions.Length - 1;
+        SetChosenNumber();
+    }
+
+    private void SetChosenNumber()
+    {
+        chosenNumber = chooseNumberOptions[chosenNumberIndex];
+        gamemodeOptionsText.text = chosenNumber.ToString();
     }
 
     public void LoadGamemode()
@@ -303,7 +379,7 @@ public class GameModeManager : MonoBehaviour
     }
     public void Stocks()
     {
-        AddRespawn(numOfStocks);
+        AddRespawn(chosenNumber);
     }
 
     public void AddRespawn(int stocks = -1)

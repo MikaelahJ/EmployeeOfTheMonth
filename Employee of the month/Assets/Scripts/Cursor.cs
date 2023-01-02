@@ -119,7 +119,17 @@ public class Cursor : MonoBehaviour
                 GameModeManager.Instance.NextGamemode();
             }
 
-            if(collision.gameObject.TryGetComponent(out TeamSelectButton teamSelectButton))
+            if (collision.gameObject.CompareTag("Right_button"))
+            {
+                GameModeManager.Instance.NextOption();
+            }
+
+            if (collision.gameObject.CompareTag("Left_button"))
+            {
+                GameModeManager.Instance.PreviousOption();
+            }
+
+            if (collision.gameObject.TryGetComponent(out TeamSelectButton teamSelectButton))
             {
                 teamSelectButton.ChangeTeam();
             }
