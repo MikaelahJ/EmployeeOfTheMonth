@@ -127,33 +127,35 @@ public class HasHealth : MonoBehaviour
     {
         isDead = true;
 
+        Vector2 rayDir = -transform.up;
         //send raycast to check for wall to play wall death animation
         if (bullet != null)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, bullet.transform.up, 1, ~ignore);
-            Debug.DrawRay(transform.position, -transform.up, Color.green, 10f);
+            rayDir = bullet.transform.up;
+        }
 
-            if (hit)
-            {
-                gameObject.transform.position = hit.point;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDir, 1, ~ignore);
 
-                transform.up = -hit.normal;
-
-                animator.SetTrigger("WallDeath");
-            }
+        if (hit)
+        {
+            gameObject.transform.position = hit.point;
+            transform.up = -hit.normal;
+            animator.SetTrigger("WallDeath");
         }
         else
         {
+            Debug.Log("death");
             animator.SetTrigger("OnDeath");
         }
 
+
+
         if (GameModeManager.Instance.currentMode == Gamemodes.DeathMatch)
         {
-            //Debug.Log(bullet.GetComponent<Bullet>().bulletOwner.gameObject.transform.parent);
             Team team = bullet.GetComponent<Bullet>().bulletOwner.gameObject.GetComponentInParent<HasHealth>().team;
             if (team != null)
             {
-                if(this.team == team)
+                if (this.team == team)
                 {
                     this.team.AddPoints(-1);
                 }
