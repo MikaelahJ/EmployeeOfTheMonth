@@ -290,14 +290,14 @@ public class ControllerInput : MonoBehaviour
 
         //Show who is who at start of round
         GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
-        Instantiate(leaderMugPrefab, new Vector2(player.transform.position.x, player.transform.position.y + mugOffsetY), Quaternion.identity);
+        //Instantiate(leaderMugPrefab, new Vector2(player.transform.position.x, player.transform.position.y + mugOffsetY), Quaternion.identity);
 
         
-        foreach(KeyValuePair<string, int> player in GameManager.Instance.playerPoints)
-        {
-            Debug.Log(player.Key);
-            Debug.Log(player.Value);
-        }
+        //foreach(KeyValuePair<string, int> player in GameManager.Instance.playerPoints)
+        //{
+        //    Debug.Log(player.Key);
+        //    Debug.Log(player.Value);
+        //}
 
         foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
         {
