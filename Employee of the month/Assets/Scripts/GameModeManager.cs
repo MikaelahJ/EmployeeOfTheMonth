@@ -84,7 +84,8 @@ public class GameModeManager : MonoBehaviour
             teams = new List<Team>();
             hasLoadedCharacterSelect = true;
             EnableTeamSelectButtons();
-            //hasEnabledTeamsButton = false;
+            EnableGamemodeOptions();
+
             string AddSpaceBeforeCapitalLetter = string.Join(" ", Regex.Split(currentMode.ToString(), @"(?<!^)(?=[A-Z])"));
             gamemodeText.text = AddSpaceBeforeCapitalLetter;
             return;
