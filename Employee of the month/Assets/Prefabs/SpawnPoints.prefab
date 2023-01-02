@@ -194,9 +194,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 282598de65254174887887078119bc0f, type: 3}
   otherTextSprites:
   - {fileID: 21300000, guid: 80cf3d09f78dcb64c9f18c047303fa70, type: 3}
-  - {fileID: 21300000, guid: d21007a06c085514f8f082397bf0c9a5, type: 3}
-  - {fileID: 21300000, guid: 0de23d731bfb7e34f87d12df3791218a, type: 3}
-  - {fileID: 21300000, guid: 5efa13f86b953f449a880dee40bbb198, type: 3}
   - {fileID: 21300000, guid: 8a72215378ed2fe4aa33150ff82bf439, type: 3}
   gameOverText: {fileID: 0}
   spawnPositions:

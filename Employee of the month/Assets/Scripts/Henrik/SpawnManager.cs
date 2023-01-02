@@ -11,10 +11,10 @@ public class SpawnManager : MonoBehaviour
 
     [SerializeField] private CameraController camController;
     [SerializeField] private List<Sprite> playerTextSprites = new List<Sprite>();
-    [SerializeField] private List<Sprite> roundTextSprites = new List<Sprite>();
     [SerializeField] private List<Sprite> otherTextSprites = new List<Sprite>();
 
     public TextMeshProUGUI gameOverText;
+    public Image PNumberImage;
 
     public List<GameObject> spawnPositions;
     private List<int> assigned;
@@ -74,7 +74,8 @@ public class SpawnManager : MonoBehaviour
 
         if (alivePlayers == 0)
         {
-            GameManager.Instance.gameoverCanvas.GetComponentInChildren<Image>().sprite = otherTextSprites[0];
+            GameManager.Instance.playSceneCanvasTextImage.enabled = true;
+            GameManager.Instance.playSceneCanvasTextImage.sprite = otherTextSprites[0];
             //gameOverText.text = "DRAW";
         }
         else
@@ -90,7 +91,8 @@ public class SpawnManager : MonoBehaviour
             GameManager.Instance.AddPointsToPlayer("P" + player.ToString(), 1);
 
             int playerNumber = player + 1;
-            gameOverText.text = "PLAYER " + playerNumber + " WON";
+
+            //gameOverText.text = "PLAYER " + playerNumber + " WON";
 
             if (GameManager.Instance.tiebreaker)
             {

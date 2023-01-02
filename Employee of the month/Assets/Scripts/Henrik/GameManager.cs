@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using TMPro;
-using System.Linq;
+using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -15,8 +16,14 @@ public class GameManager : MonoBehaviour
     public string sceneThisMatch;
     public string lastSceneThisMatch;
 
-    public RectTransform playSceneText;
-    public Canvas gameoverCanvas;
+    [SerializeField] private List<Sprite> roundTextSprites = new List<Sprite>();
+    [SerializeField] private List<Sprite> tiebreakerTextSprites = new List<Sprite>();
+    public RectTransform startRoundCountdownText;
+    public RectTransform finalRoundPrefab;
+    public RectTransform tiebreakerPrefab;
+
+    public Canvas playSceneCanvas;
+    public Image playSceneCanvasTextImage;
 
 
     public Dictionary<string, int> players = new Dictionary<string, int>();
@@ -42,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        
+
 
         if (Instance != null && Instance != this)
         {
@@ -83,7 +90,10 @@ public class GameManager : MonoBehaviour
     public void StartRoundPause()
     {
         if (GameObject.FindGameObjectWithTag("GameOverCanvas") != null)
-            gameoverCanvas = GameObject.FindGameObjectWithTag("GameOverCanvas").GetComponent<Canvas>();
+        {
+            playSceneCanvas = GameObject.FindGameObjectWithTag("GameOverCanvas").GetComponent<Canvas>();
+            playSceneCanvasTextImage = playSceneCanvas.GetComponentInChildren<Image>();
+        }
 
         StartCoroutine(RoundStartPause());
     }
@@ -92,49 +102,49 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         isPaused = true;
+        playSceneCanvasTextImage.enabled = false;
+
+        yield return new WaitForSecondsRealtime(1f);
+        PlayClip();
 
         if (!tiebreaker)
         {
             int currentRound = roundsPlayed + 1;
-            //SpawnManager.instance.gameOverText.text = "ROUND " + currentRound;
+            if (currentRound == roundsInMatch)
+            {
+                var finalRoundText = Instantiate(finalRoundPrefab, playSceneCanvas.transform);
+
+                Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(0.1f, 0.03f);
+                yield return new WaitForSecondsRealtime(0.02f);
+                Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(0.1f, 0.03f);
+
+                yield return new WaitForSecondsRealtime(2);
+                finalRoundText.gameObject.SetActive(false);
+            }
+            else
+            {
+                playSceneCanvasTextImage.enabled = true;
+                playSceneCanvasTextImage.sprite = roundTextSprites[roundsPlayed];
+
+                yield return new WaitForSecondsRealtime(1);
+
+                playSceneCanvasTextImage.enabled = false;
+                var countdown = Instantiate(startRoundCountdownText, playSceneCanvas.transform);
+
+                for (int i = 0; i < 3; i++)
+                {
+                    Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(0.15f, 0.01f);
+                    yield return new WaitForSecondsRealtime(1);
+                }
+
+                Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(0.25f, 0.02f);
+
+                yield return new WaitForSecondsRealtime(1);
+            }
         }
 
-        yield return new WaitForSecondsRealtime(1);
-
-        PlayClip();
-       var countdown = Instantiate(playSceneText, gameoverCanvas.transform);
-
-        for (int i = 0; i < 3; i++)
-        {
-            Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(0.15f, 0.01f);
-            yield return new WaitForSecondsRealtime(1);
-        }
-
-        Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(0.25f, 0.02f);
-
-        yield return new WaitForSecondsRealtime(1);
-
-
-
-        //while (countdown >= 0)
-        //{
-        //    yield return new WaitForSecondsRealtime(1);
-
-        //    if (startedclip == false)
-        //    {
-        //        PlayClip();
-        //    }
-        //    startedclip = true;
-
-        //    SpawnManager.instance.gameOverText.text = countdown.ToString();
-
-        //    countdown--;
-        //}
-        //SpawnManager.instance.gameOverText.text = "GO!";
-
+        playSceneCanvasTextImage.enabled = false;
         Time.timeScale = 1;
-        SpawnManager.instance.gameOverText.text = "";
-        Destroy(countdown);
         isPaused = false;
     }
 
@@ -145,7 +155,6 @@ public class GameManager : MonoBehaviour
 
     public void ReloadScene()
     {
-        //StartCoroutine(RoundStartPause());
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -231,6 +240,7 @@ public class GameManager : MonoBehaviour
         }
         return winner;
     }
+
     public void SetTiebreaker(List<int> winners)
     {
         tiebreaker = true;
@@ -244,6 +254,11 @@ public class GameManager : MonoBehaviour
 
     public void StartTiebreaker()
     {
+        if (GameObject.FindGameObjectWithTag("GameOverCanvas") != null)
+        {
+            playSceneCanvas = GameObject.FindGameObjectWithTag("GameOverCanvas").GetComponent<Canvas>();
+            playSceneCanvasTextImage = playSceneCanvas.GetComponentInChildren<Image>();
+        }
         StartCoroutine(TiebreakerText());
     }
 
@@ -251,19 +266,25 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         isPaused = true;
+        playSceneCanvasTextImage.enabled = false;
 
-        SpawnManager.instance.gameOverText.text = "TIEBREAKER";
+        var tiebreakerImage = Instantiate(tiebreakerPrefab, playSceneCanvas.transform);
 
-        yield return new WaitForSecondsRealtime(2f);
 
-        SpawnManager.instance.gameOverText.text = "PLAYER " + (tiebreakers[0] + 1);
+        yield return new WaitForSecondsRealtime(3f);
+
+        //SpawnManager.instance.gameOverText.text = "PLAYER " + (tiebreakers[0] + 1);
 
         for (int i = 1; i < tiebreakers.Count; i++)
         {
-            SpawnManager.instance.gameOverText.text += " VS PLAYER " + (tiebreakers[i] + 1);
+            //SpawnManager.instance.gameOverText.text += " VS PLAYER " + (tiebreakers[i] + 1);
         }
 
-        yield return new WaitForSecondsRealtime(3f);
+        //yield return new WaitForSecondsRealtime(3f);
+        foreach (RectTransform child in tiebreakerImage.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
         StartRoundPause();
     }
 
