@@ -12,6 +12,7 @@ public enum Gamemodes
     KingOfTheHill,
     DeathMatch,
     Stocks,
+    Random,
     LoopBackToTop
 }
 
@@ -25,12 +26,15 @@ public class GameModeManager : MonoBehaviour
     [Header("Character Select")]
     [SerializeField] private List<GameObject> teamSelectButtons;
     [SerializeField] private TextMeshProUGUI gamemodeText;
+    [SerializeField] private TextMeshProUGUI gamemodeOptionsText;
+    [SerializeField] private GameObject optionsButtons;
     [Header("Gamemode prefabs")]
     [SerializeField] private GameObject kingOfTheHillArea;
     [SerializeField] private GameObject captureTheFlagHolder;
     [Header("Gamemode settings")]
-    [SerializeField] private int winPoints = 30;
-    [SerializeField] private int numOfStocks = 3;
+    [SerializeField] private int chosenNumber = 30; // used for Win Points or Stocks
+    [SerializeField] private int[] chooseNumberOptions;
+    private int chosenNumberIndex;
 
     private Teams[] characterSelectedTeams; 
 
@@ -46,6 +50,8 @@ public class GameModeManager : MonoBehaviour
             {
                 Instance.teamSelectButtons = teamSelectButtons;
                 Instance.gamemodeText = gamemodeText;
+                Instance.gamemodeOptionsText = gamemodeOptionsText;
+                Instance.optionsButtons = optionsButtons;
             }
             Destroy(this);
         }
@@ -62,6 +68,7 @@ public class GameModeManager : MonoBehaviour
     private void Start()
     {
         EnableTeamSelectButtons();
+        EnableGamemodeOptions();
     }
 
     private void OnEnable()
@@ -78,7 +85,8 @@ public class GameModeManager : MonoBehaviour
             teams = new List<Team>();
             hasLoadedCharacterSelect = true;
             EnableTeamSelectButtons();
-            //hasEnabledTeamsButton = false;
+            EnableGamemodeOptions();
+
             string AddSpaceBeforeCapitalLetter = string.Join(" ", Regex.Split(currentMode.ToString(), @"(?<!^)(?=[A-Z])"));
             gamemodeText.text = AddSpaceBeforeCapitalLetter;
             return;
@@ -148,7 +156,7 @@ public class GameModeManager : MonoBehaviour
     {
         if (teamWon) { return; }
 
-        if(team.GetPoints() >= winPoints)
+        if(team.GetPoints() >= chosenNumber)
         {
             teamWon = true;
             SpawnManager.instance.TeamWon(team);
@@ -172,6 +180,7 @@ public class GameModeManager : MonoBehaviour
         }
 
         EnableTeamSelectButtons();
+        EnableGamemodeOptions();
 
         if (gamemodeText != null)
         {
@@ -237,12 +246,86 @@ public class GameModeManager : MonoBehaviour
         }
     }
 
+    public void EnableGamemodeOptions()
+    {
+        switch (currentMode)
+        {
+            case Gamemodes.FreeForAll:
+                {
+                    ActivateOptions(false);
+                    break;
+                }
+            case Gamemodes.Teams:
+                {
+                    ActivateOptions(false);
+                    break;
+                }
+            case Gamemodes.KingOfTheHill:
+                {
+                    chooseNumberOptions = new int[] {5, 10, 15, 20, 25, 30, 40, 50, 60, 99 };
+                    chosenNumberIndex = 5;
+                    SetChosenNumber();
+                    ActivateOptions(true);
+                    break;
+                }
+            case Gamemodes.DeathMatch:
+                {
+                    chooseNumberOptions = new int[] {1, 2, 3, 4, 5, 10, 15, 20, 25, 30};
+                    chosenNumberIndex = 5;
+                    SetChosenNumber();
+                    ActivateOptions(true);
+                    break;
+                }
+            case Gamemodes.Stocks:
+                {
+                    chooseNumberOptions = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+                    chosenNumberIndex = 2;
+                    SetChosenNumber();
+                    ActivateOptions(true);
+                    break;
+                }
+            case Gamemodes.Random:
+                {
+                    ActivateOptions(false);
+                    break;
+                }
+        }
+    }
+
+    private void ActivateOptions(bool enabled)
+    {
+        optionsButtons.SetActive(enabled);
+        gamemodeOptionsText.enabled = enabled;
+    }
+
+    public void NextOption()
+    {
+        chosenNumberIndex++;
+        if (chosenNumberIndex >= chooseNumberOptions.Length)
+            chosenNumberIndex = 0;
+        SetChosenNumber();
+    }
+
+    public void PreviousOption()
+    {
+        chosenNumberIndex--;
+        if (chosenNumberIndex < 0)
+            chosenNumberIndex = chooseNumberOptions.Length - 1;
+        SetChosenNumber();
+    }
+
+    private void SetChosenNumber()
+    {
+        chosenNumber = chooseNumberOptions[chosenNumberIndex];
+        gamemodeOptionsText.text = chosenNumber.ToString();
+    }
+
     public void LoadGamemode()
     {
         LoadGamemode(currentMode);
     }
 
-    public void LoadGamemode(Gamemodes gamemode)
+    public void LoadGamemode(Gamemodes gamemode, bool isRandom = false)
     {
         Debug.Log("Setting gamemode to " + gamemode.ToString());
         switch(gamemode)
@@ -259,19 +342,35 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.KingOfTheHill:
                 {
+                    if (isRandom)
+                        chosenNumber = 30;
+
                     KingOfTheHill();
                     break;
                 }
             case Gamemodes.DeathMatch:
                 {
+                    if (isRandom)
+                        chosenNumber = 10;
+
                     DeathMatch();
                     break;
                 }
             case Gamemodes.Stocks:
                 {
+                    if (isRandom)
+                        chosenNumber = 3;
+
                     Stocks();
                     break;
                 }
+            case Gamemodes.Random:
+                {
+                    Gamemodes randomMode = (Gamemodes)Random.Range((int)Gamemodes.FreeForAll, (int)Gamemodes.Stocks) + 1;
+                    LoadGamemode(randomMode, true);
+                    break;
+                }
+
             case Gamemodes.LoopBackToTop:
                 currentMode = 0;
                 LoadGamemode(currentMode);
@@ -303,7 +402,7 @@ public class GameModeManager : MonoBehaviour
     }
     public void Stocks()
     {
-        AddRespawn(numOfStocks);
+        AddRespawn(chosenNumber);
     }
 
     public void AddRespawn(int stocks = -1)

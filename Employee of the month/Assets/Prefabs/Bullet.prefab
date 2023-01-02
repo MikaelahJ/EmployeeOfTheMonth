@@ -173,10 +173,10 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.5, y: 0}
-      - {x: 25, y: 40}
-      - {x: 25, y: 50}
-      - {x: -25, y: 50}
-      - {x: -25, y: 40}
+      - {x: 20, y: 50}
+      - {x: 20, y: 50}
+      - {x: -20, y: 50}
+      - {x: -20, y: 50}
       - {x: -0.5, y: 0}
 --- !u!1 &2297937692892492729
 GameObject:
@@ -309,7 +309,7 @@ MonoBehaviour:
   homingShotgunLeftBoundsClose: {x: -3, y: 40}
   homingTrackingRightBounds: {x: 0, y: 0}
   homingTrackingLeftBounds: {x: 0, y: 0}
-  closest: {x: 0, y: 0, z: 0}
+  closest: {fileID: 0}
   range: 0
   targetsInRange: []
   bulletMask:

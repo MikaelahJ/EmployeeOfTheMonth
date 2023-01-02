@@ -53,9 +53,9 @@ public class Bullet : MonoBehaviour
     public Vector2 homingTrackingRightBounds;
     public Vector2 homingTrackingLeftBounds;
     private Vector2 previousDirection;
-    public Vector3 closest; //The position of the closest Player
+    public GameObject closest; //The position of the closest Player
     public float range; //Current range to closest Player
-    public List<Collider2D> targetsInRange;
+    public List<GameObject> targetsInRange;
     public LayerMask bulletMask;
     private Vector2[] aimAssistCollider;
     [SerializeField] private float scanBounds;
@@ -74,7 +74,7 @@ public class Bullet : MonoBehaviour
         Invoke(nameof(CanTakeDamage), 0.05f);
         previousDirection = transform.up;
         range = 0;
-        targetsInRange = new List<Collider2D>();
+        targetsInRange = new List<GameObject>();
         aimAssistCollider = GetComponentInChildren<PolygonCollider2D>().points;
 
         rb2d = GetComponent<Rigidbody2D>();
@@ -385,7 +385,7 @@ public class Bullet : MonoBehaviour
             //Debug.Log("InCollider");
             FindClosest(); //Finds closest player
             Vector2 startPos = transform.position;// new Vector2(transform.position.x, transform.position.y);
-            Vector2 deltaPos = closest - transform.position;
+            Vector2 deltaPos = closest.transform.position - transform.position;
 
             //raycast to see if any of the players are in line of sight of bullet
             RaycastHit2D hit;
@@ -416,21 +416,25 @@ public class Bullet : MonoBehaviour
     //Finds the player that are closest to the bullet
     private void FindClosest()
     {
-        foreach (Collider2D col in targetsInRange)
+        foreach (GameObject enemy in targetsInRange)
         {
-            float objectRange = (col.gameObject.transform.position - transform.position).magnitude;
+            float objectRange = (enemy.transform.position - transform.position).magnitude;
             //Debug.Log(col.name);
 
             if (range == 0)
             {
                 range = objectRange;
-                closest = col.gameObject.transform.position;
+                closest = enemy.gameObject;
             }
             else if (objectRange < range)
             {
                 //Debug.Log("Updates");
                 range = objectRange;
-                closest = col.gameObject.transform.position;
+                closest = enemy.gameObject;
+            }
+            else
+            {
+                range = (closest.transform.position - transform.position).magnitude;
             }
         }
     }
@@ -440,9 +444,9 @@ public class Bullet : MonoBehaviour
         //Add players that are in range of the bullet
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (!targetsInRange.Contains(collision))
+            if (!targetsInRange.Contains(collision.gameObject))
             {
-                targetsInRange.Add(collision);
+                targetsInRange.Add(collision.gameObject);
             }
         }
     }
@@ -453,9 +457,9 @@ public class Bullet : MonoBehaviour
         //Remove players that are not in range of the bullet
         if (collision.CompareTag("Player"))
         {
-            if (targetsInRange.Contains(collision))
+            if (targetsInRange.Contains(collision.gameObject))
             {
-                targetsInRange.Remove(collision);
+                targetsInRange.Remove(collision.gameObject);
             }
         }
     }
