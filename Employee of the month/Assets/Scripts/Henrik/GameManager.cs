@@ -267,6 +267,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         isPaused = true;
         playSceneCanvasTextImage.enabled = false;
+        yield return new WaitForSecondsRealtime(1f);
 
         var tiebreakerImage = Instantiate(tiebreakerPrefab, playSceneCanvas.transform);
 

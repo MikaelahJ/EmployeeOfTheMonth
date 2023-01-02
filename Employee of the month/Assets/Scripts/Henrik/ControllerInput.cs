@@ -299,7 +299,7 @@ public class ControllerInput : MonoBehaviour
             int playerNumber = index + 1;
             if (player.name == "P" + playerNumber + " Player")
             {
-                GameObject leadermug = Instantiate(leaderMugPrefab, new Vector2(player.transform.position.x, player.transform.position.y + mugOffsetY), Quaternion.identity);
+                GameObject leadermug = Instantiate(leaderMugPrefab, new Vector2(player.transform.position.x, player.transform.position.y), Quaternion.identity);
                 leadermug.transform.SetParent(player.transform);
             }
         }
