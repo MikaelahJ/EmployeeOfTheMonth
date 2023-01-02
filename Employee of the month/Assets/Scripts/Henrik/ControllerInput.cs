@@ -414,9 +414,10 @@ public class ControllerInput : MonoBehaviour
         }
     }
 
-    public void OnClick()
+    public void OnClick(InputAction.CallbackContext input)
     {
         if (cursor == null) { return; }
+        if (!input.performed) { return; }
         cursor.Pressed();
     }
     public void GetLeftStick(InputAction.CallbackContext input)

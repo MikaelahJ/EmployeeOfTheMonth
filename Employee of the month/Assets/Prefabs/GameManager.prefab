@@ -54,6 +54,8 @@ MonoBehaviour:
   - Map3 Dark
   sceneThisMatch: 
   lastSceneThisMatch: 
+  playSceneText: {fileID: 8836560674879478874, guid: a20f66650c5981a4f8e8744a641c979c, type: 3}
+  gameoverCanvas: {fileID: 0}
   playersCount: 0
   playersChosen: 0
   roundsPlayed: 0

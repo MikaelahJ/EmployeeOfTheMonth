@@ -3,7 +3,10 @@ guid: 3f8a7e0f7e2f608478ea23bd499fc0fa
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - camController: {instanceID: 0}
+  - gameOverText: {instanceID: 0}
+  - playSceneText: {fileID: 8836560674879478874, guid: a20f66650c5981a4f8e8744a641c979c, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
