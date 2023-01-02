@@ -11,6 +11,8 @@ public class Cursor : MonoBehaviour
     [SerializeField] public GameObject selectedCharacterBall;
     public float cursorSpeed;
 
+    public AudioClip clickSound;
+
     private Vector2 mouseInput;
     private Vector3 mousePosition;
     private Vector3 stickInput;
@@ -21,6 +23,7 @@ public class Cursor : MonoBehaviour
     private Collider2D collidedObject;
     private bool canSelect;
     private int selectIndex = -1;
+    private AudioSource characterSelectSounds;
 
     public Color32 col;
     public int playerIndex;
@@ -34,6 +37,9 @@ public class Cursor : MonoBehaviour
 
     private void Start()
     {
+        characterSelectSounds = GetComponent<AudioSource>();
+        characterSelectSounds.volume = AudioManager.instance.audioClips.sfxVolume;
+
         Vector3 spawnpoint = Camera.main.transform.position;
         spawnpoint.z = 0;
         transform.position = spawnpoint;
@@ -86,6 +92,7 @@ public class Cursor : MonoBehaviour
                     GameModeManager.Instance.CreateTeams();
                     GameManager.Instance.LoadScene("LoadingScene");
                 }
+                characterSelectSounds.PlayOneShot(clickSound);
             }
 
             if (collision.gameObject.CompareTag("Free"))
@@ -117,6 +124,7 @@ public class Cursor : MonoBehaviour
             if (collision.gameObject.CompareTag("ChangeGameMode"))
             {
                 GameModeManager.Instance.NextGamemode();
+                characterSelectSounds.PlayOneShot(clickSound);
             }
 
             if(collision.gameObject.TryGetComponent(out TeamSelectButton teamSelectButton))
@@ -242,6 +250,7 @@ public class Cursor : MonoBehaviour
             selectedFrame = Instantiate(frame.transform.parent.GetComponent<Selector>().characterFrames[playerIndex], frame.transform.position, frame.transform.rotation, frame.transform);
             selectedFrame.transform.localScale = emptyFrame.transform.localScale;
             selectedFrame.name = name + "Selected" + frame.gameObject.name;
+            characterSelectSounds.PlayOneShot(clickSound);
         }
         else if (selectedFrame.name != name + "Selected" + frame.gameObject.name)
         {
@@ -257,6 +266,7 @@ public class Cursor : MonoBehaviour
             selectedFrame = Instantiate(frame.transform.parent.GetComponent<Selector>().characterFrames[playerIndex], frame.transform.position, frame.transform.rotation);
             selectedFrame.transform.SetParent(frame.GetComponent<Transform>());
             selectedFrame.name = name + "Selected" + frame.gameObject.name;
+            characterSelectSounds.PlayOneShot(clickSound);
         }
     }
 

@@ -144,6 +144,16 @@ public class MainMenuController : MonoBehaviour
         }
     }
 
+    public void ClickSound()
+    {
+        menuSound.PlayOneShot(onClick);
+    }
+
+    public void NavigationSound()
+    {
+        menuSound.PlayOneShot(onRotate);
+    }
+
     public void OnExit()
     {
 #if UNITY_EDITOR
