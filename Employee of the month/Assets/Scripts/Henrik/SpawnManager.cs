@@ -53,6 +53,27 @@ public class SpawnManager : MonoBehaviour
     public void PlayerDied()
     {
         alivePlayers -= 1;
+
+        if(GameModeManager.Instance.currentMode != Gamemodes.FreeForAll)
+        {
+            int teamsAlive = 0;
+            Team lastTeam = null;
+            foreach(Team team in GameModeManager.Instance.teams)
+            {
+                if(team.GetAlivePlayers() > 0)
+                {
+                    lastTeam = team;
+                    teamsAlive++;
+                }
+            }
+            if(teamsAlive == 1)
+            {
+                TeamWon(lastTeam);
+                return;
+            }
+
+        }
+
         if (alivePlayers <= 1)
         {
             if (GameManager.Instance.tiebreaker)
@@ -79,22 +100,10 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            int player = 0;
-            for (int i = 0; i < camController.players.Length; i++)
-            {
-                if (camController.players[i] != null)
-                {
-                    player = camController.players[i].gameObject.GetComponent<HasHealth>().playerIndex;
-                }
-            }
-            GameManager.Instance.AddPointsToPlayer("P" + player.ToString(), 1);
-
-            int playerNumber = player + 1;
-            gameOverText.text = "PLAYER " + playerNumber + " WON";
+            AddPointsToLastPlayer();
 
             if (GameManager.Instance.tiebreaker)
             {
-                GameManager.Instance.actualWinner = player;
                 Invoke(nameof(EndMatch), 3);
                 return;
             }
@@ -116,18 +125,31 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    private void AddPointsToLastPlayer()
+    {
+        int player = 0;
+        for (int i = 0; i < camController.players.Length; i++)
+        {
+            if (camController.players[i] != null)
+            {
+                player = camController.players[i].gameObject.GetComponent<HasHealth>().playerIndex;
+            }
+        }
+        GameManager.Instance.AddPointsToPlayer("P" + player.ToString(), 1);
+
+        int playerNumber = player + 1;
+        gameOverText.text = "PLAYER " + playerNumber + " WON";
+
+        if (GameManager.Instance.tiebreaker)
+            GameManager.Instance.actualWinner = player;
+    }
+
     public void TeamWon(Team team)
     {
         GameManager.Instance.roundsPlayed++;
         AudioManager.instance.activateFadeVolume();
-        foreach (var player in team.GetPlayers())
-        {
-            int playerIndex = player.gameObject.GetComponent<HasHealth>().playerIndex;
-            GameManager.Instance.AddPointsToPlayer("P" + playerIndex.ToString(), 1);
-        }
 
-        string AddSpaceBeforeNumbers = string.Join(" ", Regex.Split(team.GetTeamName().ToString(), @"(?<!^)(?=[0-9])"));
-        gameOverText.text = AddSpaceBeforeNumbers + " WON";
+        AddPointsToTeam(team);
 
         if (GameManager.Instance.roundsPlayed == 3)
         {
@@ -144,6 +166,19 @@ public class SpawnManager : MonoBehaviour
             Invoke(nameof(CheckWinner), 3);
         }
     }
+
+    private void AddPointsToTeam(Team team)
+    {
+        foreach (var player in team.GetPlayers())
+        {
+            int playerIndex = player.gameObject.GetComponent<HasHealth>().playerIndex;
+            GameManager.Instance.AddPointsToPlayer("P" + playerIndex.ToString(), 1);
+        }
+
+        string AddSpaceBeforeNumbers = string.Join(" ", Regex.Split(team.GetTeamName().ToString(), @"(?<!^)(?=[0-9])"));
+        gameOverText.text = AddSpaceBeforeNumbers + " WON";
+    }
+
 
     public void LoadIntermission()
     {

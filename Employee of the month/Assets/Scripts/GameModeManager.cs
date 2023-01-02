@@ -21,7 +21,7 @@ public class GameModeManager : MonoBehaviour
     public static GameModeManager Instance;
     public Gamemodes currentMode = Gamemodes.FreeForAll;
 
-    List<Team> teams = new List<Team>();
+    public List<Team> teams = new List<Team>();
 
     [Header("Character Select")]
     [SerializeField] private List<GameObject> teamSelectButtons;
@@ -436,23 +436,27 @@ public class Team
     private Teams team;
     private List<GameObject> members;
     private float points;
+    int alivePlayers;
 
     public Team(Teams team)
     {
         this.team = team;
         members = new List<GameObject>();
         points = 0;
+        alivePlayers = 0;
     }
 
     public void AddPlayer(GameObject player)
     {
         Debug.Log("Added " + player.name + " to team: " + team);
         members.Add(player);
+        alivePlayers++;
     }
 
     public void RemovePlayer(GameObject player)
     {
-        members.Remove(player);
+        if (members.Remove(player))
+            alivePlayers--;
     }
 
     public void AddPoints(float points)
@@ -487,6 +491,11 @@ public class Team
     public Teams GetTeamName()
     {
         return team;
+    }
+
+    public int GetAlivePlayers()
+    {
+        return alivePlayers;
     }
 }
 
