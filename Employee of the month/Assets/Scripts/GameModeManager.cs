@@ -12,6 +12,7 @@ public enum Gamemodes
     KingOfTheHill,
     DeathMatch,
     Stocks,
+    Random,
     LoopBackToTop
 }
 
@@ -283,6 +284,11 @@ public class GameModeManager : MonoBehaviour
                     ActivateOptions(true);
                     break;
                 }
+            case Gamemodes.Random:
+                {
+                    ActivateOptions(false);
+                    break;
+                }
         }
     }
 
@@ -319,7 +325,7 @@ public class GameModeManager : MonoBehaviour
         LoadGamemode(currentMode);
     }
 
-    public void LoadGamemode(Gamemodes gamemode)
+    public void LoadGamemode(Gamemodes gamemode, bool isRandom = false)
     {
         Debug.Log("Setting gamemode to " + gamemode.ToString());
         switch(gamemode)
@@ -336,19 +342,35 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.KingOfTheHill:
                 {
+                    if (isRandom)
+                        chosenNumber = 30;
+
                     KingOfTheHill();
                     break;
                 }
             case Gamemodes.DeathMatch:
                 {
+                    if (isRandom)
+                        chosenNumber = 10;
+
                     DeathMatch();
                     break;
                 }
             case Gamemodes.Stocks:
                 {
+                    if (isRandom)
+                        chosenNumber = 3;
+
                     Stocks();
                     break;
                 }
+            case Gamemodes.Random:
+                {
+                    Gamemodes randomMode = (Gamemodes)Random.Range((int)Gamemodes.FreeForAll, (int)Gamemodes.Stocks) + 1;
+                    LoadGamemode(randomMode, true);
+                    break;
+                }
+
             case Gamemodes.LoopBackToTop:
                 currentMode = 0;
                 LoadGamemode(currentMode);
