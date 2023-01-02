@@ -14,7 +14,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private List<Sprite> otherTextSprites = new List<Sprite>();
 
     public TextMeshProUGUI gameOverText;
-    public Image PNumberImage;
+    public RectTransform PwinsHolder;
+    public Image pNumberImage;
+
 
     public List<GameObject> spawnPositions;
     private List<int> assigned;
@@ -90,8 +92,9 @@ public class SpawnManager : MonoBehaviour
             }
             GameManager.Instance.AddPointsToPlayer("P" + player.ToString(), 1);
 
-            int playerNumber = player + 1;
 
+            PwinsHolder.gameObject.SetActive(true);
+            pNumberImage.sprite = playerTextSprites[player];
             //gameOverText.text = "PLAYER " + playerNumber + " WON";
 
             if (GameManager.Instance.tiebreaker)
