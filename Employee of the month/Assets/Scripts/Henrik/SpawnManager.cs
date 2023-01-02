@@ -14,7 +14,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private List<Sprite> otherTextSprites = new List<Sprite>();
 
     public TextMeshProUGUI gameOverText;
-    public Image PNumberImage;
+    public RectTransform PwinsHolder;
+    public Image pNumberImage;
+
 
     public List<GameObject> spawnPositions;
     private List<int> assigned;

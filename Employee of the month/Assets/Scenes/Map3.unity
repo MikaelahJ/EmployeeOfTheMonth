@@ -926,6 +926,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 800959764, guid: 1d46f892f7769ec46859029bacca20eb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5409525959528163373, guid: 1d46f892f7769ec46859029bacca20eb, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1025,6 +1029,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &263302579 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 800959765, guid: 1d46f892f7769ec46859029bacca20eb, type: 3}
+  m_PrefabInstance: {fileID: 263302577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &263302580 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 296337155, guid: 1d46f892f7769ec46859029bacca20eb, type: 3}
+  m_PrefabInstance: {fileID: 263302577}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &275080408 stripped
@@ -3361,9 +3381,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5013721193138601469, guid: e0c89b17b59d76840b5f95ce06894f82, type: 3}
+      propertyPath: PwinsHolder
+      value: 
+      objectReference: {fileID: 263302579}
+    - target: {fileID: 5013721193138601469, guid: e0c89b17b59d76840b5f95ce06894f82, type: 3}
       propertyPath: gameOverText
       value: 
       objectReference: {fileID: 263302578}
+    - target: {fileID: 5013721193138601469, guid: e0c89b17b59d76840b5f95ce06894f82, type: 3}
+      propertyPath: pNumberImage
+      value: 
+      objectReference: {fileID: 263302580}
     - target: {fileID: 5013721193138601469, guid: e0c89b17b59d76840b5f95ce06894f82, type: 3}
       propertyPath: camController
       value: 

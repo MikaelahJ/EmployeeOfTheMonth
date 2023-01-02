@@ -16,6 +16,7 @@ TagManager:
   - GameOverCanvas
   - Left_button
   - Right_button
+  - PwinsText
   layers:
   - Default
   - TransparentFX
