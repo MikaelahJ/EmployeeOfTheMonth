@@ -128,16 +128,19 @@ public class HasHealth : MonoBehaviour
         isDead = true;
 
         //send raycast to check for wall to play wall death animation
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, bullet.transform.up, 1, ~ignore);
-        Debug.DrawRay(transform.position, -transform.up, Color.green, 10f);
-
-        if (hit)
+        if (bullet != null)
         {
-            gameObject.transform.position = hit.point;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, bullet.transform.up, 1, ~ignore);
+            Debug.DrawRay(transform.position, -transform.up, Color.green, 10f);
 
-            transform.up = -hit.normal;
+            if (hit)
+            {
+                gameObject.transform.position = hit.point;
 
-            animator.SetTrigger("WallDeath");
+                transform.up = -hit.normal;
+
+                animator.SetTrigger("WallDeath");
+            }
         }
         else
         {
