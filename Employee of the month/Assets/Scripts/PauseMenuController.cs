@@ -39,6 +39,7 @@ public class PauseMenuController : MonoBehaviour
     {
         //The sliders call their OnValueChanged trigger on startup, this bool is to ignore that call
         hasStarted = true;
+        inGameMenuSound.volume = sfxSlider.value;
     }
 
     public void OpenMainPauseMenu()

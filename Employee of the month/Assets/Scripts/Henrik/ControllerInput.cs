@@ -21,7 +21,8 @@ public class ControllerInput : MonoBehaviour
     public List<GameObject> roomSpriteMaskHolder;
     public GameObject playerHighlightCircle;
     public GameObject whichPlayerArrow;
-    public Gamepads playerGamepads; //To keep track of the gamepads
+    public GameObject leaderMugPrefab;
+    public float mugOffsetY;
 
     private GameObject player;
     private Movement playerMovement;
@@ -82,7 +83,7 @@ public class ControllerInput : MonoBehaviour
         //Reset gamepad motorspeeds if for some reason not reset
         if(playerInput!=null && playerInput.currentControlScheme == "Gamepad")
         {
-            Debug.Log("Resetted motorSpeed");
+            //Debug.Log("Resetted motorSpeed");
             Gamepad gamepad;
             gamepad = (Gamepad)playerInput.devices[0];
             gamepad.SetMotorSpeeds(0.0f, 0.0f);
@@ -276,7 +277,7 @@ public class ControllerInput : MonoBehaviour
 
         SetFlashlightsOnOff();
 
-        //Rumble, only with usb :(
+        //Rumble
         AddRumble();
 
         player.GetComponent<Movement>().animator = player.GetComponent<Animator>();
@@ -289,6 +290,22 @@ public class ControllerInput : MonoBehaviour
 
         //Show who is who at start of round
         GameObject whichPlayer = Instantiate(whichPlayerArrow, player.transform.position, Quaternion.identity);
+        //Instantiate(leaderMugPrefab, new Vector2(player.transform.position.x, player.transform.position.y + mugOffsetY), Quaternion.identity);
+        //List<int> pointsList = GameManager.Instance.CountPoints();
+
+        //foreach(int point in pointsList)
+        //{
+        //    Debug.Log(point);
+        //}
+
+
+        //foreach (KeyValuePair<string, int> player in GameManager.Instance.playerPoints)
+        //{
+        //    Debug.Log(player.Key);
+        //    Debug.Log(player.Value);
+        //    Debug.Log("Runs scorelist");
+        //}
+
         foreach (var sprite in whichPlayer.GetComponentsInChildren<SpriteRenderer>())
         {
             sprite.sprite = cursorSprites[playerInput.playerIndex];
