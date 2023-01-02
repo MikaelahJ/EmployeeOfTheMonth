@@ -140,8 +140,8 @@ public class SpawnManager : MonoBehaviour
         }
         GameManager.Instance.AddPointsToPlayer("P" + player.ToString(), 1);
 
-        int playerNumber = player + 1;
-        gameOverText.text = "PLAYER " + playerNumber + " WON";
+        PwinsHolder.gameObject.SetActive(true);
+        pNumberImage.sprite = playerTextSprites[player];
 
         if (GameManager.Instance.tiebreaker)
             GameManager.Instance.actualWinner = player;
