@@ -366,7 +366,7 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.Random:
                 {
-                    Gamemodes randomMode = (Gamemodes)Random.Range((int)Gamemodes.FreeForAll, (int)Gamemodes.Stocks) + 1;
+                    Gamemodes randomMode = (Gamemodes)Random.Range((int)Gamemodes.FreeForAll, (int)Gamemodes.Random);
                     LoadGamemode(randomMode, true);
                     break;
                 }
