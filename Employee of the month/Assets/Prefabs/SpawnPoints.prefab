@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5013721191012812652}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.49, y: -4.14, z: 0}
+  m_LocalPosition: {x: 6.485, y: -2.942, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5013721191526286945}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.63, y: -4.21, z: 0}
+  m_LocalPosition: {x: -5.97, y: -3.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86,7 +86,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5013721192316308172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.48, y: 3.8, z: 0}
+  m_LocalPosition: {x: 0.48, y: 4.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -117,7 +117,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5013721192750935903}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.83, y: 4.09, z: 0}
+  m_LocalPosition: {x: -6.05, y: 4.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -172,8 +172,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8a7e0f7e2f608478ea23bd499fc0fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camController: {fileID: 0}
+  playerTextSprites:
+  - {fileID: 21300000, guid: 2504abcb95cb51848934a389baa17b46, type: 3}
+  - {fileID: 21300000, guid: ac7d46014fd37c14288c15b8e91d881e, type: 3}
+  - {fileID: 21300000, guid: 0c640dce4328bcb45994f33f5d63d8f4, type: 3}
+  - {fileID: 21300000, guid: d4e12ceac9684874bb9a6e8a192aefdf, type: 3}
+  - {fileID: 21300000, guid: 0139a44997b7ad84bb2f2f73f999b06a, type: 3}
+  roundTextSprites:
+  - {fileID: 21300000, guid: 4b9445838a7b4ee4990dec027df5da69, type: 3}
+  - {fileID: 21300000, guid: 95647075c458af846ac3b90b66833090, type: 3}
+  - {fileID: 21300000, guid: 5463ec7a416c6084492d545c498400fe, type: 3}
+  - {fileID: 21300000, guid: 6cef9a11a6e299a448fd72703d51ce1a, type: 3}
+  - {fileID: 21300000, guid: a7c9820012bd2dc409bcba8a03fff13b, type: 3}
+  - {fileID: 21300000, guid: 0a7c0157417e81246a85b054fc14052c, type: 3}
+  - {fileID: 21300000, guid: c74e7112f6d7fc94ca46ff2a310192dd, type: 3}
+  - {fileID: 21300000, guid: 0f783fe9724ca7443b03404d445ad007, type: 3}
+  - {fileID: 21300000, guid: 7ab370b7783986e46857baff6be11a05, type: 3}
+  - {fileID: 21300000, guid: 2a9677b66c6ba93409acec707ea45f28, type: 3}
+  - {fileID: 21300000, guid: 6e479fb17e16e5d488f9db36df4dcefd, type: 3}
+  - {fileID: 21300000, guid: 282598de65254174887887078119bc0f, type: 3}
+  otherTextSprites:
+  - {fileID: 21300000, guid: 80cf3d09f78dcb64c9f18c047303fa70, type: 3}
+  - {fileID: 21300000, guid: d21007a06c085514f8f082397bf0c9a5, type: 3}
+  - {fileID: 21300000, guid: 0de23d731bfb7e34f87d12df3791218a, type: 3}
+  - {fileID: 21300000, guid: 5efa13f86b953f449a880dee40bbb198, type: 3}
+  - {fileID: 21300000, guid: 8a72215378ed2fe4aa33150ff82bf439, type: 3}
+  gameOverText: {fileID: 0}
   spawnPositions:
   - {fileID: 5013721191526286945}
   - {fileID: 5013721191012812652}
   - {fileID: 5013721192750935903}
   - {fileID: 5013721192316308172}
+  alivePlayers: 0

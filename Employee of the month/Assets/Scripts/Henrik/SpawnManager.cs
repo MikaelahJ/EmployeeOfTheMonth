@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Text.RegularExpressions;
+using UnityEngine.UI;
 
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager instance;
 
     [SerializeField] private CameraController camController;
+    [SerializeField] private List<Sprite> playerTextSprites = new List<Sprite>();
+    [SerializeField] private List<Sprite> roundTextSprites = new List<Sprite>();
+    [SerializeField] private List<Sprite> otherTextSprites = new List<Sprite>();
 
     public TextMeshProUGUI gameOverText;
 
@@ -70,7 +74,8 @@ public class SpawnManager : MonoBehaviour
 
         if (alivePlayers == 0)
         {
-            gameOverText.text = "DRAW";
+            GameManager.Instance.gameoverCanvas.GetComponentInChildren<Image>().sprite = otherTextSprites[0];
+            //gameOverText.text = "DRAW";
         }
         else
         {
@@ -114,8 +119,8 @@ public class SpawnManager : MonoBehaviour
     public void TeamWon(Team team)
     {
         GameManager.Instance.roundsPlayed++;
-
-        foreach(var player in team.GetPlayers())
+        AudioManager.instance.activateFadeVolume();
+        foreach (var player in team.GetPlayers())
         {
             int playerIndex = player.gameObject.GetComponent<HasHealth>().playerIndex;
             GameManager.Instance.AddPointsToPlayer("P" + playerIndex.ToString(), 1);

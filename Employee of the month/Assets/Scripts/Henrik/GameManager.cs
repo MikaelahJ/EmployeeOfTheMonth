@@ -92,22 +92,23 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         isPaused = true;
-        bool startedclip = false;
 
         if (!tiebreaker)
         {
-            int rounds = roundsPlayed + 1;
-            //SpawnManager.instance.gameOverText.text = "ROUND " + rounds;
+            int currentRound = roundsPlayed + 1;
+            //SpawnManager.instance.gameOverText.text = "ROUND " + currentRound;
         }
 
         yield return new WaitForSecondsRealtime(1);
 
-
         PlayClip();
-        Instantiate(playSceneText, gameoverCanvas.transform);
+       var countdown = Instantiate(playSceneText, gameoverCanvas.transform);
 
-
-        yield return new WaitForSecondsRealtime(3);
+        for (int i = 0; i < 3; i++)
+        {
+            Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(0.15f, 0.01f);
+            yield return new WaitForSecondsRealtime(1);
+        }
 
         Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(0.25f, 0.02f);
 
@@ -133,8 +134,8 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = 1;
         SpawnManager.instance.gameOverText.text = "";
+        Destroy(countdown);
         isPaused = false;
-        countdown = 3;
     }
 
     private void PlayClip()
