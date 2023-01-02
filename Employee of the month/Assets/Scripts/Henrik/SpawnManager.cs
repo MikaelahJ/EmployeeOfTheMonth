@@ -114,8 +114,8 @@ public class SpawnManager : MonoBehaviour
     public void TeamWon(Team team)
     {
         GameManager.Instance.roundsPlayed++;
-
-        foreach(var player in team.GetPlayers())
+        AudioManager.instance.activateFadeVolume();
+        foreach (var player in team.GetPlayers())
         {
             int playerIndex = player.gameObject.GetComponent<HasHealth>().playerIndex;
             GameManager.Instance.AddPointsToPlayer("P" + playerIndex.ToString(), 1);
