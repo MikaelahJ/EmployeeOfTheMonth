@@ -297,7 +297,8 @@ MonoBehaviour:
   - {fileID: 1632274473534850538, guid: 8210dbbfe69fc8a48beb2b6b76bcdc03, type: 3}
   playerHighlightCircle: {fileID: 2503362734398707608, guid: 4bcdec645315e0f48b1df196c442d9c3, type: 3}
   whichPlayerArrow: {fileID: 3735861215471766086, guid: d36e77971aa3752478ae6ae23132dcdf, type: 3}
-  playerGamepads: {fileID: 0}
+  leaderMugPrefab: {fileID: 2179469467964464716, guid: c0064d6c8292fc249bdf84b40ebb34e1, type: 3}
+  mugOffsetY: 0.75
   playerInput: {fileID: 0}
   sprite: {fileID: 0}
   spriteIndex: 0
