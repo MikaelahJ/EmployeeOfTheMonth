@@ -22,7 +22,6 @@ public class ControllerInput : MonoBehaviour
     public GameObject playerHighlightCircle;
     public GameObject whichPlayerArrow;
     public GameObject leaderMugPrefab;
-    public float mugOffsetY;
 
     private GameObject player;
     private Movement playerMovement;
@@ -294,14 +293,17 @@ public class ControllerInput : MonoBehaviour
 
         //Keep track of leader each round by spawning mug over head
         List<int> playersInlead = GameManager.Instance.CountPoints();
+        GameObject leadermug = Instantiate(leaderMugPrefab, new Vector2(player.transform.position.x, player.transform.position.y), Quaternion.identity);
+        leadermug.transform.SetParent(player.transform);
 
-        foreach(int index in playersInlead)
+        foreach (int index in playersInlead)
         {
             int playerNumber = index + 1;
             if (player.name == "P" + playerNumber + " Player")
             {  
-                GameObject leadermug = Instantiate(leaderMugPrefab, new Vector2(player.transform.position.x, player.transform.position.y + mugOffsetY), Quaternion.identity);
-                Destroy(leadermug, 0.5f);
+                //GameObject leadermug = Instantiate(leaderMugPrefab, new Vector2(player.transform.position.x, player.transform.position.y + mugOffsetY), Quaternion.identity);
+                //leadermug.transform.SetParent(player.transform);
+                //Destroy(leadermug, 0.5f);
             }
         }
 
