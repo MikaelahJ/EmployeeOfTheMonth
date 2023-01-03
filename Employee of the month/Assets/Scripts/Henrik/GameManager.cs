@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> playerControllers;
 
+    public bool isCountdown = true;
     public bool isPaused = false;
     public GameObject pauseMenu;
     private GameObject tempPauseMenu;
@@ -109,7 +110,7 @@ public class GameManager : MonoBehaviour
     IEnumerator RoundStartPause()
     {
         Time.timeScale = 0;
-        isPaused = true;
+        isCountdown = true;
         playSceneCanvasTextImage.enabled = false;
 
         GameObject gamemodeStart = GameObject.Find("GamemodeStartText");
@@ -162,7 +163,7 @@ public class GameManager : MonoBehaviour
         gamemodeStartText.enabled = false;
         playSceneCanvasTextImage.enabled = false;
         Time.timeScale = 1;
-        isPaused = false;
+        isCountdown = false;
     }
 
     private void PlayClip()
@@ -284,21 +285,13 @@ public class GameManager : MonoBehaviour
     IEnumerator TiebreakerText()
     {
         Time.timeScale = 0;
-        isPaused = true;
+        isCountdown = true;
         playSceneCanvasTextImage.enabled = false;
         yield return new WaitForSecondsRealtime(1f);
 
         var tiebreakerImage = Instantiate(tiebreakerPrefab, playSceneCanvas.transform);
 
-
         yield return new WaitForSecondsRealtime(3f);
-
-        //SpawnManager.instance.gameOverText.text = "PLAYER " + (tiebreakers[0] + 1);
-
-        for (int i = 1; i < tiebreakers.Count; i++)
-        {
-            //SpawnManager.instance.gameOverText.text += " VS PLAYER " + (tiebreakers[i] + 1);
-        }
 
         //yield return new WaitForSecondsRealtime(3f);
         foreach (RectTransform child in tiebreakerImage.transform)

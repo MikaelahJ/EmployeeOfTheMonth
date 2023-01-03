@@ -534,6 +534,7 @@ public class ControllerInput : MonoBehaviour
         if (!input.performed) { return; }
 
         if (player.GetComponent<HasHealth>().isDead) { return; }
+        if (GameManager.Instance.isCountdown) { return; }
 
         if (GameManager.Instance.isPaused)
         {
