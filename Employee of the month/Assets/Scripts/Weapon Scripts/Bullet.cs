@@ -189,7 +189,7 @@ public class Bullet : MonoBehaviour
         if (isStapler && collision.gameObject.CompareTag("Player"))
         {
             //Debug.Log("isStapler triggered");
-            ApplyKnockBack(collision.collider);
+            //ApplyKnockBack(collision.collider); //Knockback is added in SendDamage -Thomas
             collision.gameObject.GetComponent<Stun>().OnSlowed(speedSlowdown);
             collision.gameObject.GetComponent<Stun>().WallStunChance(stunTimer, stunTime);
             //Debug.Log(collision.gameObject.name);
