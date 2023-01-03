@@ -45,6 +45,8 @@ public class NewItemScriptableObject : ScriptableObject
     [Tooltip("The spread of missed bullets, 0% accuracy with a 45 degree miss angle allows you to miss in a 90 degree cone")]
     [Range(0, 90)] public float maxMissDegAngle = 0;
     public bool isShotgun = false;
+    public bool isSuperShredder = false;
+
     public int shotgunAmount = 0;
 
     [Header("Bullet modifiers")]
