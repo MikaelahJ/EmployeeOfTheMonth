@@ -8,7 +8,7 @@ public class Stun : MonoBehaviour
     public bool isStunned;
     public float stunTimer;
     public float slowdownTimer = 2.0f;
-    
+
     private float stunTime;
     private bool isSlowed;
     [SerializeField] private GameObject stunAnimation;
@@ -21,7 +21,7 @@ public class Stun : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall")))
+        if (collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall"))
         {
             //Debug.Log("WallCollide");
             if (!isStunned && isStunnable)
@@ -78,7 +78,7 @@ public class Stun : MonoBehaviour
         {
             isSlowed = true;
             GetComponent<Movement>().walkSpeed -= speedSlowdown;
-            
+
             yield return new WaitForSeconds(slowdownTimer);
 
             isSlowed = false;

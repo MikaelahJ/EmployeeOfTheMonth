@@ -210,6 +210,7 @@ public class WeaponController : MonoBehaviour
                 fireScript.shakeDuration = 0.4f;
                 fireScript.shakeMagnitude = 0.2f;
                 newWeapon.shotgunAmount = 30;
+                newWeapon.isSuperShredder = true;
             }
 
             if (items[0].name == "Stapler(Clone)")

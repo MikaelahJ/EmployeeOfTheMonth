@@ -84,6 +84,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if(scene == "MainMenu")
+            {
+                ResetValues();
+                playersChosen = 0;
+                playersCount = 0;
+                players.Clear();
+            }
             SceneManager.LoadScene(scene);
         }
     }
