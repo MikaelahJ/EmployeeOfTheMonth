@@ -48,7 +48,7 @@ public class Aim : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         mousePosition.z = 0;
         mousePosition = mousePosition - transform.position;
-        transform.up = Vector2.Lerp(previousMousePosition, (Vector2)mousePosition + aimAssistVector, rotationSpeed);
+        transform.up = Vector2.Lerp(previousMousePosition, (Vector2)mousePosition, rotationSpeed);
 
         transform.up = mousePosition;
 

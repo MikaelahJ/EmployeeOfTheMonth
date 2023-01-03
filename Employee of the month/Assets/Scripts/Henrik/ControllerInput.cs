@@ -454,11 +454,11 @@ public class ControllerInput : MonoBehaviour
         }
     }
 
-    public void GetMousePosition(InputAction.CallbackContext input)
-    {
-        if (aim == null) { return; }
-        aim.GetMouseInput(input.ReadValue<Vector2>());
-    }
+    //public void GetMousePosition(InputAction.CallbackContext input)
+    //{
+    //    if (aim == null) { return; }
+    //    aim.GetMouseInput(input.ReadValue<Vector2>());
+    //}
 
     //public void OnRun(InputAction.CallbackContext input)
     //{
@@ -480,13 +480,10 @@ public class ControllerInput : MonoBehaviour
         if (input.started)
         {
             fire.GetFireButtonInput(true);
-            //Gamepad.current.SetMotorSpeeds(0.5f, 0.5f);
-            //Debug.Log(Gamepad.current.name);
         }
         if (input.canceled)
         {
             fire.GetFireButtonInput(false);
-            //Gamepad.current.ResetHaptics();
         }
     }
 
