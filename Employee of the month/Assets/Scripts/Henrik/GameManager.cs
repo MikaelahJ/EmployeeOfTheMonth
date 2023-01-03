@@ -370,6 +370,11 @@ public class GameManager : MonoBehaviour
         roundsPlayed = 0;
         tiebreaker = false;
         tiebreakers.Clear();
+
+        foreach(var playerController in playerControllers)
+        {
+            Destroy(playerController);
+        }
     }
 
 }
