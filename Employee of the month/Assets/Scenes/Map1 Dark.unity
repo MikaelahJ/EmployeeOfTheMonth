@@ -1438,7 +1438,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.0264325
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10541,8 +10541,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 18.134615, y: 10.234515, z: 0.2}
-  m_Center: {x: -0.019824028, y: 0.03796053, z: 0}
+  m_Size: {x: 18.174694, y: 10.254555, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1291195332
 GameObject:
   m_ObjectHideFlags: 0
