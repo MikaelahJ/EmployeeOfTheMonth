@@ -61,6 +61,8 @@ public class ControllerInput : MonoBehaviour
 
         GameManager.Instance.playersCount += 1;
 
+        gameObject.name = "Controller P" + GameManager.Instance.playersCount.ToString();
+
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
             LoadCharacterSelect();
@@ -345,6 +347,11 @@ public class ControllerInput : MonoBehaviour
         healthbar.transform.position = player.transform.position;
 
         player.GetComponent<HasHealth>().healthbarAnimator = healthbar.GetComponent<Animator>();
+
+        if(GameModeManager.Instance.currentMode != Gamemodes.Stocks)
+        {
+            healthbar.GetComponent<stockScript>().enabled = false;
+        }
     }
 
     private void LoadPlayerChildScripts()
@@ -524,6 +531,7 @@ public class ControllerInput : MonoBehaviour
         if (!input.performed) { return; }
 
         if (player.GetComponent<HasHealth>().isDead) { return; }
+        if (GameManager.Instance.isCountdown) { return; }
 
         if (GameManager.Instance.isPaused)
         {

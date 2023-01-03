@@ -12,6 +12,16 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         spawnPosition = transform.position;
+
+        stockScript stockScript = GetComponentInChildren<stockScript>();
+        if (stockScript != null)
+        {
+            stockScript.AddStocks(stocks);
+        }
+        else
+        {
+            Debug.Log("Can't find StockHolder");
+        }
     }
 
     public void TriggerRespawn(float delay)
@@ -55,5 +65,10 @@ public class Spawner : MonoBehaviour
     public void LoseStock()
     {
         stocks--;
+    }
+
+    public int GetStocks()
+    {
+        return stocks;
     }
 }

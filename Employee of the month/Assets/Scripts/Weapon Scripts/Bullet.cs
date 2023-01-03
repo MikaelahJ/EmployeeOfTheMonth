@@ -35,11 +35,14 @@ public class Bullet : MonoBehaviour
     public Collider2D bulletOwner;
 
     public bool isStapler;
+    public bool isSuperStapler;
     public float stunTime;
     public float stunTimer;
     public float speedSlowdown;
 
     public bool isShotgun;
+    public bool isSuperShredder;
+
 
     [Header("Homing parameters")]
     public bool isHoming = false;
@@ -137,12 +140,22 @@ public class Bullet : MonoBehaviour
         knockBackModifier = weapon.knockbackModifier;
         bulletImpactSound = weapon.bulletImpactSound;
         isShotgun = weapon.isShotgun;
+        isSuperShredder = weapon.isSuperShredder;
         isHoming = weapon.isHoming;
         turnSpeed = weapon.turnSpeed;
         scanBounds = weapon.scanBounds;
         isStapler = weapon.isStapler;
+        isSuperStapler = weapon.isSuperStapler;
+
         stunTime = weapon.stunTime;
         speedSlowdown = weapon.speedSlowdown;
+
+        if (isSuperShredder)
+        {
+            GetComponent<Animator>().enabled = true;
+            GetComponent<Animator>().SetTrigger("isSuperShredder");
+            return;
+        }
 
         if (isPenetrate)
         {
@@ -166,6 +179,7 @@ public class Bullet : MonoBehaviour
             //Activate laser bullets if its exploding
             pencil.transform.localScale += Vector3.one * (explodeRadius - 1f);
             GetComponent<Animator>().enabled = true;
+            GetComponent<Animator>().SetTrigger("isLaser");
         }
 
         if (!isExplode && isPenetrate)
@@ -178,9 +192,10 @@ public class Bullet : MonoBehaviour
             trail.SetActive(true);
             trail.GetComponent<TrailRenderer>().time = bulletSpeed / 30f;
         }
+
     }
 
-
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -190,9 +205,14 @@ public class Bullet : MonoBehaviour
         {
             //Debug.Log("isStapler triggered");
             //ApplyKnockBack(collision.collider); //Knockback is added in SendDamage -Thomas
-            collision.gameObject.GetComponent<Stun>().OnSlowed(speedSlowdown);
-            collision.gameObject.GetComponent<Stun>().WallStunChance(stunTimer, stunTime);
-            //Debug.Log(collision.gameObject.name);
+            bool selfDamage = collision.collider.name == bulletOwner.name;
+
+            if (!selfDamage || canTakeDamage)
+            {
+                collision.gameObject.GetComponent<Stun>().OnSlowed(speedSlowdown);
+                collision.gameObject.GetComponent<Stun>().WallStunChance(stunTimer, stunTime);
+                //Debug.Log(collision.gameObject.name);
+            }
         }
 
         //Bounce
@@ -209,8 +229,8 @@ public class Bullet : MonoBehaviour
         }
 
 
-    //Play bullet hit sound
-    AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position, AudioManager.instance.audioClips.sfxVolume);
+        //Play bullet hit sound
+        AudioSource.PlayClipAtPoint(bulletImpactSound, transform.position, AudioManager.instance.audioClips.sfxVolume);
 
         if (isExplode)
         {
@@ -256,9 +276,9 @@ public class Bullet : MonoBehaviour
     public void SendDamage(Collider2D collider, Collision2D collision = null)
     {
         //Debug.Log(collider.name + " collided with " + bulletOwner.name);
-        if (!canTakeDamage && collider.name == bulletOwner.name) {
-            
-            return; 
+        if (!canTakeDamage && collider.name == bulletOwner.name)
+        {
+            return;
         }
         SendDamage(damage, collider, collision);
     }
@@ -276,8 +296,8 @@ public class Bullet : MonoBehaviour
         if (collider.gameObject.transform.CompareTag("Player"))
         {
             ApplyKnockBack(collider);
-            
-            if(damage == 0) { return; }
+
+            if (damage == 0) { return; }
             if (collider.transform.parent.transform.TryGetComponent<HasHealth>(out HasHealth health))
             {
                 health.LoseHealth(damage, gameObject);
@@ -295,7 +315,7 @@ public class Bullet : MonoBehaviour
             collider.gameObject.GetComponent<ItemBreak>().TakeDamage(damage);
         }
     }
-    
+
     private void Explode(Vector2 collisionPoint, Collision2D collision)
     {
         //Sometimes the player gets hit multiple times by same explosion
@@ -349,7 +369,7 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(isHoming)
+        if (isHoming)
             BulletPlayerTracking();
     }
 

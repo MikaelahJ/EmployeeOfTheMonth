@@ -8,7 +8,7 @@ public class Stun : MonoBehaviour
     public bool isStunned;
     public float stunTimer;
     public float slowdownTimer = 2.0f;
-    
+
     private float stunTime;
     private bool isSlowed;
     [SerializeField] private GameObject stunAnimation;
@@ -21,18 +21,18 @@ public class Stun : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall")))
+        if (collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall"))
         {
             //Debug.Log("WallCollide");
             if (!isStunned && isStunnable)
             {
                 isStunned = true;
                 GameObject stun = Instantiate(stunAnimation, transform.position, Quaternion.identity, transform);
+                stun.transform.localScale *= 2;
                 Destroy(stun, stunTime);
                 GetComponent<Movement>().enabled = false;
                 GetComponent<Aim>().enabled = false;
                 GetComponentInChildren<Fire>().enabled = false;
-                //Debug.Log("Runs Stun");
                 StartCoroutine(Stunned());
             }
         }
@@ -49,6 +49,10 @@ public class Stun : MonoBehaviour
 
     public void OnSlowed(float speedSlowdown)
     {
+        Debug.Log("hejhej");
+        GameObject stun = Instantiate(stunAnimation, transform.position, Quaternion.identity, transform);
+        Destroy(stun, slowdownTimer);
+
         StartCoroutine(Slowdown(speedSlowdown));
     }
 
@@ -78,7 +82,7 @@ public class Stun : MonoBehaviour
         {
             isSlowed = true;
             GetComponent<Movement>().walkSpeed -= speedSlowdown;
-            
+
             yield return new WaitForSeconds(slowdownTimer);
 
             isSlowed = false;

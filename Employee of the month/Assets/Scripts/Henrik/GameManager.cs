@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 
 public class GameManager : MonoBehaviour
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> playerControllers;
 
+    public bool isCountdown = true;
     public bool isPaused = false;
     public GameObject pauseMenu;
     private GameObject tempPauseMenu;
@@ -83,6 +85,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            if(scene == "MainMenu")
+            {
+                ResetValues();
+                playersChosen = 0;
+                playersCount = 0;
+                players.Clear();
+            }
             SceneManager.LoadScene(scene);
         }
     }
@@ -101,8 +110,15 @@ public class GameManager : MonoBehaviour
     IEnumerator RoundStartPause()
     {
         Time.timeScale = 0;
-        isPaused = true;
+        isCountdown = true;
         playSceneCanvasTextImage.enabled = false;
+
+        GameObject gamemodeStart = GameObject.Find("GamemodeStartText");
+        TextMeshProUGUI gamemodeStartText = gamemodeStart.GetComponent<TextMeshProUGUI>();
+
+        string gamemodeName = GameModeManager.Instance.currentMode.ToString();
+        gamemodeName = string.Join(" ", Regex.Split(gamemodeName, @"(?<!^)(?=[A-Z])"));
+        gamemodeStartText.text = gamemodeName;
 
         yield return new WaitForSecondsRealtime(1f);
         
@@ -144,9 +160,10 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        gamemodeStartText.enabled = false;
         playSceneCanvasTextImage.enabled = false;
         Time.timeScale = 1;
-        isPaused = false;
+        isCountdown = false;
     }
 
     private void PlayClip()
@@ -175,6 +192,7 @@ public class GameManager : MonoBehaviour
 
     public void AddPointsToPlayer(string playerName, int points)
     {
+        Debug.Log("Adding " + points + " points to" + playerName);
         if (playerPoints.ContainsKey(playerName))
         {
             playerPoints[playerName] += points;
@@ -245,6 +263,7 @@ public class GameManager : MonoBehaviour
     public void SetTiebreaker(List<int> winners)
     {
         tiebreaker = true;
+        GameModeManager.Instance.currentMode = Gamemodes.FreeForAll;
         foreach (int winner in winners)
         {
             tiebreakers.Add(winner);
@@ -266,21 +285,13 @@ public class GameManager : MonoBehaviour
     IEnumerator TiebreakerText()
     {
         Time.timeScale = 0;
-        isPaused = true;
+        isCountdown = true;
         playSceneCanvasTextImage.enabled = false;
         yield return new WaitForSecondsRealtime(1f);
 
         var tiebreakerImage = Instantiate(tiebreakerPrefab, playSceneCanvas.transform);
 
-
         yield return new WaitForSecondsRealtime(3f);
-
-        //SpawnManager.instance.gameOverText.text = "PLAYER " + (tiebreakers[0] + 1);
-
-        for (int i = 1; i < tiebreakers.Count; i++)
-        {
-            //SpawnManager.instance.gameOverText.text += " VS PLAYER " + (tiebreakers[i] + 1);
-        }
 
         //yield return new WaitForSecondsRealtime(3f);
         foreach (RectTransform child in tiebreakerImage.transform)
@@ -359,6 +370,11 @@ public class GameManager : MonoBehaviour
         roundsPlayed = 0;
         tiebreaker = false;
         tiebreakers.Clear();
+
+        foreach(var playerController in playerControllers)
+        {
+            Destroy(playerController);
+        }
     }
 
 }

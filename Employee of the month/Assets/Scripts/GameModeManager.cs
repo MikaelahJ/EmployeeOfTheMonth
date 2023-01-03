@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Text.RegularExpressions;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public enum Gamemodes
 {
@@ -127,16 +128,22 @@ public class GameModeManager : MonoBehaviour
             Debug.Log("Selected Character: " + selectedCharacter);
             Teams selectedTeam = teamSelectButtons[selectedCharacter - 1].GetComponent<TeamSelectButton>().selectedTeam;
             Debug.Log("Selected team: " + selectedTeam);
-            Team team = new Team(selectedTeam);
+            
+            Team team = teams.Find(t => t.GetTeamName() == selectedTeam);
 
-            if (!teams.Contains(team))
+            if (team != null)
             {
-                team.AddPlayer(playerController);
-                AddTeam(team);
+                int index = teams.IndexOf(team);
+                Debug.Log("Index: " + index);
+                teams[index].AddPlayer(playerController);
+                
             }
             else
             {
-                teams[teams.IndexOf(team)].AddPlayer(playerController);
+                Debug.Log("Created new team");
+                team = new Team(selectedTeam);
+                team.AddPlayer(playerController);
+                AddTeam(team);
             }
             controller.playerTeam = team;
         }
@@ -466,6 +473,11 @@ public class Team
     {
         Debug.Log("Added " + player.name + " to team: " + team);
         members.Add(player);
+
+        foreach (var member in members)
+        {
+            Debug.Log(member.name);
+        }
         alivePlayers++;
     }
 
@@ -497,6 +509,10 @@ public class Team
 
     public List<GameObject> GetPlayers()
     {
+        foreach(var member in members)
+        {
+            Debug.Log(member.name);
+        }
         List<GameObject> players = new List<GameObject>(members);
 
         for (int i = 0; i < players.Count; i++)
@@ -505,6 +521,11 @@ public class Team
         }
 
         return players;
+    }
+
+    public bool Equals(Team other)
+    {
+        return team == other.team;
     }
 
     public Teams GetTeamName()
