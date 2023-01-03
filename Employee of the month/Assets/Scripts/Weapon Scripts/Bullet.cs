@@ -210,7 +210,7 @@ public class Bullet : MonoBehaviour
             if (!selfDamage || canTakeDamage)
             {
                 collision.gameObject.GetComponent<Stun>().OnSlowed(speedSlowdown);
-                collision.gameObject.GetComponent<Stun>().WallStunChance(stunTimer, stunTime);
+                collision.gameObject.GetComponent<Stun>().WallStunChance(0.5f, stunTime);
                 //Debug.Log(collision.gameObject.name);
             }
         }

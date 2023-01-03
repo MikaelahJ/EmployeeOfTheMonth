@@ -19,7 +19,7 @@ public class Stun : MonoBehaviour
         isSlowed = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("SoftWall"))
         {
@@ -29,6 +29,11 @@ public class Stun : MonoBehaviour
                 isStunned = true;
                 GameObject stun = Instantiate(stunAnimation, transform.position, Quaternion.identity, transform);
                 stun.transform.localScale *= 2;
+                GameObject stars = stun.transform.GetChild(0).gameObject;
+                Material newMaterial = new Material(stars.GetComponent<MeshRenderer>().material);
+                newMaterial.color = Color.yellow;
+                stars.GetComponent<MeshRenderer>().material = newMaterial;
+
                 Destroy(stun, stunTime);
                 GetComponent<Movement>().enabled = false;
                 GetComponent<Aim>().enabled = false;
@@ -43,8 +48,8 @@ public class Stun : MonoBehaviour
         //Debug.Log(stunTime);
         this.stunTime = stunTime;
         this.stunTimer = stunTimer;
-        isStunnable = true;
-        StartCoroutine(StunCountDown());
+        if(!isStunned)
+            StartCoroutine(StunCountDown());
     }
 
     public void OnSlowed(float speedSlowdown)
@@ -65,6 +70,7 @@ public class Stun : MonoBehaviour
             GetComponent<Movement>().enabled = true;
             GetComponent<Aim>().enabled = true;
             GetComponentInChildren<Fire>().enabled = true;
+            StartCoroutine(ImmuneToStun());
             isStunned = false;
         }
 
@@ -72,8 +78,12 @@ public class Stun : MonoBehaviour
 
     private IEnumerator StunCountDown()
     {
-        yield return new WaitForSeconds(stunTime + stunTimer);
-        isStunnable = false;
+        isStunnable = true;
+        yield return new WaitForSeconds(stunTimer);
+        if (!isStunned)
+        {
+            isStunnable = false;
+        }
     }
 
     private IEnumerator Slowdown(float speedSlowdown)
@@ -88,5 +98,11 @@ public class Stun : MonoBehaviour
             isSlowed = false;
             GetComponent<Movement>().walkSpeed += speedSlowdown;
         }
+    }
+
+    private IEnumerator ImmuneToStun()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isStunnable = false;
     }
 }

@@ -350,7 +350,7 @@ public class ControllerInput : MonoBehaviour
 
         if(GameModeManager.Instance.currentMode != Gamemodes.Stocks)
         {
-            healthbar.GetComponent<stockScript>().enabled = false;
+            Destroy(healthbar.GetComponent<stockScript>());
         }
     }
 
