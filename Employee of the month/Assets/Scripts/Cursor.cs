@@ -44,7 +44,7 @@ public class Cursor : MonoBehaviour
         spawnpoint.z = 0;
         transform.position = spawnpoint;
 
-        sprite =  GetComponent<SpriteRenderer>().sprite = sprite;
+        sprite = GetComponent<SpriteRenderer>().sprite = sprite;
         selectedCharacterBall.GetComponent<SpriteRenderer>().color = GetComponent<SpriteRenderer>().color;
     }
 
@@ -59,7 +59,7 @@ public class Cursor : MonoBehaviour
             MousePosition();
         }
 
-        if(canSelect)
+        if (canSelect)
         {
             CharacterSelection(collidedObject);
         }
@@ -67,9 +67,18 @@ public class Cursor : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        canSelect = true;
+        if (collision.gameObject.CompareTag("StartButton"))
+        {
+
+        }
+
+
+
+            canSelect = true;
         pressed = false;
         collidedObject = collision;
+
+
     }
 
     public void CharacterSelection(Collider2D collision)
@@ -113,8 +122,8 @@ public class Cursor : MonoBehaviour
                 selectIndex = Convert.ToInt32(collision.gameObject.name) - 1;
                 //Activate new selected
                 GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, true, this.name, controller);
-                
-                
+
+
                 collision.tag = "Selected";
                 //SetSelectedBall(collision);
                 SetFrameColor(collision);
@@ -254,7 +263,7 @@ public class Cursor : MonoBehaviour
     private void SetFrameColor(Collider2D frame)
     {
         if (selectedFrame == null)
-        {      
+        {
             GameObject emptyFrame = frame.transform.GetChild(0).gameObject; //Saving correct scale
             Destroy(frame.transform.GetChild(0).gameObject); //Remove the empty character frame
             selectedFrame = Instantiate(frame.transform.parent.GetComponent<Selector>().characterFrames[playerIndex], frame.transform.position, frame.transform.rotation, frame.transform);
