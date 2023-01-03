@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/DingoIntro.unity
+    guid: a48e2f90bc14a394f9ee5645d11d170d
+  - enabled: 1
+    path: Assets/Scenes/DeskIntro.unity
+    guid: 7f49ed115f4225c46abc9f6db77d5bfa
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 917ef695f80f6be4bbdb0ac29c7fd1c2
   - enabled: 1
