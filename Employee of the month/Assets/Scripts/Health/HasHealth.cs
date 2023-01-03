@@ -31,6 +31,8 @@ public class HasHealth : MonoBehaviour
     private int sortingLayerID;
     [SerializeField] private LayerMask ignore;
 
+    private stockScript stock;
+
     void Start()
     {
         hudHealthbar = GetComponentInChildren<HudHealthBar>();
@@ -231,6 +233,12 @@ public class HasHealth : MonoBehaviour
         GetComponentInChildren<Fire>().enabled = false;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+
+        stock = GetComponentInChildren<stockScript>();
+        if (stock != null)
+        {
+            stock.gameObject.SetActive(false);
+        }
     }
 
     void EnablePlayer()
@@ -260,6 +268,16 @@ public class HasHealth : MonoBehaviour
         isDead = false;
         EnablePlayer();
         UpdateHealthbar();
+
+        if (stock != null)
+        {
+            stock.gameObject.SetActive(true);
+            stock.LoseStock();
+        }
+        else
+        {
+            Debug.Log("No stock script was found");
+        }
     }
 
     public void HealthRegen(int health, float timeBetweenRegen, float duration)

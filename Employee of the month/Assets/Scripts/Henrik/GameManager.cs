@@ -378,6 +378,10 @@ public class GameManager : MonoBehaviour
         tiebreaker = false;
         tiebreakers.Clear();
 
+        foreach(var playerController in playerControllers)
+        {
+            Destroy(playerController);
+        }
     }
 
 }
