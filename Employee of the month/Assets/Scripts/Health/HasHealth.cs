@@ -259,6 +259,7 @@ public class HasHealth : MonoBehaviour
         health = maxHealth;
         isDead = false;
         EnablePlayer();
+        UpdateHealthbar();
     }
 
     public void HealthRegen(int health, float timeBetweenRegen, float duration)
