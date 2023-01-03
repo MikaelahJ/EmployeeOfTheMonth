@@ -27,6 +27,7 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private List<GameObject> teamSelectButtons;
     [SerializeField] private TextMeshProUGUI gamemodeText;
     [SerializeField] private TextMeshProUGUI gamemodeOptionsText;
+    [SerializeField] private TextMeshProUGUI gamemodeDescriptionText;
     [SerializeField] private GameObject optionsButtons;
     [Header("Gamemode prefabs")]
     [SerializeField] private GameObject kingOfTheHillArea;
@@ -51,6 +52,7 @@ public class GameModeManager : MonoBehaviour
                 Instance.teamSelectButtons = teamSelectButtons;
                 Instance.gamemodeText = gamemodeText;
                 Instance.gamemodeOptionsText = gamemodeOptionsText;
+                Instance.gamemodeDescriptionText = gamemodeDescriptionText;
                 Instance.optionsButtons = optionsButtons;
             }
             Destroy(this);
@@ -252,16 +254,19 @@ public class GameModeManager : MonoBehaviour
         {
             case Gamemodes.FreeForAll:
                 {
+                    gamemodeDescriptionText.text = "";
                     ActivateOptions(false);
                     break;
                 }
             case Gamemodes.Teams:
                 {
+                    gamemodeDescriptionText.text = "";
                     ActivateOptions(false);
                     break;
                 }
             case Gamemodes.KingOfTheHill:
                 {
+                    gamemodeDescriptionText.text = "Seconds";
                     chooseNumberOptions = new int[] {5, 10, 15, 20, 25, 30, 40, 50, 60, 99 };
                     chosenNumberIndex = 5;
                     SetChosenNumber();
@@ -270,6 +275,7 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.DeathMatch:
                 {
+                    gamemodeDescriptionText.text = "Kills to win";
                     chooseNumberOptions = new int[] {1, 2, 3, 4, 5, 10, 15, 20, 25, 30};
                     chosenNumberIndex = 5;
                     SetChosenNumber();
@@ -278,6 +284,7 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.Stocks:
                 {
+                    gamemodeDescriptionText.text = "Lives";
                     chooseNumberOptions = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
                     chosenNumberIndex = 2;
                     SetChosenNumber();
@@ -286,6 +293,7 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.Random:
                 {
+                    gamemodeDescriptionText.text = "";
                     ActivateOptions(false);
                     break;
                 }

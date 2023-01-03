@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 2685218244082168075}
   - component: {fileID: 70913693032165462}
   - component: {fileID: 5566755338973150744}
+  - component: {fileID: 7893645872844773564}
+  - component: {fileID: 2891314132306921394}
+  - component: {fileID: 7480254101876106887}
   m_Layer: 0
   m_Name: desk_chair
   m_TagString: Untagged
@@ -98,6 +101,64 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.11662295, y: -0.0042332374}
-  m_Size: {x: 0.576276, y: 0.36330882}
+  m_Offset: {x: 0.04266687, y: -0.0042332355}
+  m_Size: {x: 0.42836395, y: 0.36330873}
   m_Direction: 1
+--- !u!50 &7893645872844773564
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587073141082902034}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 1
+  m_AngularDrag: 1
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &2891314132306921394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587073141082902034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a25c479672f3ec044b7951de558a0cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spritesBeforeBreak: []
+  animator: {fileID: 7480254101876106887}
+  spriteRenderer: {fileID: 0}
+  spriteMask: {fileID: 0}
+  health: 40
+--- !u!95 &7480254101876106887
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587073141082902034}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 81358e6fe3a24c248b674180b1c64b38, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

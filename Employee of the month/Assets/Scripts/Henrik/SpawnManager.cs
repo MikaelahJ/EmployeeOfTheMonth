@@ -103,7 +103,22 @@ public class SpawnManager : MonoBehaviour
         }
         else
         {
-            AddPointsToLastPlayer();
+            if(GameModeManager.Instance.currentMode == Gamemodes.FreeForAll)
+            {
+                AddPointsToLastPlayer();
+            }
+            else
+            {
+                for (int i = 0; i < camController.players.Length; i++)
+                {
+                    if (camController.players[i] != null)
+                    {
+                        Team winTeam = camController.players[i].gameObject.GetComponent<HasHealth>().team;
+                        AddPointsToTeam(winTeam);
+                        break;
+                    }
+                }
+            }
 
             if (GameManager.Instance.tiebreaker)
             {
