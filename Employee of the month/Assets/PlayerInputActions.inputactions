@@ -19,7 +19,7 @@
                     "type": "Value",
                     "id": "3bf405e4-7617-48b5-80cb-b50d0e5d8037",
                     "expectedControlType": "Vector2",
-                    "processors": "StickDeadzone(min=0.3,max=0.9)",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -194,7 +194,7 @@
                     "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "StickDeadzone(min=0.3,max=0.9)",
                     "groups": "Gamepad",
                     "action": "Aim",
                     "isComposite": false,
@@ -206,7 +206,7 @@
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse;Touch",
+                    "groups": "Keyboard&Mouse",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
