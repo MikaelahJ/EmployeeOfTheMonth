@@ -180,7 +180,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -190,9 +190,14 @@ public class Bullet : MonoBehaviour
         {
             //Debug.Log("isStapler triggered");
             //ApplyKnockBack(collision.collider); //Knockback is added in SendDamage -Thomas
-            collision.gameObject.GetComponent<Stun>().OnSlowed(speedSlowdown);
-            collision.gameObject.GetComponent<Stun>().WallStunChance(stunTimer, stunTime);
-            //Debug.Log(collision.gameObject.name);
+            bool selfDamage = collision.collider.name == bulletOwner.name;
+
+            if (!selfDamage || canTakeDamage)
+            {
+                collision.gameObject.GetComponent<Stun>().OnSlowed(speedSlowdown);
+                collision.gameObject.GetComponent<Stun>().WallStunChance(stunTimer, stunTime);
+                //Debug.Log(collision.gameObject.name);
+            }
         }
 
         //Bounce
