@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
         playSceneCanvasTextImage.enabled = false;
 
         yield return new WaitForSecondsRealtime(1f);
-        PlayClip();
+        
 
         if (!tiebreaker)
         {
@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
                 yield return new WaitForSecondsRealtime(1);
 
                 playSceneCanvasTextImage.enabled = false;
+                PlayClip();
                 var countdown = Instantiate(startRoundCountdownText, playSceneCanvas.transform);
 
                 for (int i = 0; i < 3; i++)

@@ -72,13 +72,9 @@ public class Cursor : MonoBehaviour
 
         }
 
-
-
-            canSelect = true;
+        canSelect = true;
         pressed = false;
         collidedObject = collision;
-
-
     }
 
     public void CharacterSelection(Collider2D collision)
@@ -91,8 +87,8 @@ public class Cursor : MonoBehaviour
             {
                 if (GameManager.Instance.playersCount != GameManager.Instance.playersChosen)
                 {
-                    GameObject mustChoose = GameObject.Find("StartGameText");
-                    mustChoose.GetComponent<TextMeshProUGUI>().text = "Everyone must choose a character";
+                    GameObject mustChoose = GameObject.Find("StartButton");
+                    mustChoose.GetComponent<TextMeshPro>().text = "Everyone must choose\n a character";
                     Invoke(nameof(ResetStartText), 1);
                     Debug.Log("Everyone must select a character");
                 }
@@ -102,6 +98,11 @@ public class Cursor : MonoBehaviour
                     GameManager.Instance.LoadScene("LoadingScene");
                 }
                 characterSelectSounds.PlayOneShot(clickSound);
+            }
+
+            if(collision.gameObject.CompareTag("MainMenuButton"))
+            {
+                GameManager.Instance.LoadScene("MainMenu");
             }
 
             if (collision.gameObject.CompareTag("Free"))
@@ -176,8 +177,8 @@ public class Cursor : MonoBehaviour
     }
     private void ResetStartText()
     {
-        GameObject mustChoose = GameObject.Find("StartGameText");
-        mustChoose.GetComponent<TextMeshProUGUI>().text = "Start Game";
+        GameObject mustChoose = GameObject.Find("StartButton");
+        mustChoose.GetComponent<TextMeshPro>().text = "Start Game";
     }
 
     //public void OnTriggerStay2D(Collider2D collision)
