@@ -69,8 +69,11 @@ public class GameModeManager : MonoBehaviour
 
     private void Start()
     {
-        EnableTeamSelectButtons();
-        EnableGamemodeOptions();
+        if (SceneManager.GetActiveScene().name == "CharacterSelect")
+        {
+            EnableTeamSelectButtons();
+            EnableGamemodeOptions();
+        }
     }
 
     private void OnEnable()
@@ -428,6 +431,11 @@ public class GameModeManager : MonoBehaviour
             }
         }
     }
+
+    public int GetWinPoints()
+    {
+        return chosenNumber;
+    }
 }
 
 public enum Teams
@@ -471,6 +479,9 @@ public class Team
     {
         Debug.Log("Added points to " + team);
         this.points += points;
+        if(this.points > GameModeManager.Instance.GetWinPoints())
+            this.points = GameModeManager.Instance.GetWinPoints();
+
         GameModeManager.Instance.CheckIfTeamWon(this);
     }
 
@@ -505,9 +516,31 @@ public class Team
     {
         return alivePlayers;
     }
+
+    public Color32 GetColor()
+    {
+        switch (team)
+        {
+            case Teams.Team1:
+                {
+                    return new Color32(255, 146, 0, 255); // P1 Orange
+                }
+            case Teams.Team2:
+                {
+                    return new Color32(169, 0, 255, 255); // P2 Purple
+                }
+            case Teams.Team3:
+                {
+                    return new Color32(0, 255, 109, 255); // P3 Green
+                }
+            case Teams.Team4:
+                {
+                    return new Color32(0, 192, 255, 255); // P4 Blue
+                }
+        }
+        return new Color32(255, 255, 255, 255); // No Team
+    }
 }
-
-
 
 //public Team AddPlayerToTeam(ControllerInput controllerInput)
 //{
