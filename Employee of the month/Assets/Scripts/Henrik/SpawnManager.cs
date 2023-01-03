@@ -55,6 +55,7 @@ public class SpawnManager : MonoBehaviour
     public void PlayerDied()
     {
         alivePlayers -= 1;
+        bool teamWon = false;
 
         if(GameModeManager.Instance.currentMode != Gamemodes.FreeForAll)
         {
@@ -70,13 +71,17 @@ public class SpawnManager : MonoBehaviour
             }
             if(teamsAlive == 1)
             {
-                TeamWon(lastTeam);
-                return;
+                teamWon = true;
+                if(GameModeManager.Instance.currentMode != Gamemodes.Teams)
+                {
+                    TeamWon(lastTeam);
+                    return;
+                }
             }
 
         }
 
-        if (alivePlayers <= 1)
+        if (alivePlayers <= 1 || teamWon)
         {
             if (GameManager.Instance.tiebreaker)
             {
@@ -107,7 +112,7 @@ public class SpawnManager : MonoBehaviour
             {
                 AddPointsToLastPlayer();
             }
-            else
+            else if(GameModeManager.Instance.currentMode == Gamemodes.Teams)
             {
                 for (int i = 0; i < camController.players.Length; i++)
                 {
@@ -115,7 +120,6 @@ public class SpawnManager : MonoBehaviour
                     {
                         Team winTeam = camController.players[i].gameObject.GetComponent<HasHealth>().team;
                         AddPointsToTeam(winTeam);
-                        break;
                     }
                 }
             }

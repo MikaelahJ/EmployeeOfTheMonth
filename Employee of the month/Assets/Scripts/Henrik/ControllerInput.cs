@@ -347,6 +347,11 @@ public class ControllerInput : MonoBehaviour
         healthbar.transform.position = player.transform.position;
 
         player.GetComponent<HasHealth>().healthbarAnimator = healthbar.GetComponent<Animator>();
+
+        if(GameModeManager.Instance.currentMode != Gamemodes.Stocks)
+        {
+            healthbar.GetComponent<stockScript>().enabled = false;
+        }
     }
 
     private void LoadPlayerChildScripts()
