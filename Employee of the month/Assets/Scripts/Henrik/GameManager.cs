@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 
 public class GameManager : MonoBehaviour
@@ -104,6 +105,13 @@ public class GameManager : MonoBehaviour
         isPaused = true;
         playSceneCanvasTextImage.enabled = false;
 
+        GameObject gamemodeStart = GameObject.Find("GamemodeStartText");
+        TextMeshProUGUI gamemodeStartText = gamemodeStart.GetComponent<TextMeshProUGUI>();
+
+        string gamemodeName = GameModeManager.Instance.currentMode.ToString();
+        gamemodeName = string.Join(" ", Regex.Split(gamemodeName, @"(?<!^)(?=[A-Z])"));
+        gamemodeStartText.text = gamemodeName;
+
         yield return new WaitForSecondsRealtime(1f);
         
 
@@ -144,6 +152,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        gamemodeStartText.enabled = false;
         playSceneCanvasTextImage.enabled = false;
         Time.timeScale = 1;
         isPaused = false;
