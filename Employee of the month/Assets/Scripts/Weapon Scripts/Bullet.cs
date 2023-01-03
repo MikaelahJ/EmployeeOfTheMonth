@@ -35,6 +35,7 @@ public class Bullet : MonoBehaviour
     public Collider2D bulletOwner;
 
     public bool isStapler;
+    public bool isSuperStapler;
     public float stunTime;
     public float stunTimer;
     public float speedSlowdown;
@@ -144,6 +145,8 @@ public class Bullet : MonoBehaviour
         turnSpeed = weapon.turnSpeed;
         scanBounds = weapon.scanBounds;
         isStapler = weapon.isStapler;
+        isSuperStapler = weapon.isSuperStapler;
+
         stunTime = weapon.stunTime;
         speedSlowdown = weapon.speedSlowdown;
 
@@ -275,7 +278,6 @@ public class Bullet : MonoBehaviour
         //Debug.Log(collider.name + " collided with " + bulletOwner.name);
         if (!canTakeDamage && collider.name == bulletOwner.name)
         {
-
             return;
         }
         SendDamage(damage, collider, collision);

@@ -75,6 +75,7 @@ public class NewItemScriptableObject : ScriptableObject
     public float turnSpeed = 0f;
     public float scanBounds = 0f;
     [Header("Stapler")]
+    public bool isSuperStapler = false;
     public bool isStapler = false;
     public float stunTime = 0f;
     public float speedSlowdown = 0;

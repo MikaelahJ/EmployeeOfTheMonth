@@ -28,11 +28,11 @@ public class Stun : MonoBehaviour
             {
                 isStunned = true;
                 GameObject stun = Instantiate(stunAnimation, transform.position, Quaternion.identity, transform);
+                stun.transform.localScale *= 2;
                 Destroy(stun, stunTime);
                 GetComponent<Movement>().enabled = false;
                 GetComponent<Aim>().enabled = false;
                 GetComponentInChildren<Fire>().enabled = false;
-                //Debug.Log("Runs Stun");
                 StartCoroutine(Stunned());
             }
         }
@@ -49,6 +49,10 @@ public class Stun : MonoBehaviour
 
     public void OnSlowed(float speedSlowdown)
     {
+        Debug.Log("hejhej");
+        GameObject stun = Instantiate(stunAnimation, transform.position, Quaternion.identity, transform);
+        Destroy(stun, slowdownTimer);
+
         StartCoroutine(Slowdown(speedSlowdown));
     }
 

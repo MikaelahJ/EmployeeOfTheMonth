@@ -216,6 +216,8 @@ public class WeaponController : MonoBehaviour
             if (items[0].name == "Stapler(Clone)")
             {
                 newWeapon.stunTime = 3;
+                newWeapon.isSuperStapler = true;
+
             }
 
             if (items[0].ultimateFire != null)
