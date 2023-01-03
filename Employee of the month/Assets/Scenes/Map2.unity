@@ -9213,7 +9213,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 22.575485, y: 12.691918, z: 0.2}
-  m_Center: {x: -0.01372385, y: -0.019808292, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &1716633454
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11662,15 +11662,15 @@ Transform:
   - {fileID: 301008899}
   - {fileID: 725546937}
   - {fileID: 2137131093}
-  - {fileID: 494708272}
   - {fileID: 2122991397}
   - {fileID: 1712037843}
   - {fileID: 231417961}
   - {fileID: 2073714858}
   - {fileID: 53474110}
   - {fileID: 1237611498}
-  - {fileID: 1296095212}
   - {fileID: 1927743685}
+  - {fileID: 1296095212}
+  - {fileID: 494708272}
   m_Father: {fileID: 1918701259}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
