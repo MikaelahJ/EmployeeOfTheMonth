@@ -145,6 +145,7 @@ public class SpawnManager : MonoBehaviour
 
     private void AddPointsToLastPlayer()
     {
+        Debug.Log("Adding points to last player");
         int player = 0;
         for (int i = 0; i < camController.players.Length; i++)
         {
@@ -187,6 +188,7 @@ public class SpawnManager : MonoBehaviour
 
     private void AddPointsToTeam(Team team)
     {
+        Debug.Log("Adding points to team: " + team.GetTeamName().ToString());
         foreach (var player in team.GetPlayers())
         {
             int playerIndex = player.gameObject.GetComponent<HasHealth>().playerIndex;

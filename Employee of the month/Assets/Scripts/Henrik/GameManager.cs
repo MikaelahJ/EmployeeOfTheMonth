@@ -174,6 +174,7 @@ public class GameManager : MonoBehaviour
 
     public void AddPointsToPlayer(string playerName, int points)
     {
+        Debug.Log("Adding " + points + " points to" + playerName);
         if (playerPoints.ContainsKey(playerName))
         {
             playerPoints[playerName] += points;
@@ -244,6 +245,7 @@ public class GameManager : MonoBehaviour
     public void SetTiebreaker(List<int> winners)
     {
         tiebreaker = true;
+        GameModeManager.Instance.currentMode = Gamemodes.FreeForAll;
         foreach (int winner in winners)
         {
             tiebreakers.Add(winner);

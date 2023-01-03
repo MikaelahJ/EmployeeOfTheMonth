@@ -61,6 +61,8 @@ public class ControllerInput : MonoBehaviour
 
         GameManager.Instance.playersCount += 1;
 
+        gameObject.name = "Controller P" + GameManager.Instance.playersCount.ToString();
+
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
             LoadCharacterSelect();
