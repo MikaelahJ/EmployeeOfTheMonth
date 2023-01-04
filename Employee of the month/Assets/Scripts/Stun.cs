@@ -11,7 +11,9 @@ public class Stun : MonoBehaviour
 
     private float stunTime;
     private bool isSlowed;
+    private GameObject stun;
     [SerializeField] private GameObject stunAnimation;
+
 
     private void Start()
     {
@@ -27,7 +29,13 @@ public class Stun : MonoBehaviour
             if (!isStunned && isStunnable)
             {
                 isStunned = true;
-                GameObject stun = Instantiate(stunAnimation, transform.position, Quaternion.identity, transform);
+                
+                if(stun != null)
+                {
+                    Destroy(stun);
+                }
+
+                stun = Instantiate(stunAnimation, transform.position, Quaternion.identity, transform);
                 stun.transform.localScale *= 2;
                 GameObject stars = stun.transform.GetChild(0).gameObject;
                 Material newMaterial = new Material(stars.GetComponent<MeshRenderer>().material);
@@ -55,7 +63,12 @@ public class Stun : MonoBehaviour
     public void OnSlowed(float speedSlowdown)
     {
         Debug.Log("hejhej");
-        GameObject stun = Instantiate(stunAnimation, transform.position, Quaternion.identity, transform);
+        if (stun != null)
+        {
+            Destroy(stun);
+        }
+        
+        stun = Instantiate(stunAnimation, transform.position, Quaternion.identity, transform);
         Destroy(stun, slowdownTimer);
 
         StartCoroutine(Slowdown(speedSlowdown));
