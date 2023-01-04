@@ -287,8 +287,10 @@ MonoBehaviour:
   PencilStuckInWall: {fileID: 912021987818860790, guid: 9d42c03f97ff5a54085fdca7b722116a, type: 3}
   particles: {fileID: 5610821773350673860}
   trail: {fileID: 3676767350735711603}
+  impactParticles: {fileID: 7563373032714049310, guid: 48198af9a5725324f9ff794ed503c15d, type: 3}
   burningPaper: {fileID: 21300000, guid: eaf4de7d859d3eb4697fc225587ce796, type: 3}
   selfDamageModifier: 0.5
+  teamDamageModifier: 0.25
   isBouncy: 0
   isPenetrate: 0
   explosionPrefab: {fileID: 4296370996026009329, guid: e681ba27915daf9408bcea4081a84cfa, type: 3}

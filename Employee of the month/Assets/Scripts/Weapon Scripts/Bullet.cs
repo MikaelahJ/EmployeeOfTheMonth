@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private GameObject PencilStuckInWall;
     [SerializeField] private GameObject particles;
     [SerializeField] private GameObject trail;
+    [SerializeField] private GameObject impactParticles;
     [SerializeField] private Sprite burningPaper;
     private bool haveSpawnedPencil = false;
 
@@ -130,6 +131,10 @@ public class Bullet : MonoBehaviour
     public void UpdateBulletModifyers(NewItemScriptableObject weapon)
     {
         pencil.GetComponent<SpriteRenderer>().sprite = weapon.bulletSprite;
+        if(weapon.bulletSprite.name == "Staple")
+        {
+            GetComponent<Animator>().SetTrigger("StapleShot");
+        }
         bulletSpeed = weapon.bulletVelocity;
         damage = weapon.weaponDamage;
         isBouncy = weapon.isBouncy;
@@ -196,10 +201,13 @@ public class Bullet : MonoBehaviour
 
     }
 
-    
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("HardWall") || collision.gameObject.CompareTag("Untagged") && collision.gameObject.name != "Map")
+        {
+            var impact = Instantiate(impactParticles, transform.position, transform.rotation);
+            Destroy(impact, 2);
+        }
         SendDamage(collision.collider, collision);
         //Debug.Log("Collided with " + collision.gameObject.name);
         if (isStapler && collision.gameObject.CompareTag("Player"))
@@ -296,12 +304,12 @@ public class Bullet : MonoBehaviour
             Team self = bulletOwner.gameObject.GetComponentInParent<HasHealth>().team;
             Team otherTeam = null;
             var other = collider.gameObject.GetComponentInParent<HasHealth>();
-            if(other != null)
+            if (other != null)
             {
                 otherTeam = other.team;
-                if(otherTeam != null && otherTeam.GetTeamName() != Teams.NoTeam)
+                if (otherTeam != null && otherTeam.GetTeamName() != Teams.NoTeam)
                 {
-                    if(self.GetTeamName() == otherTeam.GetTeamName())
+                    if (self.GetTeamName() == otherTeam.GetTeamName())
                     {
                         damage *= teamDamageModifier;
                     }
