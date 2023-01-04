@@ -12,7 +12,7 @@ public class WeaponModifyerItem : MonoBehaviour
     private GameObject pickupTextObject;
 
     public NewItemScriptableObject itemType;
-    [SerializeField] [Range(1, 30)] float respawnTime;
+    [SerializeField] [Range(1, 30)] public float respawnTime;
 
     private Vector3 startScale;
     [SerializeField] [Range(0, 1)] float scaleOccilation = 0.05f;

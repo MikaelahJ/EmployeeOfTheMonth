@@ -35,10 +35,10 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private Sprite optionsDisabled;
     [SerializeField] private Sprite optionsEnabled;
     [SerializeField] private TrailRenderer trail;
+    [SerializeField] private GameObject weaponModifyer;
 
     private GameObject scoreboard;
     private GameObject kingOfTheHill;
-
 
     [Header("Gamemode prefabs")]
     [SerializeField] private GameObject kingOfTheHillArea;
@@ -297,18 +297,21 @@ public class GameModeManager : MonoBehaviour
         {
             case Gamemodes.FreeForAll:
                 {
+                    GameManager.Instance.roundsInMatch = 6;
                     gamemodeDescriptionText.text = "";
                     ActivateOptions(false);
                     break;
                 }
             case Gamemodes.Teams:
                 {
+                    GameManager.Instance.roundsInMatch = 6;
                     gamemodeDescriptionText.text = "";
                     ActivateOptions(false);
                     break;
                 }
             case Gamemodes.KingOfTheHill:
                 {
+                    GameManager.Instance.roundsInMatch = 4;
                     gamemodeDescriptionText.text = "Seconds";
                     chooseNumberOptions = new int[] { 5, 10, 15, 20, 25, 30, 40, 50, 60, 99 };
                     chosenNumberIndex = 5;
@@ -318,6 +321,7 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.Deathmatch:
                 {
+                    GameManager.Instance.roundsInMatch = 4;
                     gamemodeDescriptionText.text = "Kills";
                     chooseNumberOptions = new int[] { 1, 2, 3, 4, 5, 10, 15, 20, 25, 30 };
                     chosenNumberIndex = 5;
@@ -327,6 +331,7 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.Stocks:
                 {
+                    GameManager.Instance.roundsInMatch = 4;
                     gamemodeDescriptionText.text = "Lives";
                     chooseNumberOptions = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
                     chosenNumberIndex = 2;
@@ -336,6 +341,7 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.Random:
                 {
+                    GameManager.Instance.roundsInMatch = 6;
                     gamemodeDescriptionText.text = "";
                     ActivateOptions(false);
                     break;
@@ -437,19 +443,26 @@ public class GameModeManager : MonoBehaviour
                 break;
         }
     }
-
+    private static void SetItemRespawnRate(float respawnRate)
+    {
+        foreach (WeaponModifyerItem modifyer in FindObjectsOfType<WeaponModifyerItem>())
+        {
+            modifyer.respawnTime = respawnRate;
+        }
+    }
     public void FreeForAll()
     {
-
+        SetItemRespawnRate(15f);
     }
+
     public void Teams()
     {
-
+        SetItemRespawnRate(15f);
     }
     public void KingOfTheHill()
     {
+        SetItemRespawnRate(7.5f);
         AddRespawn();
-
 
         GameObject kingOfTheHill = GameObject.Find(nameof(kingOfTheHillArea));
         if (kingOfTheHill == null)
@@ -461,8 +474,12 @@ public class GameModeManager : MonoBehaviour
             kingOfTheHill.SetActive(true);
         }
     }
+
+
+
     public void DeathMatch()
     {
+        SetItemRespawnRate(7.5f);
         AddRespawn();
 
         GameObject scoreboard = GameObject.Find(nameof(deathmatchScoreboard));
@@ -482,6 +499,7 @@ public class GameModeManager : MonoBehaviour
     }
     public void Stocks()
     {
+        SetItemRespawnRate(7.5f);
         AddRespawn(chosenNumber);
     }
 
