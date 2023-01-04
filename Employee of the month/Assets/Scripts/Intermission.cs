@@ -37,7 +37,6 @@ public class Intermission : MonoBehaviour
 
             int points = GameManager.Instance.playerPoints["P" + i];
 
-
             for (int k = 1; k <= points; k++)
             {
                 yield return new WaitForSecondsRealtime(0.3f);
