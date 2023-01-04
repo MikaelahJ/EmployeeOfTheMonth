@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private GameObject PencilStuckInWall;
     [SerializeField] private GameObject particles;
     [SerializeField] private GameObject trail;
+    [SerializeField] private Sprite burningPaper;
     private bool haveSpawnedPencil = false;
 
     public float selfDamageModifier = 0.5f;
@@ -152,8 +153,7 @@ public class Bullet : MonoBehaviour
 
         if (isSuperShredder)
         {
-            GetComponent<Animator>().enabled = true;
-            GetComponent<Animator>().SetTrigger("isSuperShredder");
+            pencil.GetComponent<SpriteRenderer>().sprite = burningPaper;
             return;
         }
 

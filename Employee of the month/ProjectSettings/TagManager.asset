@@ -17,6 +17,7 @@ TagManager:
   - Left_button
   - Right_button
   - PwinsText
+  - Roommask
   layers:
   - Default
   - TransparentFX
