@@ -122,7 +122,7 @@ MonoBehaviour:
   optionsDisabled: {fileID: 21300000, guid: 1c0ad14bcaf72a04f9d243e1977b7297, type: 3}
   optionsEnabled: {fileID: 21300000, guid: f0aac58ee90205f4d82e301bc1b769c8, type: 3}
   trail: {fileID: 1489819312966226119, guid: bd78e19b4042f8e41a3f6471a02a2fbe, type: 3}
-  weaponModifyer: {fileID: 6951606707269242289, guid: 1dd3aec1cf09a9f47a870c1bf62ae9d2, type: 3}
+  weaponModifyer: {fileID: 0}
   kingOfTheHillArea: {fileID: 5059035556786995075, guid: 421167deaaa703b4fb78365b3e6aa7ab, type: 3}
   deathmatchScoreboard: {fileID: 6712836174678362460, guid: 870752f010ec34a4fa2b7d510fff2cba, type: 3}
   chosenNumber: 30
