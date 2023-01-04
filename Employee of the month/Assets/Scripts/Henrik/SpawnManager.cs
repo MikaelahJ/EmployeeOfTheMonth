@@ -72,11 +72,12 @@ public class SpawnManager : MonoBehaviour
             if(teamsAlive == 1)
             {
                 teamWon = true;
-                if(GameModeManager.Instance.currentMode != Gamemodes.Teams)
-                {
-                    TeamWon(lastTeam);
-                    return;
-                }
+                Debug.Log("Team Won! " + lastTeam.GetTeamName());
+                //if(GameModeManager.Instance.currentMode != Gamemodes.Teams || GameModeManager.Instance.currentMode != Gamemodes.Stocks)
+                //{
+                //    TeamWon(lastTeam);
+                //    return;
+                //}
             }
 
         }
@@ -112,7 +113,8 @@ public class SpawnManager : MonoBehaviour
             {
                 AddPointsToLastPlayer();
             }
-            else if(GameModeManager.Instance.currentMode == Gamemodes.Teams)
+            else if(GameModeManager.Instance.currentMode == Gamemodes.Teams ||
+                    GameModeManager.Instance.currentMode == Gamemodes.Stocks)
             {
                 for (int i = 0; i < camController.players.Length; i++)
                 {
@@ -133,7 +135,7 @@ public class SpawnManager : MonoBehaviour
 
         if (GameManager.Instance.roundsPlayed == 3)
         {
-            GameManager.Instance.LoadScene("Intermission");
+            Invoke(nameof(LoadIntermission), 3);
             return;
         }
 

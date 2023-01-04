@@ -119,10 +119,10 @@ public class Cursor : MonoBehaviour
                     }
                 }
                 //Deactivate previous button
-                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, false, null, controller);
+                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, playerIndex, false, null, controller);
                 selectIndex = Convert.ToInt32(collision.gameObject.name) - 1;
                 //Activate new selected
-                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, true, this.name, controller);
+                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, playerIndex, true, this.name, controller);
 
 
                 collision.tag = "Selected";
@@ -166,7 +166,7 @@ public class Cursor : MonoBehaviour
             {
                 GameManager.Instance.ResetValues();
                 GameManager.Instance.playersChosen = 0;
-                GameManager.Instance.playersCount = 0;
+                //GameManager.Instance.playersCount = 0;
                 GameManager.Instance.players.Clear();
 
                 GameManager.Instance.LoadScene("MainMenu");

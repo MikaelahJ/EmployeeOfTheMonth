@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using UnityEngine.InputSystem;
 
 
 public class GameManager : MonoBehaviour
@@ -51,7 +52,10 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
+        if(SceneManager.GetActiveScene().name == "CharacterSelect")
+        {
+            Debug.Log(GameObject.Find("PlayerManager").GetComponent<PlayerInputManager>().playerCount);
+        }
 
         if (Instance != null && Instance != this)
         {
@@ -70,7 +74,7 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1;
 
-        Debug.Log(sceneThisMatch);
+            Debug.Log(sceneThisMatch);
         if (scene == "RandomiseMap")
         {
             sceneThisMatch = playScenes[UnityEngine.Random.Range(0, playScenes.Count)];
@@ -89,8 +93,15 @@ public class GameManager : MonoBehaviour
             {
                 ResetValues();
                 playersChosen = 0;
-                playersCount = 0;
+                //playersCount = 0;
                 players.Clear();
+
+                //for (int i = 0; i < playerControllers.Count; i++)
+                //{
+                //    GameObject playerController = playerControllers[i];
+                //    Destroy(playerController);
+                //}
+                //playerControllers = new List<GameObject>();
             }
             SceneManager.LoadScene(scene);
         }
@@ -370,11 +381,6 @@ public class GameManager : MonoBehaviour
         roundsPlayed = 0;
         tiebreaker = false;
         tiebreakers.Clear();
-
-        foreach(var playerController in playerControllers)
-        {
-            Destroy(playerController);
-        }
     }
 
 }
