@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 5059035556786995076}
   - component: {fileID: 2257531692973757981}
   - component: {fileID: 8723657617378503416}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: KingOfTheHillArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
     private bool haveSpawnedPencil = false;
 
     public float selfDamageModifier = 0.5f;
+    public float teamDamageModifier = 0.25f;
 
     private Rigidbody2D rb2d;
     private float bulletSpeed = 5;
@@ -286,12 +287,27 @@ public class Bullet : MonoBehaviour
     public void SendDamage(float damage, Collider2D collider, Collision2D collision = null)
     {
         bool selfDamage = collider.name == bulletOwner.name;
-
         if (selfDamage)
         {
             damage *= selfDamageModifier;
         }
-
+        else
+        {
+            Team self = bulletOwner.gameObject.GetComponentInParent<HasHealth>().team;
+            Team otherTeam = null;
+            var other = collider.gameObject.GetComponentInParent<HasHealth>();
+            if(other != null)
+            {
+                otherTeam = other.team;
+                if(otherTeam != null && otherTeam.GetTeamName() != Teams.NoTeam)
+                {
+                    if(self.GetTeamName() == otherTeam.GetTeamName())
+                    {
+                        damage *= teamDamageModifier;
+                    }
+                }
+            }
+        }
 
         if (collider.gameObject.transform.CompareTag("Player"))
         {

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 
 public class MainMenuController : MonoBehaviour
@@ -20,6 +21,8 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject controlsPanel;
     [SerializeField] private GameObject optionsPanel;
     [SerializeField] private GameObject creditsPanel;
+    private Gamepad[] gamepads;
+    private bool backHasBeenPressed;
 
     private GameObject backButton;
 
@@ -30,6 +33,8 @@ public class MainMenuController : MonoBehaviour
 
         menuSound = GetComponent<AudioSource>();
         menuSound.volume = AudioManager.instance.audioClips.sfxVolume;
+
+        gamepads = Gamepad.all.ToArray();
     }
 
     private void SetFirstSelectedButton(GameObject button)
@@ -39,6 +44,21 @@ public class MainMenuController : MonoBehaviour
     }
     private void Update()
     {
+        if (!buttonCarousel.activeSelf)
+        {
+            backHasBeenPressed = false;
+
+            foreach (Gamepad gamepad in gamepads)
+            {
+                if (gamepad.buttonEast.wasPressedThisFrame && !backHasBeenPressed)
+                {
+                    Debug.Log("Triggered");
+                    OnButtonPress();
+                    backHasBeenPressed = true;
+                }
+            }
+        }
+
         if (buttonCarousel.activeInHierarchy)
         {
             if (EventSystem.current.currentSelectedGameObject.name != "MiddleButton")
@@ -80,6 +100,7 @@ public class MainMenuController : MonoBehaviour
                 break;
 
             case "OPTIONS":
+
                 OnOptions();
                 break;
 
@@ -100,6 +121,7 @@ public class MainMenuController : MonoBehaviour
             optionsPanel.SetActive(false);
             buttonCarousel.SetActive(true);
             SetFirstSelectedButton(middleButton);
+
         }
         else
         {

@@ -36,6 +36,10 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private Sprite optionsEnabled;
     [SerializeField] private TrailRenderer trail;
 
+    private GameObject scoreboard;
+    private GameObject kingOfTheHill;
+
+
     [Header("Gamemode prefabs")]
     [SerializeField] private GameObject kingOfTheHillArea;
     [SerializeField] private GameObject deathmatchScoreboard;
@@ -114,8 +118,12 @@ public class GameModeManager : MonoBehaviour
 
         if (isInGame)
         {
-            Invoke(nameof(LoadGamemode), 0.001f);
 
+            Debug.Log(deathmatchScoreboard.name);
+
+            scoreboard = GameObject.Find(deathmatchScoreboard.name);
+            kingOfTheHill = GameObject.Find(kingOfTheHillArea.name);
+            Invoke(nameof(LoadGamemode), 0.001f);
         }
     }
 
@@ -464,7 +472,7 @@ public class GameModeManager : MonoBehaviour
         }
         else
         {
-            scoreboard.SetActive(true);
+            scoreboard.transform.GetChild(0).gameObject.SetActive(true);
         }
 
         foreach (var team in teams)
