@@ -141,8 +141,9 @@ public class HasHealth : MonoBehaviour
         if (hit)
         {
             gameObject.transform.position = hit.point;
-            transform.up = -hit.normal;
+            transform.up = hit.normal;
             animator.SetTrigger("WallDeath");
+
         }
         else
         {
