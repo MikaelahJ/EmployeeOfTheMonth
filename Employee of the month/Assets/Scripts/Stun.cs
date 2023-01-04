@@ -11,7 +11,9 @@ public class Stun : MonoBehaviour
 
     private float stunTime;
     private bool isSlowed;
+    private GameObject stun;
     [SerializeField] private GameObject stunAnimation;
+
 
     private void Start()
     {
@@ -55,7 +57,10 @@ public class Stun : MonoBehaviour
     public void OnSlowed(float speedSlowdown)
     {
         Debug.Log("hejhej");
-        GameObject stun = Instantiate(stunAnimation, transform.position, Quaternion.identity, transform);
+        if (stun == null)
+        {
+            stun = Instantiate(stunAnimation, transform.position, Quaternion.identity, transform);
+        }
         Destroy(stun, slowdownTimer);
 
         StartCoroutine(Slowdown(speedSlowdown));
