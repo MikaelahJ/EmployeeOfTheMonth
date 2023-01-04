@@ -704,7 +704,7 @@ GameObject:
   - component: {fileID: 1632274473534850539}
   m_Layer: 0
   m_Name: Map2RoomMasks
-  m_TagString: Untagged
+  m_TagString: Roommask
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

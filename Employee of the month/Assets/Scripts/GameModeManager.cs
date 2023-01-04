@@ -5,13 +5,14 @@ using TMPro;
 using System.Text.RegularExpressions;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEngine.UI;
 
 public enum Gamemodes
 {
     FreeForAll,
     Teams,
     KingOfTheHill,
-    DeathMatch,
+    Deathmatch,
     Stocks,
     Random,
     LoopBackToTop
@@ -26,13 +27,17 @@ public class GameModeManager : MonoBehaviour
 
     [Header("Character Select")]
     [SerializeField] private List<GameObject> teamSelectButtons;
-    [SerializeField] private TextMeshProUGUI gamemodeText;
-    [SerializeField] private TextMeshProUGUI gamemodeOptionsText;
-    [SerializeField] private TextMeshProUGUI gamemodeDescriptionText;
+    [SerializeField] private TextMeshPro gamemodeText;
+    [SerializeField] private TextMeshPro gamemodeOptionsText;
+    [SerializeField] private TextMeshPro gamemodeDescriptionText;
     [SerializeField] private GameObject optionsButtons;
+    [SerializeField] private Image modeSelect;
+    [SerializeField] private Sprite optionsDisabled;
+    [SerializeField] private Sprite optionsEnabled;
+
     [Header("Gamemode prefabs")]
     [SerializeField] private GameObject kingOfTheHillArea;
-    [SerializeField] private GameObject captureTheFlagHolder;
+    [SerializeField] private GameObject deathmatchScoreboard;
     [Header("Gamemode settings")]
     [SerializeField] private int chosenNumber = 30; // used for Win Points or Stocks
     [SerializeField] private int[] chooseNumberOptions;
@@ -55,6 +60,7 @@ public class GameModeManager : MonoBehaviour
                 Instance.gamemodeOptionsText = gamemodeOptionsText;
                 Instance.gamemodeDescriptionText = gamemodeDescriptionText;
                 Instance.optionsButtons = optionsButtons;
+                Instance.modeSelect = modeSelect;
             }
             Destroy(this);
         }
@@ -190,7 +196,25 @@ public class GameModeManager : MonoBehaviour
         {
             currentMode = 0;
         }
+        OnChangeGamemode();
+    }
 
+    public void PreviousGamemode()
+    {
+        int prevMode = (int)currentMode - 1;
+        if(prevMode < 0)
+        {
+            currentMode = Gamemodes.LoopBackToTop - 1;
+        }
+        else
+        {
+            currentMode--;
+        }
+        OnChangeGamemode();
+    }
+
+    private void OnChangeGamemode()
+    {
         EnableTeamSelectButtons();
         EnableGamemodeOptions();
 
@@ -240,21 +264,21 @@ public class GameModeManager : MonoBehaviour
             hasEnabledTeamsButton = true;
     }
 
-    public void ActivateTeamSelectButton(int index, bool enabled, string name, GameObject controllerInput)
+    public void ActivateTeamSelectButton(int selectIndex, int playerIndex, bool enabled, string name, GameObject controllerInput)
     {
         if (SceneManager.GetActiveScene().name != "CharacterSelect"){ return; }
-        if(index == -1) { return; }
+        if(selectIndex == -1) { return; }
 
         if (enabled)
         {
-            teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, true, name);
-            Debug.Log(teamSelectButtons[index].GetComponent<TeamSelectButton>().selectedTeam);
+            teamSelectButtons[selectIndex].GetComponent<TeamSelectButton>().Activate(playerIndex, true, name);
+            Debug.Log(teamSelectButtons[selectIndex].GetComponent<TeamSelectButton>().selectedTeam);
             Debug.Log(controllerInput.name);
             //controllerInput.GetComponent<ControllerInput>().playerTeam = teamSelectButtons[index].GetComponent<TeamSelectButton>().selectedTeam;
         }
         else
         {
-            teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, false, name);
+            teamSelectButtons[selectIndex].GetComponent<TeamSelectButton>().Activate(playerIndex, false, name);
         }
     }
 
@@ -283,9 +307,9 @@ public class GameModeManager : MonoBehaviour
                     ActivateOptions(true);
                     break;
                 }
-            case Gamemodes.DeathMatch:
+            case Gamemodes.Deathmatch:
                 {
-                    gamemodeDescriptionText.text = "Kills to win";
+                    gamemodeDescriptionText.text = "Kills";
                     chooseNumberOptions = new int[] {1, 2, 3, 4, 5, 10, 15, 20, 25, 30};
                     chosenNumberIndex = 5;
                     SetChosenNumber();
@@ -312,6 +336,15 @@ public class GameModeManager : MonoBehaviour
 
     private void ActivateOptions(bool enabled)
     {
+        if (enabled)
+        {
+            modeSelect.GetComponent<Image>().sprite = optionsEnabled;
+        }
+        else
+        {
+            modeSelect.GetComponent<Image>().sprite = optionsDisabled;
+        }
+
         optionsButtons.SetActive(enabled);
         gamemodeOptionsText.enabled = enabled;
     }
@@ -366,7 +399,7 @@ public class GameModeManager : MonoBehaviour
                     KingOfTheHill();
                     break;
                 }
-            case Gamemodes.DeathMatch:
+            case Gamemodes.Deathmatch:
                 {
                     if (isRandom)
                         chosenNumber = 10;
@@ -413,10 +446,29 @@ public class GameModeManager : MonoBehaviour
         {
             Instantiate(kingOfTheHillArea);
         }
+        else
+        {
+            kingOfTheHill.SetActive(true);
+        }
     }
     public void DeathMatch()
     {
         AddRespawn();
+
+        GameObject scoreboard = GameObject.Find(nameof(deathmatchScoreboard));
+        if(scoreboard == null)
+        {
+            scoreboard = Instantiate(deathmatchScoreboard);
+        }
+        else
+        {
+            scoreboard.SetActive(true);
+        }
+        
+        foreach(var team in teams)
+        {
+            scoreboard.GetComponent<ScoreboardController>().AddTeam(team);
+        }
     }
     public void Stocks()
     {

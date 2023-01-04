@@ -88,21 +88,41 @@ public class Cursor : MonoBehaviour
                 if (GameManager.Instance.playersCount != GameManager.Instance.playersChosen)
                 {
                     GameObject mustChoose = GameObject.Find("StartButton");
-                    mustChoose.GetComponent<TextMeshPro>().text = "Everyone must choose\n a character";
+                    mustChoose.GetComponent<TextMeshPro>().enabled = true;
                     Invoke(nameof(ResetStartText), 1);
                     Debug.Log("Everyone must select a character");
                 }
                 else
                 {
-                    GameModeManager.Instance.CreateTeams();
-                    GameManager.Instance.LoadScene("LoadingScene");
+                    if (collision.gameObject.TryGetComponent(out clickTwice click))
+                    {
+                        if (click.OnClick())
+                        {
+                            GameModeManager.Instance.CreateTeams();
+                            GameManager.Instance.LoadScene("LoadingScene");
+                        }
+                    }
+                    else
+                    {
+                        GameModeManager.Instance.CreateTeams();
+                        GameManager.Instance.LoadScene("LoadingScene");
+                    }
+
                 }
                 characterSelectSounds.PlayOneShot(clickSound);
             }
 
             if(collision.gameObject.CompareTag("MainMenuButton"))
             {
-                GameManager.Instance.LoadScene("MainMenu");
+                if(collision.gameObject.TryGetComponent(out clickTwice click))
+                {
+                    if(click.OnClick())
+                        GameManager.Instance.LoadScene("MainMenu");
+                }
+                else
+                {
+                    GameManager.Instance.LoadScene("MainMenu");
+                }
             }
 
             if (collision.gameObject.CompareTag("Free"))
@@ -119,10 +139,10 @@ public class Cursor : MonoBehaviour
                     }
                 }
                 //Deactivate previous button
-                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, false, null, controller);
+                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, playerIndex, false, null, controller);
                 selectIndex = Convert.ToInt32(collision.gameObject.name) - 1;
                 //Activate new selected
-                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, true, this.name, controller);
+                GameModeManager.Instance.ActivateTeamSelectButton(selectIndex, playerIndex, true, this.name, controller);
 
 
                 collision.tag = "Selected";
@@ -134,22 +154,37 @@ public class Cursor : MonoBehaviour
             if (collision.gameObject.CompareTag("ChangeGameMode"))
             {
                 GameModeManager.Instance.NextGamemode();
-                characterSelectSounds.PlayOneShot(clickSound);
+                characterSelectSounds.PlayOneShot(clickSound, AudioManager.instance.audioClips.sfxVolume);
             }
 
             if (collision.gameObject.CompareTag("Right_button"))
             {
                 GameModeManager.Instance.NextOption();
+                characterSelectSounds.PlayOneShot(clickSound, AudioManager.instance.audioClips.sfxVolume);
             }
 
             if (collision.gameObject.CompareTag("Left_button"))
             {
                 GameModeManager.Instance.PreviousOption();
+                characterSelectSounds.PlayOneShot(clickSound, AudioManager.instance.audioClips.sfxVolume);
             }
 
-            if (collision.gameObject.TryGetComponent(out TeamSelectButton teamSelectButton))
+            if (collision.gameObject.CompareTag("Right_Gamemode"))
+            {
+                GameModeManager.Instance.NextGamemode();
+                characterSelectSounds.PlayOneShot(clickSound, AudioManager.instance.audioClips.sfxVolume);
+            }
+
+            if (collision.gameObject.CompareTag("Left_Gamemode"))
+            {
+                GameModeManager.Instance.PreviousGamemode();
+                characterSelectSounds.PlayOneShot(clickSound, AudioManager.instance.audioClips.sfxVolume);
+            }
+
+                if (collision.gameObject.TryGetComponent(out TeamSelectButton teamSelectButton))
             {
                 teamSelectButton.ChangeTeam();
+                characterSelectSounds.PlayOneShot(clickSound, AudioManager.instance.audioClips.sfxVolume);
             }
         }
 
@@ -166,7 +201,7 @@ public class Cursor : MonoBehaviour
             {
                 GameManager.Instance.ResetValues();
                 GameManager.Instance.playersChosen = 0;
-                GameManager.Instance.playersCount = 0;
+                //GameManager.Instance.playersCount = 0;
                 GameManager.Instance.players.Clear();
 
                 GameManager.Instance.LoadScene("MainMenu");
@@ -178,7 +213,7 @@ public class Cursor : MonoBehaviour
     private void ResetStartText()
     {
         GameObject mustChoose = GameObject.Find("StartButton");
-        mustChoose.GetComponent<TextMeshPro>().text = "Start Game";
+        mustChoose.GetComponent<TextMeshPro>().enabled = false;
     }
 
     //public void OnTriggerStay2D(Collider2D collision)

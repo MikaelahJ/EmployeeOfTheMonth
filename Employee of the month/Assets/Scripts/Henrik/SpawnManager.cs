@@ -57,26 +57,32 @@ public class SpawnManager : MonoBehaviour
         alivePlayers -= 1;
         bool teamWon = false;
 
-        if(GameModeManager.Instance.currentMode != Gamemodes.FreeForAll)
+        if (GameModeManager.Instance.currentMode != Gamemodes.FreeForAll)
         {
             int teamsAlive = 0;
             Team lastTeam = null;
-            foreach(Team team in GameModeManager.Instance.teams)
+            foreach (Team team in GameModeManager.Instance.teams)
             {
-                if(team.GetAlivePlayers() > 0)
+                if (team.GetAlivePlayers() > 0)
                 {
                     lastTeam = team;
                     teamsAlive++;
                 }
             }
-            if(teamsAlive == 1)
+            if (teamsAlive == 1)
             {
                 teamWon = true;
-                if(GameModeManager.Instance.currentMode != Gamemodes.Teams)
+                if (GameModeManager.Instance.currentMode != Gamemodes.Teams)
                 {
                     TeamWon(lastTeam);
                     return;
                 }
+                Debug.Log("Team Won! " + lastTeam.GetTeamName());
+                //if(GameModeManager.Instance.currentMode != Gamemodes.Teams || GameModeManager.Instance.currentMode != Gamemodes.Stocks)
+                //{
+                //    TeamWon(lastTeam);
+                //    return;
+                //}
             }
 
         }
@@ -101,18 +107,18 @@ public class SpawnManager : MonoBehaviour
         GameManager.Instance.roundsPlayed++;
 
         if (alivePlayers == 0)
-        {
+        {//set DRAW text
             GameManager.Instance.playSceneCanvasTextImage.enabled = true;
             GameManager.Instance.playSceneCanvasTextImage.sprite = otherTextSprites[0];
-            //gameOverText.text = "DRAW";
         }
         else
         {
-            if(GameModeManager.Instance.currentMode == Gamemodes.FreeForAll)
+            if (GameModeManager.Instance.currentMode == Gamemodes.FreeForAll)
             {
                 AddPointsToLastPlayer();
             }
-            else if(GameModeManager.Instance.currentMode == Gamemodes.Teams)
+            else if(GameModeManager.Instance.currentMode == Gamemodes.Teams ||
+                    GameModeManager.Instance.currentMode == Gamemodes.Stocks)
             {
                 for (int i = 0; i < camController.players.Length; i++)
                 {
@@ -133,7 +139,9 @@ public class SpawnManager : MonoBehaviour
 
         if (GameManager.Instance.roundsPlayed == 3)
         {
-            GameManager.Instance.LoadScene("Intermission");
+            PwinsHolder.gameObject.SetActive(false);
+            
+            StartCoroutine(GameManager.Instance.ShowCoffeeBreak());
             return;
         }
 
@@ -160,6 +168,7 @@ public class SpawnManager : MonoBehaviour
         }
         GameManager.Instance.AddPointsToPlayer("P" + player.ToString(), 1);
 
+        //Show round winner
         PwinsHolder.gameObject.SetActive(true);
         pNumberImage.sprite = playerTextSprites[player];
 
@@ -206,7 +215,8 @@ public class SpawnManager : MonoBehaviour
 
     public void LoadIntermission()
     {
-        GameManager.Instance.LoadScene("Intermission");
+        PwinsHolder.gameObject.SetActive(false);
+        StartCoroutine(GameManager.Instance.ShowCoffeeBreak());
     }
 
     public void RestartMatch()

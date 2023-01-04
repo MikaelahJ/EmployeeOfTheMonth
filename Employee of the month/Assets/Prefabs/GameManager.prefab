@@ -87,11 +87,15 @@ MonoBehaviour:
   roundsInMatch: 6
   actualWinner: 0
   playerControllers: []
+  isCountdown: 1
   isPaused: 0
   pauseMenu: {fileID: 6266728657173171613, guid: debb18ada1ecc0e41b70f53b073f3e54, type: 3}
   showedControlls: 0
   tiebreaker: 0
   tiebreakers: 
+  coffeeBreakCanvas: {fileID: 6001481746799231331, guid: 42c8aa7d34a806449b15102cc6dd0ea7, type: 3}
+  intermissionCanvas: {fileID: 6880282952479783741, guid: fb73bff00f7a2fc40b72bdce50a297e4, type: 3}
+  isIntermission: 0
 --- !u!114 &1219743819920462201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,9 +116,13 @@ MonoBehaviour:
   - {fileID: 0}
   gamemodeText: {fileID: 0}
   gamemodeOptionsText: {fileID: 0}
+  gamemodeDescriptionText: {fileID: 0}
   optionsButtons: {fileID: 0}
+  modeSelect: {fileID: 0}
+  optionsDisabled: {fileID: 21300000, guid: 1c0ad14bcaf72a04f9d243e1977b7297, type: 3}
+  optionsEnabled: {fileID: 21300000, guid: f0aac58ee90205f4d82e301bc1b769c8, type: 3}
   kingOfTheHillArea: {fileID: 5059035556786995075, guid: 421167deaaa703b4fb78365b3e6aa7ab, type: 3}
-  captureTheFlagHolder: {fileID: 0}
+  deathmatchScoreboard: {fileID: 6712836174678362460, guid: 870752f010ec34a4fa2b7d510fff2cba, type: 3}
   chosenNumber: 30
   chooseNumberOptions: 
   hasEnabledTeamsButton: 0

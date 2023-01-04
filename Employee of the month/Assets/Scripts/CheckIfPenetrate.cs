@@ -17,7 +17,7 @@ public class CheckIfPenetrate : MonoBehaviour
         if (collider.gameObject.CompareTag("Untagged"))
         {
             bulletScript.SendDamage(collider);
-            AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position, AudioManager.instance.audioClips.sfxVolume);
+            //AudioSource.PlayClipAtPoint(AudioManager.instance.audioClips.impact_wood, transform.position, AudioManager.instance.audioClips.sfxVolume);
         }
 
         if (collider.gameObject.CompareTag("Player"))

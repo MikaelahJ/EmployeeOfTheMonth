@@ -152,7 +152,7 @@ public class HasHealth : MonoBehaviour
 
 
 
-        if (GameModeManager.Instance.currentMode == Gamemodes.DeathMatch)
+        if (GameModeManager.Instance.currentMode == Gamemodes.Deathmatch)
         {
             Team team = bullet.GetComponent<Bullet>().bulletOwner.gameObject.GetComponentInParent<HasHealth>().team;
             if (team != null)
@@ -165,6 +165,7 @@ public class HasHealth : MonoBehaviour
                 {
                     team.AddPoints(1);
                 }
+                ScoreboardController.scoreboardController.SetScore(team);
             }
         }
 
