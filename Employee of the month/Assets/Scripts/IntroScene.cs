@@ -11,28 +11,36 @@ public class IntroScene : MonoBehaviour
     public float timeDelay = 0.0f;
     private VideoPlayer videoPlayer;
     private Gamepad[] connectedGamepads;
+    private Mouse mouse;
+    private Keyboard keyboard;
+    private bool hasBeenPressed;
 
     // Start is called before the first frame update
     void Start()
     {
         videoPlayer = GetComponentInChildren<VideoPlayer>();
         connectedGamepads = Gamepad.all.ToArray();
+        mouse = Mouse.current;
+        keyboard = Keyboard.current;
     }
 
     private void Update()
     {
-        if(Keyboard.current.anyKey.isPressed || Mouse.current.leftButton.isPressed ||Mouse.current.rightButton.isPressed)
-        {
-            SceneManager.LoadScene(SceneToLoad);
-        }
 
         foreach (Gamepad gamepad in connectedGamepads)
         {
-            if (gamepad.buttonEast.isPressed || gamepad.buttonWest.isPressed || gamepad.buttonSouth.isPressed || 
+            if (gamepad.buttonEast.isPressed || gamepad.buttonWest.isPressed || gamepad.buttonSouth.isPressed ||
                 gamepad.buttonNorth.isPressed)
             {
                 SceneManager.LoadScene(SceneToLoad);
             }
+        }
+
+
+        if (keyboard.anyKey.wasPressedThisFrame || mouse.leftButton.wasPressedThisFrame || mouse.rightButton.wasPressedThisFrame)
+        {
+            hasBeenPressed = true;
+            SceneManager.LoadScene(SceneToLoad);
         }
     }
 
