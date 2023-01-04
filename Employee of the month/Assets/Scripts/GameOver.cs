@@ -10,6 +10,11 @@ public class GameOver : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI winnerText;
     [SerializeField] private Image winnerImage;
+    [SerializeField] private Image winnerName;
+
+    [SerializeField] private Animator restart;
+    [SerializeField] private Animator menu;
+
     //[SerializeField] private RectTransform winnerSpritePosition;
 
     //[SerializeField] private TextMeshProUGUI TieNameText;
@@ -17,40 +22,47 @@ public class GameOver : MonoBehaviour
     //[SerializeField] private RectTransform TieSprites;
 
     public List<Sprite> winnerSprites = new List<Sprite>();
+    public List<Sprite> winnerNames = new List<Sprite>();
+
 
     private void Start()
     {
+        restart.speed = UnityEngine.Random.Range(0.7f, 1f);
+        menu.speed = UnityEngine.Random.Range(0.7f, 1f);
         int winnerSprite = GameManager.Instance.GetWinnerSprite(GameManager.Instance.actualWinner);
         SetWinnerUI(GameManager.Instance.actualWinner, winnerSprite);
 
         //for testing:
-        //int winnerSprite = 1;
-        //SetWinnerUI(1, winnerSprite);
+        //int winnerSprite = 4;
+        //SetWinnerUI(0, winnerSprite);
     }
 
     public void SetWinnerUI(int playerIndex, int playerSprite)
     {
-        playerIndex += 1;
         winnerText.text = "Player " + playerIndex;
 
-        switch (playerSprite)
-        {
-            case 1:
-                winnerImage.GetComponent<Image>().sprite = winnerSprites[0];
-                break;
+        winnerName.sprite = winnerNames[playerIndex];
 
-            case 2:
-                winnerImage.GetComponent<Image>().sprite = winnerSprites[1];
-                break;
+        winnerImage.GetComponent<Image>().sprite = winnerSprites[playerSprite - 1];
 
-            case 3:
-                winnerImage.GetComponent<Image>().sprite = winnerSprites[2];
-                break;
+        //switch (playerSprite)
+        //{
+        //    case 1:
+        //        winnerImage.GetComponent<Image>().sprite = winnerSprites[0];
+        //        break;
 
-            case 4:
-                winnerImage.GetComponent<Image>().sprite = winnerSprites[3];
-                break;
-        }
+        //    case 2:
+        //        winnerImage.GetComponent<Image>().sprite = winnerSprites[1];
+        //        break;
+
+        //    case 3:
+        //        winnerImage.GetComponent<Image>().sprite = winnerSprites[2];
+        //        break;
+
+        //    case 4:
+        //        winnerImage.GetComponent<Image>().sprite = winnerSprites[3];
+        //        break;
+        //}
     }
 }
     //public void SetWinnerUI(int playerIndex, int playerSprite)
