@@ -18,6 +18,8 @@ TagManager:
   - Right_button
   - PwinsText
   - Roommask
+  - Left_Gamemode
+  - Right_Gamemode
   layers:
   - Default
   - TransparentFX
