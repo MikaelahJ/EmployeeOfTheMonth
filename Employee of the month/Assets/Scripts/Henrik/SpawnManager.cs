@@ -8,11 +8,11 @@ using UnityEngine.UI;
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager instance;
-
+    public int intermissionRound = 3;
     [SerializeField] private CameraController camController;
     [SerializeField] private List<Sprite> playerTextSprites = new List<Sprite>();
     [SerializeField] private List<Sprite> otherTextSprites = new List<Sprite>();
-
+    
     public TextMeshProUGUI gameOverText;
     public RectTransform PwinsHolder;
     public Image pNumberImage;
@@ -137,7 +137,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
-        if (GameManager.Instance.roundsPlayed == 3)
+        if (GameManager.Instance.roundsPlayed == intermissionRound)
         {
             PwinsHolder.gameObject.SetActive(false);
             
