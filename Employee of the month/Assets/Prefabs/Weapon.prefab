@@ -721,7 +721,7 @@ MonoBehaviour:
   isShooting: 0
   ignore:
     serializedVersion: 2
-    m_Bits: 209664
+    m_Bits: 209668
 --- !u!95 &164983538690636996
 Animator:
   serializedVersion: 4
