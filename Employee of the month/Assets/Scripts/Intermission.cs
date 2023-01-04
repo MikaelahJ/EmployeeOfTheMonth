@@ -11,14 +11,20 @@ public class Intermission : MonoBehaviour
     [SerializeField] private TextMeshProUGUI NextRoundText;
 
     [SerializeField] private List<Sprite> heads = new List<Sprite>();
+    [SerializeField] private List<Sprite> sliderCubes = new List<Sprite>();
+
+    private Animator animator;
 
     private void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         StartCoroutine(CountPoints());
     }
 
     IEnumerator CountPoints()
     {
+        yield return new WaitForSecondsRealtime(2.1f);
+
         int countdown = 3;
 
         for (int i = 0; i < GameManager.Instance.playersCount; i++)
@@ -27,19 +33,19 @@ public class Intermission : MonoBehaviour
             var pointSlider = Instantiate(pointSliderPrefab, sliderHolder);
             pointSlider.value = 0;
             pointSlider.handleRect.GetComponentInChildren<Image>().sprite = heads[GameManager.Instance.players["P" + i] - 1];
-
+            pointSlider.fillRect.GetComponentInChildren<Image>().sprite = sliderCubes[i];
 
             int points = GameManager.Instance.playerPoints["P" + i];
 
 
             for (int k = 1; k <= points; k++)
             {
-                yield return new WaitForSeconds(0.3f);
+                yield return new WaitForSecondsRealtime(0.3f);
 
                 pointSlider.value++;
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSecondsRealtime(0.5f);
         }
 
         while (countdown >= 0)
@@ -51,12 +57,8 @@ public class Intermission : MonoBehaviour
 
             countdown--;
         }
-
-        //if (GameManager.Instance.sceneThisMatch == "TestScene")
-        //    GameManager.Instance.LoadScene("Map2");
-        //else
-        //    GameManager.Instance.LoadScene("TestScene");
-
-        GameManager.Instance.LoadScene("RandomiseMap");
+        animator.SetTrigger("EndIntermission");
+        yield return new WaitForSecondsRealtime(1.2f);
+        GameManager.Instance.HideIntermission(GetComponent<Canvas>());
     }
 }

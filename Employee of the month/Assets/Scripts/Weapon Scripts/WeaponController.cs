@@ -217,7 +217,6 @@ public class WeaponController : MonoBehaviour
             {
                 newWeapon.stunTime = 3;
                 newWeapon.isSuperStapler = true;
-
             }
 
             if (items[0].ultimateFire != null)

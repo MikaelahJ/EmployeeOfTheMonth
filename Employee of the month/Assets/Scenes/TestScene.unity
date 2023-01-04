@@ -7690,6 +7690,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5409525959528163377, guid: 1d46f892f7769ec46859029bacca20eb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5409525959528163378, guid: 1d46f892f7769ec46859029bacca20eb, type: 3}
       propertyPath: m_Camera
       value: 

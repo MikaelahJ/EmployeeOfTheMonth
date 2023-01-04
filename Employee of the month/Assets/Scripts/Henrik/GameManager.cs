@@ -44,15 +44,17 @@ public class GameManager : MonoBehaviour
     private GameObject tempPauseMenu;
 
     public bool showedControlls = false;
-    private int countdown = 3;
 
     public bool tiebreaker = false;
     public List<int> tiebreakers = new List<int>();
 
+    public Canvas coffeeBreakCanvas;
+    public Canvas intermissionCanvas;
+    public bool isIntermission;
+
+
     private void Awake()
     {
-
-
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -85,7 +87,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if(scene == "MainMenu")
+            if (scene == "MainMenu")
             {
                 ResetValues();
                 playersChosen = 0;
@@ -102,6 +104,11 @@ public class GameManager : MonoBehaviour
         {
             playSceneCanvas = GameObject.FindGameObjectWithTag("GameOverCanvas").GetComponent<Canvas>();
             playSceneCanvasTextImage = playSceneCanvas.GetComponentInChildren<Image>();
+        }
+        if (isIntermission)
+        {
+            ShowIntermission();
+            return;
         }
 
         StartCoroutine(RoundStartPause());
@@ -121,7 +128,6 @@ public class GameManager : MonoBehaviour
         gamemodeStartText.text = gamemodeName;
 
         yield return new WaitForSecondsRealtime(1f);
-        
 
         if (!tiebreaker)
         {
@@ -131,7 +137,7 @@ public class GameManager : MonoBehaviour
                 var finalRoundText = Instantiate(finalRoundPrefab, playSceneCanvas.transform);
 
                 Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(0.1f, 0.03f);
-                yield return new WaitForSecondsRealtime(0.02f);
+                yield return new WaitForSecondsRealtime(0.2f);
                 Camera.main.GetComponent<ScreenShakeBehavior>().TriggerShake(0.1f, 0.03f);
 
                 yield return new WaitForSecondsRealtime(2);
@@ -174,6 +180,33 @@ public class GameManager : MonoBehaviour
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public IEnumerator ShowCoffeeBreak()
+    {
+        playSceneCanvasTextImage.enabled = false;
+        Time.timeScale = 0;
+        isCountdown = true;
+        Instantiate(coffeeBreakCanvas);
+
+        yield return new WaitForSecondsRealtime(3);
+        isIntermission = true;
+        LoadScene("RandomiseMap");
+    }
+
+    public void ShowIntermission()
+    {
+        playSceneCanvasTextImage.enabled = false;
+        Time.timeScale = 0;
+        isCountdown = true;
+        Instantiate(intermissionCanvas);
+    }
+
+    public void HideIntermission(Canvas canvas)
+    {
+        isIntermission = false;
+        canvas.enabled = false;
+        StartRoundPause();
     }
 
     public void ConnectCharacterToPlayer(string playerName, string SelectedCharacter)
@@ -371,7 +404,7 @@ public class GameManager : MonoBehaviour
         tiebreaker = false;
         tiebreakers.Clear();
 
-        foreach(var playerController in playerControllers)
+        foreach (var playerController in playerControllers)
         {
             Destroy(playerController);
         }

@@ -87,11 +87,14 @@ MonoBehaviour:
   roundsInMatch: 6
   actualWinner: 0
   playerControllers: []
+  isCountdown: 1
   isPaused: 0
   pauseMenu: {fileID: 6266728657173171613, guid: debb18ada1ecc0e41b70f53b073f3e54, type: 3}
   showedControlls: 0
   tiebreaker: 0
   tiebreakers: 
+  coffeeBreakCanvas: {fileID: 6001481746799231331, guid: 42c8aa7d34a806449b15102cc6dd0ea7, type: 3}
+  intermissionCanvas: {fileID: 6880282952479783741, guid: fb73bff00f7a2fc40b72bdce50a297e4, type: 3}
 --- !u!114 &1219743819920462201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +115,7 @@ MonoBehaviour:
   - {fileID: 0}
   gamemodeText: {fileID: 0}
   gamemodeOptionsText: {fileID: 0}
+  gamemodeDescriptionText: {fileID: 0}
   optionsButtons: {fileID: 0}
   kingOfTheHillArea: {fileID: 5059035556786995075, guid: 421167deaaa703b4fb78365b3e6aa7ab, type: 3}
   captureTheFlagHolder: {fileID: 0}
