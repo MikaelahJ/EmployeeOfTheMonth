@@ -118,7 +118,7 @@ MonoBehaviour:
   gamemodeDescriptionText: {fileID: 0}
   optionsButtons: {fileID: 0}
   kingOfTheHillArea: {fileID: 5059035556786995075, guid: 421167deaaa703b4fb78365b3e6aa7ab, type: 3}
-  captureTheFlagHolder: {fileID: 0}
+  deathmatchScoreboard: {fileID: 6712836174678362460, guid: 870752f010ec34a4fa2b7d510fff2cba, type: 3}
   chosenNumber: 30
   chooseNumberOptions: 
   hasEnabledTeamsButton: 0

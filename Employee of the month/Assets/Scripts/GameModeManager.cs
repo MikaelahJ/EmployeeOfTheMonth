@@ -32,7 +32,7 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private GameObject optionsButtons;
     [Header("Gamemode prefabs")]
     [SerializeField] private GameObject kingOfTheHillArea;
-    [SerializeField] private GameObject captureTheFlagHolder;
+    [SerializeField] private GameObject deathmatchScoreboard;
     [Header("Gamemode settings")]
     [SerializeField] private int chosenNumber = 30; // used for Win Points or Stocks
     [SerializeField] private int[] chooseNumberOptions;
@@ -240,21 +240,21 @@ public class GameModeManager : MonoBehaviour
             hasEnabledTeamsButton = true;
     }
 
-    public void ActivateTeamSelectButton(int index, bool enabled, string name, GameObject controllerInput)
+    public void ActivateTeamSelectButton(int selectIndex, int playerIndex, bool enabled, string name, GameObject controllerInput)
     {
         if (SceneManager.GetActiveScene().name != "CharacterSelect"){ return; }
-        if(index == -1) { return; }
+        if(selectIndex == -1) { return; }
 
         if (enabled)
         {
-            teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, true, name);
-            Debug.Log(teamSelectButtons[index].GetComponent<TeamSelectButton>().selectedTeam);
+            teamSelectButtons[selectIndex].GetComponent<TeamSelectButton>().Activate(playerIndex, true, name);
+            Debug.Log(teamSelectButtons[selectIndex].GetComponent<TeamSelectButton>().selectedTeam);
             Debug.Log(controllerInput.name);
             //controllerInput.GetComponent<ControllerInput>().playerTeam = teamSelectButtons[index].GetComponent<TeamSelectButton>().selectedTeam;
         }
         else
         {
-            teamSelectButtons[index].GetComponent<TeamSelectButton>().Activate(index, false, name);
+            teamSelectButtons[selectIndex].GetComponent<TeamSelectButton>().Activate(playerIndex, false, name);
         }
     }
 
@@ -413,10 +413,29 @@ public class GameModeManager : MonoBehaviour
         {
             Instantiate(kingOfTheHillArea);
         }
+        else
+        {
+            kingOfTheHill.SetActive(true);
+        }
     }
     public void DeathMatch()
     {
         AddRespawn();
+
+        GameObject scoreboard = GameObject.Find(nameof(deathmatchScoreboard));
+        if(scoreboard == null)
+        {
+            scoreboard = Instantiate(deathmatchScoreboard);
+        }
+        else
+        {
+            scoreboard.SetActive(true);
+        }
+        
+        foreach(var team in teams)
+        {
+            scoreboard.GetComponent<ScoreboardController>().AddTeam(team);
+        }
     }
     public void Stocks()
     {

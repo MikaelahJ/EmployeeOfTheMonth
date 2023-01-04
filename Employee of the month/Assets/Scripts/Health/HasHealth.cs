@@ -165,6 +165,7 @@ public class HasHealth : MonoBehaviour
                 {
                     team.AddPoints(1);
                 }
+                ScoreboardController.scoreboardController.SetScore(team);
             }
         }
 

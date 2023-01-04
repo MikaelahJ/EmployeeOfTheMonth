@@ -77,6 +77,12 @@ public class SpawnManager : MonoBehaviour
                     TeamWon(lastTeam);
                     return;
                 }
+                Debug.Log("Team Won! " + lastTeam.GetTeamName());
+                //if(GameModeManager.Instance.currentMode != Gamemodes.Teams || GameModeManager.Instance.currentMode != Gamemodes.Stocks)
+                //{
+                //    TeamWon(lastTeam);
+                //    return;
+                //}
             }
 
         }
@@ -111,7 +117,8 @@ public class SpawnManager : MonoBehaviour
             {
                 AddPointsToLastPlayer();
             }
-            else if (GameModeManager.Instance.currentMode == Gamemodes.Teams)
+            else if(GameModeManager.Instance.currentMode == Gamemodes.Teams ||
+                    GameModeManager.Instance.currentMode == Gamemodes.Stocks)
             {
                 for (int i = 0; i < camController.players.Length; i++)
                 {

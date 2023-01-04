@@ -157,8 +157,15 @@ public class ControllerInput : MonoBehaviour
 
     private void LoadCharacterSelect()
     {
-        playerInput.SwitchCurrentActionMap("UI");
+        //if (!playerInput.enabled)
+        //{
+        //    Destroy(gameObject);
+        //    //Destroy(this);
+        //    return;
+        //}
+        //playerInput.SwitchCurrentActionMap("UI");
         GameManager.Instance.playersChosen = 0;
+
 
         playerTeam = null;
         LoadCursors();
@@ -191,8 +198,8 @@ public class ControllerInput : MonoBehaviour
         }
         else
         {
-            Debug.Log("loaded cursor test scene");
-            SetCursorTestScenes();
+            //Debug.Log("loaded cursor test scene");
+            //SetCursorTestScenes();
         }
     }
 
@@ -562,4 +569,13 @@ public class ControllerInput : MonoBehaviour
     {
         return player;
     }
+
+    //private void OnDestroy()
+    //{
+    //    playerInput.enabled = true;
+    //    playerInput.SwitchCurrentActionMap("Player");
+    //    playerInput.currentActionMap.Disable();
+    //    playerInput.SwitchCurrentActionMap("UI");
+    //    playerInput.currentActionMap.Disable();
+    //}
 }

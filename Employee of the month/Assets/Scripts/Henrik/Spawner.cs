@@ -22,6 +22,11 @@ public class Spawner : MonoBehaviour
         {
             Debug.Log("Can't find StockHolder");
         }
+
+        if(stocks == 1)
+        {
+            Destroy(this);
+        }
     }
 
     public void TriggerRespawn(float delay)
