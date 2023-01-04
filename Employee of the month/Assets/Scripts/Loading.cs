@@ -12,6 +12,7 @@ public class Loading : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tip;
     [SerializeField] private TextMeshProUGUI gameMode;
     [SerializeField] private List<string> tips = new List<string>();
+    [SerializeField] private List<string> explainations = new List<string>();
 
     private float tipTimer;
     private float tipTimeRate = 2.5f;
@@ -22,6 +23,8 @@ public class Loading : MonoBehaviour
         tip.text = tips[Random.Range(0, tips.Count)];
         string AddSpaceBeforeCapitalLetter = string.Join(" ", Regex.Split(GameModeManager.Instance.currentMode.ToString(), @"(?<!^)(?=[A-Z])"));
         gameMode.text = AddSpaceBeforeCapitalLetter;
+
+        
 
     }
 
@@ -53,4 +56,5 @@ public class Loading : MonoBehaviour
         GameManager.Instance.LoadScene("RandomiseMap");
 
     }
+
 }
