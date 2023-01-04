@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour
         isCountdown = true;
         Instantiate(coffeeBreakCanvas);
 
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(2.5f);
         isIntermission = true;
         LoadScene("RandomiseMap");
     }

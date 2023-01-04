@@ -34,6 +34,7 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private Image modeSelect;
     [SerializeField] private Sprite optionsDisabled;
     [SerializeField] private Sprite optionsEnabled;
+    [SerializeField] private TrailRenderer trail;
 
     private GameObject scoreboard;
     private GameObject kingOfTheHill;
@@ -47,7 +48,7 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private int[] chooseNumberOptions;
     private int chosenNumberIndex;
 
-    private Teams[] characterSelectedTeams; 
+    private Teams[] characterSelectedTeams;
 
     public bool hasEnabledTeamsButton = false;
     private bool hasLoadedCharacterSelect = false;
@@ -57,7 +58,7 @@ public class GameModeManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            if(SceneManager.GetActiveScene().name == "CharacterSelect")
+            if (SceneManager.GetActiveScene().name == "CharacterSelect")
             {
                 Instance.teamSelectButtons = teamSelectButtons;
                 Instance.gamemodeText = gamemodeText;
@@ -115,7 +116,7 @@ public class GameModeManager : MonoBehaviour
 
         bool isInGame = (scene.name != "LoadingScene" && scene.name != "Intermission" && scene.name != "EndGame" && scene.name != "MainMenu");
 
-        if(isInGame)
+        if (isInGame)
         {
 
             Debug.Log(deathmatchScoreboard.name);
@@ -133,7 +134,7 @@ public class GameModeManager : MonoBehaviour
             return;
         }
 
-        foreach(var playerController in GameManager.Instance.playerControllers)
+        foreach (var playerController in GameManager.Instance.playerControllers)
         {
             ControllerInput controller = playerController.GetComponent<ControllerInput>();
             int playerIndex = controller.playerInput.playerIndex;
@@ -142,7 +143,7 @@ public class GameModeManager : MonoBehaviour
             Debug.Log("Selected Character: " + selectedCharacter);
             Teams selectedTeam = teamSelectButtons[selectedCharacter - 1].GetComponent<TeamSelectButton>().selectedTeam;
             Debug.Log("Selected team: " + selectedTeam);
-            
+
             Team team = teams.Find(t => t.GetTeamName() == selectedTeam);
 
             if (team != null)
@@ -150,7 +151,7 @@ public class GameModeManager : MonoBehaviour
                 int index = teams.IndexOf(team);
                 Debug.Log("Index: " + index);
                 teams[index].AddPlayer(playerController);
-                
+
             }
             else
             {
@@ -182,7 +183,7 @@ public class GameModeManager : MonoBehaviour
     {
         if (teamWon) { return; }
 
-        if(team.GetPoints() >= chosenNumber)
+        if (team.GetPoints() >= chosenNumber)
         {
             teamWon = true;
             SpawnManager.instance.TeamWon(team);
@@ -191,7 +192,7 @@ public class GameModeManager : MonoBehaviour
 
     public void ResetPoints()
     {
-        foreach(var team in teams)
+        foreach (var team in teams)
         {
             team.ResetPoints();
         }
@@ -200,7 +201,7 @@ public class GameModeManager : MonoBehaviour
     public void NextGamemode()
     {
         currentMode++;
-        if(currentMode == Gamemodes.LoopBackToTop)
+        if (currentMode == Gamemodes.LoopBackToTop)
         {
             currentMode = 0;
         }
@@ -210,7 +211,7 @@ public class GameModeManager : MonoBehaviour
     public void PreviousGamemode()
     {
         int prevMode = (int)currentMode - 1;
-        if(prevMode < 0)
+        if (prevMode < 0)
         {
             currentMode = Gamemodes.LoopBackToTop - 1;
         }
@@ -250,7 +251,7 @@ public class GameModeManager : MonoBehaviour
 
         int index = 0;
 
-        foreach(var teamSelectButton in teamSelectButtons)
+        foreach (var teamSelectButton in teamSelectButtons)
         {
             teamSelectButton.GetComponent<TeamSelectButton>().SetActive(enabled);
 
@@ -274,8 +275,8 @@ public class GameModeManager : MonoBehaviour
 
     public void ActivateTeamSelectButton(int selectIndex, int playerIndex, bool enabled, string name, GameObject controllerInput)
     {
-        if (SceneManager.GetActiveScene().name != "CharacterSelect"){ return; }
-        if(selectIndex == -1) { return; }
+        if (SceneManager.GetActiveScene().name != "CharacterSelect") { return; }
+        if (selectIndex == -1) { return; }
 
         if (enabled)
         {
@@ -309,7 +310,7 @@ public class GameModeManager : MonoBehaviour
             case Gamemodes.KingOfTheHill:
                 {
                     gamemodeDescriptionText.text = "Seconds";
-                    chooseNumberOptions = new int[] {5, 10, 15, 20, 25, 30, 40, 50, 60, 99 };
+                    chooseNumberOptions = new int[] { 5, 10, 15, 20, 25, 30, 40, 50, 60, 99 };
                     chosenNumberIndex = 5;
                     SetChosenNumber();
                     ActivateOptions(true);
@@ -318,7 +319,7 @@ public class GameModeManager : MonoBehaviour
             case Gamemodes.Deathmatch:
                 {
                     gamemodeDescriptionText.text = "Kills";
-                    chooseNumberOptions = new int[] {1, 2, 3, 4, 5, 10, 15, 20, 25, 30};
+                    chooseNumberOptions = new int[] { 1, 2, 3, 4, 5, 10, 15, 20, 25, 30 };
                     chosenNumberIndex = 5;
                     SetChosenNumber();
                     ActivateOptions(true);
@@ -387,7 +388,7 @@ public class GameModeManager : MonoBehaviour
     public void LoadGamemode(Gamemodes gamemode, bool isRandom = false)
     {
         Debug.Log("Setting gamemode to " + gamemode.ToString());
-        switch(gamemode)
+        switch (gamemode)
         {
             case Gamemodes.FreeForAll:
                 {
@@ -449,7 +450,9 @@ public class GameModeManager : MonoBehaviour
     {
         AddRespawn();
 
-        if(kingOfTheHill == null)
+
+        GameObject kingOfTheHill = GameObject.Find(nameof(kingOfTheHillArea));
+        if (kingOfTheHill == null)
         {
             Instantiate(kingOfTheHillArea);
         }
@@ -462,8 +465,8 @@ public class GameModeManager : MonoBehaviour
     {
         AddRespawn();
 
-        
-        if(scoreboard == null)
+        GameObject scoreboard = GameObject.Find(nameof(deathmatchScoreboard));
+        if (scoreboard == null)
         {
             scoreboard = Instantiate(deathmatchScoreboard);
         }
@@ -471,8 +474,8 @@ public class GameModeManager : MonoBehaviour
         {
             scoreboard.transform.GetChild(0).gameObject.SetActive(true);
         }
-        
-        foreach(var team in teams)
+
+        foreach (var team in teams)
         {
             scoreboard.GetComponent<ScoreboardController>().AddTeam(team);
         }
@@ -490,13 +493,28 @@ public class GameModeManager : MonoBehaviour
             {
                 Debug.Log("Added spawner to: " + player.name + ", stocks set to " + stocks);
                 player.AddComponent<Spawner>();
-                if(stocks > 0)
+                var respawnTrail = Instantiate(trail, player.transform.position, Quaternion.identity, player.transform);
+                respawnTrail.gameObject.transform.position = player.transform.position;
+                respawnTrail.time = 1.5f;
+                respawnTrail.startWidth = 0.3f;
+                respawnTrail.endWidth = 0.08f;
+                foreach (Transform child in player.transform)//get circleHighlight
+                {
+                    if (child.name == "PlayerCircleHighlight(Clone)")
+                    {
+                        respawnTrail.startColor = child.GetComponent<SpriteRenderer>().color;//set trail to player colour
+                        respawnTrail.endColor = child.GetComponent<SpriteRenderer>().color;//set trail to player colour
+                    }
+                }
+
+                if (stocks > 0)
                 {
                     player.GetComponent<Spawner>().SetStocks(stocks);
                 }
             }
         }
     }
+
 
     public int GetWinPoints()
     {
@@ -550,7 +568,7 @@ public class Team
     {
         Debug.Log("Added points to " + team);
         this.points += points;
-        if(this.points > GameModeManager.Instance.GetWinPoints())
+        if (this.points > GameModeManager.Instance.GetWinPoints())
             this.points = GameModeManager.Instance.GetWinPoints();
 
         GameModeManager.Instance.CheckIfTeamWon(this);
@@ -568,7 +586,7 @@ public class Team
 
     public List<GameObject> GetPlayers()
     {
-        foreach(var member in members)
+        foreach (var member in members)
         {
             Debug.Log(member.name);
         }

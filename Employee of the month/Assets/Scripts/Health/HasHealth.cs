@@ -146,11 +146,8 @@ public class HasHealth : MonoBehaviour
         }
         else
         {
-            Debug.Log("death");
             animator.SetTrigger("OnDeath");
         }
-
-
 
         if (GameModeManager.Instance.currentMode == Gamemodes.Deathmatch)
         {

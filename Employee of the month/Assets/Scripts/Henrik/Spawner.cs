@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
     private Vector2 spawnPosition;
     public bool isRespawning = false;
     [SerializeField] private int stocks = 9999;
+    private GameObject trail;
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +21,10 @@ public class Spawner : MonoBehaviour
         }
         else
         {
-            Debug.Log("Can't find StockHolder");
+            //Debug.Log("Can't find StockHolder");
         }
 
-        if(stocks == 1)
+        if (stocks == 1)
         {
             Destroy(this);
         }
@@ -31,7 +32,6 @@ public class Spawner : MonoBehaviour
 
     public void TriggerRespawn(float delay)
     {
-        Debug.Log("Trigger respawn");
         if (!isRespawning)
         {
             isRespawning = true;
@@ -41,27 +41,33 @@ public class Spawner : MonoBehaviour
 
     IEnumerator DelayedRespawn(float delay)
     {
-        Debug.Log("Init delayed respawn");
+        trail = GetComponentInChildren<TrailRenderer>().gameObject;
+        trail.GetComponent<TrailRenderer>().enabled = true;
+
         yield return new WaitForSeconds(delay);
-        Debug.Log("Init Respawn");
         Respawn();
     }
 
     public void Respawn()
     {
-        Debug.Log("Spawner: Respawning");
         GetComponent<HasHealth>().OnRespawn();
-        transform.position = SpawnManager.instance.GetRandomSpawnPoint();
+
+        Vector3 whereToSpawn = SpawnManager.instance.GetRandomSpawnPoint();
+        transform.position = whereToSpawn;
         isRespawning = false;
 
+        Invoke(nameof(HideTrail), 1);
+
         LoseStock();
-        if(stocks <= 1)
+        if (stocks <= 1)
         {
-            Debug.Log("Removing spawner");
             Destroy(this);
         }
     }
-
+    private void HideTrail()
+    {
+        trail.GetComponent<TrailRenderer>().enabled = false;
+    }
     public void SetStocks(int lives)
     {
         this.stocks = lives;
