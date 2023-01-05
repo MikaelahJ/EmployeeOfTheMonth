@@ -53,13 +53,19 @@ public class GameModeManager : MonoBehaviour
     public bool hasEnabledTeamsButton = false;
     private bool hasLoadedCharacterSelect = false;
     private bool teamWon = false;
+    bool gamemodeIsRandom = false;
 
     private void Awake()
     {
+
         if (Instance != null && Instance != this)
         {
             if (SceneManager.GetActiveScene().name == "CharacterSelect")
             {
+                if (Instance.gamemodeIsRandom)
+                {
+                    Instance.currentMode = Gamemodes.Random;
+                }
                 Instance.teamSelectButtons = teamSelectButtons;
                 Instance.gamemodeText = gamemodeText;
                 Instance.gamemodeOptionsText = gamemodeOptionsText;
@@ -118,8 +124,11 @@ public class GameModeManager : MonoBehaviour
 
         if (isInGame)
         {
-
-            Debug.Log(deathmatchScoreboard.name);
+            if (Instance.gamemodeIsRandom)
+            {
+                Gamemodes randomMode = (Gamemodes)Random.Range((int)Gamemodes.FreeForAll, (int)Gamemodes.Random);
+                currentMode = randomMode;
+            }
 
             scoreboard = GameObject.Find(deathmatchScoreboard.name);
             kingOfTheHill = GameObject.Find(kingOfTheHillArea.name);
@@ -293,6 +302,7 @@ public class GameModeManager : MonoBehaviour
 
     public void EnableGamemodeOptions()
     {
+        gamemodeIsRandom = false;
         switch (currentMode)
         {
             case Gamemodes.FreeForAll:
@@ -341,6 +351,7 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.Random:
                 {
+                    gamemodeIsRandom = true;
                     GameManager.Instance.roundsInMatch = 6;
                     gamemodeDescriptionText.text = "";
                     ActivateOptions(false);
@@ -408,7 +419,7 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.KingOfTheHill:
                 {
-                    if (isRandom)
+                    if (gamemodeIsRandom)
                         chosenNumber = 30;
 
                     KingOfTheHill();
@@ -416,7 +427,7 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.Deathmatch:
                 {
-                    if (isRandom)
+                    if (gamemodeIsRandom)
                         chosenNumber = 10;
 
                     DeathMatch();
@@ -424,7 +435,7 @@ public class GameModeManager : MonoBehaviour
                 }
             case Gamemodes.Stocks:
                 {
-                    if (isRandom)
+                    if (gamemodeIsRandom)
                         chosenNumber = 3;
 
                     Stocks();
