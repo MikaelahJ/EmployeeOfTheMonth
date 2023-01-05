@@ -380,6 +380,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a9b1851dc099d7d4f935e54612b2d46c, type: 3}
   - {fileID: 21300000, guid: 6b23e923cea768c498054141fad3629a, type: 3}
   - {fileID: 21300000, guid: 6856762b8dba25f45b8b3932f6c544ae, type: 3}
+  sliderCubes: []
 --- !u!1 &617802199
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,7 +670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6104386963993132075, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6104386963993132084, guid: a0ce3ddb63a1c594bbecc76016f3540c, type: 3}
       propertyPath: m_JoinBehavior

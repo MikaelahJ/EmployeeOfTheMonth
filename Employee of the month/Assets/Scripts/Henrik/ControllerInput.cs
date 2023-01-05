@@ -530,7 +530,7 @@ public class ControllerInput : MonoBehaviour
     //for testing
     public void KillSelf()
     {
-        player.GetComponent<HasHealth>().LoseHealth(100);
+        //player.GetComponent<HasHealth>().LoseHealth(100);
     }
 
     public void Pause(InputAction.CallbackContext input)
